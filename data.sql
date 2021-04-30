@@ -1,6 +1,6 @@
 create table PRODUCT
 (
-    ID       INT,
+    ID       LONG,
     BRAND    VARCHAR2(20),
     NAME     VARCHAR2(50),
     PRICE    FLOAT,
@@ -9,12 +9,12 @@ create table PRODUCT
 
 create table COOLER
 (
-    ID             INT auto_increment,
+    ID             LONG auto_increment,
     TIER           INT,
     NOISE_LEVEL_DB FLOAT,
     IS_AIR         BOOLEAN,
     IS_WORKSTATION BOOLEAN,
-    PRODUCT_FK     INT,
+    PRODUCT_FK     LONG,
     constraint COOLER_PK
         primary key (ID),
     constraint COOLER_PRODUCT_ID_FK
@@ -23,7 +23,7 @@ create table COOLER
 
 create table CPU
 (
-    ID             INT auto_increment,
+    ID             LONG auto_increment,
     SOCKET         VARCHAR2(10),
     CORES          INT,
     SMT            BOOLEAN,
@@ -33,7 +33,7 @@ create table CPU
     MT_PREF        INT,
     CORE_CLOCK     FLOAT,
     BOOST_CLOCK    FLOAT,
-    PRODUCT_FK     INT,
+    PRODUCT_FK     LONG,
     constraint CPU_PK
         primary key (ID),
     constraint CPU_PRODUCT_ID_FK
@@ -42,14 +42,14 @@ create table CPU
 
 create table MOTHERBOARD
 (
-    ID            INT auto_increment,
+    ID            LONG auto_increment,
     TIER          FLOAT,
     CHIPSET       VARCHAR2(10),
     SOCKET        VARCHAR2(10),
     FORM_FACTOR   VARCHAR2(10),
     MEMORY_SLOTS  INT,
     MEMORY_MAX_GB INT,
-    PRODUCT_FK    INT,
+    PRODUCT_FK    LONG,
     constraint MOTHERBOARD_PK
         primary key (ID),
     constraint MOTHERBOARD_PRODUCT_ID_FK
@@ -58,13 +58,13 @@ create table MOTHERBOARD
 
 create table RAM
 (
-    ID                 INT auto_increment,
+    ID                 LONG auto_increment,
     SPEED              INT,
     MODULES_COUNT      INT,
     MODULE_CAPACITY_GB INT,
     FW_LATENCY_NS      FLOAT,
     CL                 INT,
-    PRODUCT_FK         INT,
+    PRODUCT_FK         LONG,
     constraint RAM_PK
         primary key (ID),
     constraint RAM_PRODUCT_ID_FK
@@ -73,13 +73,13 @@ create table RAM
 
 create table STORAGE
 (
-    ID          INT auto_increment,
+    ID          LONG auto_increment,
     CAPACITY_GB INT,
     TIER        INT,
     TYPE        VARCHAR2(10),
     FORM_FACTOR VARCHAR2(10),
     INTERFACE   VARCHAR2(20),
-    PRODUCT_FK  INT,
+    PRODUCT_FK  LONG,
     constraint STORAGE_PK
         primary key (ID),
     constraint STORAGE_PRODUCT_ID_FK
@@ -88,16 +88,16 @@ create table STORAGE
 
 create table GPU
 (
-    ID                    INT auto_increment,
+    ID                    LONG auto_increment,
     CHIPSET               VARCHAR2(30),
     MEMORY_GB             INT,
     CORE_CLOCK_MHZ        INT,
     BOOST_CLOCK_MHZ       INT,
-    LENGHT_MM             FLOAT,
+    LENGTH_MM             FLOAT,
     TDP                   INT,
     RECOMMENDED_PSU_WATTS INT,
     PERFORMANCE           INT,
-    PRODUCT_FK            INT,
+    PRODUCT_FK            LONG,
     constraint GPU_PK
         primary key (ID),
     constraint GPU_PRODUCT_ID_FK
@@ -106,12 +106,12 @@ create table GPU
 
 create table CASE_
 (
-    ID                    INT auto_increment,
+    ID                    LONG auto_increment,
     POWER_SUPPLY_STANDARD VARCHAR2(5),
     MAX_MOTHERBOARD_SIZE  VARCHAR2(10),
     TYPE                  VARCHAR2(20),
     SIDE_PANEL_WINDOW     VARCHAR2(30),
-    PRODUCT_FK            INT,
+    PRODUCT_FK            LONG,
     constraint CASE__PK
         primary key (ID),
     constraint CASE__PRODUCT_ID_FK
@@ -120,13 +120,13 @@ create table CASE_
 
 create table PSU
 (
-    ID                INT auto_increment,
+    ID                LONG auto_increment,
     TIER              FLOAT,
     FORM_FACTOR       VARCHAR2(5),
     EFFICIENCY_RATING VARCHAR2(20),
     WATTAGE           INT,
     MODULAR           VARCHAR2(10),
-    PRODUCT_FK        INT,
+    PRODUCT_FK        LONG,
     constraint PSU_PK
         primary key (ID),
     constraint PSU_PRODUCT_ID_FK
@@ -135,7 +135,7 @@ create table PSU
 
 create table USER
 (
-    ID       INT auto_increment,
+    ID       LONG auto_increment,
     EMAIL    VARCHAR2(100),
     USERNAME VARCHAR2(50),
     PASSWORD VARCHAR2(50),
@@ -147,7 +147,7 @@ create table "order"
 (
     ID      INT auto_increment,
     DATE    DATE,
-    USER_ID INT,
+    USER_ID LONG,
     constraint ORDER_PK
         primary key (ID),
     constraint ORDER_USER_ID_FK
@@ -156,10 +156,10 @@ create table "order"
 
 create table ORDERLIST
 (
-    ID         INT auto_increment,
+    ID         LONG auto_increment,
     DATE       DATE,
-    PRODUCT_ID INT,
-    ORDER_ID   INT,
+    PRODUCT_ID LONG,
+    ORDER_ID   LONG,
     QUANTITY   INT,
     constraint ORDERLIST_PK
         primary key (ID),
