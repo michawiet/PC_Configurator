@@ -1,4 +1,5 @@
-﻿1,AMD,Ryzen 3 1200 (12nm),481.80,89
+﻿id,brand,name,price,quantity
+1,AMD,Ryzen 3 1200 (12nm),481.80,89
 2,AMD,Ryzen 3 3100,1247.02,62
 3,AMD,Ryzen 3 3200G,850.85,85
 4,AMD,Ryzen 5 1600 (12nm),577.35,63

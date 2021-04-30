@@ -1,4 +1,5 @@
-﻿1,ATX,Mini ITX,Mini ITX Tower,None,2773
+﻿id,power_supply_standard,max_motherboard_size,type,side_panel_window,product_fk
+1,ATX,Mini ITX,Mini ITX Tower,None,2773
 2,ATX,Mini ITX,Mini ITX Tower,None,2774
 3,ATX,Mini ITX,Mini ITX Tower,None,2775
 4,ATX,Mini ITX,Mini ITX Tower,None,2776
@@ -27,42 +28,42 @@
 27,ATX,Mini ITX,Mini ITX Desktop,Tinted Tempered Glass,2799
 28,ATX,Mini ITX,Mini ITX Desktop,None,2800
 29,ATX,Mini ITX,Mini ITX Desktop,Acrylic,2801
-30,ATX,MircoATX,MicroATX Mini Tower,None,2802
-31,ATX,MircoATX,MicroATX Mini Tower,None,2803
-32,ATX,MircoATX,MicroATX Mini Tower,Tempered Glass,2804
-33,ATX,MircoATX,MicroATX Mini Tower,Acrylic,2805
-34,ATX,MircoATX,MicroATX Mini Tower,Acrylic,2806
-35,ATX,MircoATX,MicroATX Mini Tower,Acrylic,2807
-36,ATX,MircoATX,MicroATX Mini Tower,None,2808
-37,ATX,MircoATX,MicroATX Mini Tower,None,2809
-38,ATX,MircoATX,MicroATX Mini Tower,None,2810
-39,ATX,MircoATX,MicroATX Mini Tower,Acrylic,2811
-40,ATX,MircoATX,MicroATX Mini Tower,Tinted Tempered Glass,2812
-41,ATX,MircoATX,MicroATX Mini Tower,Acrylic,2813
-42,ATX,MircoATX,MicroATX Mini Tower,Acrylic,2814
-43,ATX,MircoATX,MicroATX Mini Tower,Tinted Tempered Glass,2815
-44,ATX,MircoATX,MicroATX Mini Tower,Acrylic,2816
-45,ATX,MircoATX,MicroATX Mini Tower,Acrylic,2817
-46,ATX,MircoATX,MicroATX Mini Tower,Tempered Glass,2818
-47,ATX,MircoATX,MicroATX Mini Tower,Tempered Glass,2819
-48,ATX,MircoATX,MicroATX Mini Tower,None,2820
-49,ATX,MircoATX,MicroATX Mini Tower,Tempered Glass,2821
-50,ATX,MircoATX,MicroATX Mid Tower,Acrylic,2822
-51,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2823
-52,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2824
-53,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2825
-54,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2826
-55,ATX,MircoATX,MicroATX Mid Tower,None,2827
-56,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2828
-57,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2829
-58,ATX,MircoATX,MicroATX Mid Tower,None,2830
-59,ATX,MircoATX,MicroATX Mid Tower,None,2831
-60,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2832
-61,ATX,MircoATX,MicroATX Mid Tower,Acrylic,2833
-62,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2834
-63,ATX,MircoATX,MicroATX Mid Tower,Tempered Glass,2835
-64,ATX,MircoATX,MicroATX Mid Tower,None,2836
-65,ATX,MircoATX,MicroATX Desktop,Tempered Glass,2837
+30,ATX,MicroATX,MicroATX Mini Tower,None,2802
+31,ATX,MicroATX,MicroATX Mini Tower,None,2803
+32,ATX,MicroATX,MicroATX Mini Tower,Tempered Glass,2804
+33,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2805
+34,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2806
+35,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2807
+36,ATX,MicroATX,MicroATX Mini Tower,None,2808
+37,ATX,MicroATX,MicroATX Mini Tower,None,2809
+38,ATX,MicroATX,MicroATX Mini Tower,None,2810
+39,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2811
+40,ATX,MicroATX,MicroATX Mini Tower,Tinted Tempered Glass,2812
+41,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2813
+42,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2814
+43,ATX,MicroATX,MicroATX Mini Tower,Tinted Tempered Glass,2815
+44,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2816
+45,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2817
+46,ATX,MicroATX,MicroATX Mini Tower,Tempered Glass,2818
+47,ATX,MicroATX,MicroATX Mini Tower,Tempered Glass,2819
+48,ATX,MicroATX,MicroATX Mini Tower,None,2820
+49,ATX,MicroATX,MicroATX Mini Tower,Tempered Glass,2821
+50,ATX,MicroATX,MicroATX Mid Tower,Acrylic,2822
+51,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2823
+52,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2824
+53,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2825
+54,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2826
+55,ATX,MicroATX,MicroATX Mid Tower,None,2827
+56,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2828
+57,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2829
+58,ATX,MicroATX,MicroATX Mid Tower,None,2830
+59,ATX,MicroATX,MicroATX Mid Tower,None,2831
+60,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2832
+61,ATX,MicroATX,MicroATX Mid Tower,Acrylic,2833
+62,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2834
+63,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2835
+64,ATX,MicroATX,MicroATX Mid Tower,None,2836
+65,ATX,MicroATX,MicroATX Desktop,Tempered Glass,2837
 66,SFX,Mini ITX,HTPC,None,2838
 67,ATX,ATX,ATX Mid Tower,Tempered Glass,2839
 68,ATX,ATX,ATX Mid Tower,Tempered Glass,2840

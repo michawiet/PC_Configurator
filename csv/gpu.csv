@@ -1,4 +1,5 @@
-﻿1,GeForce GT 1030,2,1266,1506,169,30,200,100,1690
+﻿id,chipset,memory_gb,core_clock_mhz,boost_clock_mhz,length_mm,tdp,recommended_psu_watts,performance,product_fk
+1,GeForce GT 1030,2,1266,1506,169,30,200,100,1690
 2,GeForce GT 1030,2,1266,1506,173,30,200,100,1691
 3,GeForce GT 1030,2,1278,1531,184,30,200,100,1692
 4,GeForce GT 1030,2,1290,1544,145,30,200,100,1693

@@ -1,4 +1,5 @@
-﻿1,0.7,ATX,80+ Gold,550,Full,3123
+﻿id,tier,form_factor,efficiency_rating,wattage,modular,product_fk
+1,0.7,ATX,80+ Gold,550,Full,3123
 2,0.7,ATX,80+ Gold,1000,Full,3124
 3,0.7,ATX,80+ Gold,850,Full,3125
 4,1.3,ATX,80+ Titanium,1000,Full,3126
