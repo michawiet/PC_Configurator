@@ -17,8 +17,7 @@ public class Product {
     private float price;
     private int quantity;
 
-    public Product(long id, String brand, String name, float price, int quantity) {
-        this.id = id;
+    public Product(String brand, String name, float price, int quantity) {
         this.brand = brand;
         this.name = name;
         this.price = price;

@@ -13,20 +13,19 @@ public class Psu {
     private long id;
 
     private float tier;
-    private String formFactor;
-    private String efficiencyRating;
+    private String form_Factor;
+    private String efficiency_Rating;
     private int wattage;
     private String modular;
-    private long productFK;
+    private long product_FK;
 
-    public Psu(long id, float tier, String formFactor, String efficiencyRating, int wattage, String modular, long productFK) {
-        this.id = id;
+    public Psu( float tier, String formFactor, String efficiencyRating, int wattage, String modular, long productFK) {
         this.tier = tier;
-        this.formFactor = formFactor;
-        this.efficiencyRating = efficiencyRating;
+        this.form_Factor = formFactor;
+        this.efficiency_Rating = efficiencyRating;
         this.wattage = wattage;
         this.modular = modular;
-        this.productFK = productFK;
+        this.product_FK = productFK;
     }
 
     public Psu() {
@@ -48,20 +47,20 @@ public class Psu {
         this.tier = tier;
     }
 
-    public String getFormFactor() {
-        return formFactor;
+    public String getForm_Factor() {
+        return form_Factor;
     }
 
-    public void setFormFactor(String formFactor) {
-        this.formFactor = formFactor;
+    public void setForm_Factor(String formFactor) {
+        this.form_Factor = formFactor;
     }
 
-    public String getEfficiencyRating() {
-        return efficiencyRating;
+    public String getEfficiency_Rating() {
+        return efficiency_Rating;
     }
 
-    public void setEfficiencyRating(String efficiencyRating) {
-        this.efficiencyRating = efficiencyRating;
+    public void setEfficiency_Rating(String efficiencyRating) {
+        this.efficiency_Rating = efficiencyRating;
     }
 
     public int getWattage() {
@@ -80,12 +79,12 @@ public class Psu {
         this.modular = modular;
     }
 
-    public long getProductFK() {
-        return productFK;
+    public long getProduct_FK() {
+        return product_FK;
     }
 
-    public void setProductFK(long productFK) {
-        this.productFK = productFK;
+    public void setProduct_FK(long productFK) {
+        this.product_FK = productFK;
     }
 
     @Override
@@ -93,11 +92,11 @@ public class Psu {
         return "Psu{" +
                 "id=" + id +
                 ", tier=" + tier +
-                ", formFactor='" + formFactor + '\'' +
-                ", efficiencyRating='" + efficiencyRating + '\'' +
+                ", formFactor='" + form_Factor + '\'' +
+                ", efficiencyRating='" + efficiency_Rating + '\'' +
                 ", wattage=" + wattage +
                 ", modular='" + modular + '\'' +
-                ", productFK=" + productFK +
+                ", productFK=" + product_FK +
                 '}';
     }
 }

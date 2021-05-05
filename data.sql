@@ -78,7 +78,7 @@ create table STORAGE
     TIER        INT,
     TYPE        VARCHAR2(10),
     FORM_FACTOR VARCHAR2(10),
-    INTERFACE   VARCHAR2(20),
+    STORAGE_INTERFACE   VARCHAR2(20),
     PRODUCT_FK  LONG,
     constraint STORAGE_PK
         primary key (ID),

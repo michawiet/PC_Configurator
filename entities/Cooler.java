@@ -13,18 +13,17 @@ public class Cooler {
     private long id;
 
     private int tier;
-    private float noiseLevelDB;
-    private boolean isAir;
-    private boolean isWorkstation;
-    private long productFK;
+    private float noise_Level_DB;
+    private boolean is_Air;
+    private boolean is_Workstation;
+    private long product_FK;
 
-    public Cooler(long id, int tier, float noiseLevelDB, boolean isAir, boolean isWorkstation, long productFK) {
-        this.id = id;
+    public Cooler(int tier, float noiseLevelDB, boolean isAir, boolean isWorkstation, long productFK) {
         this.tier = tier;
-        this.noiseLevelDB = noiseLevelDB;
-        this.isAir = isAir;
-        this.isWorkstation = isWorkstation;
-        this.productFK = productFK;
+        this.noise_Level_DB = noiseLevelDB;
+        this.is_Air = isAir;
+        this.is_Workstation = isWorkstation;
+        this.product_FK = productFK;
     }
 
     public Cooler() {
@@ -46,36 +45,36 @@ public class Cooler {
         this.tier = tier;
     }
 
-    public float getNoiseLevelDB() {
-        return noiseLevelDB;
+    public float getNoise_Level_DB() {
+        return noise_Level_DB;
     }
 
-    public void setNoiseLevelDB(float noiseLevelDB) {
-        this.noiseLevelDB = noiseLevelDB;
+    public void setNoise_Level_DB(float noiseLevelDB) {
+        this.noise_Level_DB = noiseLevelDB;
     }
 
-    public boolean isAir() {
-        return isAir;
+    public boolean isIs_Air() {
+        return is_Air;
     }
 
-    public void setAir(boolean air) {
-        isAir = air;
+    public void setIs_Air(boolean is_Air) {
+        this.is_Air = is_Air;
     }
 
-    public boolean isWorkstation() {
-        return isWorkstation;
+    public boolean isIs_Workstation() {
+        return is_Workstation;
     }
 
-    public void setWorkstation(boolean workstation) {
-        isWorkstation = workstation;
+    public void setIs_Workstation(boolean is_Workstation) {
+        this.is_Workstation = is_Workstation;
     }
 
-    public long getProductFK() {
-        return productFK;
+    public long getProduct_FK() {
+        return product_FK;
     }
 
-    public void setProductFK(long productFK) {
-        this.productFK = productFK;
+    public void setProduct_FK(long productFK) {
+        this.product_FK = productFK;
     }
 
     @Override
@@ -83,10 +82,10 @@ public class Cooler {
         return "Cooler{" +
                 "id=" + id +
                 ", tier=" + tier +
-                ", noiseLevelDB=" + noiseLevelDB +
-                ", isAir=" + isAir +
-                ", isWorkstation=" + isWorkstation +
-                ", productFK=" + productFK +
+                ", noiseLevelDB=" + noise_Level_DB +
+                ", isAir=" + is_Air +
+                ", isWorkstation=" + is_Workstation +
+                ", productFK=" + product_FK +
                 '}';
     }
 }

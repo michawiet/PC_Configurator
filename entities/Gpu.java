@@ -13,26 +13,25 @@ public class Gpu {
     private long id;
 
     private String chipset;
-    private int memoryGB;
-    private int coreClockMHZ;
-    private int boostClockMHZ;
-    private float lengthMM;
+    private int memory_GB;
+    private int core_Clock_MHZ;
+    private int boost_Clock_MHZ;
+    private float length_MM;
     private int tdp;
-    private int recommendedPsuWatts;
+    private int recommended_Psu_Watts;
     private int performance;
-    private long productFK;
+    private long product_FK;
 
-    public Gpu(long id, String chipset, int memoryGB, int coreClockMHZ, int boostClockMHZ, float lengthMM, int tdp, int recommendedPsuWatts, int performance, long productFK) {
-        this.id = id;
+    public Gpu(String chipset, int memoryGB, int coreClockMHZ, int boostClockMHZ, float lengthMM, int tdp, int recommendedPsuWatts, int performance, long productFK) {
         this.chipset = chipset;
-        this.memoryGB = memoryGB;
-        this.coreClockMHZ = coreClockMHZ;
-        this.boostClockMHZ = boostClockMHZ;
-        this.lengthMM = lengthMM;
+        this.memory_GB = memoryGB;
+        this.core_Clock_MHZ = coreClockMHZ;
+        this.boost_Clock_MHZ = boostClockMHZ;
+        this.length_MM = lengthMM;
         this.tdp = tdp;
-        this.recommendedPsuWatts = recommendedPsuWatts;
+        this.recommended_Psu_Watts = recommendedPsuWatts;
         this.performance = performance;
-        this.productFK = productFK;
+        this.product_FK = productFK;
     }
 
     public Gpu() {
@@ -54,36 +53,36 @@ public class Gpu {
         this.chipset = chipset;
     }
 
-    public int getMemoryGB() {
-        return memoryGB;
+    public int getMemory_GB() {
+        return memory_GB;
     }
 
-    public void setMemoryGB(int memoryGB) {
-        this.memoryGB = memoryGB;
+    public void setMemory_GB(int memoryGB) {
+        this.memory_GB = memoryGB;
     }
 
-    public int getCoreClockMHZ() {
-        return coreClockMHZ;
+    public int getCore_Clock_MHZ() {
+        return core_Clock_MHZ;
     }
 
-    public void setCoreClockMHZ(int coreClockMHZ) {
-        this.coreClockMHZ = coreClockMHZ;
+    public void setCore_Clock_MHZ(int coreClockMHZ) {
+        this.core_Clock_MHZ = coreClockMHZ;
     }
 
-    public int getBoostClockMHZ() {
-        return boostClockMHZ;
+    public int getBoost_Clock_MHZ() {
+        return boost_Clock_MHZ;
     }
 
-    public void setBoostClockMHZ(int boostClockMHZ) {
-        this.boostClockMHZ = boostClockMHZ;
+    public void setBoost_Clock_MHZ(int boostClockMHZ) {
+        this.boost_Clock_MHZ = boostClockMHZ;
     }
 
-    public float getLengthMM() {
-        return lengthMM;
+    public float getLength_MM() {
+        return length_MM;
     }
 
-    public void setLengthMM(float lengthMM) {
-        this.lengthMM = lengthMM;
+    public void setLength_MM(float lengthMM) {
+        this.length_MM = lengthMM;
     }
 
     public int getTdp() {
@@ -94,12 +93,12 @@ public class Gpu {
         this.tdp = tdp;
     }
 
-    public int getRecommendedPsuWatts() {
-        return recommendedPsuWatts;
+    public int getRecommended_Psu_Watts() {
+        return recommended_Psu_Watts;
     }
 
-    public void setRecommendedPsuWatts(int recommendedPsuWatts) {
-        this.recommendedPsuWatts = recommendedPsuWatts;
+    public void setRecommended_Psu_Watts(int recommendedPsuWatts) {
+        this.recommended_Psu_Watts = recommendedPsuWatts;
     }
 
     public int getPerformance() {
@@ -110,12 +109,12 @@ public class Gpu {
         this.performance = performance;
     }
 
-    public long getProductFK() {
-        return productFK;
+    public long getProduct_FK() {
+        return product_FK;
     }
 
-    public void setProductFK(long productFK) {
-        this.productFK = productFK;
+    public void setProduct_FK(long productFK) {
+        this.product_FK = productFK;
     }
 
     @Override
@@ -123,14 +122,14 @@ public class Gpu {
         return "Gpu{" +
                 "id=" + id +
                 ", chipset='" + chipset + '\'' +
-                ", memoryGB=" + memoryGB +
-                ", coreClockMHZ=" + coreClockMHZ +
-                ", boostClockMHZ=" + boostClockMHZ +
-                ", lengthMM=" + lengthMM +
+                ", memoryGB=" + memory_GB +
+                ", coreClockMHZ=" + core_Clock_MHZ +
+                ", boostClockMHZ=" + boost_Clock_MHZ +
+                ", lengthMM=" + length_MM +
                 ", tdp=" + tdp +
-                ", recommendedPsuWatts=" + recommendedPsuWatts +
+                ", recommendedPsuWatts=" + recommended_Psu_Watts +
                 ", performance=" + performance +
-                ", productFK=" + productFK +
+                ", productFK=" + product_FK +
                 '}';
     }
 }

@@ -12,21 +12,20 @@ public class Storage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private int capacityGB;
+    private int capacity_GB;
     private int tier;
     private String type;
-    private String formFactor;
-    private String interface_;
-    private long productFK;
+    private String form_Factor;
+    private String storage_interface;
+    private long product_FK;
 
-    public Storage(long id, int capacityGB, int tier, String type, String formFactor, String interface_, long productFK) {
-        this.id = id;
-        this.capacityGB = capacityGB;
+    public Storage( int capacityGB, int tier, String type, String formFactor, String interface_, long productFK) {
+        this.capacity_GB = capacityGB;
         this.tier = tier;
         this.type = type;
-        this.formFactor = formFactor;
-        this.interface_ = interface_;
-        this.productFK = productFK;
+        this.form_Factor = formFactor;
+        this.storage_interface = interface_;
+        this.product_FK = productFK;
     }
 
     public Storage() {
@@ -40,12 +39,12 @@ public class Storage {
         this.id = id;
     }
 
-    public int getCapacityGB() {
-        return capacityGB;
+    public int getCapacity_GB() {
+        return capacity_GB;
     }
 
-    public void setCapacityGB(int capacityGB) {
-        this.capacityGB = capacityGB;
+    public void setCapacity_GB(int capacityGB) {
+        this.capacity_GB = capacityGB;
     }
 
     public int getTier() {
@@ -64,40 +63,40 @@ public class Storage {
         this.type = type;
     }
 
-    public String getFormFactor() {
-        return formFactor;
+    public String getForm_Factor() {
+        return form_Factor;
     }
 
-    public void setFormFactor(String formFactor) {
-        this.formFactor = formFactor;
+    public void setForm_Factor(String formFactor) {
+        this.form_Factor = formFactor;
     }
 
-    public String getInterface_() {
-        return interface_;
+    public String getStorage_interface() {
+        return storage_interface;
     }
 
-    public void setInterface_(String interface_) {
-        this.interface_ = interface_;
+    public void setStorage_interface(String interface_) {
+        this.storage_interface = interface_;
     }
 
-    public long getProductFK() {
-        return productFK;
+    public long getProduct_FK() {
+        return product_FK;
     }
 
-    public void setProductFK(long productFK) {
-        this.productFK = productFK;
+    public void setProduct_FK(long productFK) {
+        this.product_FK = productFK;
     }
 
     @Override
     public String toString() {
         return "Storage{" +
                 "id=" + id +
-                ", capacityGB=" + capacityGB +
+                ", capacityGB=" + capacity_GB +
                 ", tier=" + tier +
                 ", type='" + type + '\'' +
-                ", formFactor='" + formFactor + '\'' +
-                ", interface_='" + interface_ + '\'' +
-                ", productFK=" + productFK +
+                ", formFactor='" + form_Factor + '\'' +
+                ", interface_='" + storage_interface + '\'' +
+                ", productFK=" + product_FK +
                 '}';
     }
 }

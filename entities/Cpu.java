@@ -15,26 +15,25 @@ public class Cpu {
     private String socket;
     private int cores;
     private boolean smt;
-    private boolean integratedGPU;
-    private int tdpW;
-    private int stPref;
-    private int mtPref;
-    private float coreClock;
-    private float boostClock;
-    private long productFK;
+    private boolean integrated_GPU;
+    private int tdp_W;
+    private int st_Pref;
+    private int mt_Pref;
+    private float core_Clock;
+    private float boost_Clock;
+    private long product_FK;
 
-    public Cpu(long id, String socket, int cores, boolean smt, boolean integratedGPU, int tdpW, int stPref, int mtPref, float coreClock, float boostClock, long productFK) {
-        this.id = id;
+    public Cpu(String socket, int cores, boolean smt, boolean integrated_GPU, int tdpW, int stPref, int mtPref, float coreClock, float boostClock, long productFK) {
         this.socket = socket;
         this.cores = cores;
         this.smt = smt;
-        this.integratedGPU = integratedGPU;
-        this.tdpW = tdpW;
-        this.stPref = stPref;
-        this.mtPref = mtPref;
-        this.coreClock = coreClock;
-        this.boostClock = boostClock;
-        this.productFK = productFK;
+        this.integrated_GPU = integrated_GPU;
+        this.tdp_W = tdpW;
+        this.st_Pref = stPref;
+        this.mt_Pref = mtPref;
+        this.core_Clock = coreClock;
+        this.boost_Clock = boostClock;
+        this.product_FK = productFK;
     }
 
     public Cpu() {
@@ -72,60 +71,60 @@ public class Cpu {
         this.smt = smt;
     }
 
-    public boolean isIntegratedGPU() {
-        return integratedGPU;
+    public boolean isIntegrated_GPU() {
+        return integrated_GPU;
     }
 
-    public void setIntegratedGPU(boolean integratedGPU) {
-        this.integratedGPU = integratedGPU;
+    public void setIntegrated_GPU(boolean integratedGPU) {
+        this.integrated_GPU = integratedGPU;
     }
 
-    public int getTdpW() {
-        return tdpW;
+    public int getTdp_W() {
+        return tdp_W;
     }
 
-    public void setTdpW(int tdpW) {
-        this.tdpW = tdpW;
+    public void setTdp_W(int tdpW) {
+        this.tdp_W = tdpW;
     }
 
-    public int getStPref() {
-        return stPref;
+    public int getSt_Pref() {
+        return st_Pref;
     }
 
-    public void setStPref(int stPref) {
-        this.stPref = stPref;
+    public void setSt_Pref(int stPref) {
+        this.st_Pref = stPref;
     }
 
-    public int getMtPref() {
-        return mtPref;
+    public int getMt_Pref() {
+        return mt_Pref;
     }
 
-    public void setMtPref(int mtPref) {
-        this.mtPref = mtPref;
+    public void setMt_Pref(int mtPref) {
+        this.mt_Pref = mtPref;
     }
 
-    public float getCoreClock() {
-        return coreClock;
+    public float getCore_Clock() {
+        return core_Clock;
     }
 
-    public void setCoreClock(float coreClock) {
-        this.coreClock = coreClock;
+    public void setCore_Clock(float coreClock) {
+        this.core_Clock = coreClock;
     }
 
-    public float getBoostClock() {
-        return boostClock;
+    public float getBoost_Clock() {
+        return boost_Clock;
     }
 
-    public void setBoostClock(float boostClock) {
-        this.boostClock = boostClock;
+    public void setBoost_Clock(float boostClock) {
+        this.boost_Clock = boostClock;
     }
 
-    public long getProductFK() {
-        return productFK;
+    public long getProduct_FK() {
+        return product_FK;
     }
 
-    public void setProductFK(long productFK) {
-        this.productFK = productFK;
+    public void setProduct_FK(long productFK) {
+        this.product_FK = productFK;
     }
 
     @Override
@@ -135,13 +134,13 @@ public class Cpu {
                 ", socket='" + socket + '\'' +
                 ", cores=" + cores +
                 ", smt=" + smt +
-                ", integratedGPU=" + integratedGPU +
-                ", tdpW=" + tdpW +
-                ", stPref=" + stPref +
-                ", mtPref=" + mtPref +
-                ", coreClock=" + coreClock +
-                ", boostClock=" + boostClock +
-                ", productFK=" + productFK +
+                ", integratedGPU=" + integrated_GPU +
+                ", tdpW=" + tdp_W +
+                ", stPref=" + st_Pref +
+                ", mtPref=" + mt_Pref +
+                ", coreClock=" + core_Clock +
+                ", boostClock=" + boost_Clock +
+                ", productFK=" + product_FK +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-﻿id,capacity_gb,tier,type,form_factor,interface,product_fk
+﻿id,capacity_gb,tier,type,form_factor,storage_interface,product_fk
 1,256,3,NVMe,M.2-2280,M.2 (M),1256
 2,512,3,NVMe,M.2-2280,M.2 (M),1257
 3,1000,3,NVMe,M.2-2280,M.2 (M),1258

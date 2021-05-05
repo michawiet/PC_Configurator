@@ -13,20 +13,19 @@ public class Ram {
     private long id;
 
     private int speed;
-    private int modulesCount;
-    private int moduleCapacity;
-    private float fwLatencyNs;
+    private int modules_Count;
+    private int module_Capacity;
+    private float fw_Latency_Ns;
     private int cl;
-    private long productFK;
+    private long product_FK;
 
-    public Ram(long id, int speed, int modulesCount, int moduleCapacity, float fwLatencyNs, int cl, long productFK) {
-        this.id = id;
+    public Ram(int speed, int modulesCount, int moduleCapacity, float fwLatencyNs, int cl, long productFK) {
         this.speed = speed;
-        this.modulesCount = modulesCount;
-        this.moduleCapacity = moduleCapacity;
-        this.fwLatencyNs = fwLatencyNs;
+        this.modules_Count = modulesCount;
+        this.module_Capacity = moduleCapacity;
+        this.fw_Latency_Ns = fwLatencyNs;
         this.cl = cl;
-        this.productFK = productFK;
+        this.product_FK = productFK;
     }
 
     public Ram() {
@@ -48,28 +47,28 @@ public class Ram {
         this.speed = speed;
     }
 
-    public int getModulesCount() {
-        return modulesCount;
+    public int getModules_Count() {
+        return modules_Count;
     }
 
-    public void setModulesCount(int modulesCount) {
-        this.modulesCount = modulesCount;
+    public void setModules_Count(int modulesCount) {
+        this.modules_Count = modulesCount;
     }
 
-    public int getModuleCapacity() {
-        return moduleCapacity;
+    public int getModule_Capacity() {
+        return module_Capacity;
     }
 
-    public void setModuleCapacity(int moduleCapacity) {
-        this.moduleCapacity = moduleCapacity;
+    public void setModule_Capacity(int moduleCapacity) {
+        this.module_Capacity = moduleCapacity;
     }
 
-    public float getFwLatencyNs() {
-        return fwLatencyNs;
+    public float getFw_Latency_Ns() {
+        return fw_Latency_Ns;
     }
 
-    public void setFwLatencyNs(float fwLatencyNs) {
-        this.fwLatencyNs = fwLatencyNs;
+    public void setFw_Latency_Ns(float fwLatencyNs) {
+        this.fw_Latency_Ns = fwLatencyNs;
     }
 
     public int getCl() {
@@ -80,12 +79,12 @@ public class Ram {
         this.cl = cl;
     }
 
-    public long getProductFK() {
-        return productFK;
+    public long getProduct_FK() {
+        return product_FK;
     }
 
-    public void setProductFK(long productFK) {
-        this.productFK = productFK;
+    public void setProduct_FK(long productFK) {
+        this.product_FK = productFK;
     }
 
     @Override
@@ -93,11 +92,11 @@ public class Ram {
         return "Ram{" +
                 "id=" + id +
                 ", speed=" + speed +
-                ", modulesCount=" + modulesCount +
-                ", moduleCapacity=" + moduleCapacity +
-                ", fwLatencyNs=" + fwLatencyNs +
+                ", modulesCount=" + modules_Count +
+                ", moduleCapacity=" + module_Capacity +
+                ", fwLatencyNs=" + fw_Latency_Ns +
                 ", cl=" + cl +
-                ", productFK=" + productFK +
+                ", productFK=" + product_FK +
                 '}';
     }
 }

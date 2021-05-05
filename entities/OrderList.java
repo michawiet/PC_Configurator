@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class OrderList {
@@ -13,16 +13,15 @@ public class OrderList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Date date;
-    private long productId;
-    private long orderId;
+    private LocalDate date;
+    private long product_Id;
+    private long order_Id;
     private int quantity;
 
-    public OrderList(long id, Date date, long productId, long orderId, int quantity) {
-        this.id = id;
+    public OrderList(LocalDate date, long productId, long orderId, int quantity) {
         this.date = date;
-        this.productId = productId;
-        this.orderId = orderId;
+        this.product_Id = productId;
+        this.order_Id = orderId;
         this.quantity = quantity;
     }
 
@@ -37,28 +36,28 @@ public class OrderList {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public long getProductId() {
-        return productId;
+    public long getProduct_Id() {
+        return product_Id;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setProduct_Id(long productId) {
+        this.product_Id = productId;
     }
 
-    public long getOrderId() {
-        return orderId;
+    public long getOrder_Id() {
+        return order_Id;
     }
 
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
+    public void setOrder_Id(long orderId) {
+        this.order_Id = orderId;
     }
 
     public int getQuantity() {
@@ -74,8 +73,8 @@ public class OrderList {
         return "OrderList{" +
                 "id=" + id +
                 ", date=" + date +
-                ", productId=" + productId +
-                ", orderId=" + orderId +
+                ", productId=" + product_Id +
+                ", orderId=" + order_Id +
                 ", quantity=" + quantity +
                 '}';
     }

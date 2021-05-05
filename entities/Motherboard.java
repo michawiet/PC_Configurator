@@ -14,19 +14,18 @@ public class Motherboard {
 
     private float tier;
     private String chipset;
-    private String formFactor;
-    private int memorySlots;
-    private int memoryMaxGB;
-    private long productFK;
+    private String form_Factor;
+    private int memory_Slots;
+    private int memory_Max_GB;
+    private long product_FK;
 
-    public Motherboard(long id, float tier, String chipset, String formFactor, int memorySlots, int memoryMaxGB, long productFK) {
-        this.id = id;
+    public Motherboard(float tier, String chipset, String formFactor, int memorySlots, int memoryMaxGB, long productFK) {
         this.tier = tier;
         this.chipset = chipset;
-        this.formFactor = formFactor;
-        this.memorySlots = memorySlots;
-        this.memoryMaxGB = memoryMaxGB;
-        this.productFK = productFK;
+        this.form_Factor = formFactor;
+        this.memory_Slots = memorySlots;
+        this.memory_Max_GB = memoryMaxGB;
+        this.product_FK = productFK;
     }
 
     public Motherboard() {
@@ -56,36 +55,36 @@ public class Motherboard {
         this.chipset = chipset;
     }
 
-    public String getFormFactor() {
-        return formFactor;
+    public String getForm_Factor() {
+        return form_Factor;
     }
 
-    public void setFormFactor(String formFactor) {
-        this.formFactor = formFactor;
+    public void setForm_Factor(String formFactor) {
+        this.form_Factor = formFactor;
     }
 
-    public int getMemorySlots() {
-        return memorySlots;
+    public int getMemory_Slots() {
+        return memory_Slots;
     }
 
-    public void setMemorySlots(int memorySlots) {
-        this.memorySlots = memorySlots;
+    public void setMemory_Slots(int memorySlots) {
+        this.memory_Slots = memorySlots;
     }
 
-    public int getMemoryMaxGB() {
-        return memoryMaxGB;
+    public int getMemory_Max_GB() {
+        return memory_Max_GB;
     }
 
-    public void setMemoryMaxGB(int memoryMaxGB) {
-        this.memoryMaxGB = memoryMaxGB;
+    public void setMemory_Max_GB(int memoryMaxGB) {
+        this.memory_Max_GB = memoryMaxGB;
     }
 
-    public long getProductFK() {
-        return productFK;
+    public long getProduct_FK() {
+        return product_FK;
     }
 
-    public void setProductFK(long productFK) {
-        this.productFK = productFK;
+    public void setProduct_FK(long productFK) {
+        this.product_FK = productFK;
     }
 
     @Override
@@ -94,10 +93,10 @@ public class Motherboard {
                 "id=" + id +
                 ", tier=" + tier +
                 ", chipset='" + chipset + '\'' +
-                ", formFactor='" + formFactor + '\'' +
-                ", memorySlots=" + memorySlots +
-                ", memoryMaxGB=" + memoryMaxGB +
-                ", productFK=" + productFK +
+                ", formFactor='" + form_Factor + '\'' +
+                ", memorySlots=" + memory_Slots +
+                ", memoryMaxGB=" + memory_Max_GB +
+                ", productFK=" + product_FK +
                 '}';
     }
 }
