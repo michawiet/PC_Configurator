@@ -3,7 +3,9 @@ package com.pcc.pc_configurator.repositories;
 import com.pcc.pc_configurator.entities.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,5 +17,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Override
     Optional<User> findById(Long aLong);
 
-    List<User> findAllByEmail(String email);
+    @Query("SELECT u FROM User u WHERE u.email like ?1")
+    User findByEmail(@Param("email") String email);
 }
