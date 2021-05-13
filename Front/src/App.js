@@ -10,11 +10,10 @@ function App() {
     <div className="App">
      <Router>
         <Switch>
-          <Route exact path="/login" component={SignIn} />
           <Route exact path="/" component={PartPickerDrawer} />
+          <Route exact path="/login" component={SignIn} />
           <Route exact path="/signup" component={SingUp} />
           <Route exact path="/loged" component={LogedPartPicker} />
-
         </Switch>
    </Router>
 

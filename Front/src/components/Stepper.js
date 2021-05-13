@@ -6,13 +6,15 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Check from '@material-ui/icons/Check';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import QuestionsPanel  from './QuestionsPanel';
+import QuestionsPanelSecond  from './QuestionsPanelSecond';
+import QuestionsPanelThird  from './QuestionsPanelThird';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import EuroIcon from '@material-ui/icons/Euro';
+import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 
 
 
@@ -68,9 +70,9 @@ function ColorlibStepIcon(props) {
   const { active, completed } = props;
 
   const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
+    1: <GpsFixedIcon />,
+    2: <FavoriteBorderIcon />,
+    3: <EuroIcon />,
   };
 
   return (
@@ -122,9 +124,9 @@ function getStepContent(step) {
     case 0:
       return <QuestionsPanel/>;
     case 1:
-      return 'What is an ad group anyways?';
+      return <QuestionsPanelSecond/>;
     case 2:
-      return 'This is the bit I really care about!';
+      return <QuestionsPanelThird/>;
     default:
       return 'Unknown step';
   }

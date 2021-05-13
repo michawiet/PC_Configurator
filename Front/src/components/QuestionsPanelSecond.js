@@ -7,8 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { green, grey, blueGrey } from '@material-ui/core/colors';
 import Radio from '@material-ui/core/Radio';
-import Checkbox from '@material-ui/core/Checkbox';
-
 
 const useStyles = makeStyles({
   root: {
@@ -39,61 +37,73 @@ margin: 50,
   header:{
 textAlign: 'center',
 
-  } 
+  },
+
+
 });
+
+
 
 export default function SimpleCard() {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
+  const [selectedValue, setSelectedValue] = React.useState('a');
 
-  const [checked, setChecked] = React.useState([]);
-  const handleChange = (e) => {
-    let data=checked;
-    data.push(e.target.value)
-    setChecked(data);
-    console.warn(checked)
-  };
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+};
+const [selectedValue2, setSelectedValue2] = React.useState('c');
 
+const handleChange2 = (event) => {
+    setSelectedValue2(event.target.value);
+};
 
 
   return (
       <>
         
-        <h1 className={classes.header}>Przeznaczenie</h1>
+        <h1 className={classes.header}>Preferencje</h1>
 
       <div className={classes.bigdiv}>
+  
+
       <div className={classes.divs}>
 
     <Card className={classes.root} variant="outlined">
       <CardContent>
-     
+   
         <Typography variant="h5" component="h2">
-          Praca biurowa
+          Intel
         </Typography>
-        
+ 
       </CardContent>
  
     </Card>
-    <Checkbox
-        value = "1"
-        onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'primary checkbox' }}
+    <Radio
+        checked={selectedValue === 'a'}
+        onChange={handleChange}
+        value="a"
+        name="radio-button"
+        inputProps={{ 'aria-label': 'A' }}
       />
     </div>
     <div className={classes.divs}>
     <Card className={classes.root} variant="outlined">
       <CardContent>
-       
+      
         <Typography variant="h5" component="h2">
-          Gry
+       Amd
         </Typography>
+ 
       </CardContent>
   
     </Card>
-    <Checkbox
-      value = "2"
-      onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'pierwszy' }}
+    <Radio
+        checked={selectedValue === 'b'}
+        onChange={handleChange}
+        value="b"
+        name="radio-button-demo"
+        inputProps={{ 'aria-label': 'B' }}
       />
     </div>
     <div className={classes.divs}>
@@ -101,16 +111,21 @@ export default function SimpleCard() {
       <CardContent>
   
         <Typography variant="h5" component="h2">
-          Obróbka zdjęć 
+          Radeon
         </Typography>
-  
+
       </CardContent>
    
     </Card>
-    <Checkbox
-           value = "3"
-           onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'drugi' }}
+    
+    <Radio
+        checked={selectedValue2 === 'c'}
+        onChange={handleChange2}
+        value="c"
+        name="radio-button-demo"
+        color = "primary"
+
+        inputProps={{ 'aria-label': 'C' }}
       />
     </div>
     <div className={classes.divs}>
@@ -118,31 +133,18 @@ export default function SimpleCard() {
       <CardContent>
       
         <Typography variant="h5" component="h2">
-          Edycja zdjeć
+         Nvidia
         </Typography>
-
+    
       </CardContent>
     </Card>
-    <Checkbox
-        value = "4"
-        onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'czwarty' }}
-      />
-    </div>
-    <div className={classes.divs}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-      
-        <Typography variant="h5" component="h2">
-          Renderowanie grafiki 3D
-        </Typography>
-
-      </CardContent>
-    </Card>
-    <Checkbox
-        value = "5"
-        onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'czwarty' }}
+    <Radio
+        checked={selectedValue2 === 'd'}
+        onChange={handleChange2}
+        value="d"
+        color = "primary"
+        name="radio-button-demo"
+        inputProps={{ 'aria-label': 'D' }}
       />
     </div>
     </div>
