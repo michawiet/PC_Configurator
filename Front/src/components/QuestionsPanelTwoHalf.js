@@ -62,7 +62,7 @@ const handleChange2 = (event) => {
   return (
       <>
         
-        <h1 className={classes.header}>Preferowany procesor</h1>
+        <h1 className={classes.header}>Preferowany karta graficzna</h1>
 
       <div className={classes.bigdiv}>
   
@@ -73,7 +73,7 @@ const handleChange2 = (event) => {
       <CardContent>
    
         <Typography variant="h5" component="h2">
-          Intel
+          Nvidia
         </Typography>
  
       </CardContent>
@@ -92,7 +92,7 @@ const handleChange2 = (event) => {
       <CardContent>
       
         <Typography variant="h5" component="h2">
-       Amd
+       Amd Radeon
         </Typography>
  
       </CardContent>

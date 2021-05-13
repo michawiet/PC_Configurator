@@ -11,7 +11,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import QuestionsPanel  from './QuestionsPanel';
 import QuestionsPanelSecond  from './QuestionsPanelSecond';
+import QuestionsPanelTwoHalf  from './QuestionsPanelTwoHalf';
+
 import QuestionsPanelThird  from './QuestionsPanelThird';
+
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import EuroIcon from '@material-ui/icons/Euro';
 import GpsFixedIcon from '@material-ui/icons/GpsFixed';
@@ -72,7 +75,8 @@ function ColorlibStepIcon(props) {
   const icons = {
     1: <GpsFixedIcon />,
     2: <FavoriteBorderIcon />,
-    3: <EuroIcon />,
+    3: <FavoriteBorderIcon />,
+    4: <EuroIcon />,
   };
 
   return (
@@ -116,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['step1', 'step 2', ' step 3', 'step 3'];
 }
 
 function getStepContent(step) {
@@ -126,7 +130,9 @@ function getStepContent(step) {
     case 1:
       return <QuestionsPanelSecond/>;
     case 2:
-      return <QuestionsPanelThird/>;
+      return <QuestionsPanelTwoHalf/>;
+      case 3:
+        return <QuestionsPanelThird/>;
     default:
       return 'Unknown step';
   }

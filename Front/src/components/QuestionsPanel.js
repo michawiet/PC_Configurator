@@ -44,7 +44,6 @@ textAlign: 'center',
 
 export default function SimpleCard() {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   const [checked, setChecked] = React.useState([]);
   const handleChange = (e) => {
