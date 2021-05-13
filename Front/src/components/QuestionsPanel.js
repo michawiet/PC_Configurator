@@ -42,39 +42,33 @@ textAlign: 'center',
   } 
 });
 
-export default function SimpleCard() {
+export default function SimpleCard({options}) {
   const classes = useStyles();
-
-  const [checked, setChecked] = React.useState([]);
+  
   const handleChange = (e) => {
-    let data=checked;
-    data.push(e.target.value)
-    setChecked(data);
-    console.warn(checked)
+    options.set(e.target.value, !options.get(e.target.value));
+    console.log(options);
   };
 
-
+  options.set("office", false);
+  options.set("gaming", false);
+  options.set("photo-editing", false);
+  options.set("video-editing", false);
+  options.set("3d-rendering", false);
 
   return (
       <>
-        
-        <h1 className={classes.header}>Przeznaczenie</h1>
-
       <div className={classes.bigdiv}>
       <div className={classes.divs}>
-
     <Card className={classes.root} variant="outlined">
       <CardContent>
-     
         <Typography variant="h5" component="h2">
           Praca biurowa
         </Typography>
-        
       </CardContent>
- 
     </Card>
     <Checkbox
-        value = "1"
+        value = "office"
         onChange={(e)=>handleChange(e)}
         inputProps={{ 'aria-label': 'primary checkbox' }}
       />
@@ -82,15 +76,13 @@ export default function SimpleCard() {
     <div className={classes.divs}>
     <Card className={classes.root} variant="outlined">
       <CardContent>
-       
         <Typography variant="h5" component="h2">
           Gry
         </Typography>
       </CardContent>
-  
     </Card>
     <Checkbox
-      value = "2"
+      value = "gaming"
       onChange={(e)=>handleChange(e)}
         inputProps={{ 'aria-label': 'pierwszy' }}
       />
@@ -98,17 +90,12 @@ export default function SimpleCard() {
     <div className={classes.divs}>
     <Card className={classes.root} variant="outlined">
       <CardContent>
-  
-        <Typography variant="h5" component="h2">
-          Obróbka zdjęć 
-        </Typography>
-  
+        <Typography variant="h5" component="h2">Obróbka zdjęć</Typography>
       </CardContent>
-   
     </Card>
     <Checkbox
-           value = "3"
-           onChange={(e)=>handleChange(e)}
+        value = "photo-editing"
+        onChange={(e)=>handleChange(e)}
         inputProps={{ 'aria-label': 'drugi' }}
       />
     </div>
@@ -117,13 +104,13 @@ export default function SimpleCard() {
       <CardContent>
       
         <Typography variant="h5" component="h2">
-          Edycja zdjeć
+          Edycja video
         </Typography>
 
       </CardContent>
     </Card>
     <Checkbox
-        value = "4"
+        value = "video-editing"
         onChange={(e)=>handleChange(e)}
         inputProps={{ 'aria-label': 'czwarty' }}
       />
@@ -139,7 +126,7 @@ export default function SimpleCard() {
       </CardContent>
     </Card>
     <Checkbox
-        value = "5"
+        value = "3d-rendering"
         onChange={(e)=>handleChange(e)}
         inputProps={{ 'aria-label': 'czwarty' }}
       />

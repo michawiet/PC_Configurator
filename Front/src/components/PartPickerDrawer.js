@@ -237,7 +237,7 @@ const MiniDrawer = (props) => {
             Konfigurator PC
             {/*Title that is based on actual list selection*/}
           </Typography>
-          <Button style={{ marginLeft: "85%" }} color="inherit" onClick={()=>{history.push("/login")}}>LogIn</Button>
+          <Button style={{ marginLeft: "84%" }} color="inherit" onClick={()=>{history.push("/login")}}>LogIn</Button>
           <Button  style={{ marginLeft: "auto" }} color="inherit" onClick={()=>{history.push("/signup")}}>SignUp</Button>
           
 

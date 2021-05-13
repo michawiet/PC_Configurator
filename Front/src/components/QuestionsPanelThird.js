@@ -33,7 +33,7 @@ margin: 50,
   bigdiv: {
     display: "flex",
     justifyContent:'center',
-     alignItems:'center'
+    alignItems:'center'
   },
   header:{
 textAlign: 'center',
@@ -76,20 +76,11 @@ export default function SimpleCard() {
     console.warn(checked)
   };
 
-
-
   return (
-      <>
-        
-        <h1 className={classes.header}>Budżet</h1>
-
+    <>
       <div className={classes.bigdiv}>
-
-    <Slider/>
- 
- 
-    </div>
-
+        <Slider/>
+      </div>
     </>
     
   );

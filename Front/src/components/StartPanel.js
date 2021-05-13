@@ -20,19 +20,16 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   }, 
-  divs:
-  {
-height: 200,
-width: 200,
-margin: 50,
+  divs: {
+    height: 200,
+    width: 200,
+    margin: 50,
   },
   bigdiv: {
     display: "flex",
     margin: 20,
   },
 });
-
-
 
   const ColorButton = withStyles((theme) => ({
     root: {
@@ -54,21 +51,19 @@ margin: 50,
 export default function SimpleCard() {
   const classes = useStyles();
   
- const [distable, setDistabl] = React.useState(false);
+const [distable, setDistabl] = React.useState(false);
 
 const [result, ddlvalue]=React.useState()
 
 const handleClick = () => {
   setDistabl(true)
-   return  ddlvalue(<Stepper/>);
-  };
-  return (
-      <>
-        
-     <div>{result}</div> 
-      
-    <ColorButton variant="outlined" disabled={distable}  onClick={(handleClick) } >Rozpocznij</ColorButton>
+  return  ddlvalue(<Stepper/>);
+};
 
+  return (
+    <>
+      <div>{result}</div>   
+      { distable ? <></> : <ColorButton variant="outlined" disabled={distable}  onClick={(handleClick) } >Rozpocznij</ColorButton>}
     </>
     
   );

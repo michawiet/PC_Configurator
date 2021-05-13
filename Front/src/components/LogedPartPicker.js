@@ -103,10 +103,6 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     padding: 0,
   },
-  iconLabelWrapper: {
-  
-    flexDirection: "row"
-  },
   tabsy:{
     /*position: "absolute",
     left: 0,
@@ -115,56 +111,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MiniDrawer = (props) => {
-
-  const ItemList = [
-    {
-      text: "Komputer",
-      icon: <ComputerIcon />,
-      //onClick: () => history.push("/build")
-    }
-  ];
-  const LowerItemList = [
-    {
-      text: "Procesor",
-      icon: <CpuIcon />,
-      //onClick: () => history.push("/cpu")
-    },
-    {
-      text: "Chłodzenie",
-      icon: <CoolerIcon />,
-      //onClick: () => history.push("/build")
-    },
-    {
-      text: "Płyta główna",
-      icon: <MotherboardIcon />,
-      //onClick: () => history.push("/motherboard")
-    },
-    {
-      text: "Pamięć RAM",
-      icon: <RamIcon />,
-      //onClick: () => history.push("/ram")
-    },
-    {
-      text: "Dysk Twardy",
-      icon: <StorageIcon />,
-      //onClick: () => history.push("/storage")
-    },
-    {
-      text: "Karta graficzna",
-      icon: <GpuIcon />,
-      //onClick: () => history.push("/gpu")
-    },
-    {
-      text: "Obudowa",
-      icon: <CaseIcon />,
-      //onClick: () => history.push("/case")
-    },
-    {
-      text: "Zasilacz",
-      icon: <PsuIcon />,
-      //onClick: () => history.push("/psu")
-    },
-  ];
 
   const classes = useStyles();
   const theme = useTheme();
@@ -190,6 +136,7 @@ const MiniDrawer = (props) => {
       'aria-controls': `vertical-tabpanel-${index}`,
     };
   }
+
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -209,9 +156,8 @@ const MiniDrawer = (props) => {
       </div>
     );
   }
- 
+
   let history = useHistory();
-    
 
   return (
     <div className={classes.root}>
@@ -223,41 +169,33 @@ const MiniDrawer = (props) => {
         })}
       >
         <Toolbar>
-
           <Typography variant="h6" >
             Konfigurator PC
             {/*Title that is based on actual list selection*/}
           </Typography>
           
           <IconButton style={{ marginLeft: "84%" }} aria-label="delete">
-        <ShoppingCartOutlinedIcon style={{ color: green[500] }}  fontSize="large" />
-      </IconButton>
+            <ShoppingCartOutlinedIcon style={{ color: green[500] }}  fontSize="large" />
+          </IconButton>
           <Button  style={{ marginLeft: "auto" }} color="inherit" onClick={()=>{history.push("/")}} >Logout</Button>
-          
-
         </Toolbar>
         <Tabs
-        
-        variant="scrollable"
-        value={selectedTabs}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        className={classes.tabsy}
-      >
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<ComputerIcon width={25}/>} label="Komputer" {...a11yProps(0)} />
-        <Divider/>
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CpuIcon  width={25}/>} label="Procesor" {...a11yProps(2)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CoolerIcon width={25}/>} label="Chłodzenie" {...a11yProps(3)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<MotherboardIcon width={25}/>} label="Płyta główna" {...a11yProps(4)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<RamIcon width={25}/>} label="Pamięć RAM" {...a11yProps(5)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<StorageIcon width={25}/>} label="Dysk" {...a11yProps(6)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<GpuIcon width={35}/>} label="Karta graficzna" {...a11yProps(7)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CaseIcon width={25}/>} label="Obudowa" {...a11yProps(8)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<PsuIcon width={25}/>} label="Zasilacz" {...a11yProps(9)} />
-        
-
-      </Tabs>
-  
+          value={selectedTabs}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          className={classes.tabsy}
+          centered={true}
+        >
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<ComputerIcon width={25}/>} label=" Komputer" {...a11yProps(0)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CpuIcon  width={25}/>} label="Procesor" {...a11yProps(2)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CoolerIcon width={25}/>} label="Chłodzenie" {...a11yProps(3)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<MotherboardIcon width={25}/>} label="Płyta główna" {...a11yProps(4)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<RamIcon width={25}/>} label="Pamięć RAM" {...a11yProps(5)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<StorageIcon width={25}/>} label="Dysk" {...a11yProps(6)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<GpuIcon width={35}/>} label="Karta graficzna" {...a11yProps(7)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CaseIcon width={25}/>} label="Obudowa" {...a11yProps(8)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<PsuIcon width={25}/>} label="Zasilacz" {...a11yProps(9)} />
+        </Tabs>
       </AppBar>
 
       <main className={classes.content}>
@@ -290,8 +228,6 @@ const MiniDrawer = (props) => {
       <TabPanel value={selectedTabs} index={9}>
         Zasilacz
       </TabPanel>
-     
-     
       </main>
     </div>
   );

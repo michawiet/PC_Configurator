@@ -58,26 +58,16 @@ const handleChange2 = (event) => {
     setSelectedValue2(event.target.value);
 };
 
-
   return (
-      <>
-        
-        <h1 className={classes.header}>Preferowany procesor</h1>
-
+    <>
       <div className={classes.bigdiv}>
-  
-
       <div className={classes.divs}>
-
     <Card className={classes.root} variant="outlined">
       <CardContent>
-   
         <Typography variant="h5" component="h2">
           Intel
         </Typography>
- 
       </CardContent>
- 
     </Card>
     <Radio
         checked={selectedValue === 'a'}
@@ -90,13 +80,8 @@ const handleChange2 = (event) => {
     <div className={classes.divs}>
     <Card className={classes.root} variant="outlined">
       <CardContent>
-      
-        <Typography variant="h5" component="h2">
-       Amd
-        </Typography>
- 
+        <Typography variant="h5" component="h2">Amd</Typography>
       </CardContent>
-  
     </Card>
     <Radio
         checked={selectedValue === 'b'}
@@ -106,10 +91,7 @@ const handleChange2 = (event) => {
         inputProps={{ 'aria-label': 'B' }}
       />
     </div>
-
     </div>
-
     </>
-    
   );
 }

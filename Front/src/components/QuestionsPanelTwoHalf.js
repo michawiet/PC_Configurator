@@ -23,23 +23,19 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   }, 
-  divs:
-  {
-height: 200,
-width: 200,
-margin: 50,
+  divs: {
+    height: 200,
+    width: 200,
+    margin: 50,
   },
   bigdiv: {
     display: "flex",
     justifyContent:'center',
-     alignItems:'center'
+    alignItems:'center'
   },
   header:{
-textAlign: 'center',
-
+    textAlign: 'center',
   },
-
-
 });
 
 
@@ -60,24 +56,15 @@ const handleChange2 = (event) => {
 
 
   return (
-      <>
-        
-        <h1 className={classes.header}>Preferowany karta graficzna</h1>
-
+    <>
       <div className={classes.bigdiv}>
-  
-
       <div className={classes.divs}>
-
     <Card className={classes.root} variant="outlined">
       <CardContent>
-   
         <Typography variant="h5" component="h2">
           Nvidia
         </Typography>
- 
       </CardContent>
- 
     </Card>
     <Radio
         checked={selectedValue === 'a'}
@@ -90,13 +77,8 @@ const handleChange2 = (event) => {
     <div className={classes.divs}>
     <Card className={classes.root} variant="outlined">
       <CardContent>
-      
-        <Typography variant="h5" component="h2">
-       Amd Radeon
-        </Typography>
- 
+        <Typography variant="h5" component="h2">Amd Radeon</Typography>
       </CardContent>
-  
     </Card>
     <Radio
         checked={selectedValue === 'b'}
@@ -106,10 +88,7 @@ const handleChange2 = (event) => {
         inputProps={{ 'aria-label': 'B' }}
       />
     </div>
-
     </div>
-
     </>
-    
   );
 }

@@ -34,7 +34,7 @@ export default function ButtonAppBar() {
             PC-Configurator
           </Typography>
           <Button color="inherit">Login</Button>
-         <Button position="right" color="inherit">Login</Button>
+          <Button position="right" color="inherit">Login</Button>
           <Button position="right" color="inherit">Signin</Button>
         </Toolbar>
       </AppBar>
