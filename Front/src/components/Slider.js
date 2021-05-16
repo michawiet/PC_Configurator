@@ -4,7 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
-import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
+import { ReactComponent as ZlotyIcon } from '../icons/poland-zloty-currency-symbol.svg';
+
 const useStyles = makeStyles({
   root: {
     width: 1000,
@@ -47,7 +48,7 @@ export default function InputSlider() {
       </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <EuroSymbolIcon />
+        <ZlotyIcon height={20} width={20}/>
         </Grid>
         <Grid item xs>
           <Slider
@@ -59,7 +60,7 @@ export default function InputSlider() {
             step={500}
             marks
             min={1000}
-            max={15000}
+            max={9999}
             valueLabelDisplay="auto"
           />
         </Grid>
