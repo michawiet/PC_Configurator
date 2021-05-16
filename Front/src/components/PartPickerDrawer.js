@@ -9,15 +9,6 @@ import Box from '@material-ui/core/Box';
 import { useHistory } from "react-router-dom";
 import StartPanel from './StartPanel'
 //icons
-import { ReactComponent as CpuIcon } from '../icons/066-cpu-2.svg';
-import { ReactComponent as CoolerIcon } from '../icons/046-cooler.svg';
-import { ReactComponent as MotherboardIcon } from '../icons/070-motherboard.svg';
-import { ReactComponent as RamIcon } from '../icons/088-ram-memory.svg';
-import { ReactComponent as StorageIcon } from '../icons/089-hard-drive.svg';
-import { ReactComponent as GpuIcon } from '../icons/012-video-card.svg';
-import { ReactComponent as CaseIcon } from '../icons/091-desktop.svg';
-import { ReactComponent as PsuIcon } from '../icons/084-supply.svg';
-import { ReactComponent as ComputerIcon } from '../icons/007-computer.svg';
 import MainTabsPanel from './MainTabsPanel';
 
 
@@ -165,34 +156,34 @@ const MiniDrawer = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <TabPanel value={selectedTabs} index={0}>
-        <StartPanel/>
-      </TabPanel>
+          <StartPanel />
+        </TabPanel>
         <TabPanel value={selectedTabs} index={1}>
-        <CpuPicker/>
-      </TabPanel>
-      <TabPanel value={selectedTabs} index={2}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={selectedTabs} index={3}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={selectedTabs} index={4}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={selectedTabs} index={5}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={selectedTabs} index={6}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={selectedTabs} index={7}>
-        Item Seven
-      </TabPanel>
-      <TabPanel value={selectedTabs} index={8}>
-        Zasilacz
-      </TabPanel>
-        {/**<ComponentTable></ComponentTable>**/}
-        {/* component from router */}
+          <CpuPicker/>
+        </TabPanel>
+        <TabPanel value={selectedTabs} index={2}>
+          Item Two
+        </TabPanel>
+        <TabPanel value={selectedTabs} index={3}>
+          Item Three
+        </TabPanel>
+        <TabPanel value={selectedTabs} index={4}>
+          Item Four
+        </TabPanel>
+        <TabPanel value={selectedTabs} index={5}>
+          Item Five
+        </TabPanel>
+        <TabPanel value={selectedTabs} index={6}>
+          Item Six
+        </TabPanel>
+        <TabPanel value={selectedTabs} index={7}>
+          Item Seven
+        </TabPanel>
+        <TabPanel value={selectedTabs} index={8}>
+          Zasilacz
+        </TabPanel>
+          {/**<ComponentTable></ComponentTable>**/}
+          {/* component from router */}
       </main>
     </div>
   );

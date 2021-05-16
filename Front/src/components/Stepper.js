@@ -5,17 +5,16 @@ import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Check from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import StepContent from '@material-ui/core/StepContent';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import QuestionsPanel  from './QuestionsPanel';
-import QuestionsPanelSecond  from './QuestionsPanelSecond';
-import QuestionsPanelTwoHalf  from './QuestionsPanelTwoHalf';
 
-import QuestionsPanelThird  from './QuestionsPanelThird';
+import WorkloadTypeQuestionPanel  from './Questions/WorkloadTypeQuestionsPanel';
+import ProcessorQuestionPanel  from './Questions/ProcessorQuestionPanel';
+import GpuQuestionPanel  from './Questions/GpuQuestionPanel';
+import BudgetQuestionPanel  from './Questions/BudgetQuestionPanel';
 
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import EuroIcon from '@material-ui/icons/Euro';
@@ -130,13 +129,13 @@ var panelOptions = new Map();
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <QuestionsPanel options={panelOptions}/>;
+      return <WorkloadTypeQuestionPanel options={panelOptions}/>;
     case 1:
-      return <QuestionsPanelSecond />;
+      return <ProcessorQuestionPanel />;
     case 2:
-      return <QuestionsPanelTwoHalf />;
+      return <GpuQuestionPanel />;
       case 3:
-        return <QuestionsPanelThird />;
+        return <BudgetQuestionPanel />;
     default:
       return 'Unknown step';
   }
