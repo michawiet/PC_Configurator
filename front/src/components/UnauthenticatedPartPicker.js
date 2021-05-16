@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import { useHistory } from "react-router-dom";
 import MainTabsPanel from './MainTabsPanel';
-import PartPickerTabs from './PartPickerTabs';
+import PartPickerTabs from './Tabs/PartPickerTabs';
 
 const drawerWidth = 240;
 
@@ -75,12 +75,6 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     padding: 0,
   },
-
-  tabsy:{
-    /*position: "absolute",
-    left: 0,
-  top: 140*/
-  }
 }));
 
 const MiniDrawer = (props) => {

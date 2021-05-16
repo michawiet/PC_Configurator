@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CpuPicker from './CpuPicker';
-import StartPanel from './StartPanel';
+import StartPanel from '../StartPanel';
 
 function PartPickerTabs({selectedTabs}) {
   function TabPanel(props) {
