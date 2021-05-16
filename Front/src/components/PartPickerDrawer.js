@@ -1,35 +1,24 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme, Drawer, AppBar, Toolbar, List, CssBaseline, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { withRouter } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom';
-import BuildViewer from './BuildViewer';
+import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography } from '@material-ui/core';
 import CpuPicker from './CpuPicker';
 import Button from '@material-ui/core/Button';
-import ComponentTable from './ComponentTable';
-import {Redirect} from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import { useHistory } from "react-router-dom";
-import QuestionsPanel from './QuestionsPanel'
 import StartPanel from './StartPanel'
-import { grey, red } from '@material-ui/core/colors';
 //icons
-import SvgIcon from '@material-ui/core/SvgIcon';
 import { ReactComponent as CpuIcon } from '../icons/066-cpu-2.svg';
 import { ReactComponent as CoolerIcon } from '../icons/046-cooler.svg';
 import { ReactComponent as MotherboardIcon } from '../icons/070-motherboard.svg';
 import { ReactComponent as RamIcon } from '../icons/088-ram-memory.svg';
 import { ReactComponent as StorageIcon } from '../icons/089-hard-drive.svg';
-import { ReactComponent as GpuIcon } from '../icons/087-graphic-card.svg';
+import { ReactComponent as GpuIcon } from '../icons/012-video-card.svg';
 import { ReactComponent as CaseIcon } from '../icons/091-desktop.svg';
 import { ReactComponent as PsuIcon } from '../icons/084-supply.svg';
 import { ReactComponent as ComputerIcon } from '../icons/007-computer.svg';
+import MainTabsPanel from './MainTabsPanel';
 
 
 //import IconSelector from './IconSelector';
@@ -95,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: 40,
+    marginTop: 75,
   
   },
   labelContainer: {
@@ -111,56 +100,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MiniDrawer = (props) => {
-
-  const ItemList = [
-    {
-      text: "Komputer",
-      icon: <ComputerIcon />,
-      //onClick: () => history.push("/build")
-    }
-  ];
-  const LowerItemList = [
-    {
-      text: "Procesor",
-      icon: <CpuIcon />,
-      //onClick: () => history.push("/cpu")
-    },
-    {
-      text: "Chłodzenie",
-      icon: <CoolerIcon />,
-      //onClick: () => history.push("/build")
-    },
-    {
-      text: "Płyta główna",
-      icon: <MotherboardIcon />,
-      //onClick: () => history.push("/motherboard")
-    },
-    {
-      text: "Pamięć RAM",
-      icon: <RamIcon />,
-      //onClick: () => history.push("/ram")
-    },
-    {
-      text: "Dysk Twardy",
-      icon: <StorageIcon />,
-      //onClick: () => history.push("/storage")
-    },
-    {
-      text: "Karta graficzna",
-      icon: <GpuIcon />,
-      //onClick: () => history.push("/gpu")
-    },
-    {
-      text: "Obudowa",
-      icon: <CaseIcon />,
-      //onClick: () => history.push("/case")
-    },
-    {
-      text: "Zasilacz",
-      icon: <PsuIcon />,
-      //onClick: () => history.push("/psu")
-    },
-  ];
 
   const classes = useStyles();
   const theme = useTheme();
@@ -211,110 +150,20 @@ const MiniDrawer = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
+      <AppBar position="fixed" className={clsx(classes.appBar, { [classes.appBarShift]: open,})}>
         <Toolbar>
-          {/*<IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>*/}
           <Typography variant="h6" >
             Konfigurator PC
             {/*Title that is based on actual list selection*/}
           </Typography>
           <Button style={{ marginLeft: "84%" }} color="inherit" onClick={()=>{history.push("/login")}}>LogIn</Button>
           <Button  style={{ marginLeft: "auto" }} color="inherit" onClick={()=>{history.push("/signup")}}>SignUp</Button>
-          
-
         </Toolbar>
-        <Tabs
-        
-        value={selectedTabs}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        className={classes.tabsy}
-        centered={true}
-      >
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<ComputerIcon width={25}/>} label=" Komputer" {...a11yProps(0)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CpuIcon  width={25}/>} label="Procesor" {...a11yProps(1)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CoolerIcon width={25}/>} label="Chłodzenie" {...a11yProps(2)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<MotherboardIcon width={25}/>} label="Płyta główna" {...a11yProps(3)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<RamIcon width={25}/>} label="Pamięć RAM" {...a11yProps(4)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<StorageIcon width={25}/>} label="Dysk" {...a11yProps(5)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<GpuIcon width={35}/>} label="Karta graficzna" {...a11yProps(6)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CaseIcon width={25}/>} label="Obudowa" {...a11yProps(7)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<PsuIcon width={25}/>} label="Zasilacz" {...a11yProps(8)} />
-        
-
-      </Tabs>
-  
+        <MainTabsPanel selectedTabs={selectedTabs} setselectedTabs={setselectedTabs} />
       </AppBar>
-   {/*   <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        
-        <Divider />
-   
-        
-      <List>
-          {ItemList.map((value) => (
-            <ListItem button key={value.text}>
-              <ListItemIcon>
-                <SvgIcon>
-                  {value.icon}
-                </SvgIcon>
-              </ListItemIcon>
-              <ListItemText primary={value.text} />
-            </ListItem>
-          ))}
-        </List>
-          <Divider />
 
-  
-    
-         <List>
-          {LowerItemList.map((value) => (
-            <ListItem button key={value.text} onClick={value.onClick}>
-            <ListItemIcon>
-              <SvgIcon>
-                {value.icon}
-              </SvgIcon>
-            </ListItemIcon>
-            <ListItemText primary={value.text} />
-          </ListItem>
-          ))}
-          </List> 
-        <Divider />
-      </Drawer>*/}
       <main className={classes.content}>
         <div className={classes.toolbar} />
-      
         <TabPanel value={selectedTabs} index={0}>
         <StartPanel/>
       </TabPanel>
@@ -342,7 +191,6 @@ const MiniDrawer = (props) => {
       <TabPanel value={selectedTabs} index={8}>
         Zasilacz
       </TabPanel>
-     
         {/**<ComponentTable></ComponentTable>**/}
         {/* component from router */}
       </main>
