@@ -20,8 +20,6 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import EuroIcon from '@material-ui/icons/Euro';
 import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 
-
-
 const ColorlibConnector = withStyles({
   alternativeLabel: {
     top: 22,
