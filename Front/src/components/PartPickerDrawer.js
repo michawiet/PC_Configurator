@@ -102,10 +102,7 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     padding: 0,
   },
-  iconLabelWrapper: {
-  
-    flexDirection: "row"
-  },
+
   tabsy:{
     /*position: "absolute",
     left: 0,
@@ -208,7 +205,6 @@ const MiniDrawer = (props) => {
       </div>
     );
   }
- 
   let history = useHistory();
     
 
@@ -244,22 +240,21 @@ const MiniDrawer = (props) => {
         </Toolbar>
         <Tabs
         
-        variant="scrollable"
         value={selectedTabs}
         onChange={handleChange}
         aria-label="Vertical tabs example"
         className={classes.tabsy}
+        centered={true}
       >
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<ComputerIcon width={25}/>} label="Komputer" {...a11yProps(0)} />
-        <Divider/>
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CpuIcon  width={25}/>} label="Procesor" {...a11yProps(2)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CoolerIcon width={25}/>} label="Chłodzenie" {...a11yProps(3)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<MotherboardIcon width={25}/>} label="Płyta główna" {...a11yProps(4)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<RamIcon width={25}/>} label="Pamięć RAM" {...a11yProps(5)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<StorageIcon width={25}/>} label="Dysk" {...a11yProps(6)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<GpuIcon width={35}/>} label="Karta graficzna" {...a11yProps(7)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CaseIcon width={25}/>} label="Obudowa" {...a11yProps(8)} />
-        <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<PsuIcon width={25}/>} label="Zasilacz" {...a11yProps(9)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<ComputerIcon width={25}/>} label=" Komputer" {...a11yProps(0)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CpuIcon  width={25}/>} label="Procesor" {...a11yProps(1)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CoolerIcon width={25}/>} label="Chłodzenie" {...a11yProps(2)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<MotherboardIcon width={25}/>} label="Płyta główna" {...a11yProps(3)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<RamIcon width={25}/>} label="Pamięć RAM" {...a11yProps(4)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<StorageIcon width={25}/>} label="Dysk" {...a11yProps(5)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<GpuIcon width={35}/>} label="Karta graficzna" {...a11yProps(6)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CaseIcon width={25}/>} label="Obudowa" {...a11yProps(7)} />
+          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<PsuIcon width={25}/>} label="Zasilacz" {...a11yProps(8)} />
         
 
       </Tabs>
@@ -323,28 +318,28 @@ const MiniDrawer = (props) => {
         <TabPanel value={selectedTabs} index={0}>
         <StartPanel/>
       </TabPanel>
-        <TabPanel value={selectedTabs} index={2}>
+        <TabPanel value={selectedTabs} index={1}>
         <CpuPicker/>
       </TabPanel>
-      <TabPanel value={selectedTabs} index={3}>
+      <TabPanel value={selectedTabs} index={2}>
         Item Two
       </TabPanel>
-      <TabPanel value={selectedTabs} index={4}>
+      <TabPanel value={selectedTabs} index={3}>
         Item Three
       </TabPanel>
-      <TabPanel value={selectedTabs} index={5}>
+      <TabPanel value={selectedTabs} index={4}>
         Item Four
       </TabPanel>
-      <TabPanel value={selectedTabs} index={6}>
+      <TabPanel value={selectedTabs} index={5}>
         Item Five
       </TabPanel>
-      <TabPanel value={selectedTabs} index={7}>
+      <TabPanel value={selectedTabs} index={6}>
         Item Six
       </TabPanel>
-      <TabPanel value={selectedTabs} index={8}>
+      <TabPanel value={selectedTabs} index={7}>
         Item Seven
       </TabPanel>
-      <TabPanel value={selectedTabs} index={9}>
+      <TabPanel value={selectedTabs} index={8}>
         Zasilacz
       </TabPanel>
      
