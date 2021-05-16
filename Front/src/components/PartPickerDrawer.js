@@ -1,18 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography } from '@material-ui/core';
-import CpuPicker from './CpuPicker';
 import Button from '@material-ui/core/Button';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import { useHistory } from "react-router-dom";
-import StartPanel from './StartPanel'
-//icons
 import MainTabsPanel from './MainTabsPanel';
-
-
-//import IconSelector from './IconSelector';
+import PartPickerTabs from './PartPickerTabs';
 
 const drawerWidth = 240;
 
@@ -96,29 +89,11 @@ const MiniDrawer = (props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   const { children, value, index, ...other } = props;
   const [selectedTabs, setselectedTabs] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setselectedTabs(newValue);
-
-  };
-  function a11yProps(index) {
-    return {
-      id: `vertical-tab-${index}`,
-      'aria-controls': `vertical-tabpanel-${index}`,
-    };
-  }
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
     return (
       <div
         role="tabpanel"
@@ -135,8 +110,8 @@ const MiniDrawer = (props) => {
       </div>
     );
   }
+
   let history = useHistory();
-    
 
   return (
     <div className={classes.root}>
@@ -152,38 +127,9 @@ const MiniDrawer = (props) => {
         </Toolbar>
         <MainTabsPanel selectedTabs={selectedTabs} setselectedTabs={setselectedTabs} />
       </AppBar>
-
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <TabPanel value={selectedTabs} index={0}>
-          <StartPanel />
-        </TabPanel>
-        <TabPanel value={selectedTabs} index={1}>
-          <CpuPicker/>
-        </TabPanel>
-        <TabPanel value={selectedTabs} index={2}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={selectedTabs} index={3}>
-          Item Three
-        </TabPanel>
-        <TabPanel value={selectedTabs} index={4}>
-          Item Four
-        </TabPanel>
-        <TabPanel value={selectedTabs} index={5}>
-          Item Five
-        </TabPanel>
-        <TabPanel value={selectedTabs} index={6}>
-          Item Six
-        </TabPanel>
-        <TabPanel value={selectedTabs} index={7}>
-          Item Seven
-        </TabPanel>
-        <TabPanel value={selectedTabs} index={8}>
-          Zasilacz
-        </TabPanel>
-          {/**<ComponentTable></ComponentTable>**/}
-          {/* component from router */}
+        <PartPickerTabs selectedTabs={selectedTabs} />
       </main>
     </div>
   );
