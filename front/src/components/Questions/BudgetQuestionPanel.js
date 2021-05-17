@@ -1,9 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import { green, grey, blueGrey } from '@material-ui/core/colors';
-import Radio from '@material-ui/core/Radio';
 import Slider from '../Slider'
 
 const useStyles = makeStyles({
@@ -21,50 +17,23 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   }, 
-  divs:
-  {
-height: 200,
-width: 200,
-margin: 50,
+  divs: {
+    height: 200,
+    width: 200,
+    margin: 50,
   },
   bigdiv: {
     display: "flex",
     justifyContent:'center',
     alignItems:'center'
   },
-  header:{
-textAlign: 'center',
-
+  header: {
+    textAlign: 'center',
   } 
 });
 
-const GreenRadio = withStyles({
-    root: {
-      color: green[400],
-      '&$checked': {
-        color: green[600],
-      },
-    },
-    checked: {},
-  })((props) => <Radio color="default" {...props} />);
-
-  const ColorButton = withStyles((theme) => ({
-    root: {
-      color: theme.palette.getContrastText(grey[900]),
-      backgroundColor: blueGrey[400],
-      marginTop: 5,
-      marginInlineEnd: 5,
-      width: 110,
-      left: 1300,
-      '&:hover': {
-        backgroundColor: blueGrey[100],
-      },
-    },
-  }))(Button);
-
 export default function SimpleCard() {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
   const [checked, setChecked] = React.useState([]);
   const handleChange = (e) => {
     let data=checked;

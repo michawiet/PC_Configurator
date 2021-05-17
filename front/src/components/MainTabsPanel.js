@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, useTheme, CssBaseline, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { ReactComponent as CpuIcon } from '../icons/066-cpu-2.svg';
@@ -100,23 +100,17 @@ function MainTabsPanel({setselectedTabs, selectedTabs}) {
   };
 
   return (
-    <Tabs
-          value={selectedTabs}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          className={classes.tabsy}
-          centered={true}
-        >
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<ComputerIcon width={50} height={50}/>} label=" Komputer" {...a11yProps(0)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CpuIcon  width={50} height={50}/>} label="Procesor" {...a11yProps(1)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CoolerIcon width={50} height={50}/>} label="Chłodzenie" {...a11yProps(2)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<MotherboardIcon width={50} height={50}/>} label="Płyta główna" {...a11yProps(3)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<RamIcon width={50} height={50}/>} label="Pamięć RAM" {...a11yProps(4)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<StorageIcon width={50} height={50}/>} label="Dysk" {...a11yProps(5)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<GpuIcon width={50} height={50}/>} label="Karta graficzna" {...a11yProps(6)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<CaseIcon width={50} height={50}/>} label="Obudowa" {...a11yProps(7)} />
-          <Tab classes={{ wrapper: classes.iconLabelWrapper,  labelContainer: classes.labelContainer }} icon={<PsuIcon width={50} height={50} height={50}/>} label="Zasilacz" {...a11yProps(8)} />
-      </Tabs>
+    <Tabs value={selectedTabs} onChange={handleChange} aria-label="Vertical tabs example" className={classes.tabsy} centered={true}>
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<ComputerIcon width={50} height={50}/>} label=" Komputer" {...a11yProps(0)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CpuIcon  width={50} height={50}/>} label="Procesor" {...a11yProps(1)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CoolerIcon width={50} height={50}/>} label="Chłodzenie" {...a11yProps(2)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<MotherboardIcon width={50} height={50}/>} label="Płyta główna" {...a11yProps(3)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<RamIcon width={50} height={50}/>} label="Pamięć RAM" {...a11yProps(4)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<StorageIcon width={50} height={50}/>} label="Dysk" {...a11yProps(5)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<GpuIcon width={50} height={50}/>} label="Karta graficzna" {...a11yProps(6)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CaseIcon width={50} height={50}/>} label="Obudowa" {...a11yProps(7)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<PsuIcon width={50} height={50}/>} label="Zasilacz" {...a11yProps(8)} />
+    </Tabs>
   )
 }
 

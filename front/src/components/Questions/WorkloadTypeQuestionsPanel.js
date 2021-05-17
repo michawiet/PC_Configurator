@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
+import { FormControlLabel, RadioGroup, Radio, Grid } from '@material-ui/core';
+import { ReactComponent as SomeIcon } from '../../icons/081-cooling-fan.svg';
 
 const useStyles = makeStyles({
   root: {
@@ -20,11 +18,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   }, 
-  divs:
-  {
-height: 200,
-width: 200,
-margin: 50,
+  divs: {
+    height: 200,
+    width: 200,
+    margin: 50,
   },
   bigdiv: {
     display: "flex",
@@ -32,103 +29,34 @@ margin: 50,
     alignItems:'center'
   },
   header:{
-textAlign: 'center',
-
+    textAlign: 'center',
   } 
 });
 
-export default function SimpleCard({options}) {
-  const classes = useStyles();
-  
-  const handleChange = (e) => {
-    options.set(e.target.value, !options.get(e.target.value));
-    console.log(options);
-  };
+export default function SimpleCard({setNextButtonDisabled}) {
+  //const classes = useStyles();
 
-  options.set("office", false);
-  options.set("gaming", false);
-  options.set("photo-editing", false);
-  options.set("video-editing", false);
-  options.set("3d-rendering", false);
+  const checkboxOnChange = useCallback(event => {
+    console.log(event.target.value);
+    setNextButtonDisabled(event.target.value);
+  }, [setNextButtonDisabled]);
 
   return (
-      <>
-      <div className={classes.bigdiv}>
-      <div className={classes.divs}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          Praca biurowa
-        </Typography>
-      </CardContent>
-    </Card>
-    <Checkbox
-        value = "office"
-        onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
+    <div>
+      <div>
+        <Grid container spacing={10} direction="row" justify="flex-start" alignItems="center">
+          <Grid item><SomeIcon width={30} height={30}/></Grid>
+          <Grid item><SomeIcon width={30} height={30}/></Grid>
+          <Grid item><SomeIcon width={30} height={30}/></Grid>
+        </Grid>
+        <RadioGroup row={true} >
+          <FormControlLabel labelPlacement="top" value="office" control={<Radio />} label="Praca biurowa"/>
+          <FormControlLabel labelPlacement="top" value="gaming" control={<Radio />} label="Gry"/>
+          <FormControlLabel labelPlacement="top" value="photo-editing" control={<Radio />} label="Obróbka zdjęć"/>
+          <FormControlLabel labelPlacement="top" value="video-editing" control={<Radio />} label="Edycja filmów"/>
+          <FormControlLabel labelPlacement="top" value="3d-rendering" control={<Radio />} label="Renderowanie 3D"/>
+        </RadioGroup>
+      </div>
     </div>
-    <div className={classes.divs}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          Gry
-        </Typography>
-      </CardContent>
-    </Card>
-    <Checkbox
-      value = "gaming"
-      onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'pierwszy' }}
-      />
-    </div>
-    <div className={classes.divs}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h2">Obróbka zdjęć</Typography>
-      </CardContent>
-    </Card>
-    <Checkbox
-        value = "photo-editing"
-        onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'drugi' }}
-      />
-    </div>
-    <div className={classes.divs}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-      
-        <Typography variant="h5" component="h2">
-          Edycja video
-        </Typography>
-
-      </CardContent>
-    </Card>
-    <Checkbox
-        value = "video-editing"
-        onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'czwarty' }}
-      />
-    </div>
-    <div className={classes.divs}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-      
-        <Typography variant="h5" component="h2">
-          Renderowanie grafiki 3D
-        </Typography>
-
-      </CardContent>
-    </Card>
-    <Checkbox
-        value = "3d-rendering"
-        onChange={(e)=>handleChange(e)}
-        inputProps={{ 'aria-label': 'czwarty' }}
-      />
-    </div>
-    </div>
-
-    </>
-    
   );
 }

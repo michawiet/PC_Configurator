@@ -13,22 +13,19 @@ const useStyles = makeStyles({
   input: {
     width: 100,
     fontSize: 20,
-
   },
-
-
 });
+
 function valuetext(value) {
     return `${value}`;
-  }
+}
+
 export default function InputSlider() {
   const classes = useStyles();
   const [value, setValue] = React.useState(3000);
-
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const handleInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
   };

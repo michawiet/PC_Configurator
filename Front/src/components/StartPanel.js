@@ -39,26 +39,20 @@ const useStyles = makeStyles({
       marginInlineEnd: 5,
       width: 110,
       left: 1300,
-
       '&:hover': {
         backgroundColor: blueGrey[100],
       },
     },
   }))(Button);
 
-
-
 export default function SimpleCard() {
   const classes = useStyles();
-  
-const [distable, setDistabl] = React.useState(false);
-
-const [result, ddlvalue]=React.useState()
-
-const handleClick = () => {
-  setDistabl(true)
-  return  ddlvalue(<Stepper/>);
-};
+  const [distable, setDistabl] = React.useState(false);
+  const [result, ddlvalue]=React.useState()
+  const handleClick = () => {
+    setDistabl(true)
+    return  ddlvalue(<Stepper/>);
+  };
 
   return (
     <>

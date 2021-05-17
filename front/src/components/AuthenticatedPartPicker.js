@@ -94,13 +94,6 @@ const MiniDrawer = (props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   const { children, value, index, ...other } = props;
   const [selectedTabs, setselectedTabs] = React.useState(0);
 
@@ -108,6 +101,7 @@ const MiniDrawer = (props) => {
     setselectedTabs(newValue);
 
   };
+  
   function a11yProps(index) {
     return {
       id: `vertical-tab-${index}`,

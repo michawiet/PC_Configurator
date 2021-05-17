@@ -20,37 +20,11 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import EuroIcon from '@material-ui/icons/Euro';
 import GpsFixedIcon from '@material-ui/icons/GpsFixed';
 
-const ColorlibConnector = withStyles({
-  alternativeLabel: {
-    top: 22,
-  },
-  active: {
-    '& $line': {
-      backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-    },
-  },
-  completed: {
-    '& $line': {
-      backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-    },
-  },
-  line: {
-    height: 3,
-    border: 0,
-    backgroundColor: '#eaeaf0',
-    borderRadius: 1,
-  },
-})(StepConnector);
-
 const useColorlibStepIconStyles = makeStyles({
   root: {
     backgroundColor: '#ccc',
     zIndex: 1,
     color: '#fff',
-    width: 50,
-    height: 50,
     display: 'flex',
     borderRadius: '50%',
     justifyContent: 'center',
@@ -119,31 +93,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return [<h1>Przeznaczenie komputera</h1>, <h1>Preferowany producent procesora</h1>, <h1>Preferowany producent karty graficznej</h1>, <h1>Budżet</h1>];
-}
-
-var panelOptions = new Map();
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <WorkloadTypeQuestionPanel options={panelOptions}/>;
-    case 1:
-      return <ProcessorQuestionPanel />;
-    case 2:
-      return <GpuQuestionPanel />;
-      case 3:
-        return <BudgetQuestionPanel />;
-    default:
-      return 'Unknown step';
-  }
+  return [<h1>Główne przeznaczenie komputera</h1>, <h1>Preferowany producent procesora</h1>, <h1>Preferowany producent karty graficznej</h1>, <h1>Budżet</h1>];
 }
 
 export default function CustomizedSteppers() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const [nextButtonDisabled, setNextButtonDisabled] = React.useState(false);
   const steps = getSteps();
+
+  const getStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return <WorkloadTypeQuestionPanel setNextButtonDisabled={setNextButtonDisabled}/>;
+      case 1:
+        return <ProcessorQuestionPanel />;
+      case 2:
+        return <GpuQuestionPanel />;
+      case 3:
+        return <BudgetQuestionPanel />;
+      default:
+        return 'Unknown step';
+    }
+  } 
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -196,20 +169,11 @@ export default function CustomizedSteppers() {
             <Typography>{getStepContent(index)}</Typography>
             <div className={classes.actionsContainer}>
               <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  className={classes.button}
-                >
-                  Back
+                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                  Wróć
                 </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                <Button disabled={nextButtonDisabled} variant="contained" color="primary" onClick={handleNext} className={classes.button}>
+                  {activeStep === steps.length - 1 ? 'Zakończ' : 'Dalej'}
                 </Button>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import UnauthenticatedPartPicker from './components/UnauthenticatedPartPicker';
-import SignIn from './components/SignIn';
-import SingUp from './components/SignUp';
+import SignIn from './components/AuthenticationForms/SignIn';
+import SingUp from './components/AuthenticationForms/SignUp';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AuthenticatedPartPicker from './components/AuthenticatedPartPicker';
 
