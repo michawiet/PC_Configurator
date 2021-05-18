@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.primary,
+    elevation: 8,
   },
   icon: {
     maxWidth: 100,
@@ -33,33 +34,33 @@ export default function SimpleCard({setNextButtonDisabled}) {
       <Grid container spacing={3}>
         <Grid item xs = {1} />
         <Grid item xs = {2}>
-          <Paper className = {classes.paper}>
+          <Paper className={classes.paper} elevation={6}>
             <OfficeIcon className={classes.icon}/>
             <FormControlLabel value="office" control={<Radio />} label="Praca biurowa"/>
           </Paper>
         </Grid>
         <Grid item xs = {2}>
-          <Paper className = {classes.paper}>
+          <Paper className={classes.paper} elevation={6}>
             <GamesIcon className={classes.icon}/>
-            <FormControlLabel value="gaming" control={<Radio />} label="Gry"/>
+            <FormControlLabel value="gaming" control={<Radio />} label="Gry i streamowanie"/>
           </Paper>
         </Grid>
         <Grid item xs = {2}>
-          <Paper className = {classes.paper}>
+          <Paper className={classes.paper} elevation={6}>
             <PhotoIcon className={classes.icon}/>
             <FormControlLabel value="photo-editing" control={<Radio />} label="Obróbka zdjęć"/>
           </Paper>
         </Grid>
         <Grid item xs = {2}>
-          <Paper className = {classes.paper}>
+          <Paper className={classes.paper} elevation={6}>
             <VideoIcon className={classes.icon}/>
             <FormControlLabel value="video-editing" control={<Radio />} label="Edycja filmów"/>
           </Paper>
         </Grid>
         <Grid item xs = {2}>
-          <Paper className = {classes.paper}>
+          <Paper className={classes.paper} elevation={6}>
             <Graphics3DIcon className={classes.icon}/>
-            <FormControlLabel value="3d-rendering" control={<Radio />} label="Renderowanie 3D"/>
+            <FormControlLabel value="3d-rendering" control={<Radio />} label="Modelowanie 3D"/>
           </Paper>
         </Grid>
         <Grid item xs = {1} />
