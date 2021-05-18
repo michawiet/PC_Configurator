@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: auto;
 }
 
 .App-header {
@@ -11,4 +11,12 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+#papier :hover {
+  --box-shadow: hsla(210, 14%, 49%, 0.3);
+  --box-shadow: hsla(var(--cd-color-3-h), var(--cd-color-3-s), var(--cd-color-3-l), 0.3);
+  box-shadow: undefined;
+  box-shadow: 0 1px 10px var(--box-shadow);
+  cursor: pointer;
 }

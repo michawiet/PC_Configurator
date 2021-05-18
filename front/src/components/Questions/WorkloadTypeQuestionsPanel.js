@@ -27,40 +27,44 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleCard({setNextButtonDisabled}) {
   const classes = useStyles();
+  const [value, setValue] = React.useState('');
 
+  const handleChange = (bvalue) => {
+    setValue(bvalue);
+  };
   return (
     <div className={classes.root}>
-      <RadioGroup>
+      <RadioGroup value={value}>
       <Grid container spacing={3}>
         <Grid item xs = {1} />
         <Grid item xs = {2}>
-          <Paper className={classes.paper} elevation={6}>
+          <Paper className={classes.paper} elevation={6} onClick={() =>{handleChange('office');}}>
             <OfficeIcon className={classes.icon}/>
-            <FormControlLabel value="office" control={<Radio />} label="Praca biurowa"/>
+            <FormControlLabel value="office" control={<Radio />} labelPlacement="top" label="Praca biurowa"/>
           </Paper>
         </Grid>
         <Grid item xs = {2}>
-          <Paper className={classes.paper} elevation={6}>
+          <Paper className={classes.paper} elevation={6} onClick={() =>{handleChange('gaming');}}>
             <GamesIcon className={classes.icon}/>
-            <FormControlLabel value="gaming" control={<Radio />} label="Gry i streamowanie"/>
+            <FormControlLabel value="gaming" control={<Radio />} labelPlacement="top" label="Gry i streamowanie"/>
           </Paper>
         </Grid>
         <Grid item xs = {2}>
-          <Paper className={classes.paper} elevation={6}>
+          <Paper className={classes.paper} elevation={6} onClick={() =>{handleChange('photo-editing');}}>
             <PhotoIcon className={classes.icon}/>
-            <FormControlLabel value="photo-editing" control={<Radio />} label="Obróbka zdjęć"/>
+            <FormControlLabel value="photo-editing" control={<Radio />} labelPlacement="top" label="Obróbka zdjęć"/>
           </Paper>
         </Grid>
         <Grid item xs = {2}>
-          <Paper className={classes.paper} elevation={6}>
+          <Paper className={classes.paper} elevation={6} onClick={() =>{handleChange('video-editing');}}>
             <VideoIcon className={classes.icon}/>
-            <FormControlLabel value="video-editing" control={<Radio />} label="Edycja filmów"/>
+            <FormControlLabel value="video-editing" control={<Radio />} labelPlacement="top" label="Edycja filmów"/>
           </Paper>
         </Grid>
         <Grid item xs = {2}>
-          <Paper className={classes.paper} elevation={6}>
+          <Paper className={classes.paper} elevation={6} onClick={() =>{handleChange('3d-rendering');}}>
             <Graphics3DIcon className={classes.icon}/>
-            <FormControlLabel value="3d-rendering" control={<Radio />} label="Modelowanie 3D"/>
+            <FormControlLabel value="3d-rendering" control={<Radio />} labelPlacement="top" label="Modelowanie 3D"/>
           </Paper>
         </Grid>
         <Grid item xs = {1} />

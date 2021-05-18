@@ -20,18 +20,22 @@ const useStyles = makeStyles((theme) => ({
   iconStyle: {
     maxHeight: 100,
     maxWidth: 200,
-  }
+  },
 }));
 
 export default function ProcessorQuestionPanel() {
   const classes = useStyles();
+  const [value, setValue] = React.useState('');
 
+  const handleChange = (bvalue) => {
+      setValue(bvalue);
+  };
   return (
     <div className={classes.root}>
-      <RadioGroup>
+      <RadioGroup value={value}>
         <Grid container spacing={10}>
         <Grid item xs = {6}>
-            <Paper elevation={16} className = {classes.paper}>
+            <Paper elevation={16} className = {classes.paper} onClick={() =>{handleChange('amd');}}>
               <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <RyzenLogo className={classes.iconStyle}/>
@@ -43,7 +47,7 @@ export default function ProcessorQuestionPanel() {
             </Paper>
           </Grid>
           <Grid item xs = {6}>
-            <Paper elevation={16} className = {classes.paper}>
+            <Paper elevation={16} className = {classes.paper} onClick={() =>{handleChange('intel');}}>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <IntelLogo className={classes.iconStyle}/>

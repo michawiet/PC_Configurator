@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
 import { ReactComponent as NvidiaLogo } from '../../icons/nvidia.svg';
 import { ReactComponent as RadeonLogo } from '../../icons/amd-radeon.svg';
+//import '../../App.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.primary,
     maxWidth: 460,
+    '&:hover': {
+      cursor: 'pointer',
+      boxShadow: theme.shadows[6],
+    }
   },
   iconStyle: {
     maxHeight: 100,
@@ -31,12 +36,13 @@ const [value, setValue] = React.useState('');
 const handleChange = (bvalue) => {
     setValue(bvalue);
 };
+
   return (
     <div className={classes.root}>
       <RadioGroup  value={value}>
-      <Grid container spacing={10}>
-      <Grid item xs = {6}>
-          <Paper elevation={16} className = {classes.paper} onClick={() =>{handleChange('amd');}}>
+      <Grid container spacing={10} >
+      <Grid item xs = {6} >
+          <Paper  elevation={16} className = {classes.paper} onClick={() =>{handleChange('amd');}}  >
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <RadeonLogo className={classes.iconStyle}/>
@@ -48,18 +54,17 @@ const handleChange = (bvalue) => {
           </Paper>
         </Grid>
         <Grid item xs = {6}>
-          <Paper elevation={16} className = {classes.paper} onClick={() =>{handleChange('intel');}}>
+          <Paper elevation={16} className = {classes.paper} onClick={() =>{handleChange('nvidia');}}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <NvidiaLogo className={classes.iconStyle}/>
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel value="intel" control={<Radio />}/>
+                <FormControlLabel value="nvidia" control={<Radio />}/>
               </Grid>
             </Grid>
           </Paper>
         </Grid>
-        
       </Grid>
         </RadioGroup>
     </div>
