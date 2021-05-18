@@ -1,62 +1,66 @@
 import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControlLabel, RadioGroup, Radio, Grid } from '@material-ui/core';
-import { ReactComponent as SomeIcon } from '../../icons/081-cooling-fan.svg';
+import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
+import { ReactComponent as OfficeIcon } from '../../icons/081-cooling-fan.svg';
+import { ReactComponent as GamesIcon } from '../../icons/005-sd-card-2.svg';
+import { ReactComponent as PhotoIcon } from '../../icons/007-computer.svg';
+import { ReactComponent as VideoIcon } from '../../icons/031-battery.svg';
+import { ReactComponent as Graphics3DIcon } from '../../icons/057-scanner.svg';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
+    flexGrow: 1,
+    paddingBottom: theme.spacing(3),
+    paddingTop: theme.spacing(3),
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  }, 
-  divs: {
-    height: 200,
-    width: 200,
-    margin: 50,
-  },
-  bigdiv: {
-    display: "flex",
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  header:{
+  paper: {
+    padding: theme.spacing(2),
     textAlign: 'center',
-  } 
-});
+    color: theme.palette.text.primary,
+  },
+}));
 
 export default function SimpleCard({setNextButtonDisabled}) {
-  //const classes = useStyles();
-
-  const checkboxOnChange = useCallback(event => {
-    console.log(event.target.value);
-    setNextButtonDisabled(event.target.value);
-  }, [setNextButtonDisabled]);
+  const classes = useStyles();
 
   return (
-    <div>
-      <div>
-        <Grid container spacing={10} direction="row" justify="flex-start" alignItems="center">
-          <Grid item><SomeIcon width={30} height={30}/></Grid>
-          <Grid item><SomeIcon width={30} height={30}/></Grid>
-          <Grid item><SomeIcon width={30} height={30}/></Grid>
+    <div className={classes.root}>
+      <RadioGroup>
+      <Grid container spacing={3}>
+        <Grid item xs = {1} />
+        <Grid item xs = {2}>
+          <Paper className = {classes.paper}>
+            <OfficeIcon/>
+            <FormControlLabel value="office" control={<Radio />} label="Praca biurowa"/>
+          </Paper>
         </Grid>
-        <RadioGroup row={true} >
-          <FormControlLabel labelPlacement="top" value="office" control={<Radio />} label="Praca biurowa"/>
-          <FormControlLabel labelPlacement="top" value="gaming" control={<Radio />} label="Gry"/>
-          <FormControlLabel labelPlacement="top" value="photo-editing" control={<Radio />} label="Obróbka zdjęć"/>
-          <FormControlLabel labelPlacement="top" value="video-editing" control={<Radio />} label="Edycja filmów"/>
-          <FormControlLabel labelPlacement="top" value="3d-rendering" control={<Radio />} label="Renderowanie 3D"/>
+        <Grid item xs = {2}>
+          <Paper className = {classes.paper}>
+            <GamesIcon/>
+            <FormControlLabel value="gaming" control={<Radio />} label="Gry"/>
+          </Paper>
+        </Grid>
+        <Grid item xs = {2}>
+          <Paper className = {classes.paper}>
+            <PhotoIcon/>
+            <FormControlLabel value="photo-editing" control={<Radio />} label="Obróbka zdjęć"/>
+          </Paper>
+        </Grid>
+        <Grid item xs = {2}>
+          <Paper className = {classes.paper}>
+            <VideoIcon/>
+            <FormControlLabel value="video-editing" control={<Radio />} label="Edycja filmów"/>
+          </Paper>
+        </Grid>
+        <Grid item xs = {2}>
+          <Paper className = {classes.paper}>
+            <Graphics3DIcon/>
+            <FormControlLabel value="3d-rendering" control={<Radio />} label="Renderowanie 3D"/>
+          </Paper>
+        </Grid>
+        <Grid item xs = {1} />
+      </Grid>
         </RadioGroup>
-      </div>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import { ReactComponent as GpuIcon } from '../icons/012-video-card.svg';
 import { ReactComponent as CaseIcon } from '../icons/091-desktop.svg';
 import { ReactComponent as PsuIcon } from '../icons/084-supply.svg';
 import { ReactComponent as ComputerIcon } from '../icons/007-computer.svg';
+import { ClassRounded } from '@material-ui/icons';
 
 function a11yProps(index) {
   return {
@@ -46,29 +47,6 @@ function MainTabsPanel({setselectedTabs, selectedTabs}) {
     hide: {
       display: 'none',
     },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: 'nowrap',
-    },
-    drawerOpen: {
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    drawerClose: {
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      overflowX: 'hidden',
-      width: theme.spacing(7) + 1,
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9) + 1,
-      },
-    },
     toolbar: {
       display: 'flex',
       alignItems: 'center',
@@ -87,12 +65,10 @@ function MainTabsPanel({setselectedTabs, selectedTabs}) {
       width: "auto",
       padding: 0,
     },
-  
-    tabsy:{
-      /*position: "absolute",
-      left: 0,
-    top: 140*/
-    }
+    icon: {
+      width: 40,
+      height: 40,
+    },
   }));
   const classes = useStyles();
   const handleChange = (event, newValue) => {
@@ -101,15 +77,15 @@ function MainTabsPanel({setselectedTabs, selectedTabs}) {
 
   return (
     <Tabs value={selectedTabs} onChange={handleChange} aria-label="Vertical tabs example" className={classes.tabsy} centered={true}>
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<ComputerIcon width={50} height={50}/>} label=" Komputer" {...a11yProps(0)} />
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CpuIcon  width={50} height={50}/>} label="Procesor" {...a11yProps(1)} />
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CoolerIcon width={50} height={50}/>} label="Chłodzenie" {...a11yProps(2)} />
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<MotherboardIcon width={50} height={50}/>} label="Płyta główna" {...a11yProps(3)} />
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<RamIcon width={50} height={50}/>} label="Pamięć RAM" {...a11yProps(4)} />
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<StorageIcon width={50} height={50}/>} label="Dysk" {...a11yProps(5)} />
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<GpuIcon width={50} height={50}/>} label="Karta graficzna" {...a11yProps(6)} />
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CaseIcon width={50} height={50}/>} label="Obudowa" {...a11yProps(7)} />
-      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<PsuIcon width={50} height={50}/>} label="Zasilacz" {...a11yProps(8)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<ComputerIcon className={classes.icon}/>} label=" Komputer" {...a11yProps(0)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CpuIcon  className={classes.icon}/>} label="Procesor" {...a11yProps(1)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CoolerIcon className={classes.icon}/>} label="Chłodzenie" {...a11yProps(2)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<MotherboardIcon className={classes.icon}/>} label="Płyta główna" {...a11yProps(3)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<RamIcon className={classes.icon}/>} label="Pamięć RAM" {...a11yProps(4)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<StorageIcon className={classes.icon}/>} label="Dysk" {...a11yProps(5)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<GpuIcon className={classes.icon}/>} label="Karta graficzna" {...a11yProps(6)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<CaseIcon className={classes.icon}/>} label="Obudowa" {...a11yProps(7)} />
+      <Tab classes={{ wrapper: classes.iconLabelWrapper }} icon={<PsuIcon className={classes.icon}/>} label="Zasilacz" {...a11yProps(8)} />
     </Tabs>
   )
 }

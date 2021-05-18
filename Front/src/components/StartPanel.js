@@ -7,7 +7,7 @@ import Stepper from './Stepper'
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    alignItems: 'center',
   },
   bullet: {
     display: 'inline-block',
@@ -35,10 +35,6 @@ const useStyles = makeStyles({
     root: {
       color: theme.palette.getContrastText(grey[900]),
       backgroundColor: blueGrey[400],
-      marginTop: 30,
-      marginInlineEnd: 5,
-      width: 110,
-      left: 1300,
       '&:hover': {
         backgroundColor: blueGrey[100],
       },
@@ -56,7 +52,7 @@ export default function SimpleCard() {
 
   return (
     <>
-      <div>{result}</div>   
+      <div className={classes.root}>{result}</div>   
       { distable ? <></> : <ColorButton variant="outlined" disabled={distable}  onClick={(handleClick) } >Rozpocznij</ColorButton>}
     </>
     

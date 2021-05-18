@@ -1,91 +1,61 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Radio from '@material-ui/core/Radio';
+import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
+import { ReactComponent as NvidiaLogo } from '../../icons/nvidia.svg';
+import { ReactComponent as RadeonLogo } from '../../icons/amd-radeon.svg';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
+    flexGrow: 1,
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(6),
+    paddingLeft: theme.spacing(10),
+    paddingRight: theme.spacing(10),
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  }, 
-  divs: {
-    height: 200,
-    width: 200,
-    margin: 50,
-  },
-  bigdiv: {
-    display: "flex",
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  header:{
+  paper: {
+    padding: theme.spacing(3),
     textAlign: 'center',
+    color: theme.palette.text.primary,
   },
-});
+  iconStyle: {
+    maxHeight: 100,
+    maxWidth: 200,
+  }
+}));
 
-
-
-export default function SimpleCard() {
+export default function GpuQuestionPanel() {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
-  const [selectedValue, setSelectedValue] = React.useState('a');
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-};
-const [selectedValue2, setSelectedValue2] = React.useState('c');
-
-const handleChange2 = (event) => {
-    setSelectedValue2(event.target.value);
-};
-
 
   return (
-    <>
-      <div className={classes.bigdiv}>
-      <div className={classes.divs}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          Nvidia
-        </Typography>
-      </CardContent>
-    </Card>
-    <Radio
-        checked={selectedValue === 'a'}
-        onChange={handleChange}
-        value="a"
-        name="radio-button"
-        inputProps={{ 'aria-label': 'A' }}
-      />
+    <div className={classes.root}>
+      <RadioGroup>
+      <Grid container spacing={10}>
+      <Grid item xs = {6}>
+          <Paper elevation={16} className = {classes.paper}>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <RadeonLogo className={classes.iconStyle}/>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel value="amd" control={<Radio />}/>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid item xs = {6}>
+          <Paper elevation={16} className = {classes.paper}>
+          <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <NvidiaLogo className={classes.iconStyle}/>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel value="intel" control={<Radio />}/>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+      </Grid>
+        </RadioGroup>
     </div>
-    <div className={classes.divs}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h2">Amd Radeon</Typography>
-      </CardContent>
-    </Card>
-    <Radio
-        checked={selectedValue === 'b'}
-        onChange={handleChange}
-        value="b"
-        name="radio-button-demo"
-        inputProps={{ 'aria-label': 'B' }}
-      />
-    </div>
-    </div>
-    </>
   );
 }

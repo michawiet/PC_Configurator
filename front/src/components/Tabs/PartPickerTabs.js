@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CpuPicker from './CpuPicker';
 import StartPanel from '../StartPanel';
@@ -24,7 +24,7 @@ function PartPickerTabs({selectedTabs}) {
   }
 
   return (
-    <div>
+    <Container fixed>
       <TabPanel value={selectedTabs} index={0}>
         <StartPanel />
       </TabPanel>
@@ -52,7 +52,7 @@ function PartPickerTabs({selectedTabs}) {
       <TabPanel value={selectedTabs} index={8}>
         Zasilacz
       </TabPanel>
-    </div>
+    </Container>
   )
 }
 

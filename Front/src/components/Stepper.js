@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Paper from '@material-ui/core/Paper';
 import StepContent from '@material-ui/core/StepContent';
-import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
@@ -26,7 +25,7 @@ const useColorlibStepIconStyles = makeStyles({
     zIndex: 1,
     color: '#fff',
     display: 'flex',
-    borderRadius: '50%',
+    borderRadius: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -82,6 +81,7 @@ ColorlibStepIcon.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    alignItems: 'center',
   },
   button: {
     marginRight: theme.spacing(1),
