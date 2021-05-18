@@ -2,15 +2,15 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { ReactComponent as CpuIcon } from '../icons/066-cpu-2.svg';
-import { ReactComponent as CoolerIcon } from '../icons/046-cooler.svg';
-import { ReactComponent as MotherboardIcon } from '../icons/070-motherboard.svg';
-import { ReactComponent as RamIcon } from '../icons/088-ram-memory.svg';
-import { ReactComponent as StorageIcon } from '../icons/089-hard-drive.svg';
-import { ReactComponent as GpuIcon } from '../icons/012-video-card.svg';
-import { ReactComponent as CaseIcon } from '../icons/091-desktop.svg';
-import { ReactComponent as PsuIcon } from '../icons/084-supply.svg';
-import { ReactComponent as ComputerIcon } from '../icons/007-computer.svg';
+import { ReactComponent as CpuIcon } from '../icons/cpu.svg';
+import { ReactComponent as CoolerIcon } from '../icons/fan.svg';
+import { ReactComponent as MotherboardIcon } from '../icons/motherboard.svg';
+import { ReactComponent as RamIcon } from '../icons/ram.svg';
+import { ReactComponent as StorageIcon } from '../icons/hard-disk-drive.svg';
+import { ReactComponent as GpuIcon } from '../icons/graphics-card.svg';
+import { ReactComponent as CaseIcon } from '../icons/case.svg';
+import { ReactComponent as PsuIcon } from '../icons/power-supply.svg';
+import { ReactComponent as ComputerIcon } from '../icons/computer.svg';
 import { ClassRounded } from '@material-ui/icons';
 
 function a11yProps(index) {
@@ -66,8 +66,8 @@ function MainTabsPanel({setselectedTabs, selectedTabs}) {
       padding: 0,
     },
     icon: {
-      width: 40,
-      height: 40,
+      width: 50,
+      height: 50,
     },
   }));
   const classes = useStyles();
