@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
+import { FormControlLabel, RadioGroup, Radio, Grid, Paper, Button } from '@material-ui/core';
 import { ReactComponent as NvidiaLogo } from '../../icons/nvidia.svg';
 import { ReactComponent as RadeonLogo } from '../../icons/amd-radeon.svg';
 
@@ -34,7 +34,7 @@ export default function GpuQuestionPanel() {
           <Paper elevation={16} className = {classes.paper}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <RadeonLogo className={classes.iconStyle}/>
+                  <RadeonLogo className={classes.iconStyle}/>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel value="amd" control={<Radio />}/>
