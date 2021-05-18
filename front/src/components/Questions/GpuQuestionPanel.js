@@ -16,33 +16,47 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.primary,
+    width: 460,
+
   },
   iconStyle: {
     maxHeight: 100,
     maxWidth: 200,
+  },
+  button:{
+    width: 460,
   }
 }));
 
+
 export default function GpuQuestionPanel() {
   const classes = useStyles();
+const [value, setValue] = React.useState('');
 
+const handleChange = (bvalue) => {
+    setValue(bvalue);
+};
   return (
     <div className={classes.root}>
-      <RadioGroup>
+      <RadioGroup  value={value}>
       <Grid container spacing={10}>
       <Grid item xs = {6}>
+      <Button className = {classes.button}  onClick={() =>{handleChange('amd');}}>
+
           <Paper elevation={16} className = {classes.paper}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                  <RadeonLogo className={classes.iconStyle}/>
+                <RadeonLogo className={classes.iconStyle}/>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel value="amd" control={<Radio />}/>
               </Grid>
             </Grid>
           </Paper>
+          </Button>
         </Grid>
         <Grid item xs = {6}>
+        <Button className = {classes.button}  onClick={() =>{handleChange('intel');}} >
           <Paper elevation={16} className = {classes.paper}>
           <Grid container spacing={1}>
               <Grid item xs={12}>
@@ -53,7 +67,9 @@ export default function GpuQuestionPanel() {
               </Grid>
             </Grid>
           </Paper>
+          </Button>
         </Grid>
+        
       </Grid>
         </RadioGroup>
     </div>
