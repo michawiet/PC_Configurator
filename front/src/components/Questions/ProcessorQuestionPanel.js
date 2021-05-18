@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.primary,
+    maxWidth: 460,
+    boxShadow: theme.shadows[8],
+    '&:hover': {
+      cursor: 'pointer',
+      boxShadow: theme.shadows[2],
+    }
   },
   iconStyle: {
     maxHeight: 100,
@@ -35,7 +41,7 @@ export default function ProcessorQuestionPanel() {
       <RadioGroup value={value}>
         <Grid container spacing={10}>
         <Grid item xs = {6}>
-            <Paper elevation={16} className = {classes.paper} onClick={() =>{handleChange('amd');}}>
+            <Paper className = {classes.paper} onClick={() =>{handleChange('amd');}}>
               <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <RyzenLogo className={classes.iconStyle}/>
@@ -47,7 +53,7 @@ export default function ProcessorQuestionPanel() {
             </Paper>
           </Grid>
           <Grid item xs = {6}>
-            <Paper elevation={16} className = {classes.paper} onClick={() =>{handleChange('intel');}}>
+            <Paper className = {classes.paper} onClick={() =>{handleChange('intel');}}>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <IntelLogo className={classes.iconStyle}/>

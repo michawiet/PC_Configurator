@@ -18,9 +18,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.primary,
     maxWidth: 460,
+    boxShadow: theme.shadows[8],
     '&:hover': {
       cursor: 'pointer',
-      boxShadow: theme.shadows[6],
+      boxShadow: theme.shadows[2],
     }
   },
   iconStyle: {
@@ -42,7 +43,7 @@ const handleChange = (bvalue) => {
       <RadioGroup  value={value}>
       <Grid container spacing={10} >
       <Grid item xs = {6} >
-          <Paper  elevation={16} className = {classes.paper} onClick={() =>{handleChange('amd');}}  >
+          <Paper className = {classes.paper} onClick={() =>{handleChange('amd');}}  >
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <RadeonLogo className={classes.iconStyle}/>
@@ -54,7 +55,7 @@ const handleChange = (bvalue) => {
           </Paper>
         </Grid>
         <Grid item xs = {6}>
-          <Paper elevation={16} className = {classes.paper} onClick={() =>{handleChange('nvidia');}}>
+          <Paper className = {classes.paper} onClick={() =>{handleChange('nvidia');}}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <NvidiaLogo className={classes.iconStyle}/>
