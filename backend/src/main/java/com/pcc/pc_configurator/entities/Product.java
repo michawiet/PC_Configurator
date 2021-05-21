@@ -1,9 +1,8 @@
 package com.pcc.pc_configurator.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 public class Product {
