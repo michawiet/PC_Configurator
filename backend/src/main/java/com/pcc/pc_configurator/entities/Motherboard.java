@@ -14,18 +14,19 @@ public class Motherboard {
 
     private float tier;
     private String chipset;
+    private String socket;
     private String form_Factor;
     private int memory_Slots;
     private int memory_Max_GB;
     private long product_FK;
 
-    public Motherboard(float tier, String chipset, String formFactor, int memorySlots, int memoryMaxGB, long productFK) {
+    public Motherboard(float tier, String chipset, String socket, String form_Factor, int memory_Slots, int memory_Max_GB) {
         this.tier = tier;
         this.chipset = chipset;
-        this.form_Factor = formFactor;
-        this.memory_Slots = memorySlots;
-        this.memory_Max_GB = memoryMaxGB;
-        this.product_FK = productFK;
+        this.socket = socket;
+        this.form_Factor = form_Factor;
+        this.memory_Slots = memory_Slots;
+        this.memory_Max_GB = memory_Max_GB;
     }
 
     public Motherboard() {
@@ -55,36 +56,44 @@ public class Motherboard {
         this.chipset = chipset;
     }
 
+    public String getSocket() {
+        return socket;
+    }
+
+    public void setSocket(String socket) {
+        this.socket = socket;
+    }
+
     public String getForm_Factor() {
         return form_Factor;
     }
 
-    public void setForm_Factor(String formFactor) {
-        this.form_Factor = formFactor;
+    public void setForm_Factor(String form_Factor) {
+        this.form_Factor = form_Factor;
     }
 
     public int getMemory_Slots() {
         return memory_Slots;
     }
 
-    public void setMemory_Slots(int memorySlots) {
-        this.memory_Slots = memorySlots;
+    public void setMemory_Slots(int memory_Slots) {
+        this.memory_Slots = memory_Slots;
     }
 
     public int getMemory_Max_GB() {
         return memory_Max_GB;
     }
 
-    public void setMemory_Max_GB(int memoryMaxGB) {
-        this.memory_Max_GB = memoryMaxGB;
+    public void setMemory_Max_GB(int memory_Max_GB) {
+        this.memory_Max_GB = memory_Max_GB;
     }
 
     public long getProduct_FK() {
         return product_FK;
     }
 
-    public void setProduct_FK(long productFK) {
-        this.product_FK = productFK;
+    public void setProduct_FK(long product_FK) {
+        this.product_FK = product_FK;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.pcc.pc_configurator.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cpu {
@@ -23,7 +20,7 @@ public class Cpu {
     private float boost_Clock;
     private long product_FK;
 
-    public Cpu(String socket, int cores, boolean smt, boolean integrated_GPU, int tdpW, int stPref, int mtPref, float coreClock, float boostClock, long productFK) {
+    public Cpu(String socket, int cores, boolean smt, boolean integrated_GPU, int tdpW, int stPref, int mtPref, float coreClock, float boostClock, long product_FK) {
         this.socket = socket;
         this.cores = cores;
         this.smt = smt;
@@ -33,7 +30,7 @@ public class Cpu {
         this.mt_Pref = mtPref;
         this.core_Clock = coreClock;
         this.boost_Clock = boostClock;
-        this.product_FK = productFK;
+        this.product_FK = product_FK;
     }
 
     public Cpu() {
