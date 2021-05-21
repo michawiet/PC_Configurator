@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface CpuRepository extends JpaRepository<Cpu,Long> {
-    //@Query("FROM ReleaseDateType AS rdt WHERE cm.rdt.cacheMedia.id = ?1")
-    //@Query(value = "SELECT * FROM Cpu c JOIN Product p on p.id = c.product_FK WHERE p.id = :id" , nativeQuery = true)
-    Optional<Cpu> findById(@Param("id") Long along);
+
+    @Query(value = "SELECT * FROM Cpu c JOIN Product p on p.id = c.product_FK WHERE p.id = :id" , nativeQuery = true)
+    Optional<Cpu> findByIdTemp(@Param("id") Long along);
 }
