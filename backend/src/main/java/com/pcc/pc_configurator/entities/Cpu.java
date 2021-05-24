@@ -18,9 +18,12 @@ public class Cpu {
     private int mt_Pref;
     private float core_Clock;
     private float boost_Clock;
-    private long product_FK;
+    @OneToOne(targetEntity = Product.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_FK", referencedColumnName = "id")
+    private Product product;
+    //private long product_FK;
 
-    public Cpu(String socket, int cores, boolean smt, boolean integrated_GPU, int tdpW, int stPref, int mtPref, float coreClock, float boostClock, long product_FK) {
+    public Cpu(String socket, int cores, boolean smt, boolean integrated_GPU, int tdpW, int stPref, int mtPref, float coreClock, float boostClock/*, long product_FK*/) {
         this.socket = socket;
         this.cores = cores;
         this.smt = smt;
@@ -30,7 +33,7 @@ public class Cpu {
         this.mt_Pref = mtPref;
         this.core_Clock = coreClock;
         this.boost_Clock = boostClock;
-        this.product_FK = product_FK;
+        //this.product_FK = product_FK;
     }
 
     public Cpu() {
@@ -116,13 +119,13 @@ public class Cpu {
         this.boost_Clock = boostClock;
     }
 
-    public long getProduct_FK() {
-        return product_FK;
-    }
-
-    public void setProduct_FK(long productFK) {
-        this.product_FK = productFK;
-    }
+    //public long getProduct_FK() {
+    //    return product_FK;
+    //}
+//
+    //public void setProduct_FK(long productFK) {
+    //    this.product_FK = productFK;
+    //}
 
     @Override
     public String toString() {
@@ -137,7 +140,7 @@ public class Cpu {
                 ", mtPref=" + mt_Pref +
                 ", coreClock=" + core_Clock +
                 ", boostClock=" + boost_Clock +
-                ", productFK=" + product_FK +
+                //", productFK=" + product_FK +
                 '}';
     }
 }

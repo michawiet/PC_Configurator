@@ -2,14 +2,10 @@ package com.pcc.pc_configurator.Controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pcc.pc_configurator.DTO.CoolerDTO;
-import com.pcc.pc_configurator.DTO.CpuDTO;
-import com.pcc.pc_configurator.Views;
-import com.pcc.pc_configurator.entities.Cooler;
 import com.pcc.pc_configurator.repositories.CoolerRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +25,6 @@ public class CoolerController {
     //public ResponseEntity<Iterable<Cooler>> getAllCoolers() { return ResponseEntity.ok(coolerRepo.findAll());}
 
     @GetMapping("/{id}")
-    @JsonView(Views.Normal.class)
     public CoolerDTO getOneCpu(@PathVariable int id) {
         return coolerDtoList.get(id);
     }
@@ -41,7 +36,6 @@ public class CoolerController {
     }
 
     @GetMapping
-    @JsonView(Views.Normal.class)
     public List<CoolerDTO> getOrders() {
         return coolerDtoList;
     }
