@@ -1,9 +1,6 @@
 package com.pcc.pc_configurator.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cooler {
@@ -16,14 +13,16 @@ public class Cooler {
     private float noise_Level_DB;
     private boolean is_Air;
     private boolean is_Workstation;
-    private long product_FK;
+    @OneToOne
+    @JoinColumn(name = "product_FK", referencedColumnName = "id")
+    private Product product;
 
-    public Cooler(int tier, float noiseLevelDB, boolean isAir, boolean isWorkstation, long productFK) {
+    public Cooler(int tier, float noise_Level_DB, boolean is_Air, boolean is_Workstation, Product product) {
         this.tier = tier;
-        this.noise_Level_DB = noiseLevelDB;
-        this.is_Air = isAir;
-        this.is_Workstation = isWorkstation;
-        this.product_FK = productFK;
+        this.noise_Level_DB = noise_Level_DB;
+        this.is_Air = is_Air;
+        this.is_Workstation = is_Workstation;
+        this.product = product;
     }
 
     public Cooler() {
@@ -49,8 +48,8 @@ public class Cooler {
         return noise_Level_DB;
     }
 
-    public void setNoise_Level_DB(float noiseLevelDB) {
-        this.noise_Level_DB = noiseLevelDB;
+    public void setNoise_Level_DB(float noise_Level_DB) {
+        this.noise_Level_DB = noise_Level_DB;
     }
 
     public boolean isIs_Air() {
@@ -69,23 +68,11 @@ public class Cooler {
         this.is_Workstation = is_Workstation;
     }
 
-    public long getProduct_FK() {
-        return product_FK;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_FK(long productFK) {
-        this.product_FK = productFK;
-    }
-
-    @Override
-    public String toString() {
-        return "Cooler{" +
-                "id=" + id +
-                ", tier=" + tier +
-                ", noiseLevelDB=" + noise_Level_DB +
-                ", isAir=" + is_Air +
-                ", isWorkstation=" + is_Workstation +
-                ", productFK=" + product_FK +
-                '}';
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

@@ -1,9 +1,6 @@
 package com.pcc.pc_configurator.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Gpu {
@@ -20,21 +17,23 @@ public class Gpu {
     private int tdp;
     private int recommended_Psu_Watts;
     private int performance;
-    private long product_FK;
-
-    public Gpu(String chipset, int memoryGB, int coreClockMHZ, int boostClockMHZ, float lengthMM, int tdp, int recommendedPsuWatts, int performance, long productFK) {
-        this.chipset = chipset;
-        this.memory_GB = memoryGB;
-        this.core_Clock_MHZ = coreClockMHZ;
-        this.boost_Clock_MHZ = boostClockMHZ;
-        this.length_MM = lengthMM;
-        this.tdp = tdp;
-        this.recommended_Psu_Watts = recommendedPsuWatts;
-        this.performance = performance;
-        this.product_FK = productFK;
-    }
+    @OneToOne
+    @JoinColumn(name = "product_FK", referencedColumnName = "id")
+    private Product product;
 
     public Gpu() {
+    }
+
+    public Gpu(String chipset, int memory_GB, int core_Clock_MHZ, int boost_Clock_MHZ, float length_MM, int tdp, int recommended_Psu_Watts, int performance, Product product) {
+        this.chipset = chipset;
+        this.memory_GB = memory_GB;
+        this.core_Clock_MHZ = core_Clock_MHZ;
+        this.boost_Clock_MHZ = boost_Clock_MHZ;
+        this.length_MM = length_MM;
+        this.tdp = tdp;
+        this.recommended_Psu_Watts = recommended_Psu_Watts;
+        this.performance = performance;
+        this.product = product;
     }
 
     public long getId() {
@@ -57,32 +56,32 @@ public class Gpu {
         return memory_GB;
     }
 
-    public void setMemory_GB(int memoryGB) {
-        this.memory_GB = memoryGB;
+    public void setMemory_GB(int memory_GB) {
+        this.memory_GB = memory_GB;
     }
 
     public int getCore_Clock_MHZ() {
         return core_Clock_MHZ;
     }
 
-    public void setCore_Clock_MHZ(int coreClockMHZ) {
-        this.core_Clock_MHZ = coreClockMHZ;
+    public void setCore_Clock_MHZ(int core_Clock_MHZ) {
+        this.core_Clock_MHZ = core_Clock_MHZ;
     }
 
     public int getBoost_Clock_MHZ() {
         return boost_Clock_MHZ;
     }
 
-    public void setBoost_Clock_MHZ(int boostClockMHZ) {
-        this.boost_Clock_MHZ = boostClockMHZ;
+    public void setBoost_Clock_MHZ(int boost_Clock_MHZ) {
+        this.boost_Clock_MHZ = boost_Clock_MHZ;
     }
 
     public float getLength_MM() {
         return length_MM;
     }
 
-    public void setLength_MM(float lengthMM) {
-        this.length_MM = lengthMM;
+    public void setLength_MM(float length_MM) {
+        this.length_MM = length_MM;
     }
 
     public int getTdp() {
@@ -97,8 +96,8 @@ public class Gpu {
         return recommended_Psu_Watts;
     }
 
-    public void setRecommended_Psu_Watts(int recommendedPsuWatts) {
-        this.recommended_Psu_Watts = recommendedPsuWatts;
+    public void setRecommended_Psu_Watts(int recommended_Psu_Watts) {
+        this.recommended_Psu_Watts = recommended_Psu_Watts;
     }
 
     public int getPerformance() {
@@ -109,27 +108,13 @@ public class Gpu {
         this.performance = performance;
     }
 
-    public long getProduct_FK() {
-        return product_FK;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_FK(long productFK) {
-        this.product_FK = productFK;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    @Override
-    public String toString() {
-        return "Gpu{" +
-                "id=" + id +
-                ", chipset='" + chipset + '\'' +
-                ", memoryGB=" + memory_GB +
-                ", coreClockMHZ=" + core_Clock_MHZ +
-                ", boostClockMHZ=" + boost_Clock_MHZ +
-                ", lengthMM=" + length_MM +
-                ", tdp=" + tdp +
-                ", recommendedPsuWatts=" + recommended_Psu_Watts +
-                ", performance=" + performance +
-                ", productFK=" + product_FK +
-                '}';
-    }
+
 }

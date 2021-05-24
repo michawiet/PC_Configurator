@@ -34,16 +34,15 @@ public class CpuController {
 
     @Autowired
     public void cpuToDTO(ModelMapper modelMapper) {
-        var repo = cpuRepository.findAll();
-        for(int i=0;i<repo.size();++i)
-        cpuDtoList.add(modelMapper.map(repo.get(i),CpuDTO.class));
+        for(var cpu : cpuRepository.findAll())
+            cpuDtoList.add(modelMapper.map(cpu,CpuDTO.class));
     }
 
-    @GetMapping("/test/{id}")
-    public List<Temp> test(@PathVariable long id) { return cpuRepository.findByIdTemp(id);}
+    //@GetMapping("/test/{id}")
+    //public List<Temp> test(@PathVariable long id) { return cpuRepository.findByIdTemp(id);}
     
     @GetMapping
-    public List<CpuDTO> getOrders() {
+    public List<CpuDTO> getCpus() {
         return cpuDtoList;
     }
 }

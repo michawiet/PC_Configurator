@@ -31,13 +31,12 @@ public class RamController {
 
     @Autowired
     public void ramToDTO(ModelMapper modelMapper) {
-        var repo = ramRepository.findAll();
-        for(int i=0;i<repo.size();++i)
-            ramDtoList.add(modelMapper.map(repo.get(i),RamDTO.class));
+        for(var ram : ramRepository.findAll())
+            ramDtoList.add(modelMapper.map(ram,RamDTO.class));
     }
 
     @GetMapping
-    public List<RamDTO> getOrders() {
+    public List<RamDTO> getRams() {
         return ramDtoList;
     }
 }

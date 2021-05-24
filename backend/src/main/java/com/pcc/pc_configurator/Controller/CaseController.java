@@ -30,12 +30,12 @@ public class CaseController {
 
     @Autowired
     public void caseToDTO(ModelMapper modelMapper) {
-        for(int i=0;i<caseRepository.findAll().size();++i)
-            caseDtoList.add(modelMapper.map(caseRepository.findAll().get(i),CaseDTO.class));
+        for(var case_ : caseRepository.findAll())
+            caseDtoList.add(modelMapper.map(case_,CaseDTO.class));
     }
 
     @GetMapping
-    public List<CaseDTO> getOrders() {
+    public List<CaseDTO> getCases() {
         return caseDtoList;
     }
 }

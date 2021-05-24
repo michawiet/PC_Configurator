@@ -30,13 +30,13 @@ public class CoolerController {
     }
 
     @Autowired
-    public void cpuToDTO(ModelMapper modelMapper) {
-        for(int i=0;i<coolerRepo.findAll().size();++i)
-            coolerDtoList.add(modelMapper.map(coolerRepo.findAll().get(i),CoolerDTO.class));
+    public void coolerToDTO(ModelMapper modelMapper) {
+        for(var cooler : coolerRepo.findAll())
+            coolerDtoList.add(modelMapper.map(cooler, CoolerDTO.class));
     }
 
     @GetMapping
-    public List<CoolerDTO> getOrders() {
+    public List<CoolerDTO> getCoolers() {
         return coolerDtoList;
     }
 }

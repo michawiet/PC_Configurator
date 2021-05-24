@@ -31,13 +31,12 @@ public class StorageController {
 
     @Autowired
     public void storageToDTO(ModelMapper modelMapper) {
-        var repo = storageRepository.findAll();
-        for(int i=0;i<repo.size();++i)
-            storageDtoList.add(modelMapper.map(repo.get(i),StorageDTO.class));
+        for(var storage : storageRepository.findAll())
+            storageDtoList.add(modelMapper.map(storage,StorageDTO.class));
     }
 
     @GetMapping
-    public List<StorageDTO> getOrders() {
+    public List<StorageDTO> getStorages() {
         return storageDtoList;
     }
 }

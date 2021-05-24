@@ -31,13 +31,12 @@ public class PsuController {
 
     @Autowired
     public void psuToDTO(ModelMapper modelMapper) {
-        var repo = psuRepository.findAll();
-        for(int i=0;i<repo.size();++i)
-            psuDtoList.add(modelMapper.map(repo.get(i),PsuDTO.class));
+        for(var psu : psuRepository.findAll())
+            psuDtoList.add(modelMapper.map(psu,PsuDTO.class));
     }
 
     @GetMapping
-    public List<PsuDTO> getOrders() {
+    public List<PsuDTO> getPsus() {
         return psuDtoList;
     }
 }

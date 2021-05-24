@@ -18,22 +18,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GpuController {
     private final GpuRepository gpuRepo;
+    private List<GpuDTO> gpuDtoList = new ArrayList<>();
 
     //@GetMapping
     //public ResponseEntity<Iterable<Gpu>> getAllGpu() {
     //    return ResponseEntity.ok(gpuRepo.findAll());}
 
-    private List<GpuDTO> gpuDtoList = new ArrayList<>();
 
     @Autowired
     public void gpuToDTO(ModelMapper modelMapper) {
-        var repo = gpuRepo.findAll();
-        for(int i=0;i<repo.size();++i)
-            gpuDtoList.add(modelMapper.map(repo.get(i),GpuDTO.class));
+        for(var gpu : gpuRepo.findAll())
+            gpuDtoList.add(modelMapper.map(gpu,GpuDTO.class));
     }
 
     @GetMapping
-    public List<GpuDTO> getGpusDTo() {
+    public List<GpuDTO> getGpus() {
         return gpuDtoList;
     }
 }

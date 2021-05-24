@@ -33,13 +33,12 @@ public class ProductsController {
 
     @Autowired
     public void productToDTO(ModelMapper modelMapper) {
-        var repo = productRepo.findAll();
-        for(int i=0;i<repo.size();++i)
-            productsDtoList.add(modelMapper.map(repo.get(i),ProductsDTO.class));
+        for(var product : productRepo.findAll())
+            productsDtoList.add(modelMapper.map(product,ProductsDTO.class));
     }
 
     @GetMapping
-    public List<ProductsDTO> getOrders() {
+    public List<ProductsDTO> getProducts() {
         return productsDtoList;
     }
 }
