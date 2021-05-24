@@ -8,7 +8,6 @@ import AuthenticatedPartPicker from './components/AuthenticatedPartPicker';
 function App() {
   return (
     <div className="App">
-    
       <Router>
         <Switch>
           <Route exact path="/" component={UnauthenticatedPartPicker} />

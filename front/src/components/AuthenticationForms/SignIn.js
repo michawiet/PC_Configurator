@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from "react-router-dom";
 import GoogleButton from 'react-google-button'
+import PropTypes from 'prop-types';
 
 function Copyright() {
   return (
@@ -51,18 +52,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function SignIn() {
+export default function SignIn({  }) {
   const classes = useStyles();
   let history = useHistory();
 
-  const[isAutheticated, setisAutheticated] = useState(false);
-
   function login(){
-    setisAutheticated(true);
-    console.log("loggedInUser:" + isAutheticated)
+  
     history.push("/loged")
   }
-
+ 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

@@ -118,8 +118,7 @@ export default function StickyHeadTable() {
           </TableHead>
           <TableBody>
             {products
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((userProfile) => {
-                return (
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((userProfile) => (
                   <TableRow key = {userProfile.id}>
                     <TableCell align="center">
                       {userProfile.socket}
@@ -149,8 +148,7 @@ export default function StickyHeadTable() {
                       {userProfile.boostClock}
                     </TableCell>
                   </TableRow>
-                );
-              })}
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

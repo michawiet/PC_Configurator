@@ -3,6 +3,12 @@ import Box from '@material-ui/core/Box';
 import CpuPicker from './CpuPicker';
 import StartPanel from '../StartPanel';
 import CoolerPicker from './CoolerPicker';
+import MotherboardPicker from './MotherboardPicker';
+import RamPicker from './RamPicker';
+import StoragePicker from './StoragePicker';
+import GpuPicker from './GpuPicker';
+import CasePicker from './CasePicker';
+import PsuPicker from './PsuPicker';
 
 function PartPickerTabs({selectedTabs}) {
   function TabPanel(props) {
@@ -36,22 +42,22 @@ function PartPickerTabs({selectedTabs}) {
         <CoolerPicker/>
       </TabPanel>
       <TabPanel value={selectedTabs} index={3}>
-        Item Three
+        <MotherboardPicker/>
       </TabPanel>
       <TabPanel value={selectedTabs} index={4}>
-        Item Four
+        <RamPicker/>
       </TabPanel>
       <TabPanel value={selectedTabs} index={5}>
-        Item Five
+        <StoragePicker/>
       </TabPanel>
       <TabPanel value={selectedTabs} index={6}>
-        Item Six
+        <GpuPicker/>
       </TabPanel>
       <TabPanel value={selectedTabs} index={7}>
-        Item Seven
+        <CasePicker/>
       </TabPanel>
       <TabPanel value={selectedTabs} index={8}>
-        Zasilacz
+        <PsuPicker/>
       </TabPanel>
     </Container>
   )

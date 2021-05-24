@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import VerticalProductCard from '../products/VerticalProductCard'
 import axios from 'axios';
 
-function CoolerPicker() {
+function CasePicker() {
   const [products, setProducts] = useState([]);
   
     const fetchProducts = () => {
-      axios.get("http://localhost:8080/products/cooler").then(res => {
+      axios.get("http://localhost:8080/products/case").then(res => {
         console.log(res);
         setProducts(res.data);
       });
@@ -20,14 +20,15 @@ function CoolerPicker() {
   return (
     <div>
       <Grid container spacing={3}>
-        {products.map(({product, noiseLevelDB, tier, workstation, air}) => (
+        {products.map(({product, type, side_Panel_Window, max_Motherboard_Size, power_Supply_Standard}, index) => (
           <Grid item xs={4}>
             <VerticalProductCard
-              productName={product.brand + " " + product.name}
+              productName={ product.brand + " " + product.name }
               price={Number(product.price).toFixed(2)}
-              detail0={"Maksymalny poziom hałasu: " + noiseLevelDB + " dB"}
-              detail1={"Kompatybilność z gniazdem: " + (workstation ? "sTRX4" : "2066, 1151, 1200, AM4")}
-              detail2={"Typ chłodzenia: " + (air ? "Powietrzne" : "AIO")}
+              detail0={"Typ: " + type }
+              detail1={"Panel boczny: " +  side_Panel_Window }
+              detail2={"Standard zasilacza: " + power_Supply_Standard }
+              detail3={"Maksymaly wymiar płyty głównej: " + max_Motherboard_Size }
             />
           </Grid>
         ))}
@@ -35,5 +36,4 @@ function CoolerPicker() {
     </div>
   )
 }
-
-export default CoolerPicker
+export default CasePicker;

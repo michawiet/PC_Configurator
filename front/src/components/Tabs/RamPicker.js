@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import VerticalProductCard from '../products/VerticalProductCard'
 import axios from 'axios';
 
-function CoolerPicker() {
+function RamPicker() {
   const [products, setProducts] = useState([]);
   
     const fetchProducts = () => {
-      axios.get("http://localhost:8080/products/cooler").then(res => {
+      axios.get("http://localhost:8080/products/ram").then(res => {
         console.log(res);
         setProducts(res.data);
       });
@@ -20,14 +20,14 @@ function CoolerPicker() {
   return (
     <div>
       <Grid container spacing={3}>
-        {products.map(({product, noiseLevelDB, tier, workstation, air}) => (
+        {products.map(({product, moduleCapacity, speed, modulesCount, cl }, index) => (
           <Grid item xs={4}>
             <VerticalProductCard
-              productName={product.brand + " " + product.name}
+              productName={ product.brand + " " + product.name + " (" + modulesCount + " x " + moduleCapacity + " GB)" }
               price={Number(product.price).toFixed(2)}
-              detail0={"Maksymalny poziom hałasu: " + noiseLevelDB + " dB"}
-              detail1={"Kompatybilność z gniazdem: " + (workstation ? "sTRX4" : "2066, 1151, 1200, AM4")}
-              detail2={"Typ chłodzenia: " + (air ? "Powietrzne" : "AIO")}
+              detail0={"Taktowanie  : " + speed + " MHz" }
+              detail1={"Opóżnienie: CL" + cl }
+              detail2={"Pojemność całkowita: " + (moduleCapacity * modulesCount) + " GB" }
             />
           </Grid>
         ))}
@@ -36,4 +36,4 @@ function CoolerPicker() {
   )
 }
 
-export default CoolerPicker
+export default RamPicker

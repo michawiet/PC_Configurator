@@ -7,7 +7,7 @@ function CoolerPicker() {
   const [products, setProducts] = useState([]);
   
     const fetchProducts = () => {
-      axios.get("http://localhost:8080/products/cooler").then(res => {
+      axios.get("http://localhost:8080/products/motherboard").then(res => {
         console.log(res);
         setProducts(res.data);
       });
@@ -20,14 +20,15 @@ function CoolerPicker() {
   return (
     <div>
       <Grid container spacing={3}>
-        {products.map(({product, noiseLevelDB, tier, workstation, air}) => (
+        {products.map(({product, formFactor, chipset, socket}, index) => (
           <Grid item xs={4}>
             <VerticalProductCard
-              productName={product.brand + " " + product.name}
+              productName={ product.brand + " " + product.name }
               price={Number(product.price).toFixed(2)}
-              detail0={"Maksymalny poziom hałasu: " + noiseLevelDB + " dB"}
-              detail1={"Kompatybilność z gniazdem: " + (workstation ? "sTRX4" : "2066, 1151, 1200, AM4")}
-              detail2={"Typ chłodzenia: " + (air ? "Powietrzne" : "AIO")}
+              detail0={"Socket: " + socket }
+              detail1={"Chipset: " + chipset }
+              detail2={"Format: " + formFactor }
+            
             />
           </Grid>
         ))}

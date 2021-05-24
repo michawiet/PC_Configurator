@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, List, ListItem, ListItemText } from '@material-ui/core';
+import { makeStyles, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, List, ListItem, ListItemText, Grid } from '@material-ui/core';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import fanImage from '../../icons/fan.png'
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 270,
+        maxWidth: 400,
     },
     button: {
       marginLeft: 'auto !important',
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     },
 });
 //productDetails as a array, that gets converted here to a list or something
-export default function ImgMediaCard({image, productName, detail0, detail1, detail2, detail3, price, href}) {
+export default function VerticalProductCard({image, productName, detail0, detail1, detail2, detail3, price, href}) {
   const classes = useStyles();
 
   return (

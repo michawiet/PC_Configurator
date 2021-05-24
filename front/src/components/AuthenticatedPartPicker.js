@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const MiniDrawer = (props) => {
+const MiniDrawer = (props  ) => {
 
   const classes = useStyles();
   const theme = useTheme();
