@@ -1,9 +1,6 @@
 package com.pcc.pc_configurator.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Ram {
@@ -17,15 +14,17 @@ public class Ram {
     private int module_Capacity_Gb;
     private float fw_Latency_Ns;
     private int cl;
-    private long product_FK;
+    @OneToOne
+    @JoinColumn(name = "product_FK", referencedColumnName = "id")
+    private Product product;
 
-    public Ram(int speed, int modulesCount, int moduleCapacity, float fwLatencyNs, int cl, long productFK) {
+    public Ram(int speed, int modules_Count, int module_Capacity_Gb, float fw_Latency_Ns, int cl, Product product) {
         this.speed = speed;
-        this.modules_Count = modulesCount;
-        this.module_Capacity_Gb = moduleCapacity;
-        this.fw_Latency_Ns = fwLatencyNs;
+        this.modules_Count = modules_Count;
+        this.module_Capacity_Gb = module_Capacity_Gb;
+        this.fw_Latency_Ns = fw_Latency_Ns;
         this.cl = cl;
-        this.product_FK = productFK;
+        this.product = product;
     }
 
     public Ram() {
@@ -79,24 +78,11 @@ public class Ram {
         this.cl = cl;
     }
 
-    public long getProduct_FK() {
-        return product_FK;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_FK(long productFK) {
-        this.product_FK = productFK;
-    }
-
-    @Override
-    public String toString() {
-        return "Ram{" +
-                "id=" + id +
-                ", speed=" + speed +
-                ", modulesCount=" + modules_Count +
-                ", moduleCapacity=" + module_Capacity_Gb +
-                ", fwLatencyNs=" + fw_Latency_Ns +
-                ", cl=" + cl +
-                ", productFK=" + product_FK +
-                '}';
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

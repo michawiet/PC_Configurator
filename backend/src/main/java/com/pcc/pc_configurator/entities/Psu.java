@@ -1,9 +1,6 @@
 package com.pcc.pc_configurator.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Psu {
@@ -17,15 +14,17 @@ public class Psu {
     private String efficiency_Rating;
     private int wattage;
     private String modular;
-    private long product_FK;
+    @OneToOne
+    @JoinColumn(name = "product_FK", referencedColumnName = "id")
+    private Product product;
 
-    public Psu( float tier, String formFactor, String efficiencyRating, int wattage, String modular, long productFK) {
+    public Psu(float tier, String form_Factor, String efficiency_Rating, int wattage, String modular, Product product) {
         this.tier = tier;
-        this.form_Factor = formFactor;
-        this.efficiency_Rating = efficiencyRating;
+        this.form_Factor = form_Factor;
+        this.efficiency_Rating = efficiency_Rating;
         this.wattage = wattage;
         this.modular = modular;
-        this.product_FK = productFK;
+        this.product = product;
     }
 
     public Psu() {
@@ -79,24 +78,11 @@ public class Psu {
         this.modular = modular;
     }
 
-    public long getProduct_FK() {
-        return product_FK;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_FK(long productFK) {
-        this.product_FK = productFK;
-    }
-
-    @Override
-    public String toString() {
-        return "Psu{" +
-                "id=" + id +
-                ", tier=" + tier +
-                ", formFactor='" + form_Factor + '\'' +
-                ", efficiencyRating='" + efficiency_Rating + '\'' +
-                ", wattage=" + wattage +
-                ", modular='" + modular + '\'' +
-                ", productFK=" + product_FK +
-                '}';
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

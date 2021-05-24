@@ -34,6 +34,7 @@ public class PcConfiguratorApplication {
                 map().setMtPref(source.getMt_Pref());
                 map().setCoreClock(source.getCore_Clock());
                 map().setBoostClock(source.getBoost_Clock());
+                map().setProduct(source.getProduct());
                 //map().setProductFK(source.getProduct_FK());
             }
         });
@@ -49,7 +50,7 @@ public class PcConfiguratorApplication {
                 map().setTdp(source.getTdp());
                 map().setRecommendedPsuWatts(source.getRecommended_Psu_Watts());
                 map().setPerformance(source.getPerformance());
-                map().setProductFK(source.getProduct_FK());
+                map().setProduct(source.getProduct());
             }
         });
         modelMapper.addMappings(new PropertyMap<Case_, CaseDTO>() {
@@ -60,7 +61,7 @@ public class PcConfiguratorApplication {
                 map().setMax_Motherboard_Size(source.getMax_Motherboard_Size());
                 map().setType(source.getType());
                 map().setSide_Panel_Window(source.getSide_Panel_Window());
-                map().setProductFK(source.getProduct_FK());
+                map().setProduct(source.getProduct());
             }
         });
         modelMapper.addMappings(new PropertyMap<Cooler, CoolerDTO>() {
@@ -71,7 +72,7 @@ public class PcConfiguratorApplication {
                 map().setNoiseLevelDB(source.getNoise_Level_DB());
                 map().setAir(source.isIs_Air());
                 map().setWorkstation(source.isIs_Workstation());
-                map().setProductFK(source.getProduct_FK());
+                map().setProduct(source.getProduct());
             }
         });
         modelMapper.addMappings(new PropertyMap<Motherboard, MotherboardDTO>() {
@@ -84,7 +85,7 @@ public class PcConfiguratorApplication {
                 map().setFormFactor(source.getForm_Factor());
                 map().setMemorySlots(source.getMemory_Slots());
                 map().setMemoryMaxGB(source.getMemory_Max_GB());
-                map().setProductFK(source.getProduct_FK());
+                map().setProduct(source.getProduct());
             }
         });
         modelMapper.addMappings(new PropertyMap<Product, ProductsDTO>() {
@@ -106,7 +107,7 @@ public class PcConfiguratorApplication {
                 map().setEfficiencyRating(source.getEfficiency_Rating());
                 map().setWattage(source.getWattage());
                 map().setModular(source.getModular());
-                map().setProductFK(source.getProduct_FK());
+                map().setProduct(source.getProduct());
             }
         });
         modelMapper.addMappings(new PropertyMap<Ram, RamDTO>() {
@@ -118,7 +119,7 @@ public class PcConfiguratorApplication {
                 map().setModuleCapacity(source.getModule_Capacity_Gb());
                 map().setFwLatencyNs(source.getFw_Latency_Ns());
                 map().setCl(source.getCl());
-                map().setProductFK(source.getProduct_FK());
+                map().setProduct(source.getProduct());
             }
         });
         modelMapper.addMappings(new PropertyMap<Storage, StorageDTO>() {
@@ -130,7 +131,7 @@ public class PcConfiguratorApplication {
                 map().setType(source.getType());
                 map().setFormFactor(source.getForm_Factor());
                 map().setInterface_(source.getStorage_interface());
-                map().setProductFK(source.getProduct_FK());
+                map().setProduct(source.getProduct());
             }
         });
         return modelMapper;

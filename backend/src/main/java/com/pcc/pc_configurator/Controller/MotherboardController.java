@@ -6,10 +6,7 @@ import com.pcc.pc_configurator.repositories.MotherboardRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products/motherboard")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class MotherboardController {
     private final MotherboardRepository motherboardRepository;
     private List<MotherboardDTO> motherboardDtoList = new ArrayList<>();
@@ -32,13 +30,12 @@ public class MotherboardController {
 
     @Autowired
     public void motherboardToDTO(ModelMapper modelMapper) {
-        var repo = motherboardRepository.findAll();
-        for(int i=0;i<repo.size();++i)
-            motherboardDtoList.add(modelMapper.map(repo.get(i),MotherboardDTO.class));
+        for(var motherboard : motherboardRepository.findAll())
+            motherboardDtoList.add(modelMapper.map(motherboard,MotherboardDTO.class));
     }
 
     @GetMapping
-    public List<MotherboardDTO> getOrders() {
+    public List<MotherboardDTO> getMotherboards() {
         return motherboardDtoList;
     }
 }

@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/list_users").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .formLogin().loginPage("https://localhost:3000/login")
+                .formLogin()
                 .usernameParameter("email")
                 .defaultSuccessUrl("/hey")
                 .permitAll()

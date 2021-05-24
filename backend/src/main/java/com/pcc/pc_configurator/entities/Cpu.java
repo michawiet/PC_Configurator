@@ -18,22 +18,23 @@ public class Cpu {
     private int mt_Pref;
     private float core_Clock;
     private float boost_Clock;
-    @OneToOne(targetEntity = Product.class,cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "product_FK", referencedColumnName = "id")
     private Product product;
     //private long product_FK;
 
-    public Cpu(String socket, int cores, boolean smt, boolean integrated_GPU, int tdpW, int stPref, int mtPref, float coreClock, float boostClock/*, long product_FK*/) {
+
+    public Cpu(String socket, int cores, boolean smt, boolean integrated_GPU, int tdp_W, int st_Pref, int mt_Pref, float core_Clock, float boost_Clock, Product product) {
         this.socket = socket;
         this.cores = cores;
         this.smt = smt;
         this.integrated_GPU = integrated_GPU;
-        this.tdp_W = tdpW;
-        this.st_Pref = stPref;
-        this.mt_Pref = mtPref;
-        this.core_Clock = coreClock;
-        this.boost_Clock = boostClock;
-        //this.product_FK = product_FK;
+        this.tdp_W = tdp_W;
+        this.st_Pref = st_Pref;
+        this.mt_Pref = mt_Pref;
+        this.core_Clock = core_Clock;
+        this.boost_Clock = boost_Clock;
+        this.product = product;
     }
 
     public Cpu() {
@@ -75,72 +76,55 @@ public class Cpu {
         return integrated_GPU;
     }
 
-    public void setIntegrated_GPU(boolean integratedGPU) {
-        this.integrated_GPU = integratedGPU;
+    public void setIntegrated_GPU(boolean integrated_GPU) {
+        this.integrated_GPU = integrated_GPU;
     }
 
     public int getTdp_W() {
         return tdp_W;
     }
 
-    public void setTdp_W(int tdpW) {
-        this.tdp_W = tdpW;
+    public void setTdp_W(int tdp_W) {
+        this.tdp_W = tdp_W;
     }
 
     public int getSt_Pref() {
         return st_Pref;
     }
 
-    public void setSt_Pref(int stPref) {
-        this.st_Pref = stPref;
+    public void setSt_Pref(int st_Pref) {
+        this.st_Pref = st_Pref;
     }
 
     public int getMt_Pref() {
         return mt_Pref;
     }
 
-    public void setMt_Pref(int mtPref) {
-        this.mt_Pref = mtPref;
+    public void setMt_Pref(int mt_Pref) {
+        this.mt_Pref = mt_Pref;
     }
 
     public float getCore_Clock() {
         return core_Clock;
     }
 
-    public void setCore_Clock(float coreClock) {
-        this.core_Clock = coreClock;
+    public void setCore_Clock(float core_Clock) {
+        this.core_Clock = core_Clock;
     }
 
     public float getBoost_Clock() {
         return boost_Clock;
     }
 
-    public void setBoost_Clock(float boostClock) {
-        this.boost_Clock = boostClock;
+    public void setBoost_Clock(float boost_Clock) {
+        this.boost_Clock = boost_Clock;
     }
 
-    //public long getProduct_FK() {
-    //    return product_FK;
-    //}
-//
-    //public void setProduct_FK(long productFK) {
-    //    this.product_FK = productFK;
-    //}
+    public Product getProduct() {
+        return product;
+    }
 
-    @Override
-    public String toString() {
-        return "Cpu{" +
-                "id=" + id +
-                ", socket='" + socket + '\'' +
-                ", cores=" + cores +
-                ", smt=" + smt +
-                ", integratedGPU=" + integrated_GPU +
-                ", tdpW=" + tdp_W +
-                ", stPref=" + st_Pref +
-                ", mtPref=" + mt_Pref +
-                ", coreClock=" + core_Clock +
-                ", boostClock=" + boost_Clock +
-                //", productFK=" + product_FK +
-                '}';
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

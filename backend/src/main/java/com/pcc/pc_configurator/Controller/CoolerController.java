@@ -6,10 +6,7 @@ import com.pcc.pc_configurator.repositories.CoolerRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products/cooler")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class CoolerController {
     private final CoolerRepository coolerRepo;
     private List<CoolerDTO> coolerDtoList = new ArrayList<>();
@@ -30,14 +28,13 @@ public class CoolerController {
     }
 
     @Autowired
-    public void cpuToDTO(ModelMapper modelMapper) {
-        var repo = coolerRepo.findAll();
-        for(int i=0;i<repo.size();++i)
-            coolerDtoList.add(modelMapper.map(repo.get(i),CoolerDTO.class));
+    public void coolerToDTO(ModelMapper modelMapper) {
+        for(var cooler : coolerRepo.findAll())
+            coolerDtoList.add(modelMapper.map(cooler, CoolerDTO.class));
     }
 
     @GetMapping
-    public List<CoolerDTO> getOrders() {
+    public List<CoolerDTO> getCoolers() {
         return coolerDtoList;
     }
 }

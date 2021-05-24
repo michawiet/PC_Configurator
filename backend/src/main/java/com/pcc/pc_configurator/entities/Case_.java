@@ -1,9 +1,6 @@
 package com.pcc.pc_configurator.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Case_ {
@@ -16,14 +13,16 @@ public class Case_ {
     private String max_Motherboard_Size;
     private String type;
     private String side_Panel_Window;
-    private long product_FK;
+    @OneToOne
+    @JoinColumn(name = "product_FK", referencedColumnName = "id")
+    private Product product;
 
-    public Case_(String powerSupplyStandard, String maxMotherboardSize, String type, String sidePanelWindow, long productFK) {
-        this.power_Supply_Standard = powerSupplyStandard;
-        this.max_Motherboard_Size = maxMotherboardSize;
+    public Case_(String power_Supply_Standard, String max_Motherboard_Size, String type, String side_Panel_Window, Product product) {
+        this.power_Supply_Standard = power_Supply_Standard;
+        this.max_Motherboard_Size = max_Motherboard_Size;
         this.type = type;
-        this.side_Panel_Window = sidePanelWindow;
-        this.product_FK = productFK;
+        this.side_Panel_Window = side_Panel_Window;
+        this.product = product;
     }
 
     public Case_() {
@@ -41,16 +40,16 @@ public class Case_ {
         return power_Supply_Standard;
     }
 
-    public void setPower_Supply_Standard(String powerSupplyStandard) {
-        this.power_Supply_Standard = powerSupplyStandard;
+    public void setPower_Supply_Standard(String power_Supply_Standard) {
+        this.power_Supply_Standard = power_Supply_Standard;
     }
 
     public String getMax_Motherboard_Size() {
         return max_Motherboard_Size;
     }
 
-    public void setMax_Motherboard_Size(String maxMotherboardSize) {
-        this.max_Motherboard_Size = maxMotherboardSize;
+    public void setMax_Motherboard_Size(String max_Motherboard_Size) {
+        this.max_Motherboard_Size = max_Motherboard_Size;
     }
 
     public String getType() {
@@ -65,27 +64,15 @@ public class Case_ {
         return side_Panel_Window;
     }
 
-    public void setSide_Panel_Window(String sidePanelWindow) {
-        this.side_Panel_Window = sidePanelWindow;
+    public void setSide_Panel_Window(String side_Panel_Window) {
+        this.side_Panel_Window = side_Panel_Window;
     }
 
-    public long getProduct_FK() {
-        return product_FK;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_FK(long productFK) {
-        this.product_FK = productFK;
-    }
-
-    @Override
-    public String toString() {
-        return "Case{" +
-                "id=" + id +
-                ", powerSupplyStandard='" + power_Supply_Standard + '\'' +
-                ", maxMotherboardSize='" + max_Motherboard_Size + '\'' +
-                ", type='" + type + '\'' +
-                ", sidePanelWindow='" + side_Panel_Window + '\'' +
-                ", productFK=" + product_FK +
-                '}';
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

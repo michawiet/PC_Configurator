@@ -2,6 +2,7 @@ package com.pcc.pc_configurator.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pcc.pc_configurator.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -19,8 +20,18 @@ public class CpuDTO {
     private int mtPref;
     private float coreClock;
     private float boostClock;
-    @JsonIgnore
-    private long productFK;
+    private Product product;
+    //@JsonIgnore
+    //private long productFK;
+
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public long getId() {
         return id;
@@ -102,13 +113,13 @@ public class CpuDTO {
         this.boostClock = boostClock;
     }
 
-    public long getProductFK() {
-        return productFK;
-    }
-
-    public void setProductFK(long productFK) {
-        this.productFK = productFK;
-    }
+    //public long getProductFK() {
+    //    return productFK;
+    //}
+//
+    //public void setProductFK(long productFK) {
+    //    this.productFK = productFK;
+    //}
 
     @Override
     public String toString() {
@@ -123,7 +134,7 @@ public class CpuDTO {
                 ", mtPref=" + mtPref +
                 ", coreClock=" + coreClock +
                 ", boostClock=" + boostClock +
-                ", productFK=" + productFK +
+                //", productFK=" + productFK +
                 '}';
     }
 }

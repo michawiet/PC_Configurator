@@ -8,16 +8,14 @@ import com.pcc.pc_configurator.repositories.CpuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @RestController
 @RequestMapping("/products/cpu")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class CpuController {
     private final CpuRepository cpuRepository;
     private List<CpuDTO> cpuDtoList = new ArrayList<>();
@@ -34,16 +32,15 @@ public class CpuController {
 
     @Autowired
     public void cpuToDTO(ModelMapper modelMapper) {
-        var repo = cpuRepository.findAll();
-        for(int i=0;i<repo.size();++i)
-        cpuDtoList.add(modelMapper.map(repo.get(i),CpuDTO.class));
+        for(var cpu : cpuRepository.findAll())
+            cpuDtoList.add(modelMapper.map(cpu,CpuDTO.class));
     }
 
-    @GetMapping("/test/{id}")
-    public List<Temp> test(@PathVariable long id) { return cpuRepository.findByIdTemp(id);}
+    //@GetMapping("/test/{id}")
+    //public List<Temp> test(@PathVariable long id) { return cpuRepository.findByIdTemp(id);}
     
     @GetMapping
-    public List<CpuDTO> getOrders() {
+    public List<CpuDTO> getCpus() {
         return cpuDtoList;
     }
 }

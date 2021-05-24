@@ -4,6 +4,7 @@ import com.pcc.pc_configurator.entities.Order_;
 import com.pcc.pc_configurator.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class OrderController {
     private final OrderRepository orderRepo;
 

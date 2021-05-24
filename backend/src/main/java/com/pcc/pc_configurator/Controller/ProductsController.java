@@ -6,10 +6,7 @@ import com.pcc.pc_configurator.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ProductsController {
     private final ProductRepository productRepo;
     private List<ProductsDTO> productsDtoList = new ArrayList<>();
@@ -33,13 +31,12 @@ public class ProductsController {
 
     @Autowired
     public void productToDTO(ModelMapper modelMapper) {
-        var repo = productRepo.findAll();
-        for(int i=0;i<repo.size();++i)
-            productsDtoList.add(modelMapper.map(repo.get(i),ProductsDTO.class));
+        for(var product : productRepo.findAll())
+            productsDtoList.add(modelMapper.map(product,ProductsDTO.class));
     }
 
     @GetMapping
-    public List<ProductsDTO> getOrders() {
+    public List<ProductsDTO> getProducts() {
         return productsDtoList;
     }
 }

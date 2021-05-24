@@ -6,10 +6,7 @@ import com.pcc.pc_configurator.repositories.PsuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products/psu")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class PsuController {
     private final PsuRepository psuRepository;
     private List<PsuDTO> psuDtoList = new ArrayList<>();
@@ -31,13 +29,12 @@ public class PsuController {
 
     @Autowired
     public void psuToDTO(ModelMapper modelMapper) {
-        var repo = psuRepository.findAll();
-        for(int i=0;i<repo.size();++i)
-            psuDtoList.add(modelMapper.map(repo.get(i),PsuDTO.class));
+        for(var psu : psuRepository.findAll())
+            psuDtoList.add(modelMapper.map(psu,PsuDTO.class));
     }
 
     @GetMapping
-    public List<PsuDTO> getOrders() {
+    public List<PsuDTO> getPsus() {
         return psuDtoList;
     }
 }

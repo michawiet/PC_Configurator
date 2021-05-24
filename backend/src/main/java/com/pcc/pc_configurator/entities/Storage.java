@@ -1,9 +1,6 @@
 package com.pcc.pc_configurator.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Storage {
@@ -17,15 +14,17 @@ public class Storage {
     private String type;
     private String form_Factor;
     private String storage_interface;
-    private long product_FK;
+    @OneToOne
+    @JoinColumn(name = "product_FK", referencedColumnName = "id")
+    private Product product;
 
-    public Storage( int capacityGB, int tier, String type, String formFactor, String interface_, long productFK) {
-        this.capacity_GB = capacityGB;
+    public Storage(int capacity_GB, int tier, String type, String form_Factor, String storage_interface, Product product) {
+        this.capacity_GB = capacity_GB;
         this.tier = tier;
         this.type = type;
-        this.form_Factor = formFactor;
-        this.storage_interface = interface_;
-        this.product_FK = productFK;
+        this.form_Factor = form_Factor;
+        this.storage_interface = storage_interface;
+        this.product = product;
     }
 
     public Storage() {
@@ -79,24 +78,11 @@ public class Storage {
         this.storage_interface = interface_;
     }
 
-    public long getProduct_FK() {
-        return product_FK;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_FK(long productFK) {
-        this.product_FK = productFK;
-    }
-
-    @Override
-    public String toString() {
-        return "Storage{" +
-                "id=" + id +
-                ", capacityGB=" + capacity_GB +
-                ", tier=" + tier +
-                ", type='" + type + '\'' +
-                ", formFactor='" + form_Factor + '\'' +
-                ", interface_='" + storage_interface + '\'' +
-                ", productFK=" + product_FK +
-                '}';
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

@@ -5,6 +5,7 @@ import com.pcc.pc_configurator.repositories.CaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products/case")
+@CrossOrigin("*")
 @RequiredArgsConstructor
 public class CaseController {
     private final CaseRepository caseRepository;
@@ -30,13 +32,12 @@ public class CaseController {
 
     @Autowired
     public void caseToDTO(ModelMapper modelMapper) {
-        var repo = caseRepository.findAll();
-        for(int i=0;i<repo.size();++i)
-            caseDtoList.add(modelMapper.map(repo.get(i),CaseDTO.class));
+        for(var case_ : caseRepository.findAll())
+            caseDtoList.add(modelMapper.map(case_,CaseDTO.class));
     }
 
     @GetMapping
-    public List<CaseDTO> getOrders() {
+    public List<CaseDTO> getCases() {
         return caseDtoList;
     }
 }
