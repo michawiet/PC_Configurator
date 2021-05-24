@@ -1,351 +1,351 @@
 ﻿id,power_supply_standard,max_motherboard_size,type,side_panel_window,product_fk
-1,ATX,Mini ITX,Mini ITX Tower,None,2773
-2,ATX,Mini ITX,Mini ITX Tower,None,2774
-3,ATX,Mini ITX,Mini ITX Tower,None,2775
-4,ATX,Mini ITX,Mini ITX Tower,None,2776
-5,ATX,Mini ITX,Mini ITX Tower,None,2777
-6,ATX,Mini ITX,Mini ITX Tower,None,2778
-7,ATX,Mini ITX,Mini ITX Tower,None,2779
-8,ATX,Mini ITX,Mini ITX Tower,Tempered Glass,2780
-9,ATX,Mini ITX,Mini ITX Tower,Tempered Glass,2781
-10,ATX,Mini ITX,Mini ITX Tower,Tempered Glass,2782
-11,ATX,Mini ITX,Mini ITX Tower,Tempered Glass,2783
-12,ATX,Mini ITX,Mini ITX Tower,Acrylic,2784
-13,ATX,Mini ITX,Mini ITX Tower,Tinted Tempered Glass,2785
-14,ATX,Mini ITX,Mini ITX Tower,Tinted Tempered Glass,2786
-15,ATX,Mini ITX,Mini ITX Tower,Tempered Glass,2787
-16,ATX,Mini ITX,Mini ITX Tower,Tempered Glass,2788
-17,ATX,Mini ITX,Mini ITX Tower,Tempered Glass,2789
-18,ATX,Mini ITX,Mini ITX Desktop,None,2790
-19,ATX,Mini ITX,Mini ITX Desktop,Tempered Glass,2791
-20,ATX,Mini ITX,Mini ITX Desktop,None,2792
-21,ATX,Mini ITX,Mini ITX Desktop,None,2793
-22,ATX,Mini ITX,Mini ITX Desktop,None,2794
-23,ATX,Mini ITX,Mini ITX Desktop,Acrylic,2795
-24,ATX,Mini ITX,Mini ITX Desktop,Tinted Tempered Glass,2796
-25,ATX,Mini ITX,Mini ITX Desktop,None,2797
-26,ATX,Mini ITX,Mini ITX Desktop,Tempered Glass,2798
-27,ATX,Mini ITX,Mini ITX Desktop,Tinted Tempered Glass,2799
-28,ATX,Mini ITX,Mini ITX Desktop,None,2800
-29,ATX,Mini ITX,Mini ITX Desktop,Acrylic,2801
-30,ATX,MicroATX,MicroATX Mini Tower,None,2802
-31,ATX,MicroATX,MicroATX Mini Tower,None,2803
-32,ATX,MicroATX,MicroATX Mini Tower,Tempered Glass,2804
-33,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2805
-34,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2806
-35,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2807
-36,ATX,MicroATX,MicroATX Mini Tower,None,2808
-37,ATX,MicroATX,MicroATX Mini Tower,None,2809
-38,ATX,MicroATX,MicroATX Mini Tower,None,2810
-39,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2811
-40,ATX,MicroATX,MicroATX Mini Tower,Tinted Tempered Glass,2812
-41,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2813
-42,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2814
-43,ATX,MicroATX,MicroATX Mini Tower,Tinted Tempered Glass,2815
-44,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2816
-45,ATX,MicroATX,MicroATX Mini Tower,Acrylic,2817
-46,ATX,MicroATX,MicroATX Mini Tower,Tempered Glass,2818
-47,ATX,MicroATX,MicroATX Mini Tower,Tempered Glass,2819
-48,ATX,MicroATX,MicroATX Mini Tower,None,2820
-49,ATX,MicroATX,MicroATX Mini Tower,Tempered Glass,2821
-50,ATX,MicroATX,MicroATX Mid Tower,Acrylic,2822
-51,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2823
-52,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2824
-53,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2825
-54,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2826
-55,ATX,MicroATX,MicroATX Mid Tower,None,2827
-56,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2828
-57,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2829
-58,ATX,MicroATX,MicroATX Mid Tower,None,2830
-59,ATX,MicroATX,MicroATX Mid Tower,None,2831
-60,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2832
-61,ATX,MicroATX,MicroATX Mid Tower,Acrylic,2833
-62,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2834
-63,ATX,MicroATX,MicroATX Mid Tower,Tempered Glass,2835
-64,ATX,MicroATX,MicroATX Mid Tower,None,2836
-65,ATX,MicroATX,MicroATX Desktop,Tempered Glass,2837
-66,SFX,Mini ITX,HTPC,None,2838
-67,ATX,ATX,ATX Mid Tower,Tempered Glass,2839
-68,ATX,ATX,ATX Mid Tower,Tempered Glass,2840
-69,ATX,ATX,ATX Mid Tower,Tempered Glass,2841
-70,ATX,ATX,ATX Mid Tower,Tempered Glass,2842
-71,ATX,ATX,ATX Mid Tower,None,2843
-72,ATX,ATX,ATX Mid Tower,Tempered Glass,2844
-73,ATX,ATX,ATX Mid Tower,Tempered Glass,2845
-74,ATX,ATX,ATX Mid Tower,Tempered Glass,2846
-75,ATX,ATX,ATX Mid Tower,Acrylic,2847
-76,ATX,ATX,ATX Mid Tower,None,2848
-77,ATX,ATX,ATX Mid Tower,Acrylic,2849
-78,ATX,ATX,ATX Mid Tower,Acrylic,2850
-79,ATX,ATX,ATX Mid Tower,Acrylic,2851
-80,ATX,ATX,ATX Mid Tower,Tempered Glass,2852
-81,ATX,ATX,ATX Mid Tower,None,2853
-82,ATX,ATX,ATX Mid Tower,None,2854
-83,ATX,ATX,ATX Mid Tower,Tempered Glass,2855
-84,ATX,ATX,ATX Mid Tower,Tempered Glass,2856
-85,ATX,ATX,ATX Mid Tower,Acrylic,2857
-86,ATX,ATX,ATX Mid Tower,Tempered Glass,2858
-87,ATX,ATX,ATX Mid Tower,Tempered Glass,2859
-88,ATX,ATX,ATX Mid Tower,Tempered Glass,2860
-89,ATX,ATX,ATX Mid Tower,Tempered Glass,2861
-90,ATX,ATX,ATX Mid Tower,Acrylic,2862
-91,ATX,ATX,ATX Mid Tower,Acrylic,2863
-92,ATX,ATX,ATX Mid Tower,Tempered Glass,2864
-93,ATX,ATX,ATX Mid Tower,Tempered Glass,2865
-94,ATX,ATX,ATX Mid Tower,Tempered Glass,2866
-95,ATX,ATX,ATX Mid Tower,Tempered Glass,2867
-96,ATX,ATX,ATX Mid Tower,Tempered Glass,2868
-97,ATX,ATX,ATX Mid Tower,Tempered Glass,2869
-98,ATX,ATX,ATX Mid Tower,Tempered Glass,2870
-99,ATX,ATX,ATX Mid Tower,None,2871
-100,ATX,ATX,ATX Mid Tower,Acrylic,2872
-101,ATX,ATX,ATX Mid Tower,Acrylic,2873
-102,ATX,ATX,ATX Mid Tower,Tempered Glass,2874
-103,ATX,ATX,ATX Mid Tower,Tempered Glass,2875
-104,ATX,ATX,ATX Mid Tower,Tempered Glass,2876
-105,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2877
-106,ATX,ATX,ATX Mid Tower,Tempered Glass,2878
-107,ATX,ATX,ATX Mid Tower,Tempered Glass,2879
-108,ATX,ATX,ATX Mid Tower,Tempered Glass,2880
-109,ATX,ATX,ATX Mid Tower,Tempered Glass,2881
-110,ATX,ATX,ATX Mid Tower,Acrylic,2882
-111,ATX,ATX,ATX Mid Tower,Tempered Glass,2883
-112,ATX,ATX,ATX Mid Tower,Tempered Glass,2884
-113,ATX,ATX,ATX Mid Tower,Tempered Glass,2885
-114,ATX,ATX,ATX Mid Tower,Acrylic,2886
-115,ATX,ATX,ATX Mid Tower,Acrylic,2887
-116,ATX,ATX,ATX Mid Tower,None,2888
-117,ATX,ATX,ATX Mid Tower,None,2889
-118,ATX,ATX,ATX Mid Tower,None,2890
-119,ATX,ATX,ATX Mid Tower,Tempered Glass,2891
-120,ATX,ATX,ATX Mid Tower,Acrylic,2892
-121,ATX,ATX,ATX Mid Tower,None,2893
-122,ATX,ATX,ATX Mid Tower,Tempered Glass,2894
-123,ATX,ATX,ATX Mid Tower,None,2895
-124,ATX,ATX,ATX Mid Tower,None,2896
-125,ATX,ATX,ATX Mid Tower,None,2897
-126,ATX,ATX,ATX Mid Tower,Tempered Glass,2898
-127,ATX,ATX,ATX Mid Tower,Tempered Glass,2899
-128,ATX,ATX,ATX Mid Tower,Tempered Glass,2900
-129,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2901
-130,ATX,ATX,ATX Mid Tower,Acrylic,2902
-131,ATX,ATX,ATX Mid Tower,Acrylic,2903
-132,ATX,ATX,ATX Mid Tower,Tempered Glass,2904
-133,ATX,ATX,ATX Mid Tower,Tempered Glass,2905
-134,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2906
-135,ATX,ATX,ATX Mid Tower,None,2907
-136,ATX,ATX,ATX Mid Tower,Tempered Glass,2908
-137,ATX,ATX,ATX Mid Tower,Acrylic,2909
-138,ATX,ATX,ATX Mid Tower,Tempered Glass,2910
-139,ATX,ATX,ATX Mid Tower,Tempered Glass,2911
-140,ATX,ATX,ATX Mid Tower,Acrylic,2912
-141,ATX,ATX,ATX Mid Tower,Tempered Glass,2913
-142,ATX,ATX,ATX Mid Tower,Tempered Glass,2914
-143,ATX,ATX,ATX Mid Tower,Tempered Glass,2915
-144,ATX,ATX,ATX Mid Tower,Tempered Glass,2916
-145,ATX,ATX,ATX Mid Tower,Tempered Glass,2917
-146,ATX,ATX,ATX Mid Tower,Tempered Glass,2918
-147,ATX,ATX,ATX Mid Tower,Tempered Glass,2919
-148,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2920
-149,ATX,ATX,ATX Mid Tower,Tempered Glass,2921
-150,ATX,ATX,ATX Mid Tower,Acrylic,2922
-151,ATX,ATX,ATX Mid Tower,Acrylic,2923
-152,ATX,ATX,ATX Mid Tower,Acrylic,2924
-153,ATX,ATX,ATX Mid Tower,Acrylic,2925
-154,ATX,ATX,ATX Mid Tower,Tempered Glass,2926
-155,ATX,ATX,ATX Mid Tower,Acrylic,2927
-156,ATX,ATX,ATX Mid Tower,Tempered Glass,2928
-157,ATX,ATX,ATX Mid Tower,Tempered Glass,2929
-158,ATX,ATX,ATX Mid Tower,None,2930
-159,ATX,ATX,ATX Mid Tower,None,2931
-160,ATX,ATX,ATX Mid Tower,Tempered Glass,2932
-161,ATX,ATX,ATX Mid Tower,None,2933
-162,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2934
-163,ATX,ATX,ATX Mid Tower,Tempered Glass,2935
-164,ATX,ATX,ATX Mid Tower,None,2936
-165,ATX,ATX,ATX Mid Tower,Tempered Glass,2937
-166,ATX,ATX,ATX Mid Tower,None,2938
-167,ATX,ATX,ATX Mid Tower,Tempered Glass,2939
-168,ATX,ATX,ATX Mid Tower,Tempered Glass,2940
-169,ATX,ATX,ATX Mid Tower,Tempered Glass,2941
-170,ATX,ATX,ATX Mid Tower,Acrylic,2942
-171,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2943
-172,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2944
-173,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2945
-174,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2946
-175,ATX,ATX,ATX Mid Tower,Acrylic,2947
-176,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2948
-177,ATX,ATX,ATX Mid Tower,None,2949
-178,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2950
-179,ATX,ATX,ATX Mid Tower,Tempered Glass,2951
-180,ATX,ATX,ATX Mid Tower,Tempered Glass,2952
-181,ATX,ATX,ATX Mid Tower,Tempered Glass,2953
-182,ATX,ATX,ATX Mid Tower,Tempered Glass,2954
-183,ATX,ATX,ATX Mid Tower,Tempered Glass,2955
-184,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2956
-185,ATX,ATX,ATX Mid Tower,Tempered Glass,2957
-186,ATX,ATX,ATX Mid Tower,Tempered Glass,2958
-187,ATX,ATX,ATX Mid Tower,Tempered Glass,2959
-188,ATX,ATX,ATX Mid Tower,Tempered Glass,2960
-189,ATX,ATX,ATX Mid Tower,Tempered Glass,2961
-190,ATX,ATX,ATX Mid Tower,Acrylic,2962
-191,ATX,ATX,ATX Mid Tower,Tempered Glass,2963
-192,ATX,ATX,ATX Mid Tower,Tempered Glass,2964
-193,ATX,ATX,ATX Mid Tower,Tempered Glass,2965
-194,ATX,ATX,ATX Mid Tower,Acrylic,2966
-195,ATX,ATX,ATX Mid Tower,Tempered Glass,2967
-196,ATX,ATX,ATX Mid Tower,Tempered Glass,2968
-197,ATX,ATX,ATX Mid Tower,Tempered Glass,2969
-198,ATX,ATX,ATX Mid Tower,Tempered Glass,2970
-199,ATX,ATX,ATX Mid Tower,Tempered Glass,2971
-200,ATX,ATX,ATX Mid Tower,Tempered Glass,2972
-201,ATX,ATX,ATX Mid Tower,Tempered Glass,2973
-202,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2974
-203,ATX,ATX,ATX Mid Tower,Tempered Glass,2975
-204,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2976
-205,ATX,ATX,ATX Mid Tower,Tempered Glass,2977
-206,ATX,ATX,ATX Mid Tower,Tempered Glass,2978
-207,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2979
-208,ATX,ATX,ATX Mid Tower,Tempered Glass,2980
-209,ATX,ATX,ATX Mid Tower,Tempered Glass,2981
-210,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2982
-211,ATX,ATX,ATX Mid Tower,Tempered Glass,2983
-212,ATX,ATX,ATX Mid Tower,Tempered Glass,2984
-213,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2985
-214,ATX,ATX,ATX Mid Tower,Acrylic,2986
-215,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2987
-216,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2988
-217,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,2989
-218,ATX,ATX,ATX Mid Tower,None,2990
-219,ATX,ATX,ATX Mid Tower,Tempered Glass,2991
-220,ATX,ATX,ATX Mid Tower,None,2992
-221,ATX,ATX,ATX Mid Tower,Tempered Glass,2993
-222,ATX,ATX,ATX Mid Tower,Tempered Glass,2994
-223,ATX,ATX,ATX Mid Tower,None,2995
-224,ATX,ATX,ATX Mid Tower,Tempered Glass,2996
-225,ATX,ATX,ATX Mid Tower,Tempered Glass,2997
-226,ATX,ATX,ATX Mid Tower,Tempered Glass,2998
-227,ATX,ATX,ATX Mid Tower,None,2999
-228,ATX,ATX,ATX Mid Tower,Tempered Glass,3000
-229,ATX,ATX,ATX Mid Tower,Tempered Glass,3001
-230,ATX,ATX,ATX Mid Tower,Tempered Glass,3002
-231,ATX,ATX,ATX Mid Tower,None,3003
-232,ATX,ATX,ATX Mid Tower,Tempered Glass,3004
-233,ATX,ATX,ATX Mid Tower,None,3005
-234,ATX,ATX,ATX Mid Tower,Tempered Glass,3006
-235,ATX,ATX,ATX Mid Tower,Tempered Glass,3007
-236,ATX,ATX,ATX Mid Tower,Tempered Glass,3008
-237,ATX,ATX,ATX Mid Tower,Tempered Glass,3009
-238,ATX,ATX,ATX Mid Tower,Tempered Glass,3010
-239,ATX,ATX,ATX Mid Tower,Tempered Glass,3011
-240,ATX,ATX,ATX Mid Tower,None,3012
-241,ATX,ATX,ATX Mid Tower,Tempered Glass,3013
-242,ATX,ATX,ATX Mid Tower,Tempered Glass,3014
-243,ATX,ATX,ATX Mid Tower,Tempered Glass,3015
-244,ATX,ATX,ATX Mid Tower,Tempered Glass,3016
-245,ATX,ATX,ATX Mid Tower,Tempered Glass,3017
-246,ATX,ATX,ATX Mid Tower,Tempered Glass,3018
-247,ATX,ATX,ATX Mid Tower,Tempered Glass,3019
-248,ATX,ATX,ATX Mid Tower,Tempered Glass,3020
-249,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,3021
-250,ATX,ATX,ATX Mid Tower,Acrylic,3022
-251,ATX,ATX,ATX Mid Tower,Tempered Glass,3023
-252,ATX,ATX,ATX Mid Tower,Tempered Glass,3024
-253,ATX,ATX,ATX Mid Tower,Tempered Glass,3025
-254,ATX,ATX,ATX Mid Tower,Tinted Tempered Glass,3026
-255,ATX,ATX,ATX Mid Tower,Acrylic,3027
-256,ATX,ATX,ATX Mid Tower,Tempered Glass,3028
-257,ATX,ATX,ATX Mid Tower,Tempered Glass,3029
-258,ATX,ATX,ATX Mid Tower,Tempered Glass,3030
-259,ATX,ATX,ATX Mid Tower,Tempered Glass,3031
-260,ATX,ATX,ATX Mid Tower,Tempered Glass,3032
-261,ATX,ATX,ATX Mid Tower,Tempered Glass,3033
-262,ATX,ATX,ATX Mid Tower,Tempered Glass,3034
-263,ATX,ATX,ATX Mid Tower,Tempered Glass,3035
-264,ATX,ATX,ATX Mid Tower,Tempered Glass,3036
-265,ATX,ATX,ATX Mid Tower,None,3037
-266,ATX,ATX,ATX Mid Tower,Tempered Glass,3038
-267,ATX,ATX,ATX Mid Tower,Tempered Glass,3039
-268,ATX,ATX,ATX Mid Tower,Tempered Glass,3040
-269,ATX,ATX,ATX Mid Tower,Acrylic,3041
-270,ATX,ATX,ATX Mid Tower,Acrylic,3042
-271,ATX,ATX,ATX Mid Tower,Acrylic,3043
-272,ATX,ATX,ATX Mid Tower,Tempered Glass,3044
-273,ATX,ATX,ATX Mid Tower,None,3045
-274,ATX,ATX,ATX Mid Tower,None,3046
-275,ATX,ATX,ATX Mid Tower,Acrylic,3047
-276,ATX,ATX,ATX Mid Tower,Acrylic,3048
-277,ATX,ATX,ATX Mid Tower,Acrylic,3049
-278,ATX,ATX,ATX Mid Tower,Tempered Glass,3050
-279,ATX,ATX,ATX Mid Tower,Acrylic,3051
-280,ATX,ATX,ATX Mid Tower,Tempered Glass,3052
-281,ATX,ATX,ATX Mid Tower,Tempered Glass,3053
-282,ATX,ATX,ATX Mid Tower,Tempered Glass,3054
-283,ATX,ATX,ATX Mid Tower,Tempered Glass,3055
-284,ATX,ATX,ATX Mid Tower,Tempered Glass,3056
-285,ATX,ATX,ATX Mid Tower,Tempered Glass,3057
-286,ATX,ATX,ATX Mid Tower,Tempered Glass,3058
-287,ATX,ATX,ATX Mid Tower,Tempered Glass,3059
-288,ATX,ATX,ATX Mid Tower,Acrylic,3060
-289,ATX,ATX,ATX Mid Tower,Acrylic,3061
-290,ATX,ATX,ATX Mid Tower,Acrylic,3062
-291,ATX,ATX,ATX Mid Tower,Tempered Glass,3063
-292,ATX,ATX,ATX Mid Tower,Acrylic,3064
-293,ATX,ATX,ATX Mid Tower,Acrylic,3065
-294,ATX,ATX,ATX Mid Tower,Acrylic,3066
-295,ATX,ATX,ATX Mid Tower,Acrylic,3067
-296,ATX,ATX,ATX Mid Tower,Acrylic,3068
-297,ATX,ATX,ATX Full Tower,None,3069
-298,ATX,ATX,ATX Full Tower,Tempered Glass,3070
-299,ATX,ATX,ATX Full Tower,None,3071
-300,ATX,ATX,ATX Full Tower,Tempered Glass,3072
-301,ATX,ATX,ATX Full Tower,Tempered Glass,3073
-302,ATX,ATX,ATX Full Tower,Tempered Glass,3074
-303,ATX,ATX,ATX Full Tower,Tempered Glass,3075
-304,ATX,ATX,ATX Full Tower,Tempered Glass,3076
-305,ATX,ATX,ATX Full Tower,Acrylic,3077
-306,ATX,ATX,ATX Full Tower,Acrylic,3078
-307,ATX,ATX,ATX Full Tower,Acrylic,3079
-308,ATX,ATX,ATX Full Tower,None,3080
-309,ATX,ATX,ATX Full Tower,None,3081
-310,ATX,ATX,ATX Full Tower,Tinted Tempered Glass,3082
-311,ATX,ATX,ATX Full Tower,Tempered Glass,3083
-312,ATX,ATX,ATX Full Tower,None,3084
-313,ATX,ATX,ATX Full Tower,Tinted Tempered Glass,3085
-314,ATX,ATX,ATX Full Tower,Tempered Glass,3086
-315,ATX,ATX,ATX Full Tower,Tempered Glass,3087
-316,ATX,ATX,ATX Full Tower,Tempered Glass,3088
-317,ATX,ATX,ATX Full Tower,Tempered Glass,3089
-318,ATX,ATX,ATX Full Tower,Tempered Glass,3090
-319,ATX,ATX,ATX Full Tower,Tempered Glass,3091
-320,ATX,ATX,ATX Full Tower,Acrylic,3092
-321,ATX,ATX,ATX Full Tower,Tempered Glass,3093
-322,ATX,ATX,ATX Full Tower,Acrylic,3094
-323,ATX,ATX,ATX Full Tower,Acrylic,3095
-324,ATX,ATX,ATX Full Tower,Tempered Glass,3096
-325,ATX,ATX,ATX Full Tower,Tinted Tempered Glass,3097
-326,ATX,ATX,ATX Full Tower,Acrylic,3098
-327,ATX,ATX,ATX Full Tower,None,3099
-328,ATX,ATX,ATX Full Tower,Tempered Glass,3100
-329,ATX,ATX,ATX Full Tower,Tempered Glass,3101
-330,ATX,ATX,ATX Full Tower,Tempered Glass,3102
-331,ATX,ATX,ATX Full Tower,Tempered Glass,3103
-332,ATX,ATX,ATX Full Tower,Tempered Glass,3104
-333,ATX,ATX,ATX Full Tower,Acrylic,3105
-334,ATX,ATX,ATX Full Tower,Acrylic,3106
-335,ATX,ATX,ATX Full Tower,Tempered Glass,3107
-336,ATX,ATX,ATX Full Tower,Tempered Glass,3108
-337,ATX,ATX,ATX Full Tower,Tempered Glass,3109
-338,ATX,ATX,ATX Full Tower,Tempered Glass,3110
-339,ATX,ATX,ATX Full Tower,Tempered Glass,3111
-340,ATX,ATX,ATX Full Tower,Tempered Glass,3112
-341,ATX,ATX,ATX Full Tower,Tempered Glass,3113
-342,ATX,ATX,ATX Full Tower,Tempered Glass,3114
-343,ATX,ATX,ATX Full Tower,Tempered Glass,3115
-344,ATX,ATX,ATX Full Tower,Acrylic,3116
-345,ATX,ATX,ATX Full Tower,Acrylic,3117
-346,ATX,ATX,ATX Full Tower,Acrylic,3118
-347,ATX,ATX,ATX Full Tower,Acrylic,3119
-348,ATX,ATX,ATX Desktop,None,3120
-349,ATX,ATX,ATX Desktop,None,3121
-350,ATX,ATX,ATX Desktop,Tempered Glass,3122
+1,ATX,Mini ITX,Mini ITX Tower,Metal,2773
+2,ATX,Mini ITX,Mini ITX Tower,Metal,2774
+3,ATX,Mini ITX,Mini ITX Tower,Metal,2775
+4,ATX,Mini ITX,Mini ITX Tower,Metal,2776
+5,ATX,Mini ITX,Mini ITX Tower,Metal,2777
+6,ATX,Mini ITX,Mini ITX Tower,Metal,2778
+7,ATX,Mini ITX,Mini ITX Tower,Metal,2779
+8,ATX,Mini ITX,Mini ITX Tower,Szkło hartowane,2780
+9,ATX,Mini ITX,Mini ITX Tower,Szkło hartowane,2781
+10,ATX,Mini ITX,Mini ITX Tower,Szkło hartowane,2782
+11,ATX,Mini ITX,Mini ITX Tower,Szkło hartowane,2783
+12,ATX,Mini ITX,Mini ITX Tower,Akryl,2784
+13,ATX,Mini ITX,Mini ITX Tower,Przyciemniane szkło hartowane,2785
+14,ATX,Mini ITX,Mini ITX Tower,Przyciemniane szkło hartowane,2786
+15,ATX,Mini ITX,Mini ITX Tower,Szkło hartowane,2787
+16,ATX,Mini ITX,Mini ITX Tower,Szkło hartowane,2788
+17,ATX,Mini ITX,Mini ITX Tower,Szkło hartowane,2789
+18,ATX,Mini ITX,Mini ITX Desktop,Metal,2790
+19,ATX,Mini ITX,Mini ITX Desktop,Szkło hartowane,2791
+20,ATX,Mini ITX,Mini ITX Desktop,Metal,2792
+21,ATX,Mini ITX,Mini ITX Desktop,Metal,2793
+22,ATX,Mini ITX,Mini ITX Desktop,Metal,2794
+23,ATX,Mini ITX,Mini ITX Desktop,Akryl,2795
+24,ATX,Mini ITX,Mini ITX Desktop,Przyciemniane szkło hartowane,2796
+25,ATX,Mini ITX,Mini ITX Desktop,Metal,2797
+26,ATX,Mini ITX,Mini ITX Desktop,Szkło hartowane,2798
+27,ATX,Mini ITX,Mini ITX Desktop,Przyciemniane szkło hartowane,2799
+28,ATX,Mini ITX,Mini ITX Desktop,Metal,2800
+29,ATX,Mini ITX,Mini ITX Desktop,Akryl,2801
+30,ATX,MicroATX,MicroATX Mini Tower,Metal,2802
+31,ATX,MicroATX,MicroATX Mini Tower,Metal,2803
+32,ATX,MicroATX,MicroATX Mini Tower,Szkło hartowane,2804
+33,ATX,MicroATX,MicroATX Mini Tower,Akryl,2805
+34,ATX,MicroATX,MicroATX Mini Tower,Akryl,2806
+35,ATX,MicroATX,MicroATX Mini Tower,Akryl,2807
+36,ATX,MicroATX,MicroATX Mini Tower,Metal,2808
+37,ATX,MicroATX,MicroATX Mini Tower,Metal,2809
+38,ATX,MicroATX,MicroATX Mini Tower,Metal,2810
+39,ATX,MicroATX,MicroATX Mini Tower,Akryl,2811
+40,ATX,MicroATX,MicroATX Mini Tower,Przyciemniane szkło hartowane,2812
+41,ATX,MicroATX,MicroATX Mini Tower,Akryl,2813
+42,ATX,MicroATX,MicroATX Mini Tower,Akryl,2814
+43,ATX,MicroATX,MicroATX Mini Tower,Przyciemniane szkło hartowane,2815
+44,ATX,MicroATX,MicroATX Mini Tower,Akryl,2816
+45,ATX,MicroATX,MicroATX Mini Tower,Akryl,2817
+46,ATX,MicroATX,MicroATX Mini Tower,Szkło hartowane,2818
+47,ATX,MicroATX,MicroATX Mini Tower,Szkło hartowane,2819
+48,ATX,MicroATX,MicroATX Mini Tower,Metal,2820
+49,ATX,MicroATX,MicroATX Mini Tower,Szkło hartowane,2821
+50,ATX,MicroATX,MicroATX Mid Tower,Akryl,2822
+51,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2823
+52,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2824
+53,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2825
+54,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2826
+55,ATX,MicroATX,MicroATX Mid Tower,Metal,2827
+56,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2828
+57,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2829
+58,ATX,MicroATX,MicroATX Mid Tower,Metal,2830
+59,ATX,MicroATX,MicroATX Mid Tower,Metal,2831
+60,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2832
+61,ATX,MicroATX,MicroATX Mid Tower,Akryl,2833
+62,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2834
+63,ATX,MicroATX,MicroATX Mid Tower,Szkło hartowane,2835
+64,ATX,MicroATX,MicroATX Mid Tower,Metal,2836
+65,ATX,MicroATX,MicroATX Desktop,Szkło hartowane,2837
+66,SFX,Mini ITX,HTPC,Metal,2838
+67,ATX,ATX,ATX Mid Tower,Szkło hartowane,2839
+68,ATX,ATX,ATX Mid Tower,Szkło hartowane,2840
+69,ATX,ATX,ATX Mid Tower,Szkło hartowane,2841
+70,ATX,ATX,ATX Mid Tower,Szkło hartowane,2842
+71,ATX,ATX,ATX Mid Tower,Metal,2843
+72,ATX,ATX,ATX Mid Tower,Szkło hartowane,2844
+73,ATX,ATX,ATX Mid Tower,Szkło hartowane,2845
+74,ATX,ATX,ATX Mid Tower,Szkło hartowane,2846
+75,ATX,ATX,ATX Mid Tower,Akryl,2847
+76,ATX,ATX,ATX Mid Tower,Metal,2848
+77,ATX,ATX,ATX Mid Tower,Akryl,2849
+78,ATX,ATX,ATX Mid Tower,Akryl,2850
+79,ATX,ATX,ATX Mid Tower,Akryl,2851
+80,ATX,ATX,ATX Mid Tower,Szkło hartowane,2852
+81,ATX,ATX,ATX Mid Tower,Metal,2853
+82,ATX,ATX,ATX Mid Tower,Metal,2854
+83,ATX,ATX,ATX Mid Tower,Szkło hartowane,2855
+84,ATX,ATX,ATX Mid Tower,Szkło hartowane,2856
+85,ATX,ATX,ATX Mid Tower,Akryl,2857
+86,ATX,ATX,ATX Mid Tower,Szkło hartowane,2858
+87,ATX,ATX,ATX Mid Tower,Szkło hartowane,2859
+88,ATX,ATX,ATX Mid Tower,Szkło hartowane,2860
+89,ATX,ATX,ATX Mid Tower,Szkło hartowane,2861
+90,ATX,ATX,ATX Mid Tower,Akryl,2862
+91,ATX,ATX,ATX Mid Tower,Akryl,2863
+92,ATX,ATX,ATX Mid Tower,Szkło hartowane,2864
+93,ATX,ATX,ATX Mid Tower,Szkło hartowane,2865
+94,ATX,ATX,ATX Mid Tower,Szkło hartowane,2866
+95,ATX,ATX,ATX Mid Tower,Szkło hartowane,2867
+96,ATX,ATX,ATX Mid Tower,Szkło hartowane,2868
+97,ATX,ATX,ATX Mid Tower,Szkło hartowane,2869
+98,ATX,ATX,ATX Mid Tower,Szkło hartowane,2870
+99,ATX,ATX,ATX Mid Tower,Metal,2871
+100,ATX,ATX,ATX Mid Tower,Akryl,2872
+101,ATX,ATX,ATX Mid Tower,Akryl,2873
+102,ATX,ATX,ATX Mid Tower,Szkło hartowane,2874
+103,ATX,ATX,ATX Mid Tower,Szkło hartowane,2875
+104,ATX,ATX,ATX Mid Tower,Szkło hartowane,2876
+105,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2877
+106,ATX,ATX,ATX Mid Tower,Szkło hartowane,2878
+107,ATX,ATX,ATX Mid Tower,Szkło hartowane,2879
+108,ATX,ATX,ATX Mid Tower,Szkło hartowane,2880
+109,ATX,ATX,ATX Mid Tower,Szkło hartowane,2881
+110,ATX,ATX,ATX Mid Tower,Akryl,2882
+111,ATX,ATX,ATX Mid Tower,Szkło hartowane,2883
+112,ATX,ATX,ATX Mid Tower,Szkło hartowane,2884
+113,ATX,ATX,ATX Mid Tower,Szkło hartowane,2885
+114,ATX,ATX,ATX Mid Tower,Akryl,2886
+115,ATX,ATX,ATX Mid Tower,Akryl,2887
+116,ATX,ATX,ATX Mid Tower,Metal,2888
+117,ATX,ATX,ATX Mid Tower,Metal,2889
+118,ATX,ATX,ATX Mid Tower,Metal,2890
+119,ATX,ATX,ATX Mid Tower,Szkło hartowane,2891
+120,ATX,ATX,ATX Mid Tower,Akryl,2892
+121,ATX,ATX,ATX Mid Tower,Metal,2893
+122,ATX,ATX,ATX Mid Tower,Szkło hartowane,2894
+123,ATX,ATX,ATX Mid Tower,Metal,2895
+124,ATX,ATX,ATX Mid Tower,Metal,2896
+125,ATX,ATX,ATX Mid Tower,Metal,2897
+126,ATX,ATX,ATX Mid Tower,Szkło hartowane,2898
+127,ATX,ATX,ATX Mid Tower,Szkło hartowane,2899
+128,ATX,ATX,ATX Mid Tower,Szkło hartowane,2900
+129,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2901
+130,ATX,ATX,ATX Mid Tower,Akryl,2902
+131,ATX,ATX,ATX Mid Tower,Akryl,2903
+132,ATX,ATX,ATX Mid Tower,Szkło hartowane,2904
+133,ATX,ATX,ATX Mid Tower,Szkło hartowane,2905
+134,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2906
+135,ATX,ATX,ATX Mid Tower,Metal,2907
+136,ATX,ATX,ATX Mid Tower,Szkło hartowane,2908
+137,ATX,ATX,ATX Mid Tower,Akryl,2909
+138,ATX,ATX,ATX Mid Tower,Szkło hartowane,2910
+139,ATX,ATX,ATX Mid Tower,Szkło hartowane,2911
+140,ATX,ATX,ATX Mid Tower,Akryl,2912
+141,ATX,ATX,ATX Mid Tower,Szkło hartowane,2913
+142,ATX,ATX,ATX Mid Tower,Szkło hartowane,2914
+143,ATX,ATX,ATX Mid Tower,Szkło hartowane,2915
+144,ATX,ATX,ATX Mid Tower,Szkło hartowane,2916
+145,ATX,ATX,ATX Mid Tower,Szkło hartowane,2917
+146,ATX,ATX,ATX Mid Tower,Szkło hartowane,2918
+147,ATX,ATX,ATX Mid Tower,Szkło hartowane,2919
+148,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2920
+149,ATX,ATX,ATX Mid Tower,Szkło hartowane,2921
+150,ATX,ATX,ATX Mid Tower,Akryl,2922
+151,ATX,ATX,ATX Mid Tower,Akryl,2923
+152,ATX,ATX,ATX Mid Tower,Akryl,2924
+153,ATX,ATX,ATX Mid Tower,Akryl,2925
+154,ATX,ATX,ATX Mid Tower,Szkło hartowane,2926
+155,ATX,ATX,ATX Mid Tower,Akryl,2927
+156,ATX,ATX,ATX Mid Tower,Szkło hartowane,2928
+157,ATX,ATX,ATX Mid Tower,Szkło hartowane,2929
+158,ATX,ATX,ATX Mid Tower,Metal,2930
+159,ATX,ATX,ATX Mid Tower,Metal,2931
+160,ATX,ATX,ATX Mid Tower,Szkło hartowane,2932
+161,ATX,ATX,ATX Mid Tower,Metal,2933
+162,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2934
+163,ATX,ATX,ATX Mid Tower,Szkło hartowane,2935
+164,ATX,ATX,ATX Mid Tower,Metal,2936
+165,ATX,ATX,ATX Mid Tower,Szkło hartowane,2937
+166,ATX,ATX,ATX Mid Tower,Metal,2938
+167,ATX,ATX,ATX Mid Tower,Szkło hartowane,2939
+168,ATX,ATX,ATX Mid Tower,Szkło hartowane,2940
+169,ATX,ATX,ATX Mid Tower,Szkło hartowane,2941
+170,ATX,ATX,ATX Mid Tower,Akryl,2942
+171,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2943
+172,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2944
+173,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2945
+174,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2946
+175,ATX,ATX,ATX Mid Tower,Akryl,2947
+176,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2948
+177,ATX,ATX,ATX Mid Tower,Metal,2949
+178,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2950
+179,ATX,ATX,ATX Mid Tower,Szkło hartowane,2951
+180,ATX,ATX,ATX Mid Tower,Szkło hartowane,2952
+181,ATX,ATX,ATX Mid Tower,Szkło hartowane,2953
+182,ATX,ATX,ATX Mid Tower,Szkło hartowane,2954
+183,ATX,ATX,ATX Mid Tower,Szkło hartowane,2955
+184,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2956
+185,ATX,ATX,ATX Mid Tower,Szkło hartowane,2957
+186,ATX,ATX,ATX Mid Tower,Szkło hartowane,2958
+187,ATX,ATX,ATX Mid Tower,Szkło hartowane,2959
+188,ATX,ATX,ATX Mid Tower,Szkło hartowane,2960
+189,ATX,ATX,ATX Mid Tower,Szkło hartowane,2961
+190,ATX,ATX,ATX Mid Tower,Akryl,2962
+191,ATX,ATX,ATX Mid Tower,Szkło hartowane,2963
+192,ATX,ATX,ATX Mid Tower,Szkło hartowane,2964
+193,ATX,ATX,ATX Mid Tower,Szkło hartowane,2965
+194,ATX,ATX,ATX Mid Tower,Akryl,2966
+195,ATX,ATX,ATX Mid Tower,Szkło hartowane,2967
+196,ATX,ATX,ATX Mid Tower,Szkło hartowane,2968
+197,ATX,ATX,ATX Mid Tower,Szkło hartowane,2969
+198,ATX,ATX,ATX Mid Tower,Szkło hartowane,2970
+199,ATX,ATX,ATX Mid Tower,Szkło hartowane,2971
+200,ATX,ATX,ATX Mid Tower,Szkło hartowane,2972
+201,ATX,ATX,ATX Mid Tower,Szkło hartowane,2973
+202,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2974
+203,ATX,ATX,ATX Mid Tower,Szkło hartowane,2975
+204,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2976
+205,ATX,ATX,ATX Mid Tower,Szkło hartowane,2977
+206,ATX,ATX,ATX Mid Tower,Szkło hartowane,2978
+207,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2979
+208,ATX,ATX,ATX Mid Tower,Szkło hartowane,2980
+209,ATX,ATX,ATX Mid Tower,Szkło hartowane,2981
+210,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2982
+211,ATX,ATX,ATX Mid Tower,Szkło hartowane,2983
+212,ATX,ATX,ATX Mid Tower,Szkło hartowane,2984
+213,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2985
+214,ATX,ATX,ATX Mid Tower,Akryl,2986
+215,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2987
+216,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2988
+217,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,2989
+218,ATX,ATX,ATX Mid Tower,Metal,2990
+219,ATX,ATX,ATX Mid Tower,Szkło hartowane,2991
+220,ATX,ATX,ATX Mid Tower,Metal,2992
+221,ATX,ATX,ATX Mid Tower,Szkło hartowane,2993
+222,ATX,ATX,ATX Mid Tower,Szkło hartowane,2994
+223,ATX,ATX,ATX Mid Tower,Metal,2995
+224,ATX,ATX,ATX Mid Tower,Szkło hartowane,2996
+225,ATX,ATX,ATX Mid Tower,Szkło hartowane,2997
+226,ATX,ATX,ATX Mid Tower,Szkło hartowane,2998
+227,ATX,ATX,ATX Mid Tower,Metal,2999
+228,ATX,ATX,ATX Mid Tower,Szkło hartowane,3000
+229,ATX,ATX,ATX Mid Tower,Szkło hartowane,3001
+230,ATX,ATX,ATX Mid Tower,Szkło hartowane,3002
+231,ATX,ATX,ATX Mid Tower,Metal,3003
+232,ATX,ATX,ATX Mid Tower,Szkło hartowane,3004
+233,ATX,ATX,ATX Mid Tower,Metal,3005
+234,ATX,ATX,ATX Mid Tower,Szkło hartowane,3006
+235,ATX,ATX,ATX Mid Tower,Szkło hartowane,3007
+236,ATX,ATX,ATX Mid Tower,Szkło hartowane,3008
+237,ATX,ATX,ATX Mid Tower,Szkło hartowane,3009
+238,ATX,ATX,ATX Mid Tower,Szkło hartowane,3010
+239,ATX,ATX,ATX Mid Tower,Szkło hartowane,3011
+240,ATX,ATX,ATX Mid Tower,Metal,3012
+241,ATX,ATX,ATX Mid Tower,Szkło hartowane,3013
+242,ATX,ATX,ATX Mid Tower,Szkło hartowane,3014
+243,ATX,ATX,ATX Mid Tower,Szkło hartowane,3015
+244,ATX,ATX,ATX Mid Tower,Szkło hartowane,3016
+245,ATX,ATX,ATX Mid Tower,Szkło hartowane,3017
+246,ATX,ATX,ATX Mid Tower,Szkło hartowane,3018
+247,ATX,ATX,ATX Mid Tower,Szkło hartowane,3019
+248,ATX,ATX,ATX Mid Tower,Szkło hartowane,3020
+249,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,3021
+250,ATX,ATX,ATX Mid Tower,Akryl,3022
+251,ATX,ATX,ATX Mid Tower,Szkło hartowane,3023
+252,ATX,ATX,ATX Mid Tower,Szkło hartowane,3024
+253,ATX,ATX,ATX Mid Tower,Szkło hartowane,3025
+254,ATX,ATX,ATX Mid Tower,Przyciemniane szkło hartowane,3026
+255,ATX,ATX,ATX Mid Tower,Akryl,3027
+256,ATX,ATX,ATX Mid Tower,Szkło hartowane,3028
+257,ATX,ATX,ATX Mid Tower,Szkło hartowane,3029
+258,ATX,ATX,ATX Mid Tower,Szkło hartowane,3030
+259,ATX,ATX,ATX Mid Tower,Szkło hartowane,3031
+260,ATX,ATX,ATX Mid Tower,Szkło hartowane,3032
+261,ATX,ATX,ATX Mid Tower,Szkło hartowane,3033
+262,ATX,ATX,ATX Mid Tower,Szkło hartowane,3034
+263,ATX,ATX,ATX Mid Tower,Szkło hartowane,3035
+264,ATX,ATX,ATX Mid Tower,Szkło hartowane,3036
+265,ATX,ATX,ATX Mid Tower,Metal,3037
+266,ATX,ATX,ATX Mid Tower,Szkło hartowane,3038
+267,ATX,ATX,ATX Mid Tower,Szkło hartowane,3039
+268,ATX,ATX,ATX Mid Tower,Szkło hartowane,3040
+269,ATX,ATX,ATX Mid Tower,Akryl,3041
+270,ATX,ATX,ATX Mid Tower,Akryl,3042
+271,ATX,ATX,ATX Mid Tower,Akryl,3043
+272,ATX,ATX,ATX Mid Tower,Szkło hartowane,3044
+273,ATX,ATX,ATX Mid Tower,Metal,3045
+274,ATX,ATX,ATX Mid Tower,Metal,3046
+275,ATX,ATX,ATX Mid Tower,Akryl,3047
+276,ATX,ATX,ATX Mid Tower,Akryl,3048
+277,ATX,ATX,ATX Mid Tower,Akryl,3049
+278,ATX,ATX,ATX Mid Tower,Szkło hartowane,3050
+279,ATX,ATX,ATX Mid Tower,Akryl,3051
+280,ATX,ATX,ATX Mid Tower,Szkło hartowane,3052
+281,ATX,ATX,ATX Mid Tower,Szkło hartowane,3053
+282,ATX,ATX,ATX Mid Tower,Szkło hartowane,3054
+283,ATX,ATX,ATX Mid Tower,Szkło hartowane,3055
+284,ATX,ATX,ATX Mid Tower,Szkło hartowane,3056
+285,ATX,ATX,ATX Mid Tower,Szkło hartowane,3057
+286,ATX,ATX,ATX Mid Tower,Szkło hartowane,3058
+287,ATX,ATX,ATX Mid Tower,Szkło hartowane,3059
+288,ATX,ATX,ATX Mid Tower,Akryl,3060
+289,ATX,ATX,ATX Mid Tower,Akryl,3061
+290,ATX,ATX,ATX Mid Tower,Akryl,3062
+291,ATX,ATX,ATX Mid Tower,Szkło hartowane,3063
+292,ATX,ATX,ATX Mid Tower,Akryl,3064
+293,ATX,ATX,ATX Mid Tower,Akryl,3065
+294,ATX,ATX,ATX Mid Tower,Akryl,3066
+295,ATX,ATX,ATX Mid Tower,Akryl,3067
+296,ATX,ATX,ATX Mid Tower,Akryl,3068
+297,ATX,ATX,ATX Full Tower,Metal,3069
+298,ATX,ATX,ATX Full Tower,Szkło hartowane,3070
+299,ATX,ATX,ATX Full Tower,Metal,3071
+300,ATX,ATX,ATX Full Tower,Szkło hartowane,3072
+301,ATX,ATX,ATX Full Tower,Szkło hartowane,3073
+302,ATX,ATX,ATX Full Tower,Szkło hartowane,3074
+303,ATX,ATX,ATX Full Tower,Szkło hartowane,3075
+304,ATX,ATX,ATX Full Tower,Szkło hartowane,3076
+305,ATX,ATX,ATX Full Tower,Akryl,3077
+306,ATX,ATX,ATX Full Tower,Akryl,3078
+307,ATX,ATX,ATX Full Tower,Akryl,3079
+308,ATX,ATX,ATX Full Tower,Metal,3080
+309,ATX,ATX,ATX Full Tower,Metal,3081
+310,ATX,ATX,ATX Full Tower,Przyciemniane szkło hartowane,3082
+311,ATX,ATX,ATX Full Tower,Szkło hartowane,3083
+312,ATX,ATX,ATX Full Tower,Metal,3084
+313,ATX,ATX,ATX Full Tower,Przyciemniane szkło hartowane,3085
+314,ATX,ATX,ATX Full Tower,Szkło hartowane,3086
+315,ATX,ATX,ATX Full Tower,Szkło hartowane,3087
+316,ATX,ATX,ATX Full Tower,Szkło hartowane,3088
+317,ATX,ATX,ATX Full Tower,Szkło hartowane,3089
+318,ATX,ATX,ATX Full Tower,Szkło hartowane,3090
+319,ATX,ATX,ATX Full Tower,Szkło hartowane,3091
+320,ATX,ATX,ATX Full Tower,Akryl,3092
+321,ATX,ATX,ATX Full Tower,Szkło hartowane,3093
+322,ATX,ATX,ATX Full Tower,Akryl,3094
+323,ATX,ATX,ATX Full Tower,Akryl,3095
+324,ATX,ATX,ATX Full Tower,Szkło hartowane,3096
+325,ATX,ATX,ATX Full Tower,Przyciemniane szkło hartowane,3097
+326,ATX,ATX,ATX Full Tower,Akryl,3098
+327,ATX,ATX,ATX Full Tower,Metal,3099
+328,ATX,ATX,ATX Full Tower,Szkło hartowane,3100
+329,ATX,ATX,ATX Full Tower,Szkło hartowane,3101
+330,ATX,ATX,ATX Full Tower,Szkło hartowane,3102
+331,ATX,ATX,ATX Full Tower,Szkło hartowane,3103
+332,ATX,ATX,ATX Full Tower,Szkło hartowane,3104
+333,ATX,ATX,ATX Full Tower,Akryl,3105
+334,ATX,ATX,ATX Full Tower,Akryl,3106
+335,ATX,ATX,ATX Full Tower,Szkło hartowane,3107
+336,ATX,ATX,ATX Full Tower,Szkło hartowane,3108
+337,ATX,ATX,ATX Full Tower,Szkło hartowane,3109
+338,ATX,ATX,ATX Full Tower,Szkło hartowane,3110
+339,ATX,ATX,ATX Full Tower,Szkło hartowane,3111
+340,ATX,ATX,ATX Full Tower,Szkło hartowane,3112
+341,ATX,ATX,ATX Full Tower,Szkło hartowane,3113
+342,ATX,ATX,ATX Full Tower,Szkło hartowane,3114
+343,ATX,ATX,ATX Full Tower,Szkło hartowane,3115
+344,ATX,ATX,ATX Full Tower,Akryl,3116
+345,ATX,ATX,ATX Full Tower,Akryl,3117
+346,ATX,ATX,ATX Full Tower,Akryl,3118
+347,ATX,ATX,ATX Full Tower,Akryl,3119
+348,ATX,ATX,ATX Desktop,Metal,3120
+349,ATX,ATX,ATX Desktop,Metal,3121
+350,ATX,ATX,ATX Desktop,Szkło hartowane,3122
