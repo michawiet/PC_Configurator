@@ -1,32 +1,25 @@
 package com.pcc.pc_configurator.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.pcc.pc_configurator.Views;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 public class CpuDTO {
+    @JsonIgnore
     private long id;
-    @JsonView(Views.Normal.class)
     private String socket;
-    @JsonView(Views.Normal.class)
     private int cores;
-    @JsonView(Views.Normal.class)
     private boolean smt;
-    @JsonView(Views.Normal.class)
     private boolean integratedGPU;
-    @JsonView(Views.Normal.class)
     private int tdpW;
-    @JsonView(Views.Normal.class)
     private int stPref;
-    @JsonView(Views.Normal.class)
     private int mtPref;
-    @JsonView(Views.Normal.class)
     private float coreClock;
-    @JsonView(Views.Normal.class)
     private float boostClock;
+    @JsonIgnore
     private long productFK;
 
     public long getId() {

@@ -2,13 +2,10 @@ package com.pcc.pc_configurator.Controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pcc.pc_configurator.DTO.ProductsDTO;
-import com.pcc.pc_configurator.Views;
-import com.pcc.pc_configurator.entities.*;
 import com.pcc.pc_configurator.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,19 +27,18 @@ public class ProductsController {
     //}
 
     @GetMapping("/{id}")
-    @JsonView(Views.Normal.class)
     public ProductsDTO getOneProduct(@PathVariable int id) {
         return productsDtoList.get(id);
     }
 
     @Autowired
     public void productToDTO(ModelMapper modelMapper) {
-        for(int i=0;i<productRepo.findAll().size();++i)
-            productsDtoList.add(modelMapper.map(productRepo.findAll().get(i),ProductsDTO.class));
+        var repo = productRepo.findAll();
+        for(int i=0;i<repo.size();++i)
+            productsDtoList.add(modelMapper.map(repo.get(i),ProductsDTO.class));
     }
 
     @GetMapping
-    @JsonView(Views.Normal.class)
     public List<ProductsDTO> getOrders() {
         return productsDtoList;
     }

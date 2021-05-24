@@ -2,13 +2,10 @@ package com.pcc.pc_configurator.Controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.pcc.pc_configurator.DTO.PsuDTO;
-import com.pcc.pc_configurator.Views;
-import com.pcc.pc_configurator.entities.Psu;
 import com.pcc.pc_configurator.repositories.PsuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,19 +25,18 @@ public class PsuController {
     //public ResponseEntity<Iterable<Psu>> getAllPsu() { return ResponseEntity.ok(psuRepository.findAll());}
 
     @GetMapping("/{id}")
-    @JsonView(Views.Normal.class)
     public PsuDTO getOnePsu(@PathVariable int id) {
         return psuDtoList.get(id);
     }
 
     @Autowired
     public void psuToDTO(ModelMapper modelMapper) {
-        for(int i=0;i<psuRepository.findAll().size();++i)
-            psuDtoList.add(modelMapper.map(psuRepository.findAll().get(i),PsuDTO.class));
+        var repo = psuRepository.findAll();
+        for(int i=0;i<repo.size();++i)
+            psuDtoList.add(modelMapper.map(repo.get(i),PsuDTO.class));
     }
 
     @GetMapping
-    @JsonView(Views.Normal.class)
     public List<PsuDTO> getOrders() {
         return psuDtoList;
     }
