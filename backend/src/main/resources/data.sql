@@ -1,6 +1,6 @@
 create table PRODUCT
 (
-    ID       INT,
+    ID       INT auto_increment,
     BRAND    VARCHAR(20),
     NAME     VARCHAR(50),
     PRICE    FLOAT,
@@ -11,7 +11,7 @@ create table PRODUCT
 
 create table COOLER
 (
-    ID             INT,
+    ID             INT auto_increment,
     TIER           INT,
     NOISE_LEVEL_DB FLOAT,
     IS_AIR         BOOLEAN,
@@ -25,7 +25,7 @@ create table COOLER
 
 create table CPU
 (
-    ID             INT,
+    ID             INT auto_increment,
     SOCKET         VARCHAR(10),
     CORES          INT,
     SMT            BOOLEAN,
@@ -44,7 +44,7 @@ create table CPU
 
 create table MOTHERBOARD
 (
-    ID            INT,
+    ID            INT auto_increment,
     TIER          FLOAT,
     CHIPSET       VARCHAR(10),
     SOCKET        VARCHAR(10),
@@ -60,7 +60,7 @@ create table MOTHERBOARD
 
 create table RAM
 (
-    ID                 INT,
+    ID                 INT auto_increment,
     SPEED              INT,
     MODULES_COUNT      INT,
     MODULE_CAPACITY_GB INT,
@@ -75,7 +75,7 @@ create table RAM
 
 create table STORAGE
 (
-    ID          INT,
+    ID          INT auto_increment,
     CAPACITY_GB INT,
     TIER        INT,
     TYPE        VARCHAR(10),
@@ -90,7 +90,7 @@ create table STORAGE
 
 create table GPU
 (
-    ID                    INT,
+    ID                    INT auto_increment,
     CHIPSET               VARCHAR(30),
     MEMORY_GB             INT,
     CORE_CLOCK_MHZ        INT,
@@ -108,7 +108,7 @@ create table GPU
 
 create table CASE_
 (
-    ID                    INT,
+    ID                    INT auto_increment,
     POWER_SUPPLY_STANDARD VARCHAR(5),
     MAX_MOTHERBOARD_SIZE  VARCHAR(10),
     TYPE                  VARCHAR(20),
@@ -122,7 +122,7 @@ create table CASE_
 
 create table PSU
 (
-    ID                INT,
+    ID                INT auto_increment,
     TIER              FLOAT,
     FORM_FACTOR       VARCHAR(5),
     EFFICIENCY_RATING VARCHAR(20),
@@ -137,7 +137,7 @@ create table PSU
 
 create table USER
 (
-    ID       INT,
+    ID       INT auto_increment,
     EMAIL    VARCHAR(100),
     USERNAME VARCHAR(50),
     PASSWORD VARCHAR(250),
@@ -147,7 +147,7 @@ create table USER
 
 create table ORDER_
 (
-    ID      INT,
+    ID      INT auto_increment,
     DATE    DATE,
     USER_ID INT,
     constraint ORDER_PK
@@ -158,7 +158,7 @@ create table ORDER_
 
 create table ORDER_LIST
 (
-    ID         INT,
+    ID         INT auto_increment,
     DATE       DATE,
     PRODUCT_ID INT,
     ORDER_ID   INT,
