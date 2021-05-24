@@ -6,10 +6,7 @@ import com.pcc.pc_configurator.repositories.StorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products/storage")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class StorageController {
     private final StorageRepository storageRepository;
     private List<StorageDTO> storageDtoList = new ArrayList<>();

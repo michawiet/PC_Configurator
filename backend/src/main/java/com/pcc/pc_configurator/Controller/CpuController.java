@@ -8,16 +8,14 @@ import com.pcc.pc_configurator.repositories.CpuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @RestController
 @RequestMapping("/products/cpu")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class CpuController {
     private final CpuRepository cpuRepository;
     private List<CpuDTO> cpuDtoList = new ArrayList<>();
