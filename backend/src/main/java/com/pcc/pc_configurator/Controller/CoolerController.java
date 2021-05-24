@@ -31,8 +31,9 @@ public class CoolerController {
 
     @Autowired
     public void cpuToDTO(ModelMapper modelMapper) {
-        for(int i=0;i<coolerRepo.findAll().size();++i)
-            coolerDtoList.add(modelMapper.map(coolerRepo.findAll().get(i),CoolerDTO.class));
+        var repo = coolerRepo.findAll();
+        for(int i=0;i<repo.size();++i)
+            coolerDtoList.add(modelMapper.map(repo.get(i),CoolerDTO.class));
     }
 
     @GetMapping

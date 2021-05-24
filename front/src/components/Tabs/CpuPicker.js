@@ -9,46 +9,56 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import axios from 'axios';
-import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
 
 const columns = [
-  { id: 'socet', label: 'Socet', minWidth: 5 ,},
-  { id: 'cores', label: 'Cores', minWidth: 5, },
+  { 
+    id: 'socket', 
+    label: 'Socket', 
+    align: 'center',
+  },
+  { 
+    id: 'cores', 
+    label: 'Cores',
+    align: 'center',
+  },
   {
     id: 'smt',
-    label: 'Smt',
-    align: 'right',
-    minWidth: 50,
+    label: 'SMT',
+    align: 'center',
   },
   {
     id: 'igpu',
-    label: 'integratet gpu',
-    align: 'right',
+    label: 'iGPU',
+    align: 'center',
+
   },
   {
     id: 'tdpw',
-    label: 'tdpw',
-    align: 'right',
+    label: 'TDP (W)',
+    align: 'center',
+
   },
   {
     id: 'stp',
-    label: 'st pref',
-    align: 'right',
+    label: 'ST pref',
+    align: 'center',
+
   },
   {
     id: 'mtp',
-    label: 'mt pref',
-    align: 'right',
+    label: 'MT pref',
+    align: 'center',
+
   },
   {
     id: 'cc',
-    label: 'corecloks',
-    align: 'right',
+    label: 'Core Clocks',
+    align: 'center',
   },
   {
     id: 'bc',
-    label: 'boost cloks',
-    align: 'right',
+    label: 'Boost Clocks',
+    align: 'center',
   },
 ];
 
@@ -57,39 +67,14 @@ const useStyles = makeStyles({
     width: '100%',
   },
   container: {
-    maxHeight: 440,
+    maxHeight: 650,
   },
 });
-
-
-
-
-
 
 export default function StickyHeadTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const MyComponent = withAxios(class MyComponentRaw extends React.Component {
-    componentWillMount() {
-      this.props.axios('test').then(result => {
-        this.setState({ data: result.data })
-      })
-    }
-    render() {
-      const data = (this.state || {}).data
-      return <div>{JSON.stringify(data)}</div>
-    }
-  })
-
-
-  const axiosInstance = axios.create({
-    baseURL: '/',
-    timeout: 2000,
-    headers: { 'X-Custom-Header': 'foobar' }
-  });
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -100,25 +85,21 @@ export default function StickyHeadTable() {
     setPage(0);
   };
 
-    const [userProfiles, setUserProfiles] = useState([]);
+  const [products, setProducts] = useState([]);
   
-    const fetchUserProfiles = () => {
+    const fetchProducts = () => {
       axios.get("http://localhost:8080/products/cpu").then(res => {
         console.log(res);
-        setUserProfiles(res.data);
+        setProducts(res.data);
       });
     };
   
     useEffect(() => {
-      fetchUserProfiles();
+      fetchProducts();
     }, []);
-  
-
   
   return (
     <>
-
-
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
@@ -136,48 +117,47 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {userProfiles
-            .map((userProfile) => {
+            {products
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((userProfile) => {
                 return (
                   <TableRow key = {userProfile.id}>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.socket}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.cores}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.smt ? "Yes" : "No"}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.integratedGPU ? "Yes" : "No"}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.tdpW} 
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.stPref}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.mtPref}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.coreClock}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       {userProfile.boostClock}
                     </TableCell>
                   </TableRow>
                 );
-              })
-            }
-
+              })}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[10, 25, 30]}
         component="div"
+        count={products.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

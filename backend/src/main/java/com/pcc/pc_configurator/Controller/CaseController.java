@@ -30,8 +30,9 @@ public class CaseController {
 
     @Autowired
     public void caseToDTO(ModelMapper modelMapper) {
-        for(int i=0;i<caseRepository.findAll().size();++i)
-            caseDtoList.add(modelMapper.map(caseRepository.findAll().get(i),CaseDTO.class));
+        var repo = caseRepository.findAll();
+        for(int i=0;i<repo.size();++i)
+            caseDtoList.add(modelMapper.map(repo.get(i),CaseDTO.class));
     }
 
     @GetMapping

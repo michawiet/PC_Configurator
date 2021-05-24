@@ -2,6 +2,7 @@ import { Container, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CpuPicker from './CpuPicker';
 import StartPanel from '../StartPanel';
+import CoolerPicker from './CoolerPicker';
 
 function PartPickerTabs({selectedTabs}) {
   function TabPanel(props) {
@@ -32,7 +33,7 @@ function PartPickerTabs({selectedTabs}) {
         <CpuPicker/>
       </TabPanel>
       <TabPanel value={selectedTabs} index={2}>
-        Item Two
+        <CoolerPicker/>
       </TabPanel>
       <TabPanel value={selectedTabs} index={3}>
         Item Three

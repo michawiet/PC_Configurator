@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState}from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from "react-router-dom";
+import GoogleButton from 'react-google-button'
 
 function Copyright() {
   return (
@@ -26,6 +27,8 @@ function Copyright() {
     </Typography>
   );
 }
+
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,9 +50,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function SignIn() {
   const classes = useStyles();
   let history = useHistory();
+
+  const[isAutheticated, setisAutheticated] = useState(false);
+
+  function login(){
+    setisAutheticated(true);
+    console.log("loggedInUser:" + isAutheticated)
+    history.push("/loged")
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -62,51 +74,21 @@ export default function SignIn() {
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={()=>{history.push("/loged")}}
-          >
+          <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus/>
+          <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"/>
+          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me"/>
+          <Button type="submit" fullWidth variant="contained" color="primary"className={classes.submit} onClick={login}>
             Sign In
           </Button>
+          <Link href="http://localhost:8080/oauth2/authorization/google">
+          <GoogleButton variant="contained" color="primary"className={classes.submit}
+          />
+          </Link >
           <Grid container>
             <Grid item xs>
-             
             </Grid>
             <Grid item>
             <Button color="primary" onClick={()=>{history.push("/signup")}}>Don't have an account? Sign Up</Button>
-
-              
-              
             </Grid>
           </Grid>
         </form>
