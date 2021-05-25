@@ -1,13 +1,12 @@
 package com.pcc.pc_configurator.Controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.pcc.pc_configurator.DTO.CpuDTO;
-import com.pcc.pc_configurator.Temp;
-import com.pcc.pc_configurator.entities.Cpu;
 import com.pcc.pc_configurator.repositories.CpuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -19,28 +18,40 @@ import java.util.*;
 public class CpuController {
     private final CpuRepository cpuRepository;
     private List<CpuDTO> cpuDtoList = new ArrayList<>();
-    //@GetMapping
-    //public ResponseEntity<Iterable<Cpu>> getAllCpus() { return ResponseEntity.ok(cpuRepository.findAll());}
-    //@GetMapping("/{id}")
-    //public ResponseEntity<Optional<Cpu>> getOneCpu(@PathVariable Long id) {
-    //    return ResponseEntity.ok(cpuRepository.findById(id));
-    //}
-    @GetMapping("/{id}")
-    public CpuDTO getOneCpu(@PathVariable int id) {
+    @Autowired
+    ModelMapper modelMapper;
+
+    public void cpuToDTO(ModelMapper modelMapper, int page, int size, String sortBy, String sortingOrder) {
+        if(sortingOrder.equals("asc"))
+            for(var cpu : cpuRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy).ascending())))
+                cpuDtoList.add(modelMapper.map(cpu,CpuDTO.class));
+        else if(sortingOrder.equals("desc"))
+            for(var cpu : cpuRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy).descending())))
+                cpuDtoList.add(modelMapper.map(cpu,CpuDTO.class));
+        else if(sortingOrder.equals(""))
+            for(var cpu : cpuRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy))))
+                cpuDtoList.add(modelMapper.map(cpu,CpuDTO.class));
+    }
+
+    public void cpu(ModelMapper modelMapper) {
+        for (var cpu : cpuRepository.findAll())
+            cpuDtoList.add(modelMapper.map(cpu, CpuDTO.class));
+    }
+
+    @GetMapping(params = {"id"})
+    public CpuDTO getOneCpu(@RequestParam("id") int id) {
+        cpuDtoList.clear();
+        cpu(modelMapper);
         return cpuDtoList.get(id);
     }
 
-    @Autowired
-    public void cpuToDTO(ModelMapper modelMapper) {
-        for(var cpu : cpuRepository.findAll())
-            cpuDtoList.add(modelMapper.map(cpu,CpuDTO.class));
-    }
-
-    //@GetMapping("/test/{id}")
-    //public List<Temp> test(@PathVariable long id) { return cpuRepository.findByIdTemp(id);}
-    
     @GetMapping
-    public List<CpuDTO> getCpus() {
+    public List<CpuDTO> getCpus(@RequestParam("page") int page,
+                                @RequestParam("size") int size,
+                                @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
+                                @RequestParam(value = "sortingOrder",required = false,defaultValue = "") String sortingOrder) {
+        cpuDtoList.clear();
+        cpuToDTO(modelMapper,page,size,sortBy,sortingOrder);
         return cpuDtoList;
     }
 }
