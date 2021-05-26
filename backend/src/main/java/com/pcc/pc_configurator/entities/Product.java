@@ -1,5 +1,7 @@
 package com.pcc.pc_configurator.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import static javax.persistence.CascadeType.ALL;
@@ -9,18 +11,21 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private long id;
 
     private String brand;
     private String name;
     private float price;
     private int quantity;
+    private String image;
 
-    public Product(String brand, String name, float price, int quantity) {
+    public Product(String brand, String name, float price, int quantity, String image) {
         this.brand = brand;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.image = image;
     }
 
     public Product() {
@@ -66,14 +71,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", brand='" + brand + '\'' +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                '}';
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

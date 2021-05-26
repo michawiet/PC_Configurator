@@ -5,6 +5,7 @@ create table PRODUCT
     NAME     VARCHAR(50),
     PRICE    FLOAT,
     QUANTITY INT,
+    IMAGE    VARCHAR(110)
     constraint PRODUCT_PK
         primary key (ID)
 );

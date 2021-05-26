@@ -35,7 +35,6 @@ public class PcConfiguratorApplication {
                 map().setCoreClock(source.getCore_Clock());
                 map().setBoostClock(source.getBoost_Clock());
                 map().setProduct(source.getProduct());
-                //map().setProductFK(source.getProduct_FK());
             }
         });
         modelMapper.addMappings(new PropertyMap<Gpu, GpuDTO>() {
@@ -96,6 +95,7 @@ public class PcConfiguratorApplication {
                 map().setName(source.getName());
                 map().setPrice(source.getPrice());
                 map().setQuantity(source.getQuantity());
+                map().setImage(source.getImage());
             }
         });
         modelMapper.addMappings(new PropertyMap<Psu, PsuDTO>() {
