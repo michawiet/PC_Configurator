@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../AuthContext"
+import Alert from '@material-ui/lab/Alert';
+
 
 function Copyright() {
   return (
@@ -48,8 +51,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  //const usernameRef = useRef()
+  const passwordConfirmRef = useRef()
+  const { signup } = useAuth()
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
   const classes = useStyles();
   let history = useHistory();
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("Passwords do not match")
+    }
+
+    try {
+      setError("")
+      setLoading(true)
+      await signup(emailRef.current.value, passwordRef.current.value)
+      console.log("konto")
+      history.push("/loged")
+    } catch {
+      setError("Failed to create an account")
+    }
+
+    setLoading(false)
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,34 +88,26 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        {error && <Alert severity="error">{error}</Alert>}
+
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            {/*<Grid item xs={12} >
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                autoComplete="Name"
+                name="Name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="Name"
+                label=" Name"
                 autoFocus
+                inputRef={usernameRef}
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
+  </Grid>*/}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -95,6 +117,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                inputRef={emailRef}
               />
             </Grid>
             <Grid item xs={12}>
@@ -107,12 +130,20 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                inputRef={passwordRef}
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+            <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label=" Confirm Password "
+                type="password"
+                id="passworConfirm"
+                autoComplete="Confirm-password"
+                inputRef={passwordConfirmRef}
               />
             </Grid>
           </Grid>
@@ -122,14 +153,14 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={()=>{history.push("/loged")}}
+            onClick={handleSubmit}
 
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-            <Button color="primary" onClick={()=>{history.push("/login")}}>Already have an account? Sign in</Button>
+            <Button disabled={loading} color="primary" onClick={()=>{history.push("/login")}}>Already have an account? Sign in</Button>
 
              
             </Grid>

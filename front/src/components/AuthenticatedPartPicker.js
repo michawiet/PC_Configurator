@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography, IconButton } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { green } from '@material-ui/core/colors';
 import MainTabsPanel from './MainTabsPanel';
 import PartPickerTabs from './Tabs/PartPickerTabs';
+import { useAuth } from "../AuthContext"
 
 //icons
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -96,6 +97,8 @@ const MiniDrawer = (props  ) => {
 
   const { children, value, index, ...other } = props;
   const [selectedTabs, setselectedTabs] = React.useState(0);
+  const [error, setError] = useState("")
+  const { currentUser, logout } = useAuth()
 
   const handleChange = (event, newValue) => {
     setselectedTabs(newValue);
@@ -130,6 +133,16 @@ const MiniDrawer = (props  ) => {
   }
 
   let history = useHistory();
+  async function handleLogout() {
+    setError("")
+
+    try {
+      await logout()
+      history.push("/")
+    } catch {
+      setError("Failed to log out")
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -148,7 +161,7 @@ const MiniDrawer = (props  ) => {
           <IconButton style={{ marginLeft: "84%" }} aria-label="delete">
             <ShoppingCartOutlinedIcon style={{ color: green[500] }}  fontSize="large" />
           </IconButton>
-          <Button  style={{ marginLeft: "auto" }} color="inherit" onClick={()=>{history.push("/")}} >Logout</Button>
+          <Button  style={{ marginLeft: "auto" }} color="inherit" onClick={handleLogout} >Logout</Button>
         </Toolbar>
         <MainTabsPanel selectedTabs={selectedTabs} setselectedTabs={setselectedTabs} />
       </AppBar>

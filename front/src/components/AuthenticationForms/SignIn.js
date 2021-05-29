@@ -1,4 +1,4 @@
-import React, {useState}from 'react';
+import React, {useRef, useState}from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container';
 import { useHistory } from "react-router-dom";
 import GoogleButton from 'react-google-button'
 import PropTypes from 'prop-types';
+import { useAuth } from "../../AuthContext"
+import Alert from '@material-ui/lab/Alert';
 
 function Copyright() {
   return (
@@ -52,13 +54,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function SignIn({  }) {
+export default function SignIn() {
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { login } = useAuth()
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
   const classes = useStyles();
   let history = useHistory();
 
-  function login(){
-  
-    history.push("/loged")
+
+
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    try {
+
+      setError("")
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/loged")
+
+    } catch {
+      setError("Failed to log in")
+
+    }
+
+    setLoading(false)
   }
  
   return (
@@ -68,14 +91,17 @@ export default function SignIn({  }) {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        {error && <Alert severity="error">{error}</Alert>}
+
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus/>
-          <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"/>
+          <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus inputRef={emailRef}/>
+
+          <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" inputRef={passwordRef}/>
           <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me"/>
-          <Button type="submit" fullWidth variant="contained" color="primary"className={classes.submit} onClick={login}>
+          <Button disabled={loading}  fullWidth variant="contained" color="primary"className={classes.submit} onClick={handleSubmit}>
             Sign In
           </Button>
           <Link href="http://localhost:8080/oauth2/authorization/google">
