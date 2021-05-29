@@ -6,8 +6,8 @@ create table PRODUCT
     PRICE    FLOAT,
     QUANTITY INT,
     IMAGE    VARCHAR(110)
-    constraint PRODUCT_PK
-        primary key (ID)
+        constraint PRODUCT_PK
+            primary key (ID)
 );
 
 create table COOLER
