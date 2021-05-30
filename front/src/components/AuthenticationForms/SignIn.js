@@ -17,7 +17,8 @@ import GoogleButton from 'react-google-button'
 import PropTypes from 'prop-types';
 import { useAuth } from "../../AuthContext"
 import Alert from '@material-ui/lab/Alert';
-
+import firebase from "firebase/app";
+import "firebase/auth";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -104,10 +105,16 @@ export default function SignIn() {
           <Button disabled={loading}  fullWidth variant="contained" color="primary"className={classes.submit} onClick={handleSubmit}>
             Sign In
           </Button>
-          <Link href="http://localhost:8080/oauth2/authorization/google">
-          <GoogleButton variant="contained" color="primary"className={classes.submit}
+          <GoogleButton variant="contained" color="primary"className={classes.submit}    
+          onClick={() => {
+                const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+              firebase.auth().signInWithPopup(googleAuthProvider).then(function() {
+                history.push("/loged");
+              }).catch(function(error) {
+                console.log(error);
+              });
+            }}
           />
-          </Link >
           <Grid container>
             <Grid item xs>
             </Grid>
