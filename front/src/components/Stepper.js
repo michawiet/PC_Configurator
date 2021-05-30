@@ -200,14 +200,14 @@ export default function CustomizedSteppers() {
     <div>
     {activeStep === steps.length ? (
       <div>
-        <Typography className={classes.instructions}>
+        <Typography component={'span'} className={classes.instructions}>
           All steps completed - you&apos;re finished
         </Typography>
         <Button onClick={handleReset} className={classes.button}>Reset</Button>
       </div>
       ) : (
       <div>
-        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+        <Typography component={'span'} className={classes.instructions}>{getStepContent(activeStep)}</Typography>
         <div>
           <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>Wstecz</Button>
           <Button variant="contained" color="primary" onClick={handleNext} className={classes.button}>

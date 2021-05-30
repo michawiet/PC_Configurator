@@ -112,7 +112,7 @@ const MiniDrawer = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={clsx(classes.appBar, { [classes.appBarShift]: open,})}>
         <Toolbar>
-          <Typography variant="h6" >
+          <Typography component={'span'} variant="h6" >
             Konfigurator PC
             {/*Title that is based on actual list selection*/}
           </Typography>

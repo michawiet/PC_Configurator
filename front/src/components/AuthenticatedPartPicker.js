@@ -125,7 +125,7 @@ const MiniDrawer = (props  ) => {
       >
         {value === index && (
           <Box p={3}>
-            <Typography>{children}</Typography>
+            <Typography component={'span'}>{children}</Typography>
           </Box>
         )}
       </div>
@@ -154,7 +154,7 @@ const MiniDrawer = (props  ) => {
         })}
       >
         <Toolbar>
-          <Typography variant="h6" >
+          <Typography component={'span'} variant="h6" >
             Konfigurator PC
             {/*Title that is based on actual list selection*/}
           </Typography>

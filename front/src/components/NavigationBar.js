@@ -29,7 +29,7 @@ export default function ButtonAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <HomeIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography component={'span'} variant="h6" className={classes.title}>
             PC-Configurator
           </Typography>
           <Button color="inherit">Login</Button>

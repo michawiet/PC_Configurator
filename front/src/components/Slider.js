@@ -40,7 +40,7 @@ export default function InputSlider() {
 
   return (
     <div className={classes.root}>
-      <Typography id="input-slider" variant="h5" gutterBottom>
+      <Typography component={'span'} id="input-slider" variant="h5" gutterBottom>
         Cena
       </Typography>
       <Grid container spacing={2} alignItems="center">
