@@ -1,16 +1,22 @@
 package com.pcc.pc_configurator.Controller;
 
+import com.pcc.pc_configurator.DTO.PsuDTO;
 import com.pcc.pc_configurator.DTO.StorageDTO;
+import com.pcc.pc_configurator.entities.Storage;
 import com.pcc.pc_configurator.repositories.StorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products/storage")
@@ -22,37 +28,45 @@ public class StorageController {
     @Autowired
     ModelMapper modelMapper;
 
-    public void storageToDTO(ModelMapper modelMapper, int page, int size, String sortBy, String sortingOrder) {
-        if(sortingOrder.equals("asc"))
-            for(var storage : storageRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy).ascending())))
-                storageDtoList.add(modelMapper.map(storage,StorageDTO.class));
-        else if(sortingOrder.equals("desc"))
-            for(var storage : storageRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy).descending())))
-                storageDtoList.add(modelMapper.map(storage,StorageDTO.class));
-        else if(sortingOrder.equals(""))
-            for(var storage : storageRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy).descending())))
-                storageDtoList.add(modelMapper.map(storage,StorageDTO.class));
-    }
-
-    public void storage(ModelMapper modelMapper) {
-        for(var storage : storageRepository.findAll())
-            storageDtoList.add(modelMapper.map(storage,StorageDTO.class));
-    }
-
     @GetMapping(params = {"id"})
     public StorageDTO getOneStorage(@RequestParam("id") int id) {
-        storageDtoList.clear();
-        storage(modelMapper);
-        return storageDtoList.get(id);
+        var storageRepo = storageRepository.findById(Long.valueOf(id));
+        return modelMapper.map(storageRepo, StorageDTO.class);
     }
 
     @GetMapping
-    public List<StorageDTO> getStorages(@RequestParam("page") int page,
+    public Map<String, Object> getStorages(@RequestParam("page") int page,
                                         @RequestParam("size") int size,
                                         @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
                                         @RequestParam(value = "sortingOrder",required = false,defaultValue = "") String sortingOrder) {
-        storageDtoList.clear();
-        storageToDTO(modelMapper,page,size,sortBy,sortingOrder);
-        return storageDtoList;
+        List<StorageDTO> storageDtoList = new ArrayList<>();
+        Pageable pagingSort;
+        switch (sortingOrder) {
+            case "asc":
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+                break;
+            case "desc":
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy).descending());
+                break;
+            default:
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy));
+                break;
+        }
+
+        Page<Storage> storagePage;
+
+        storagePage = storageRepository.findAll(pagingSort);
+
+        for(var storage : storagePage) {
+            storageDtoList.add(modelMapper.map(storage, StorageDTO.class));
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("products", storageDtoList);
+        response.put("currentPage", storagePage.getNumber());
+        response.put("totalItems",storagePage.getTotalElements());
+        response.put("totalPages", storagePage.getTotalPages());
+
+        return response;
     }
 }

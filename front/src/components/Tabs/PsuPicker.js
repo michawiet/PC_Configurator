@@ -1,13 +1,15 @@
 import { Grid, makeStyles } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import VerticalProductCard from '../products/VerticalProductCard'
+import Typography from '@material-ui/core/Typography';
+import Pagination from '@material-ui/lab/Pagination';
 import axios from 'axios';
 
 function PsuPicker() {
   const [products, setProducts] = useState([]);
   
     const fetchProducts = () => {
-      axios.get("http://localhost:8080/products/psu").then(res => {
+      axios.get("http://localhost:8080/products/psu?page=0&size=10&sortBy=product.brand&sortingOrder=desc").then(res => {
         console.log(res);
         setProducts(res.data);
       });
@@ -17,8 +19,14 @@ function PsuPicker() {
       fetchProducts();
     }, []);
 
+    const [page, setPage] = React.useState(1);
+    const handleChangePage = (event, value) => {
+      setPage(value);
+    };
   return (
     <div>
+       <Typography>Page: {page}</Typography>
+      <Pagination count={10} page={page} onChange={handleChangePage} />
       <Grid container spacing={3}>
         {products.map(({product, modular, wattage, formFactor, efficiencyRating }, index) => (
           <Grid item xs={4}>
@@ -33,6 +41,8 @@ function PsuPicker() {
           </Grid>
         ))}
       </Grid>
+      <Typography>Page: {page}</Typography>
+      <Pagination count={10} page={page} onChange={handleChangePage} />
     </div>
   )
 }

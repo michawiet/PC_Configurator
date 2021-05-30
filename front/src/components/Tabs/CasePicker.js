@@ -7,7 +7,7 @@ function CasePicker() {
   const [products, setProducts] = useState([]);
   
     const fetchProducts = () => {
-      axios.get("http://localhost:8080/products/case").then(res => {
+      axios.get("http://localhost:8080/products/case?page=0&size=10&sortBy=product.brand&sortingOrder=desc").then(res => {
         console.log(res);
         setProducts(res.data);
       });

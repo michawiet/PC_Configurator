@@ -11,11 +11,14 @@ const useStyles = makeStyles({
       marginLeft: 'auto !important',
     },
     image: {
-      paddingTop: 10,
-      margin: "auto",
+      paddingTop: 20,
+      margin: 'auto',
       maxWidth: 200,
-      maxHeight: 210,
+      maxHeight: 220,
     },
+    content: {
+      minHeight: 200,
+    }
 });
 //productDetails as a array, that gets converted here to a list or something
 export default function VerticalProductCard({image, productName, detail0, detail1, detail2, detail3, price, href}) {
@@ -29,7 +32,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
           component="img"
           image={fanImage}
         />
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography component={'span'} gutterBottom variant="h5" component="h2">
             {productName}
           </Typography>
@@ -37,7 +40,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
             {detail0}<br/>
             {detail1}<br/>
             {detail2}<br/>
-            {detail3}<br/>
+            {detail3}
           </Typography>
         </CardContent>
         </CardActionArea>

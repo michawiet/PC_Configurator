@@ -7,7 +7,8 @@ function CoolerPicker() {
   const [products, setProducts] = useState([]);
   
     const fetchProducts = () => {
-      axios.get("http://localhost:8080/products/motherboard").then(res => {
+      axios.get("http://localhost:8080/products/motherboard?page=0&size=10&sortBy=product.brand&sortingOrder=desc").then(res => {
+        
         console.log(res);
         setProducts(res.data);
       });

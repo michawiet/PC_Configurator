@@ -1,16 +1,22 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.RamDTO;
+import com.pcc.pc_configurator.entities.Ram;
 import com.pcc.pc_configurator.repositories.RamRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products/ram")
@@ -18,43 +24,48 @@ import java.util.List;
 @CrossOrigin("*")
 public class RamController {
     private final RamRepository ramRepository;
-    private List<RamDTO> ramDtoList = new ArrayList<>();
     @Autowired
     ModelMapper modelMapper;
 
-    public void ramToDTO(ModelMapper modelMapper, int page, int size, String sortBy, String sortingOrder) {
-        if(sortingOrder.equals("asc"))
-            for(var ram : ramRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy).ascending())))
-                ramDtoList.add(modelMapper.map(ram,RamDTO.class));
-        else if(sortingOrder.equals("desc")) {
-            for(var ram : ramRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy).descending())))
-                ramDtoList.add(modelMapper.map(ram,RamDTO.class));
-        }
-        else if(sortingOrder.equals("")) {
-            for(var ram : ramRepository.findAll(PageRequest.of(page, size, Sort.by(sortBy).descending())))
-                ramDtoList.add(modelMapper.map(ram,RamDTO.class));
-        }
-    }
-
-    public void ram(ModelMapper modelMapper) {
-        for(var ram : ramRepository.findAll())
-            ramDtoList.add(modelMapper.map(ram,RamDTO.class));
-    }
-
     @GetMapping(params = {"id"})
     public RamDTO getOneRam(@RequestParam("id") int id) {
-        ramDtoList.clear();
-        ram(modelMapper);
-        return ramDtoList.get(id);
+        var ramRepo = ramRepository.findById(Long.valueOf(id));
+        return modelMapper.map(ramRepo,RamDTO.class);
     }
 
     @GetMapping
-    public List<RamDTO> getRams(@RequestParam("page") int page,
-                                @RequestParam("size") int size,
-                                @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
-                                @RequestParam(value = "sortingOrder",required = false,defaultValue = "") String sortingOrder) {
-        ramDtoList.clear();
-        ramToDTO(modelMapper,page,size,sortBy,sortingOrder);
-        return ramDtoList;
+    public Map<String, Object> getRams(@RequestParam("page") int page,
+                                                       @RequestParam("size") int size,
+                                                       @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
+                                                       @RequestParam(value = "sortingOrder",required = false,defaultValue = "") String sortingOrder) {
+        List<RamDTO> ramDtoList = new ArrayList<>();
+        Pageable pagingSort;
+        switch (sortingOrder) {
+            case "asc":
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+                break;
+            case "desc":
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy).descending());
+                break;
+            default:
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy));
+                break;
+        }
+
+        Page<Ram> ramPage;
+
+        ramPage = ramRepository.findAll(pagingSort);
+
+        for(var ram : ramPage) {
+            ramDtoList.add(modelMapper.map(ram, RamDTO.class));
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("products", ramDtoList);
+        response.put("currentPage", ramPage.getNumber());
+        response.put("totalItems",ramPage.getTotalElements());
+        response.put("totalPages", ramPage.getTotalPages());
+
+        return response;
     }
 }

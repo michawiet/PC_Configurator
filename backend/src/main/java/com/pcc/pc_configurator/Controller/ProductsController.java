@@ -1,60 +1,73 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.ProductsDTO;
+import com.pcc.pc_configurator.DTO.RamDTO;
+import com.pcc.pc_configurator.entities.Product;
+import com.pcc.pc_configurator.entities.Ram;
 import com.pcc.pc_configurator.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class ProductsController {
-    private final ProductRepository productRepo;
-    private List<ProductsDTO> productsDtoList = new ArrayList<>();
+    private final ProductRepository productRepository;
     @Autowired
     ModelMapper modelMapper;
 
-    public void productToDTO(ModelMapper modelMapper, int page, int size, String sortBy, String sortingOrder) {
-        if(sortingOrder.equals("asc"))
-            for (var product : productRepo.findAll(PageRequest.of(page, size, Sort.by(sortBy).ascending())))
-                productsDtoList.add(modelMapper.map(product, ProductsDTO.class));
-        else if(sortingOrder.equals("desc")){
-            for (var product : productRepo.findAll(PageRequest.of(page, size, Sort.by(sortBy).descending())))
-                productsDtoList.add(modelMapper.map(product, ProductsDTO.class));
-        }
-        else if(sortingOrder.equals("")){
-            for (var product : productRepo.findAll(PageRequest.of(page, size, Sort.by(sortBy))))
-                productsDtoList.add(modelMapper.map(product, ProductsDTO.class));
-        }
-    }
-
-    public void product(ModelMapper modelMapper) {
-        for (var product : productRepo.findAll())
-            productsDtoList.add(modelMapper.map(product, ProductsDTO.class));
-    }
 
     @GetMapping(params = {"id"})
     public ProductsDTO getOneProduct(@RequestParam("id") int id) {
-        productsDtoList.clear();
-        product(modelMapper);
-        return productsDtoList.get(id);
+        var productsRepo = productRepository.findById(Long.valueOf(id));
+        return modelMapper.map(productsRepo, ProductsDTO.class);
     }
 
     @GetMapping
-    public List<ProductsDTO> getProducts(@RequestParam("page") int page,
+    public Map<String, Object> getProducts(@RequestParam("page") int page,
                                          @RequestParam("size") int size,
                                          @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
                                          @RequestParam(value = "sortingOrder",required = false,defaultValue = "") String sortingOrder) {
-        productsDtoList.clear();
-        productToDTO(modelMapper,page,size,sortBy,sortingOrder);
-        return productsDtoList;
+        List<ProductsDTO> productsDtoList = new ArrayList<>();
+        Pageable pagingSort;
+        switch (sortingOrder) {
+            case "asc":
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+                break;
+            case "desc":
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy).descending());
+                break;
+            default:
+                pagingSort = PageRequest.of(page, size, Sort.by(sortBy));
+                break;
+        }
+
+        Page<Product> productPage;
+
+        productPage = productRepository.findAll(pagingSort);
+
+        for(var product : productPage) {
+            productsDtoList.add(modelMapper.map(product, ProductsDTO.class));
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("products", productsDtoList);
+        response.put("currentPage", productPage.getNumber());
+        response.put("totalItems", productPage.getTotalElements());
+        response.put("totalPages", productPage.getTotalPages());
+
+        return response;
     }
 }

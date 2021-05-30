@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 
-public interface CoolerRepository extends JpaRepository<Cooler,Integer> {
+public interface CoolerRepository extends JpaRepository<Cooler,Long> {
 }
