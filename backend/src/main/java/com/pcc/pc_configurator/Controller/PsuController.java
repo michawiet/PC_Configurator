@@ -23,14 +23,12 @@ import java.util.Map;
 @CrossOrigin("*")
 public class PsuController {
     private final PsuRepository psuRepository;
-    //private List<PsuDTO> psuDtoList = new ArrayList<>();
     @Autowired
     ModelMapper modelMapper;
 
     @GetMapping(params = {"id"})
     public PsuDTO getOnePsu(@RequestParam("id") int id) {
-        var psuRepo = psuRepository.findById(Long.valueOf(id));
-        return modelMapper.map(psuRepo,PsuDTO.class);
+        return modelMapper.map(psuRepository.findById(Long.valueOf(id)).get(),PsuDTO.class);
     }
 
     @GetMapping
@@ -52,9 +50,7 @@ public class PsuController {
                 break;
         }
 
-        Page<Psu> psuPage;
-
-        psuPage = psuRepository.findAll(pagingSort);
+        Page<Psu> psuPage = psuRepository.findAll(pagingSort);
 
         for(var psu : psuPage) {
             psuDTOList.add(modelMapper.map(psu, PsuDTO.class));
@@ -63,7 +59,7 @@ public class PsuController {
         Map<String, Object> response = new HashMap<>();
         response.put("products", psuDTOList);
         response.put("currentPage", psuPage.getNumber());
-        response.put("totalItems",psuPage.getTotalElements());
+        response.put("totalItems", psuPage.getTotalElements());
         response.put("totalPages", psuPage.getTotalPages());
 
         return response;

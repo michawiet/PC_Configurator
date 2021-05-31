@@ -26,8 +26,7 @@ public class CpuController {
 
     @GetMapping(params = {"id"})
     public CpuDTO getOneCpu(@RequestParam("id") int id) {
-        var cpuRepo = cpuRepository.findById(Long.valueOf(id));
-        return modelMapper.map(cpuRepo,CpuDTO.class);
+        return modelMapper.map(cpuRepository.findById(Long.valueOf(id)).get(),CpuDTO.class);
     }
 
     @GetMapping
