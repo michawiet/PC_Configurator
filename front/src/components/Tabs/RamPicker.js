@@ -21,39 +21,43 @@ const useStyles = makeStyles((theme) => ({
 
 function RamPicker() {
   const classes = useStyles();
-  const [totalPages, setTotalPages] = useState(0);
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1);
   
-  const fetchProducts = (p, t, s, o) => {
-    axios.get("http://localhost:8080/products/ram?page=" + (p - 1) + "&size=" + t + "&sortBy=" + s + "&sortingOrder=" + o).then(res => {
-      console.log(res.data.products);
+  const fetchProducts = () => {
+    axios.get("http://localhost:8080/products/ram?page="
+      + (page - 1)
+      + "&size="
+      + totalItems
+      + "&sortBy=" 
+      + sortBy
+      + "&sortingOrder="
+      + sortOrder
+    ).then(res => {
       setProducts(res.data.products);
       setTotalPages(res.data.totalPages);
     });
   };
 
-  useEffect(() => {
-    fetchProducts(1, 30, '', '');
-  }, []);
-  
-
-  const handleChangePage = (event, value) => {
-    setPage(value);
-    fetchProducts(value,totalItems,sortBy,sortOrder);
-    scroll.scrollToTop();
-  };
-
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(30);
+  const [page, setPage] = useState(1);
   const [sortBy, setSortBy] = useState('');
   const [sortSelect, setSortSelect] = useState('');
   const [sortOrder, setSortOrder] = useState('');
-  const [totalItems, setTotalItems] = useState(30);
   const [open, setOpen] = useState(false);
   const [openSort, setOpenSort] = useState(false);
 
+  useEffect(() => {
+    fetchProducts();
+  }, [sortBy, sortSelect, sortOrder, totalItems]);
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
+    scroll.scrollToTop();
+  };
+
   const handleTotalItemsChange = (event) => {
     setTotalItems(event.target.value);
-    fetchProducts(page,event.target.value,sortBy,sortOrder);
   };
   
   const handleSortChange = (event) => {
@@ -62,24 +66,18 @@ function RamPicker() {
       case "brand_asc":
         setSortBy('product.brand');
         setSortOrder('asc');
-        fetchProducts(page,totalItems,'product.brand','asc');
-
         break;
       case "brand_desc":
         setSortBy('product.brand');
         setSortOrder('desc');
-        fetchProducts(page,totalItems,'product.brand','desc');
-
         break;
       case "price_asc":
         setSortBy('product.price');
         setSortOrder('asc');
-        fetchProducts(page,totalItems,'product.price','asc');
         break;
       case "price_desc":
-        setSortBy('product.brand');
+        setSortBy('product.price');
         setSortOrder('desc');
-        fetchProducts(page,totalItems,'product.price','desc');
         break;
     }
   };
@@ -125,7 +123,7 @@ function RamPicker() {
       </Grid>
       <Grid container alignItems="center" spacing={3}>
         {products.map(({product, moduleCapacity, speed, modulesCount, cl}, index) => (
-          <Grid item xs={4}>
+          <Grid item key={index} xs={4}>
             <VerticalProductCard
               productName={ product.brand + " " + product.name + " (" + modulesCount + " x " + moduleCapacity + " GB)" }
               price={Number(product.price).toFixed(2)}
@@ -138,7 +136,6 @@ function RamPicker() {
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={4}>
-            <Typography align="center|right">
             <FormControl variant="filled" className={classes.formControl}>
               <InputLabel id="totalPagesLabel">liczba wyników</InputLabel>
               <Select
@@ -155,7 +152,6 @@ function RamPicker() {
                 <MenuItem value={90}>90</MenuItem>
               </Select> 
             </FormControl>
-            </Typography>
           </Grid>
       </Grid>
       <Pagination count={totalPages} page={page} onChange={handleChangePage} />
