@@ -1,10 +1,9 @@
-import { Grid, makeStyles, FormControl, MenuItem, Select, InputLabel, Typography  } from '@material-ui/core'
+import { Grid, makeStyles, FormControl, MenuItem, Select, InputLabel, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import VerticalProductCard from '../products/VerticalProductCard'
 import axios from 'axios';
 import Pagination from '@material-ui/lab/Pagination';
 import * as Scroll from 'react-scroll';
-import { CenterFocusStrong } from '@material-ui/icons';
 
 let scroll = Scroll.animateScroll;
 
@@ -25,7 +24,7 @@ function RamPicker() {
   
   const fetchProducts = () => {
     axios.get("http://localhost:8080/products/ram?page="
-      + (page - 1)
+      + (currentPage - 1)
       + "&size="
       + totalItems
       + "&sortBy=" 
@@ -40,7 +39,7 @@ function RamPicker() {
 
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(30);
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('');
   const [sortSelect, setSortSelect] = useState('');
   const [sortOrder, setSortOrder] = useState('');
@@ -49,10 +48,10 @@ function RamPicker() {
 
   useEffect(() => {
     fetchProducts();
-  }, [sortBy, sortSelect, sortOrder, totalItems]);
+  }, [sortBy, sortSelect, sortOrder, totalItems, currentPage]);
 
   const handleChangePage = (event, value) => {
-    setPage(value);
+    setCurrentPage(value);
     scroll.scrollToTop();
   };
 
@@ -80,6 +79,7 @@ function RamPicker() {
         setSortOrder('desc');
         break;
     }
+    setCurrentPage(1);
   };
 
   const handleClose = () => {
@@ -100,8 +100,8 @@ function RamPicker() {
   
   return (
     <div>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+      <Grid container direction="row" justify="flex-end" alignItems="center" spacing>
+        <Grid item>
           <FormControl variant="outlined" className={classes.sortControl}>
           <InputLabel id="sortSelectLabel">Sortuj po</InputLabel>
             <Select
@@ -126,6 +126,7 @@ function RamPicker() {
           <Grid item key={index} xs={4}>
             <VerticalProductCard
               productName={ product.brand + " " + product.name + " (" + modulesCount + " x " + moduleCapacity + " GB)" }
+              image={product.image}
               price={Number(product.price).toFixed(2)}
               detail0={"Taktowanie  : " + speed + " MHz" }
               detail1={"Opóżnienie: CL" + cl }
@@ -134,9 +135,9 @@ function RamPicker() {
           </Grid>
         ))}
         </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs={4}>
-            <FormControl variant="filled" className={classes.formControl}>
+        <Grid container direction="row" justify="space-between" alignItems="center" spacing={5}>
+          <Grid item>
+            <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="totalPagesLabel">liczba wyników</InputLabel>
               <Select
                 id="totalPagesSelect"
@@ -153,9 +154,11 @@ function RamPicker() {
               </Select> 
             </FormControl>
           </Grid>
+          <Grid item>
+          <Pagination variant="outlined" color="primary" count={totalPages} page={currentPage} onChange={handleChangePage} />
+          </Grid>
       </Grid>
-      <Pagination count={totalPages} page={page} onChange={handleChangePage} />
-      </div>
+    </div>
   );
 }
 
