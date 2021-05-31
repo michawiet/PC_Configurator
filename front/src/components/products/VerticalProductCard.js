@@ -1,38 +1,51 @@
-import React from 'react';
-import { makeStyles, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, List, ListItem, ListItemText, Grid } from '@material-ui/core';
+import React, {useState}  from 'react';
+import { makeStyles, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import fanImage from '../../icons/fan.png'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 400,
+      maxWidth: 400,
+      boxShadow: theme.shadows[2],
+      '&:hover': {
+        boxShadow: theme.shadows[6],
+      },
     },
     button: {
       marginLeft: 'auto !important',
     },
-    image: {
+    cardMedia: {
       paddingTop: 20,
       margin: 'auto',
-      maxWidth: 200,
-      maxHeight: 220,
+      height: 220,
+      width: '80%',
+      objectFit: 'contain',
     },
-    content: {
+    cardContent: {
       minHeight: 200,
     }
-});
+}));
+
 //productDetails as a array, that gets converted here to a list or something
 export default function VerticalProductCard({image, productName, detail0, detail1, detail2, detail3, price, href}) {
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+    //tu sie dialog otworzy
+  };
+
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea  onClick={handleClickOpen}>
         <CardMedia 
-          className={classes.image}
+          className={classes.cardMedia}
           component="img"
-          image={fanImage}
-        />
-        <CardContent className={classes.content}>
+          src={image}
+        >
+        </CardMedia>
+        <CardContent className={classes.cardContent}>
           <Typography component={'span'} gutterBottom variant="h5" component="h2">
             {productName}
           </Typography>
@@ -51,7 +64,6 @@ export default function VerticalProductCard({image, productName, detail0, detail
         </Button>
         </CardActions>
     </Card>
-    );
+  )
 }
 
-//const withDefaultProps = defaultProps
