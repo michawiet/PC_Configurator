@@ -35,9 +35,9 @@ public class RamController {
 
     @GetMapping
     public Map<String, Object> getRams(@RequestParam("page") int page,
-                                                       @RequestParam("size") int size,
-                                                       @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
-                                                       @RequestParam(value = "sortingOrder",required = false,defaultValue = "") String sortingOrder) {
+                                       @RequestParam("size") int size,
+                                       @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
+                                       @RequestParam(value = "sortingOrder",required = false,defaultValue = "") String sortingOrder) {
         List<RamDTO> ramDtoList = new ArrayList<>();
         Pageable pagingSort;
         switch (sortingOrder) {

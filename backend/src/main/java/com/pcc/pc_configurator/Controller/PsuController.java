@@ -23,7 +23,7 @@ import java.util.Map;
 @CrossOrigin("*")
 public class PsuController {
     private final PsuRepository psuRepository;
-    private List<PsuDTO> psuDtoList = new ArrayList<>();
+    //private List<PsuDTO> psuDtoList = new ArrayList<>();
     @Autowired
     ModelMapper modelMapper;
 
@@ -35,10 +35,10 @@ public class PsuController {
 
     @GetMapping
     public Map<String, Object> getPsus(@RequestParam("page") int page,
-                                @RequestParam("size") int size,
-                                @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
-                                @RequestParam(value = "sortingOrder",required = false,defaultValue = "") String sortingOrder) {
-        List<PsuDTO> cpuDtoList = new ArrayList<>();
+                                       @RequestParam("size") int size,
+                                       @RequestParam(value = "sortBy", required = false, defaultValue = "id") String sortBy,
+                                       @RequestParam(value = "sortingOrder", required = false, defaultValue = "") String sortingOrder) {
+        List<PsuDTO> psuDTOList = new ArrayList<>();
         Pageable pagingSort;
         switch (sortingOrder) {
             case "asc":
@@ -57,11 +57,11 @@ public class PsuController {
         psuPage = psuRepository.findAll(pagingSort);
 
         for(var psu : psuPage) {
-            cpuDtoList.add(modelMapper.map(psu, PsuDTO.class));
+            psuDTOList.add(modelMapper.map(psu, PsuDTO.class));
         }
 
         Map<String, Object> response = new HashMap<>();
-        response.put("products", psuDtoList);
+        response.put("products", psuDTOList);
         response.put("currentPage", psuPage.getNumber());
         response.put("totalItems",psuPage.getTotalElements());
         response.put("totalPages", psuPage.getTotalPages());
