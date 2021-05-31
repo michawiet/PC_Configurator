@@ -100,7 +100,7 @@ function CoolerPicker() {
 
   return (
     <div>
-      <Grid container direction="row" justify="flex-end" alignItems="center" spacing>
+      <Grid container direction="row" justify="flex-end" alignItems="center" spacing spacing={3}>
         <Grid item>
           <FormControl variant="outlined" className={classes.sortControl}>
           <InputLabel id="sortSelectLabel">Sortuj po</InputLabel>
@@ -122,8 +122,8 @@ function CoolerPicker() {
         </Grid>
       </Grid>
       <Grid container alignItems="center" spacing={3}>
-        {products.map(({product, noiseLevelDB, workstation, air}) => (
-          <Grid item xs={4}>
+        {products.map(({product, noiseLevelDB, workstation, air}, index) => (
+          <Grid key={index} item xs={4}>
             <VerticalProductCard
               productName={product.brand + " " + product.name}
               image={product.image}

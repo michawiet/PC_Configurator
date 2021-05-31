@@ -101,7 +101,7 @@ function GpuPicker() {
 
   return (
     <div>
-        <Grid container direction="row" justify="flex-end" alignItems="center" spacing>
+        <Grid container direction="row" justify="flex-end" alignItems="center" spacing={3}>
         <Grid item>
           <FormControl variant="outlined" className={classes.sortControl}>
           <InputLabel id="sortSelectLabel">Sortuj po</InputLabel>
