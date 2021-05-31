@@ -1,37 +1,132 @@
-import { Grid, makeStyles } from '@material-ui/core'
+import { Grid, makeStyles, FormControl, MenuItem, Select, InputLabel, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import VerticalProductCard from '../products/VerticalProductCard'
-import Typography from '@material-ui/core/Typography';
-import Pagination from '@material-ui/lab/Pagination';
 import axios from 'axios';
+import Pagination from '@material-ui/lab/Pagination';
+import * as Scroll from 'react-scroll';
+
+let scroll = Scroll.animateScroll;
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    minWidth: 120,
+    justifyContent: 'flex-end',
+  },
+  sortControl: {
+    margin: theme.spacing(1),
+    minWidth: 300,
+  }
+}));
 
 function PsuPicker() {
+  const classes = useStyles();
   const [products, setProducts] = useState([]);
   
-    const fetchProducts = () => {
-      axios.get("http://localhost:8080/products/psu?page=0&size=10&sortBy=product.brand&sortingOrder=desc").then(res => {
-        console.log(res);
-        setProducts(res.data);
-      });
-    };
-  
-    useEffect(() => {
-      fetchProducts();
-    }, []);
+  const fetchProducts = () => {
+    axios.get("http://localhost:8080/products/psu?page="
+      + (currentPage - 1)
+      + "&size="
+      + totalItems
+      + "&sortBy=" 
+      + sortBy
+      + "&sortingOrder="
+      + sortOrder
+    ).then(res => {
+      setProducts(res.data.products);
+      setTotalPages(res.data.totalPages);
+    });
+  };
 
-    const [page, setPage] = React.useState(1);
-    const handleChangePage = (event, value) => {
-      setPage(value);
-    };
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(30);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState('');
+  const [sortSelect, setSortSelect] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
+  const [open, setOpen] = useState(false);
+  const [openSort, setOpenSort] = useState(false);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [sortBy, sortSelect, sortOrder, totalItems, currentPage]);
+
+  const handleChangePage = (event, value) => {
+    setCurrentPage(value);
+    scroll.scrollToTop();
+  };
+
+  const handleTotalItemsChange = (event) => {
+    setTotalItems(event.target.value);
+  };
+  
+  const handleSortChange = (event) => {
+    setSortSelect(event.target.value);
+    switch(event.target.value) {
+      case "brand_asc":
+        setSortBy('product.brand');
+        setSortOrder('asc');
+        break;
+      case "brand_desc":
+        setSortBy('product.brand');
+        setSortOrder('desc');
+        break;
+      case "price_asc":
+        setSortBy('product.price');
+        setSortOrder('asc');
+        break;
+      case "price_desc":
+        setSortBy('product.price');
+        setSortOrder('desc');
+        break;
+    }
+    setCurrentPage(1);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  
+  const handleCloseSort = () => {
+    setOpenSort(false);
+  };
+
+  const handleOpenSort = () => {
+    setOpenSort(true);
+  };
+  
   return (
     <div>
-       <Typography>Page: {page}</Typography>
-      <Pagination count={10} page={page} onChange={handleChangePage} />
-      <Grid container spacing={3}>
+      <Grid container direction="row" justify="flex-end" alignItems="center" spacing>
+        <Grid item>
+          <FormControl variant="outlined" className={classes.sortControl}>
+          <InputLabel id="sortSelectLabel">Sortuj po</InputLabel>
+            <Select
+              id="sortSelect"
+              open={openSort}
+              onClose={handleCloseSort}
+              onOpen={handleOpenSort}
+              value={sortSelect}
+              onChange={handleSortChange}
+              label="Sortuj po"
+            >
+              <MenuItem value={'brand_desc'}>Marka malejąco</MenuItem>
+              <MenuItem value={'brand_asc'}>Marka rosnąco</MenuItem>
+              <MenuItem value={'price_desc'}>Cena malejąco</MenuItem>
+              <MenuItem value={'price_asc'}>Cena rosnąco</MenuItem>
+            </Select> 
+          </FormControl>
+        </Grid>
+      </Grid>
+      <Grid container alignItems="center" spacing={3}>
         {products.map(({product, modular, wattage, formFactor, efficiencyRating }, index) => (
-          <Grid item xs={4}>
+          <Grid item key={index} xs={4}>
             <VerticalProductCard
               productName={ product.brand + " " + product.name }
+              image={product.image}
               price={Number(product.price).toFixed(2)}
               detail0={"Moc: " + wattage + " W"}
               detail1={"Format: " + formFactor }
@@ -40,10 +135,32 @@ function PsuPicker() {
             />
           </Grid>
         ))}
+        </Grid>
+        <Grid container direction="row" justify="space-between" alignItems="center" spacing={5}>
+          <Grid item>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="totalPagesLabel">liczba wyników</InputLabel>
+              <Select
+                id="totalPagesSelect"
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={totalItems}
+                onChange={handleTotalItemsChange}
+                label="liczba wyników"
+              >
+                <MenuItem value={30}>30</MenuItem>
+                <MenuItem value={60}>60</MenuItem>
+                <MenuItem value={90}>90</MenuItem>
+              </Select> 
+            </FormControl>
+          </Grid>
+          <Grid item>
+          <Pagination variant="outlined" color="primary" count={totalPages} page={currentPage} onChange={handleChangePage} />
+          </Grid>
       </Grid>
-      <Typography>Page: {page}</Typography>
-      <Pagination count={10} page={page} onChange={handleChangePage} />
     </div>
-  )
+  );
 }
-export default PsuPicker;
+
+export default PsuPicker

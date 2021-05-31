@@ -1,167 +1,166 @@
-import React, { useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
+import { Grid, makeStyles, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import VerticalProductCard from '../products/VerticalProductCard'
 import axios from 'axios';
+import Pagination from '@material-ui/lab/Pagination';
+import * as Scroll from 'react-scroll';
 
-const columns = [
-  { 
-    id: 'socket', 
-    label: 'Socket', 
-    align: 'center',
-  },
-  { 
-    id: 'cores', 
-    label: 'Cores',
-    align: 'center',
-  },
-  {
-    id: 'smt',
-    label: 'SMT',
-    align: 'center',
-  },
-  {
-    id: 'igpu',
-    label: 'iGPU',
-    align: 'center',
+let scroll = Scroll.animateScroll;
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    minWidth: 120,
+    justifyContent: 'flex-end',
   },
-  {
-    id: 'tdpw',
-    label: 'TDP (W)',
-    align: 'center',
+  sortControl: {
+    margin: theme.spacing(1),
+    minWidth: 300,
+  }
+}));
 
-  },
-  {
-    id: 'stp',
-    label: 'ST pref',
-    align: 'center',
-
-  },
-  {
-    id: 'mtp',
-    label: 'MT pref',
-    align: 'center',
-
-  },
-  {
-    id: 'cc',
-    label: 'Core Clocks',
-    align: 'center',
-  },
-  {
-    id: 'bc',
-    label: 'Boost Clocks',
-    align: 'center',
-  },
-];
-
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
-  container: {
-    maxHeight: 650,
-  },
-});
-
-export default function StickyHeadTable() {
+function CpuPicker() {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
   const [products, setProducts] = useState([]);
   
-    const fetchProducts = () => {
-      axios.get("http://localhost:8080/products/cpu?page=0&size=10&sortBy=product.brand&sortingOrder=desc").then(res => {
-        console.log(res);
-        setProducts(res.data);
-      });
-    };
+  const fetchProducts = () => {
+    axios.get("http://localhost:8080/products/cpu?page="
+      + (currentPage - 1)
+      + "&size="
+      + totalItems
+      + "&sortBy=" 
+      + sortBy
+      + "&sortingOrder="
+      + sortOrder
+    ).then(res => {
+      setProducts(res.data.products);
+      setTotalPages(res.data.totalPages);
+    });
+  };
+
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(30);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState('');
+  const [sortSelect, setSortSelect] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
+  const [open, setOpen] = useState(false);
+  const [openSort, setOpenSort] = useState(false);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [sortBy, sortSelect, sortOrder, totalItems, currentPage]);
+
+  const handleChangePage = (event, value) => {
+    setCurrentPage(value);
+    scroll.scrollToTop();
+  };
+
+  const handleTotalItemsChange = (event) => {
+    setTotalItems(event.target.value);
+  };
   
-    useEffect(() => {
-      fetchProducts();
-    }, []);
+  const handleSortChange = (event) => {
+    setSortSelect(event.target.value);
+    switch(event.target.value) {
+      case "brand_asc":
+        setSortBy('product.brand');
+        setSortOrder('asc');
+        break;
+      case "brand_desc":
+        setSortBy('product.brand');
+        setSortOrder('desc');
+        break;
+      case "price_asc":
+        setSortBy('product.price');
+        setSortOrder('asc');
+        break;
+      case "price_desc":
+        setSortBy('product.price');
+        setSortOrder('desc');
+        break;
+    }
+    setCurrentPage(1);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  
+  const handleCloseSort = () => {
+    setOpenSort(false);
+  };
+
+  const handleOpenSort = () => {
+    setOpenSort(true);
+  };
   
   return (
-    <>
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((userProfile) => (
-                  <TableRow key = {userProfile.id}>
-                    <TableCell align="center">
-                      {userProfile.socket}
-                    </TableCell>
-                    <TableCell align="center">
-                      {userProfile.cores}
-                    </TableCell>
-                    <TableCell align="center">
-                      {userProfile.smt ? "Yes" : "No"}
-                    </TableCell>
-                    <TableCell align="center">
-                      {userProfile.integratedGPU ? "Yes" : "No"}
-                    </TableCell>
-                    <TableCell align="center">
-                      {userProfile.tdpW} 
-                    </TableCell>
-                    <TableCell align="center">
-                      {userProfile.stPref}
-                    </TableCell>
-                    <TableCell align="center">
-                      {userProfile.mtPref}
-                    </TableCell>
-                    <TableCell align="center">
-                      {userProfile.coreClock}
-                    </TableCell>
-                    <TableCell align="center">
-                      {userProfile.boostClock}
-                    </TableCell>
-                  </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 30]}
-        component="div"
-        count={products.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </Paper>
-    </>
+    <div>
+      <Grid container direction="row" justify="flex-end" alignItems="center" spacing>
+        <Grid item>
+          <FormControl variant="outlined" className={classes.sortControl}>
+          <InputLabel id="sortSelectLabel">Sortuj po</InputLabel>
+            <Select
+              id="sortSelect"
+              open={openSort}
+              onClose={handleCloseSort}
+              onOpen={handleOpenSort}
+              value={sortSelect}
+              onChange={handleSortChange}
+              label="Sortuj po"
+            >
+              <MenuItem value={'brand_desc'}>Marka malejąco</MenuItem>
+              <MenuItem value={'brand_asc'}>Marka rosnąco</MenuItem>
+              <MenuItem value={'price_desc'}>Cena malejąco</MenuItem>
+              <MenuItem value={'price_asc'}>Cena rosnąco</MenuItem>
+            </Select> 
+          </FormControl>
+        </Grid>
+      </Grid>
+      <Grid container alignItems="center" spacing={3}>
+        {products.map(({product, coreClock, socket, cores, smt, tdpW }, index) => (
+          <Grid item key={index} xs={4}>
+            <VerticalProductCard
+              productName={ product.brand + " " + product.name + " " }
+              image={product.image}
+              price={Number(product.price).toFixed(2)}
+              detail0={"Socket: " + socket}
+              detail1={"Taktowanie: " + coreClock + " GHz"}
+              detail2={"Liczba rdzeni (wątków): " + cores + "(" + (smt ? cores * 2 : cores) + ")" }
+              detail3={"TDP: " + tdpW + " W"}
+            />
+          </Grid>
+        ))}
+        </Grid>
+        <Grid container direction="row" justify="space-between" alignItems="center" spacing={5}>
+          <Grid item>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="totalPagesLabel">liczba wyników</InputLabel>
+              <Select
+                id="totalPagesSelect"
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={totalItems}
+                onChange={handleTotalItemsChange}
+                label="liczba wyników"
+              >
+                <MenuItem value={30}>30</MenuItem>
+                <MenuItem value={60}>60</MenuItem>
+                <MenuItem value={90}>90</MenuItem>
+              </Select> 
+            </FormControl>
+          </Grid>
+          <Grid item>
+          <Pagination variant="outlined" color="primary" count={totalPages} page={currentPage} onChange={handleChangePage} />
+          </Grid>
+      </Grid>
+    </div>
   );
 }
+
+export default CpuPicker

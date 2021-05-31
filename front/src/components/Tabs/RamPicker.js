@@ -128,7 +128,7 @@ function RamPicker() {
               productName={ product.brand + " " + product.name + " (" + modulesCount + " x " + moduleCapacity + " GB)" }
               image={product.image}
               price={Number(product.price).toFixed(2)}
-              detail0={"Taktowanie  : " + speed + " MHz" }
+              detail0={"Taktowanie: " + speed + " MHz" }
               detail1={"Opóżnienie: CL" + cl }
               detail2={"Pojemność całkowita: " + (moduleCapacity * modulesCount) + " GB" }
             />
