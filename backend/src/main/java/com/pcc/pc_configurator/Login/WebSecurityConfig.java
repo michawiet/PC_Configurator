@@ -64,18 +64,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login().defaultSuccessUrl("/loginSuccess")
                 .and()
                 .logout().logoutSuccessUrl("/logoutsucces").permitAll();
-        http.cors().and().csrf().disable();
+        http.csrf().disable();
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+    //@Bean
+    //CorsConfigurationSource corsConfigurationSource() {
+    //    CorsConfiguration configuration = new CorsConfiguration();
+    //    configuration.setAllowedOrigins(Arrays.asList("*"));
+    //    configuration.setAllowedMethods(Arrays.asList("*"));
+    //    configuration.setAllowedHeaders(Arrays.asList("*"));
+    //    configuration.setAllowCredentials(true);
+    //    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    //    source.registerCorsConfiguration("/**", configuration);
+    //    return source;
+    //}
 }

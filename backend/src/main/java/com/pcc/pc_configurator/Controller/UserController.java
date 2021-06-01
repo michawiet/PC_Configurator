@@ -1,7 +1,6 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.UserDTO;
-import com.pcc.pc_configurator.entities.User;
 import com.pcc.pc_configurator.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -28,7 +27,7 @@ public class UserController {
             userDtoList.add(modelMapper.map(user,UserDTO.class));
     }
 
-    @PostMapping(value = "/testPost",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/testPost",consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public String testPost(@RequestParam String email) {
         var userRepo = userRepository.findByEmail(email).getEmail();
         if(email.equals(userRepo)) {

@@ -8,7 +8,7 @@ import { green } from '@material-ui/core/colors';
 import MainTabsPanel from './MainTabsPanel';
 import PartPickerTabs from './Tabs/PartPickerTabs';
 import { useAuth } from "../AuthContext"
-
+import axios from 'axios';
 //icons
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
@@ -104,6 +104,13 @@ const MiniDrawer = (props  ) => {
     setselectedTabs(newValue);
 
   };
+  //trzeba to przenieść w inne miejsce  
+  axios.post('http://localhost:8080/users/testPost?email=' + currentUser.email , {
+    email: currentUser.email
+  })
+  .then(function (res) {
+    console.log(res);
+  })
   
   function a11yProps(index) {
     return {
@@ -155,7 +162,7 @@ const MiniDrawer = (props  ) => {
       >
         <Toolbar>
           <Typography component={'span'} variant="h6" >
-            Konfigurator PC
+            Konfigurator PC 
             {/*Title that is based on actual list selection*/}
           </Typography>
           <IconButton style={{ marginLeft: "84%" }} aria-label="delete">
@@ -168,7 +175,10 @@ const MiniDrawer = (props  ) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <PartPickerTabs selectedTabs={selectedTabs} />
+        {currentUser.email}
       </main>
+      
+
     </div>
   );
 }
