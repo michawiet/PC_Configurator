@@ -127,6 +127,7 @@ function CasePicker() {
               detail1={"Panel boczny: " +  side_Panel_Window }
               detail2={"Standard zasilacza: " + power_Supply_Standard }
               detail3={"Maksymaly wymiar płyty głównej: " + max_Motherboard_Size }
+              productID={product.id}
             />
           </Grid>
         ))}

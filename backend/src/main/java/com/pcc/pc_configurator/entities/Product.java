@@ -1,17 +1,15 @@
 package com.pcc.pc_configurator.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-
-import static javax.persistence.CascadeType.ALL;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private long id;
 
     private String brand;
@@ -26,6 +24,10 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
         this.image = image;
+        //  "basket"          klucz   wartość(aka. id i ilość)
+        Map<String, List<Integer>> localStorage;
+        //List<Integer> basket;
+        List<Map<String, Integer>> basket;
     }
 
     public Product() {

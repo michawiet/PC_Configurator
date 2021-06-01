@@ -1,5 +1,5 @@
-import React, { useState }  from 'react';
-import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography, IconButton, Grid, Button } from '@material-ui/core';
+import React, { useState, useEffect }  from 'react';
+import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography, IconButton, Grid, Button, Badge } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import MainTabsPanel from './MainTabsPanel';
 import PartPickerTabs from './Tabs/PartPickerTabs';
@@ -26,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MiniDrawer = (props  ) => {
-
+const MiniDrawer = (props) => {
   const classes = useStyles();
   const { children, value, index, ...other } = props;
   const [selectedTabs, setselectedTabs] = useState(0);
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
+  const [itemCount, setItemCount] = useState(0);
 
   const handleChange = (event, newValue) => {
     setselectedTabs(newValue);
@@ -59,7 +59,26 @@ const MiniDrawer = (props  ) => {
     } catch {
       setError("Failed to log out")
     }
-  } 
+  }
+
+  useEffect(() => {
+    function updateItemBasketCount() {
+      const itemsString = localStorage.getItem("basket");
+      var count = 0;
+      if(itemsString) {
+        const items = JSON.parse(itemsString);
+        for(const item of items) {
+          count += item.quantity;
+        }
+      }
+      setItemCount(count);
+    }
+    updateItemBasketCount();
+    window.addEventListener('storage', updateItemBasketCount);
+    return () => {
+      window.removeEventListener("storage", updateItemBasketCount);
+    }
+  }, [])
 
   return (
     <div className={classes.root}>
@@ -73,12 +92,20 @@ const MiniDrawer = (props  ) => {
               </Typography>
             </Grid>
             <Grid item>
-              <IconButton color="inherit" onClick={handleClickOpenDialog}>  
-                <ShoppingCartRoundedIcon/>
-              </IconButton>
-              <Button color="inherit" variant="outlined" onClick={handleLogout}>
-                Wyloguj się
-              </Button>
+              <Grid container spacing={5}>
+                <Grid item>
+                  <IconButton color="inherit" onClick={handleClickOpenDialog}>  
+                    <Badge badgeContent={itemCount} color="secondary">
+                      <ShoppingCartRoundedIcon/>
+                    </Badge>
+                  </IconButton>
+                </Grid>
+                <Grid item>
+                  <Button color="inherit" variant="outlined" onClick={handleLogout} >
+                    Wyloguj się
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Toolbar>

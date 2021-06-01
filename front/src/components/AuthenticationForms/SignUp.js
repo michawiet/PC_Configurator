@@ -17,19 +17,6 @@ import { useAuth } from "../../AuthContext"
 import Alert from '@material-ui/lab/Alert';
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -65,7 +52,7 @@ export default function SignUp() {
     e.preventDefault()
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
+      return setError("Hasła nie są takie same!")
     }
 
     try {
@@ -75,7 +62,7 @@ export default function SignUp() {
       console.log("konto")
       history.push("/loged")
     } catch {
-      setError("Failed to create an account")
+      setError("Nie udało się stworzyć konta")
     }
 
     setLoading(false)
@@ -88,7 +75,7 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        {error && <Alert severity="error">{error}</Alert>}
+        
 
         <Typography component="h1" variant="h5">
           Rejestracja
@@ -154,21 +141,18 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
             onClick={handleSubmit}
-
           >
             Zarejestruj
           </Button>
+          {error && <Alert severity="error">{error}</Alert>}
           <Grid container justify="flex-end">
             <Grid item>
-            <Button disabled={loading} color="primary" onClick={()=>{history.push("/login")}}>Posiasz już konto? Zaloguj się</Button>
-
-             
+              <Button disabled={loading} color="primary" onClick={()=>{history.push("/login")}}>Posiasz już konto? Zaloguj się</Button>
             </Grid>
           </Grid>
         </form>
       </div>
       <Box mt={5}>
-        <Copyright />
       </Box>
     </Container>
   );

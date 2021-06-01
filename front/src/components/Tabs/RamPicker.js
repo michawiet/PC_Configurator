@@ -126,6 +126,7 @@ function RamPicker() {
               detail0={"Taktowanie: " + speed + " MHz" }
               detail1={"Opóżnienie: CL" + cl }
               detail2={"Pojemność całkowita: " + (moduleCapacity * modulesCount) + " GB" }
+              productID={product.id}
             />
           </Grid>
         ))}

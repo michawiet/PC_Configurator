@@ -126,6 +126,7 @@ function CoolerPicker() {
               detail0={"Socket: " + socket }
               detail1={"Chipset: " + chipset }
               detail2={"Format: " + formFactor }
+              productID={product.id}
             />
           </Grid>
         ))}

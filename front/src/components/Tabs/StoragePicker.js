@@ -127,6 +127,7 @@ function StoragePicker() {
               detail1={"Typ: " + type }
               detail2={"Interfejs: " + interface_ }
               detail3={"Format: " + formFactor }
+              productID={product.id}
             />
           </Grid>
         ))}

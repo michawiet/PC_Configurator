@@ -26,14 +26,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //productDetails as a array, that gets converted here to a list or something
-export default function VerticalProductCard({image, productName, detail0, detail1, detail2, detail3, price, href}) {
+export default function VerticalProductCard({image, productName, detail0, detail1, detail2, detail3, price, productID}) {
   const classes = useStyles();
-
   const [open, setOpen] = useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
-    //tu sie dialog otworzy
+  };
+  
+  const addToLocalStorage = () => {
+    var basketString = localStorage.getItem("basket");
+    var basketItems = [];
+    if(basketString) {
+      basketItems = JSON.parse(basketString);
+    }
+    var exists = false;
+    for(var product of basketItems){ //check if item exists
+      if(product.id === productID) {
+        product.quantity++;
+        exists = true;
+      }
+    }
+    if(!exists) {
+      basketItems.push({id: productID, quantity: 1});
+    }
+    var string = JSON.stringify(basketItems);
+    localStorage.setItem("basket", string);
+    //window.dispatchEvent(new Event("storage"));
+    //console.log(localStorage.getItem("basket"));
   };
 
   return (
@@ -58,7 +77,12 @@ export default function VerticalProductCard({image, productName, detail0, detail
         </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button variant="contained" className={classes.button} endIcon={<AddShoppingCartIcon />} color="primary">
+          <Button
+            variant="contained"
+            className={classes.button}
+            endIcon={<AddShoppingCartIcon />}
+            onClick={addToLocalStorage}
+            color="primary">
             {price} zł
           </Button>
         </CardActions>

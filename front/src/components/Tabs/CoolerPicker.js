@@ -125,6 +125,7 @@ function CoolerPicker() {
               detail0={"Maksymalny poziom hałasu: " + noiseLevelDB + " dB"}
               detail1={"Kompatybilność z gniazdem: " + (workstation ? "sTRX4" : "2066, 1151, 1200, AM4")}
               detail2={"Typ chłodzenia: " + (air ? "Powietrzne" : "AIO")}
+              productID={product.id}
             />
           </Grid>
         ))}

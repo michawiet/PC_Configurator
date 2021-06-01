@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AuthenticatedPartPicker from './components/AuthenticatedPartPicker';
 import { AuthProvider } from "./AuthContext"
 import PrivateRoute from "./PrivateRoute"
-
+import Basket from './components/Basket/Basket'
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
           <Route exact path="/" component={UnauthenticatedPartPicker} />
           <Route exact path="/login" component={SignIn} />
           <Route exact path="/signup" component={SingUp} />
+          <PrivateRoute exact path="/basket" component={Basket} />
           <PrivateRoute exact path="/loged" component={AuthenticatedPartPicker} />
         </Switch>
         </AuthProvider>

@@ -127,6 +127,7 @@ function PsuPicker() {
               detail1={"Format: " + formFactor }
               detail2={"Sprawność: " + efficiencyRating }
               detail3={"Typ okablowania: " + modular }
+              productID={product.id}
             />
           </Grid>
         ))}

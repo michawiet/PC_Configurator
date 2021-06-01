@@ -19,18 +19,7 @@ import { useAuth } from "../../AuthContext"
 import Alert from '@material-ui/lab/Alert';
 import firebase from "firebase/app";
 import "firebase/auth";
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 
 
@@ -78,7 +67,7 @@ export default function SignIn() {
       history.push("/loged")
 
     } catch {
-      setError("Failed to log in")
+      setError("Niepoprawne hasło lub e-mail")
 
     }
 
@@ -92,7 +81,7 @@ export default function SignIn() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        {error && <Alert severity="error">{error}</Alert>}
+        
 
         <Typography component="h1" variant="h5">
           Zaloguj
@@ -101,10 +90,11 @@ export default function SignIn() {
           <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Adres Email" name="email" autoComplete="email" autoFocus inputRef={emailRef}/>
 
           <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Hasło" type="password" id="password" autoComplete="current-password" inputRef={passwordRef}/>
-          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me"/>
+          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Zapamiętaj mnie"/>
           <Button disabled={loading}  fullWidth variant="contained" color="primary"className={classes.submit} onClick={handleSubmit}>
             Zaloguj
           </Button>
+          {error && <Alert severity="error">{error}</Alert>}
           <GoogleButton variant="contained" color="primary"className={classes.submit}    
           onClick={() => {
                 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
@@ -125,7 +115,6 @@ export default function SignIn() {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
       </Box>
     </Container>
   );

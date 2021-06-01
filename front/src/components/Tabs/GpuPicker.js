@@ -127,6 +127,7 @@ function GpuPicker() {
               detail1={"Taktowanie rdzenia: " + coreClockMHZ + " MHz (" + boostClockMHZ + " MHz w trybie Boost)"}
               detail2={"Pamięć: " + memoryGB + " GB" }
               detail3={"Długość: " + lengthMM + " mm" }
+              productID={product.id}
             />
           </Grid>
         ))}
