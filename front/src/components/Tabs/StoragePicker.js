@@ -1,4 +1,4 @@
-import { Grid, makeStyles, FormControl, MenuItem, Select, InputLabel, Typography } from '@material-ui/core'
+import { Grid, makeStyles, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import VerticalProductCard from '../products/VerticalProductCard'
 import axios from 'axios';
@@ -20,21 +20,6 @@ const useStyles = makeStyles((theme) => ({
 function StoragePicker() {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
-  
-  const fetchProducts = () => {
-    axios.get("http://localhost:8080/products/storage?page="
-      + (currentPage - 1)
-      + "&size="
-      + totalItems
-      + "&sortBy=" 
-      + sortBy
-      + "&sortingOrder="
-      + sortOrder
-    ).then(res => {
-      setProducts(res.data.products);
-      setTotalPages(res.data.totalPages);
-    });
-  };
 
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(30);
@@ -46,7 +31,18 @@ function StoragePicker() {
   const [openSort, setOpenSort] = useState(false);
 
   useEffect(() => {
-    fetchProducts();
+    axios.get("http://localhost:8080/products/storage?page="
+      + (currentPage - 1)
+      + "&size="
+      + totalItems
+      + "&sortBy=" 
+      + sortBy
+      + "&sortingOrder="
+      + sortOrder
+    ).then(res => {
+    setProducts(res.data.products);
+    setTotalPages(res.data.totalPages);
+  });
   }, [sortBy, sortSelect, sortOrder, totalItems, currentPage]);
 
   const handleChangePage = (event, value) => {

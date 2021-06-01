@@ -20,8 +20,16 @@ const useStyles = makeStyles((theme) => ({
 function CpuPicker() {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
-  
-  const fetchProducts = () => {
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(30);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState('');
+  const [sortSelect, setSortSelect] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
+  const [open, setOpen] = useState(false);
+  const [openSort, setOpenSort] = useState(false);
+
+  useEffect(() => {
     axios.get("http://localhost:8080/products/cpu?page="
       + (currentPage - 1)
       + "&size="
@@ -34,19 +42,6 @@ function CpuPicker() {
       setProducts(res.data.products);
       setTotalPages(res.data.totalPages);
     });
-  };
-
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalItems, setTotalItems] = useState(30);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortBy, setSortBy] = useState('');
-  const [sortSelect, setSortSelect] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
-  const [open, setOpen] = useState(false);
-  const [openSort, setOpenSort] = useState(false);
-
-  useEffect(() => {
-    fetchProducts();
   }, [sortBy, sortSelect, sortOrder, totalItems, currentPage]);
 
   const handleChangePage = (event, value) => {

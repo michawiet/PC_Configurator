@@ -1,8 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography } from '@material-ui/core';
+import { makeStyles, AppBar, Toolbar, CssBaseline, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
 import { useHistory } from "react-router-dom";
 import MainTabsPanel from './MainTabsPanel';
 import PartPickerTabs from './Tabs/PartPickerTabs';
@@ -28,34 +27,10 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
-  },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
   },
   toolbar: {
     display: 'flex',
@@ -71,39 +46,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 75,
   
   },
-  labelContainer: {
-    width: "auto",
-    padding: 0,
-  },
 }));
 
 const MiniDrawer = (props) => {
 
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const { children, value, index, ...other } = props;
   const [selectedTabs, setselectedTabs] = React.useState(0);
-
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
 
   let history = useHistory();
 

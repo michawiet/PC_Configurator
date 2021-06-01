@@ -46,10 +46,10 @@ export default function VerticalProductCard({image, productName, detail0, detail
         >
         </CardMedia>
         <CardContent className={classes.cardContent}>
-          <Typography component={'span'} gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2">
             {productName}
           </Typography>
-          <Typography component={'span'} variant="caption" color="textSecondary" component="h2">
+          <Typography variant="caption" color="textSecondary" component="h2">
             {detail0}<br/>
             {detail1}<br/>
             {detail2}<br/>

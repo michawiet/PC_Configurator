@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.primary,
     maxWidth: 460,
-    boxShadow: theme.shadows[8],
+    boxShadow: theme.shadows[2],
     '&:hover': {
       cursor: 'pointer',
-      boxShadow: theme.shadows[2],
+      boxShadow: theme.shadows[8],
     }
   },
   iconStyle: {

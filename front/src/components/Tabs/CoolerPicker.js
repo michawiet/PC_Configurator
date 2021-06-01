@@ -20,8 +20,16 @@ const useStyles = makeStyles((theme) => ({
 function CoolerPicker() {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
-  
-  const fetchProducts = () => {
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(30);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState('');
+  const [sortSelect, setSortSelect] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
+  const [open, setOpen] = useState(false);
+  const [openSort, setOpenSort] = useState(false);
+
+  useEffect(() => {
     axios.get("http://localhost:8080/products/cooler?page="
       + (currentPage - 1)
       + "&size="
@@ -34,19 +42,6 @@ function CoolerPicker() {
       setProducts(res.data.products);
       setTotalPages(res.data.totalPages);
     });
-  };
-  
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalItems, setTotalItems] = useState(30);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortBy, setSortBy] = useState('');
-  const [sortSelect, setSortSelect] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
-  const [open, setOpen] = useState(false);
-  const [openSort, setOpenSort] = useState(false);
-
-  useEffect(() => {
-    fetchProducts();
   }, [sortBy, sortSelect, sortOrder, totalItems, currentPage]);
 
   const handleChangePage = (event, value) => {
@@ -99,7 +94,7 @@ function CoolerPicker() {
 
   return (
     <div>
-      <Grid container direction="row" justify="flex-end" alignItems="center" spacing spacing={3}>
+      <Grid container direction="row" justify="flex-end" alignItems="center" spacing={3}>
         <Grid item>
           <FormControl variant="outlined" className={classes.sortControl}>
           <InputLabel id="sortSelectLabel">Sortuj po</InputLabel>

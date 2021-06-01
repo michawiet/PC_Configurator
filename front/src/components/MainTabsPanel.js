@@ -11,7 +11,6 @@ import { ReactComponent as GpuIcon } from '../icons/graphics-card.svg';
 import { ReactComponent as CaseIcon } from '../icons/case.svg';
 import { ReactComponent as PsuIcon } from '../icons/power-supply.svg';
 import { ReactComponent as ComputerIcon } from '../icons/computer.svg';
-import { ClassRounded } from '@material-ui/icons';
 
 function a11yProps(index) {
   return {

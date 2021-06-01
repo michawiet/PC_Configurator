@@ -1,4 +1,4 @@
-import { Grid, makeStyles, FormControl, MenuItem, Select, InputLabel, Typography } from '@material-ui/core'
+import { Grid, makeStyles, FormControl, MenuItem, Select, InputLabel } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import VerticalProductCard from '../products/VerticalProductCard'
 import axios from 'axios';
@@ -20,8 +20,17 @@ const useStyles = makeStyles((theme) => ({
 function RamPicker() {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
-  
-  const fetchProducts = () => {
+
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(30);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState('');
+  const [sortSelect, setSortSelect] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
+  const [open, setOpen] = useState(false);
+  const [openSort, setOpenSort] = useState(false);
+
+  useEffect(() => {
     axios.get("http://localhost:8080/products/ram?page="
       + (currentPage - 1)
       + "&size="
@@ -34,19 +43,6 @@ function RamPicker() {
       setProducts(res.data.products);
       setTotalPages(res.data.totalPages);
     });
-  };
-
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalItems, setTotalItems] = useState(30);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortBy, setSortBy] = useState('');
-  const [sortSelect, setSortSelect] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
-  const [open, setOpen] = useState(false);
-  const [openSort, setOpenSort] = useState(false);
-
-  useEffect(() => {
-    fetchProducts();
   }, [sortBy, sortSelect, sortOrder, totalItems, currentPage]);
 
   const handleChangePage = (event, value) => {
