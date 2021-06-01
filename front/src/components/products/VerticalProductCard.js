@@ -5,7 +5,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 400,
-      boxShadow: theme.shadows[2],
+      boxShadow: theme.shadows[1],
       '&:hover': {
         boxShadow: theme.shadows[6],
       },
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
       objectFit: 'contain',
     },
     cardContent: {
-      minHeight: 200,
+      minHeight: 150,
     }
 }));
 
@@ -46,7 +46,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
         >
         </CardMedia>
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom component="h5" variant="body1">
             {productName}
           </Typography>
           <Typography variant="caption" color="textSecondary" component="h2">
@@ -58,10 +58,9 @@ export default function VerticalProductCard({image, productName, detail0, detail
         </CardContent>
         </CardActionArea>
         <CardActions>
-        <p></p>
-        <Button className={classes.button} endIcon={<AddShoppingCartIcon />} variant="contained" color="primary">
-          {price} zł &nbsp;
-        </Button>
+          <Button variant="contained" className={classes.button} endIcon={<AddShoppingCartIcon />} color="primary">
+            {price} zł
+          </Button>
         </CardActions>
     </Card>
   )
