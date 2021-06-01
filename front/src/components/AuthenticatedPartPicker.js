@@ -1,68 +1,15 @@
 import React, { useState }  from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography, IconButton } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
+import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography, IconButton, Grid, Button } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
-import { green } from '@material-ui/core/colors';
 import MainTabsPanel from './MainTabsPanel';
 import PartPickerTabs from './Tabs/PartPickerTabs';
-import { useAuth } from "../AuthContext"
+import { useAuth } from "../AuthContext";
 import axios from 'axios';
-//icons
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-
-//import IconSelector from './IconSelector';
-
-const drawerWidth = 240;
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
   },
   toolbar: {
     display: 'flex',
@@ -76,34 +23,21 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     marginTop: 75,
-  
   },
-  labelContainer: {
-    width: "auto",
-    padding: 0,
-  },
-  tabsy:{
-    /*position: "absolute",
-    left: 0,
-  top: 140*/
-  }
 }));
 
 const MiniDrawer = (props  ) => {
 
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
   const { children, value, index, ...other } = props;
-  const [selectedTabs, setselectedTabs] = React.useState(0);
-  const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const [selectedTabs, setselectedTabs] = useState(0);
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
 
   const handleChange = (event, newValue) => {
     setselectedTabs(newValue);
-
   };
+
   //trzeba to przenieść w inne miejsce  
   axios.post('http://localhost:8080/users/testPost?email=' + currentUser.email , {
     email: currentUser.email
@@ -111,74 +45,49 @@ const MiniDrawer = (props  ) => {
   .then(function (res) {
     console.log(res);
   })
-  
-  function a11yProps(index) {
-    return {
-      id: `vertical-tab-${index}`,
-      'aria-controls': `vertical-tabpanel-${index}`,
-    };
-  }
 
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography component={'span'}>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
+  const handleClickOpenDialog = () => {
+    history.push("/basket")
+  };
 
   let history = useHistory();
   async function handleLogout() {
     setError("")
-
     try {
       await logout()
       history.push("/")
     } catch {
       setError("Failed to log out")
     }
-  }
+  } 
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
+      <AppBar position="fixed">
         <Toolbar>
-          <Typography component={'span'} variant="h6" >
-            Konfigurator PC 
-            {/*Title that is based on actual list selection*/}
-          </Typography>
-          <IconButton style={{ marginLeft: "84%" }} aria-label="delete">
-            <ShoppingCartOutlinedIcon style={{ color: green[500] }}  fontSize="large" />
-          </IconButton>
-          <Button  style={{ marginLeft: "auto" }} color="inherit" onClick={handleLogout} >Logout</Button>
+          <Grid container direction="row" justify="space-between" alignItems="center" spacing={0}>
+            <Grid item>
+              <Typography variant="h6" noWrap>
+                Konfigurator PC
+              </Typography>
+            </Grid>
+            <Grid item>
+              <IconButton color="inherit" onClick={handleClickOpenDialog}>  
+                <ShoppingCartRoundedIcon/>
+              </IconButton>
+              <Button color="inherit" variant="outlined" onClick={handleLogout}>
+                Wyloguj się
+              </Button>
+            </Grid>
+          </Grid>
         </Toolbar>
         <MainTabsPanel selectedTabs={selectedTabs} setselectedTabs={setselectedTabs} />
       </AppBar>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <PartPickerTabs selectedTabs={selectedTabs} />
-        {currentUser.email}
       </main>
-      
-
     </div>
   );
 }
