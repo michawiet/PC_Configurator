@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Slider from '../Slider'
+import Slider from './Slider'
 
 const useStyles = makeStyles({
   root: {

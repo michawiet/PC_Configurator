@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
-import { ReactComponent as ZlotyIcon } from '../icons/poland-zloty-currency-symbol.svg';
+import { ReactComponent as ZlotyIcon } from '../../icons/poland-zloty-currency-symbol.svg';
 
 const useStyles = makeStyles({
   root: {
@@ -69,9 +69,9 @@ export default function InputSlider() {
             onChange={handleInputChange}
             onBlur={handleBlur}
             inputProps={{
-              step: 10,
+              step: 500,
               min: 0,
-              max: 15000,
+              max: 9999,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
