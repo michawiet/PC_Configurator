@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
   },
   sortControl: {
-    margin: theme.spacing(1),
     minWidth: 300,
   }
 }));
