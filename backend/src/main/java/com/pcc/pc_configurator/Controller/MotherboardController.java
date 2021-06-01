@@ -31,8 +31,7 @@ public class MotherboardController {
 
     @GetMapping(params = {"id"})
     public MotherboardDTO getOneMotherboard(@RequestParam("id") int id) {
-        var motherboardRepo = motherboardRepository.findById(Long.valueOf(id));
-        return modelMapper.map(motherboardRepo,MotherboardDTO.class);
+        return modelMapper.map(motherboardRepository.findById(Long.valueOf(id)).get(), MotherboardDTO.class);
     }
 
     @GetMapping

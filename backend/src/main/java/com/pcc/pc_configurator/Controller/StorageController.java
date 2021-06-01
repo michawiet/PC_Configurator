@@ -30,8 +30,7 @@ public class StorageController {
 
     @GetMapping(params = {"id"})
     public StorageDTO getOneStorage(@RequestParam("id") int id) {
-        var storageRepo = storageRepository.findById(Long.valueOf(id));
-        return modelMapper.map(storageRepo, StorageDTO.class);
+        return modelMapper.map(storageRepository.findById(Long.valueOf(id)).get(), StorageDTO.class);
     }
 
     @GetMapping

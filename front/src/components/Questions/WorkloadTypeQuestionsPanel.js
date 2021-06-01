@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.primary,
-    boxShadow: theme.shadows[8],
+    boxShadow: theme.shadows[2],
     '&:hover': {
       cursor: 'pointer',
-      boxShadow: theme.shadows[2],
+      boxShadow: theme.shadows[8],
     }
   },
   icon: {

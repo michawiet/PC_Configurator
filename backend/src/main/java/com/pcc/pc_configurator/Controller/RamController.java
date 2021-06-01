@@ -29,8 +29,7 @@ public class RamController {
 
     @GetMapping(params = {"id"})
     public RamDTO getOneRam(@RequestParam("id") int id) {
-        var ramRepo = ramRepository.findById(Long.valueOf(id));
-        return modelMapper.map(ramRepo,RamDTO.class);
+        return modelMapper.map(ramRepository.findById(Long.valueOf(id)).get(),RamDTO.class);
     }
 
     @GetMapping

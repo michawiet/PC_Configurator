@@ -30,8 +30,7 @@ public class CaseController {
 
     @GetMapping(params = {"id"})
     public CaseDTO getOneCase(@RequestParam("id") int id) {
-        var caseRepo = caseRepository.findById(Long.valueOf(id));
-        return modelMapper.map(caseRepo,CaseDTO.class);
+        return modelMapper.map(caseRepository.findById(Long.valueOf(id)).get(),CaseDTO.class);
     }
 
     @GetMapping

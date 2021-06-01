@@ -31,8 +31,7 @@ public class ProductsController {
 
     @GetMapping(params = {"id"})
     public ProductsDTO getOneProduct(@RequestParam("id") int id) {
-        var productsRepo = productRepository.findById(Long.valueOf(id));
-        return modelMapper.map(productsRepo, ProductsDTO.class);
+        return modelMapper.map(productRepository.findById(Long.valueOf(id)).get(), ProductsDTO.class);
     }
 
     @GetMapping
