@@ -91,7 +91,7 @@ export default function SignUp() {
         {error && <Alert severity="error">{error}</Alert>}
 
         <Typography component="h1" variant="h5">
-          Sign up
+          Rejestracja
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -114,7 +114,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Adres Email"
                 name="email"
                 autoComplete="email"
                 inputRef={emailRef}
@@ -126,7 +126,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Hasło"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -139,7 +139,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label=" Confirm Password "
+                label=" Potwierdź hasło "
                 type="password"
                 id="passworConfirm"
                 autoComplete="Confirm-password"
@@ -156,11 +156,11 @@ export default function SignUp() {
             onClick={handleSubmit}
 
           >
-            Sign Up
+            Zarejestruj
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-            <Button disabled={loading} color="primary" onClick={()=>{history.push("/login")}}>Already have an account? Sign in</Button>
+            <Button disabled={loading} color="primary" onClick={()=>{history.push("/login")}}>Posiasz już konto? Zaloguj się</Button>
 
              
             </Grid>

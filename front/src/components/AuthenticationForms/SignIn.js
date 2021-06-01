@@ -95,15 +95,15 @@ export default function SignIn() {
         {error && <Alert severity="error">{error}</Alert>}
 
         <Typography component="h1" variant="h5">
-          Sign in
+          Zaloguj
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus inputRef={emailRef}/>
+          <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Adres Email" name="email" autoComplete="email" autoFocus inputRef={emailRef}/>
 
-          <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" inputRef={passwordRef}/>
+          <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Hasło" type="password" id="password" autoComplete="current-password" inputRef={passwordRef}/>
           <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me"/>
           <Button disabled={loading}  fullWidth variant="contained" color="primary"className={classes.submit} onClick={handleSubmit}>
-            Sign In
+            Zaloguj
           </Button>
           <GoogleButton variant="contained" color="primary"className={classes.submit}    
           onClick={() => {
@@ -119,7 +119,7 @@ export default function SignIn() {
             <Grid item xs>
             </Grid>
             <Grid item>
-            <Button color="primary" onClick={()=>{history.push("/signup")}}>Don't have an account? Sign Up</Button>
+            <Button color="primary" onClick={()=>{history.push("/signup")}}>Nie masz konta? Zarejestruj się</Button>
             </Grid>
           </Grid>
         </form>
