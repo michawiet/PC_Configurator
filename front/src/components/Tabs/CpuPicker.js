@@ -124,7 +124,7 @@ function CpuPicker() {
               price={Number(product.price).toFixed(2)}
               detail0={"Socket: " + socket}
               detail1={"Taktowanie: " + coreClock + " GHz"}
-              detail2={"Liczba rdzeni (wątków): " + cores + "(" + (smt ? cores * 2 : cores) + ")" }
+              detail2={"Liczba rdzeni (wątków): " + cores + " (" + (smt ? cores * 2 : cores) + ")" }
               detail3={"TDP: " + tdpW + " W"}
               productID={product.id}
             />

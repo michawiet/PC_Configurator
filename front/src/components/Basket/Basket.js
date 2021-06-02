@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { makeStyles, Dialog, AppBar, Toolbar, IconButton, Typography, Slide, Table, TableBody, TableCell,
-  TableContainer, TableHead, TableRow, Paper, Container, Grid, FormControl, InputLabel, Select, MenuItem, Button} from '@material-ui/core';
+  TableContainer, TableHead, TableRow, Paper, Container, Grid, Button} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -90,7 +90,7 @@ function Basket() {
                       <TableCell align="right">Nazwa:</TableCell>
                       <TableCell align="right">Cena:</TableCell>
                       <TableCell align="right">Ilość:</TableCell>
-                      <TableCell align="right"><Button variant='outlined' onClick={deleteProducts}>wyczyść koszyk</Button></TableCell>
+                      <TableCell align="right"><Button variant='outlined' color="primary" onClick={deleteProducts}>wyczyść koszyk</Button></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

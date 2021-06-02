@@ -51,7 +51,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
     }
     var string = JSON.stringify(basketItems);
     localStorage.setItem("basket", string);
-    //window.dispatchEvent(new Event("storage"));
+    window.dispatchEvent(new Event("storage"));
     //console.log(localStorage.getItem("basket"));
   };
 
@@ -83,7 +83,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
             endIcon={<AddShoppingCartIcon />}
             onClick={addToLocalStorage}
             color="primary">
-            {price} zł
+              {price} zł
           </Button>
         </CardActions>
     </Card>

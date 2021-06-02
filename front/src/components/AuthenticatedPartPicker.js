@@ -5,7 +5,8 @@ import MainTabsPanel from './MainTabsPanel';
 import PartPickerTabs from './Tabs/PartPickerTabs';
 import { useAuth } from "../AuthContext";
 import axios from 'axios';
-import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import BasketBadgedButton from './Basket/BasketBadgedButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +33,6 @@ const MiniDrawer = (props) => {
   const [selectedTabs, setselectedTabs] = useState(0);
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
-  const [itemCount, setItemCount] = useState(0);
 
   const handleChange = (event, newValue) => {
     setselectedTabs(newValue);
@@ -46,10 +46,6 @@ const MiniDrawer = (props) => {
     console.log(res);
   })
 
-  const handleClickOpenDialog = () => {
-    history.push("/basket")
-  };
-
   let history = useHistory();
   async function handleLogout() {
     setError("")
@@ -60,25 +56,6 @@ const MiniDrawer = (props) => {
       setError("Failed to log out")
     }
   }
-
-  useEffect(() => {
-    function updateItemBasketCount() {
-      const itemsString = localStorage.getItem("basket");
-      var count = 0;
-      if(itemsString) {
-        const items = JSON.parse(itemsString);
-        for(const item of items) {
-          count += item.quantity;
-        }
-      }
-      setItemCount(count);
-    }
-    updateItemBasketCount();
-    window.addEventListener('storage', updateItemBasketCount);
-    return () => {
-      window.removeEventListener("storage", updateItemBasketCount);
-    }
-  }, [])
 
   return (
     <div className={classes.root}>
@@ -92,13 +69,9 @@ const MiniDrawer = (props) => {
               </Typography>
             </Grid>
             <Grid item>
-              <Grid container spacing={5}>
+              <Grid container direction="row" justify="space-between" alignItems="center" spacing={5}>
                 <Grid item>
-                  <IconButton color="inherit" onClick={handleClickOpenDialog}>  
-                    <Badge badgeContent={itemCount} color="secondary">
-                      <ShoppingCartRoundedIcon/>
-                    </Badge>
-                  </IconButton>
+                  <BasketBadgedButton/>
                 </Grid>
                 <Grid item>
                   <Button color="inherit" variant="outlined" onClick={handleLogout} >
