@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
       objectFit: 'contain',
     },
     cardContent: {
-      minHeight: 150,
+      minHeight: 165,
     }
 }));
 
