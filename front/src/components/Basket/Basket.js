@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import { makeStyles, Dialog, AppBar, Toolbar, IconButton, Typography, Slide, Table, TableBody, TableCell,
   TableContainer, TableHead, TableRow, Paper, Container, Grid, Button} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloseIcon from '@material-ui/icons/Close';
-
+import axios from 'axios'
+import { ContactlessOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -23,50 +24,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('piot', 123, 6.0, 24, 4.0),
-  createData('rek', 456, 9.0, 37, 4.3),
-  createData('tu', 789, 16.0, 24, 6.0),
-  createData('taj', 305, 3.7, 67, 4.3),
-  createData('był', 356, 16.0, 49, 3.9),
-];
-
 function Basket() {
   const classes = useStyles();
   let history = useHistory();
-  const [totalItems, setTotalItems] = useState(1);
-  const [open, setOpen] = useState(true);
-  const [openSelect, setOpenSelect] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    //get basket from local storage
+    const basketString = localStorage.getItem("basket");
+    //if basketString is not null, then parse into {id: x, quantity: y}
+    if(basketString) {
+      var basketItems = JSON.parse(basketString);
+      const baseUrl = "http://localhost:8080/products?id=";
+      var urls = [];
+      //create promises
+      basketItems.map(x => urls.push(axios.get(baseUrl + x.id)));
+      //axios getAll items
+      axios.all(urls).then(axios.spread((...responses) => {
+        var productsArr = [];
+        for(var i = 0; i < responses.length; i++) {
+          productsArr.push({product: responses[i].data, quantity: basketItems[i].quantity});
+        }
+        console.log(productsArr);
+        setProducts(productsArr);
+      }));
+    }
+    //else return
+  }, []);
+  
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
   });
   
-  const handleTotalItemsChange = (event) => {
-    setTotalItems(event.target.value);
-  };
-
-  const handleCloseSelect = () => {
-    setOpenSelect(false);
-  };
-
-  const handleOpenSelect = () => {
-    setOpenSelect(true);
-  };
   const handleClose = () => {
     history.push("/loged")
   };
   const deleteProducts = () => {
     localStorage.setItem("basket", []);
-    };
-  
+    setProducts([]);
+  };
+  const removeItemFromBasket = () =>{
+
+  };
+  var totalPrice = 0 ;
   return (
     <div>
-      <Dialog fullScreen open={open} onClose={handleClose}>
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -75,7 +77,6 @@ function Basket() {
             <Typography variant="h6" className={classes.title}>
               Koszyk
             </Typography>
-            
           </Toolbar>
         </AppBar>
         <Container fixed className={classes.container}>
@@ -94,15 +95,24 @@ function Basket() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                  {rows.map((row) => (
-                    <TableRow key={row.name}>
+                  {products.map(({product, quantity}) => (
+                    <TableRow key={product.id}>
                       <TableCell component="th" scope="row">
-                        {row.name}
+                        <img src={product.image} alt="" width="100" height="100"></img>
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">tu kiedyś będzie ilość</TableCell>
-                      <TableCell align="right"><IconButton ><DeleteIcon/></IconButton></TableCell>
+                      <TableCell align="right">
+                        {product.name}
+                      </TableCell>
+                      <TableCell align="right">
+                        {product.price}
+                      </TableCell>
+                      <TableCell align="right">
+                        {quantity}
+                        
+                      </TableCell>
+                      <TableCell align="right">
+                        <IconButton onClick={removeItemFromBasket} ><DeleteIcon/></IconButton>
+                      </TableCell>
                     </TableRow>
                   ))}
                   </TableBody>
@@ -112,11 +122,12 @@ function Basket() {
             <Grid item xs={4}>
               <Paper elevation={3}>
                 Tutaj terz XD
+                {totalPrice}
+                <Button>Kup</Button>
               </Paper>
             </Grid>
           </Grid>
         </Container>
-      </Dialog>
     </div>
   )
 }
