@@ -51,6 +51,8 @@ function CpuPicker() {
 
   const handleTotalItemsChange = (event) => {
     setTotalItems(event.target.value);
+    setCurrentPage(1);
+    scroll.scrollToTop();
   };
   
   const handleSortChange = (event) => {

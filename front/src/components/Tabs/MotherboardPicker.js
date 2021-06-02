@@ -52,6 +52,8 @@ function CoolerPicker() {
 
   const handleTotalItemsChange = (event) => {
     setTotalItems(event.target.value);
+    setCurrentPage(1);
+    scroll.scrollToTop();
   };
   
   const handleSortChange = (event) => {
@@ -121,12 +123,12 @@ function CoolerPicker() {
           <Grid item key={index} xs={4}>
             <VerticalProductCard
               productName={ product.brand + " " + product.name }
-              image={product.image}
-              price={Number(product.price).toFixed(2)}
-              detail0={"Socket: " + socket }
-              detail1={"Chipset: " + chipset }
-              detail2={"Format: " + formFactor }
-              productID={product.id}
+              image={ product.image}
+              price={ Number(product.price).toFixed(2)}
+              detail0={ "Socket: " + socket }
+              detail1={ "Chipset: " + chipset }
+              detail2={ "Format: " + formFactor }
+              productID={ product.id }
             />
           </Grid>
         ))}

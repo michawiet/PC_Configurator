@@ -52,6 +52,8 @@ function RamPicker() {
 
   const handleTotalItemsChange = (event) => {
     setTotalItems(event.target.value);
+    setCurrentPage(1);
+    scroll.scrollToTop();
   };
   
   const handleSortChange = (event) => {
@@ -120,12 +122,13 @@ function RamPicker() {
         {products.map(({product, moduleCapacity, speed, modulesCount, cl}, index) => (
           <Grid item key={index} xs={4}>
             <VerticalProductCard
-              productName={ product.brand + " " + product.name + " (" + modulesCount + " x " + moduleCapacity + " GB)" }
+              productName={ product.brand + " " + product.name }
               image={product.image}
               price={Number(product.price).toFixed(2)}
-              detail0={"Taktowanie: " + speed + " MHz" }
-              detail1={"Opóżnienie: CL" + cl }
-              detail2={"Pojemność całkowita: " + (moduleCapacity * modulesCount) + " GB" }
+              detail0={ "Taktowanie: " + speed + " MHz" }
+              detail1={ "Opóżnienie: CL" + cl }
+              detail2={ "Pojemność całkowita: " + (moduleCapacity * modulesCount) + " GB" }
+              detail3={ "Ilość modułów: " + modulesCount }
               productID={product.id}
             />
           </Grid>

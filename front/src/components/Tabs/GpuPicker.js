@@ -51,6 +51,8 @@ function GpuPicker() {
 
   const handleTotalItemsChange = (event) => {
     setTotalItems(event.target.value);
+    setCurrentPage(1);
+    scroll.scrollToTop();
   };
   
   const handleSortChange = (event) => {
@@ -121,13 +123,13 @@ function GpuPicker() {
           <Grid item key={index} xs={4}>
             <VerticalProductCard
               productName={ product.brand + " " + product.name  }
-              image={product.image}
-              price={Number(product.price).toFixed(2)}
-              detail0={"Układ graficzny: " + chipset }
-              detail1={"Taktowanie rdzenia: " + coreClockMHZ + " MHz (" + boostClockMHZ + " MHz w trybie Boost)"}
-              detail2={"Pamięć: " + memoryGB + " GB" }
-              detail3={"Długość: " + lengthMM + " mm" }
-              productID={product.id}
+              image={ product.image }
+              price={ Number(product.price).toFixed(2)}
+              detail0={ "Układ graficzny: " + chipset }
+              detail1={ "Taktowanie rdzenia: " + coreClockMHZ + " MHz (" + boostClockMHZ + " MHz w trybie Boost)" }
+              detail2={ "Pamięć: " + memoryGB + " GB" }
+              detail3={ "Długość: " + lengthMM + " mm" }
+              productID={ product.id }
             />
           </Grid>
         ))}
