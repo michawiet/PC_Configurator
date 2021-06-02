@@ -2,12 +2,12 @@ create table PRODUCT
 (
     ID       INT auto_increment,
     BRAND    VARCHAR(20),
-    NAME     VARCHAR(50),
+    NAME     VARCHAR(80),
     PRICE    FLOAT,
     QUANTITY INT,
-    IMAGE    VARCHAR(250)
-        constraint PRODUCT_PK
-            primary key (ID)
+    IMAGE    VARCHAR(250),
+    constraint PRODUCT_PK
+        primary key (ID)
 );
 
 create table COOLER
