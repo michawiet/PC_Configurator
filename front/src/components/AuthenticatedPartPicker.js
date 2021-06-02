@@ -6,7 +6,7 @@ import PartPickerTabs from './Tabs/PartPickerTabs';
 import { useAuth } from "../AuthContext";
 import axios from 'axios';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import BasketBadgedButton from './Basket/BasketBadgedButton';
+import BasketBadgedButton from './Cart/CartBadgedButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,12 +48,12 @@ const MiniDrawer = (props) => {
 
   let history = useHistory();
   async function handleLogout() {
-    setError("")
+    setError("");
     try {
-      await logout()
-      history.push("/")
+      await logout();
+      history.push("/");
     } catch {
-      setError("Failed to log out")
+      setError("Failed to log out");
     }
   }
 

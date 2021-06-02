@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AuthenticatedPartPicker from './components/AuthenticatedPartPicker';
 import { AuthProvider } from "./AuthContext"
 import PrivateRoute from "./PrivateRoute"
-import Basket from './components/Basket/Basket'
+import Basket from './components/Cart/Cart'
 
 function App() {
   return (
