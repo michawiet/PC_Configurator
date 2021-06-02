@@ -29,8 +29,7 @@ public class CoolerController {
 
     @GetMapping(params = {"id"})
     public CoolerDTO getOneCpu(@RequestParam("id") int id) {
-        var coolerRepo = coolerRepopository.findById(Long.valueOf(id));
-        return modelMapper.map(coolerRepo,CoolerDTO.class);
+        return modelMapper.map(coolerRepopository.findById(Long.valueOf(id)).get(),CoolerDTO.class);
     }
 
     @GetMapping

@@ -28,7 +28,6 @@ public class ProductsController {
     @Autowired
     ModelMapper modelMapper;
 
-
     @GetMapping(params = {"id"})
     public ProductsDTO getOneProduct(@RequestParam("id") int id) {
         return modelMapper.map(productRepository.findById(Long.valueOf(id)).get(), ProductsDTO.class);
