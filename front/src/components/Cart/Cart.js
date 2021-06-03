@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
-import { makeStyles, Dialog, AppBar, Toolbar, IconButton, Typography, Slide, Table, TableBody, TableCell,
-  TableContainer, TableHead, TableRow, Paper, Container, Grid, Button} from '@material-ui/core';
+import { makeStyles, AppBar, Toolbar, IconButton, Typography, Table, TableBody, TableCell,
+TableContainer, TableHead, TableRow, Paper, Container, Grid, Button, OutlinedInput } from '@material-ui/core';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloseIcon from '@material-ui/icons/Close';
-import axios from 'axios'
-import { ContactlessOutlined } from '@material-ui/icons';
+import axios from 'axios';
 import BasketEmptyPlaceholder from './CartEmptyPlaceholder'
 import PayPalPayment from '../payment/PayPalPayment'
 
@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 20,
     justifyContent: 'flex-end',
   },
+  checkoutPaper: {
+    padding: '15px',
+  }
 }));
 
 function Basket() {
@@ -58,22 +61,20 @@ function Basket() {
     //else return
   }, []);
   
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="left" ref={ref} {...props} />;
-  });
-  
   const handleClose = () => {
     history.push("/loged")
   };
+
   const deleteProducts = () => {
     localStorage.setItem("basket", []);
     setProducts([]);
     setPriceTotal(0);
   };
+
   const removeItemFromBasket = (props) =>{
     console.log(props);
   };
-  
+
   return (
     <div>
         <AppBar className={classes.appBar}>
@@ -84,45 +85,63 @@ function Basket() {
             <Typography variant="h6" className={classes.title}>
               Koszyk
             </Typography>
+            <Button variant='outlined' color="inherit" onClick={deleteProducts}>wyczyść koszyk</Button>
           </Toolbar>
         </AppBar>
         <Container fixed className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={8}>
+          <Grid container spacing={4} >
+            <Grid item xs={9}>
+              <Grid container style={{paddingBottom: 10}} spacing={3} direction="column" alignItems="flex-end">
+                <Grid item>
+                  <Button variant='outlined' color="inherit" onClick={deleteProducts} endIcon={<DeleteOutlinedIcon/>}>
+                    wyczyść koszyk
+                  </Button>
+                </Grid>
+              </Grid>
               <TableContainer component={Paper}>
-                <Table className={classes.table} size="small">
-                  <TableHead>
-                    <Button variant='outlined' color="primary" onClick={deleteProducts}>wyczyść koszyk</Button>
-                  </TableHead>
+                <Table>
                   <TableBody>
-                  {products.length !== 0 ? products.map(({product, quantity}) => (
-                    <TableRow key={product.id}>
-                      <TableCell component="th" scope="row">
-                        <img src={product.image} alt="" width="100" height="100"></img>
+                  {products.map(({product, quantity}) => (
+                    <TableRow key={product.id} hover>
+                      <TableCell>
+                      <img src={product.image} style={{
+                          height: 72,
+                          maxWidth: 72,
+                          width: '100%',
+                          objectFit: 'contain',
+                        }}
+                        loading="lazy"
+                        />
                       </TableCell>
                       <TableCell align="left">
                         {product.brand + " " + product.name}
                       </TableCell>
-                      <TableCell align="right">
-                        {product.price + " zł"}
+                      <TableCell align="right" size="small">
+                        {product.price.toFixed(2) + " zł"}
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell align="right" size="small">
                         {"Ilość: " + quantity}
                       </TableCell>
-                      <TableCell align="center">
-                        <IconButton onClick={() => removeItemFromBasket(product.id)} ><DeleteIcon/></IconButton>
+                      <TableCell align="right" padding="checkbox">
+                        <IconButton onClick={() => removeItemFromBasket(product.id)}>
+                          <DeleteOutlinedIcon/>
+                        </IconButton>
                       </TableCell>
                     </TableRow>
-                  )) : <TableRow><BasketEmptyPlaceholder/></TableRow>}
+                  ))}
                   </TableBody>
                 </Table>
               </TableContainer>
             </Grid>
-            <Grid item xs={4}>
-              <Paper elevation={3}>
-                Cena całkowita
-                <Typography>{" " + priceTotal + "zł"}</Typography>
-                {checkout ? (<PayPalPayment price={priceTotal} />) : ( <Typography><Button variant="outlined" color="primary" onClick={() => {setCheckout(true);}}>Kup</Button></Typography>)}
+            <Grid item xs={3}>
+              <Paper elevation={2} className={classes.checkoutPaper}>
+                <Typography>{"Cena całkowita " + priceTotal + " zł"}</Typography>
+                { checkout ? (<PayPalPayment price={priceTotal} />) 
+                : (<Typography>
+                    <Button fullWidth variant="outlined" color="primary" onClick={() => {setCheckout(true);}}>
+                      Kup
+                    </Button>
+                  </Typography>)}
                     </Paper>
                   </Grid>
                 </Grid>
