@@ -1,4 +1,4 @@
-package com.pcc.pc_configurator.Controller;
+package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.Entities.Order_;
 import com.pcc.pc_configurator.Repositories.OrderRepository;

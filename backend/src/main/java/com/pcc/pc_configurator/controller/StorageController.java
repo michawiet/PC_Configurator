@@ -1,4 +1,4 @@
-package com.pcc.pc_configurator.Controller;
+package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.StorageDTO;
 import com.pcc.pc_configurator.Entities.Storage;

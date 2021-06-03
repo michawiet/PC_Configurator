@@ -1,4 +1,4 @@
-package com.pcc.pc_configurator.Controller;
+package com.pcc.pc_configurator.controller;
 
 import org.springframework.stereotype.Component;
 
