@@ -1,8 +1,7 @@
-package com.pcc.pc_configurator.repositories;
+package com.pcc.pc_configurator.Repositories;
 
-import com.pcc.pc_configurator.entities.Storage;
+import com.pcc.pc_configurator.Entities.Storage;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

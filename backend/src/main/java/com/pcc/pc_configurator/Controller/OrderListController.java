@@ -1,7 +1,7 @@
 package com.pcc.pc_configurator.Controller;
 
-import com.pcc.pc_configurator.entities.OrderList;
-import com.pcc.pc_configurator.repositories.OrderListRepository;
+import com.pcc.pc_configurator.Entities.OrderList;
+import com.pcc.pc_configurator.Repositories.OrderListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

@@ -1,8 +1,8 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.RamDTO;
-import com.pcc.pc_configurator.entities.Ram;
-import com.pcc.pc_configurator.repositories.RamRepository;
+import com.pcc.pc_configurator.Entities.Ram;
+import com.pcc.pc_configurator.Repositories.RamRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

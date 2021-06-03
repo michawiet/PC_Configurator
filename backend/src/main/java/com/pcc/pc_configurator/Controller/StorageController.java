@@ -1,9 +1,8 @@
 package com.pcc.pc_configurator.Controller;
 
-import com.pcc.pc_configurator.DTO.PsuDTO;
 import com.pcc.pc_configurator.DTO.StorageDTO;
-import com.pcc.pc_configurator.entities.Storage;
-import com.pcc.pc_configurator.repositories.StorageRepository;
+import com.pcc.pc_configurator.Entities.Storage;
+import com.pcc.pc_configurator.Repositories.StorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

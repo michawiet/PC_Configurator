@@ -1,15 +1,12 @@
 package com.pcc.pc_configurator;
 
 import com.pcc.pc_configurator.DTO.*;
-import com.pcc.pc_configurator.entities.*;
+import com.pcc.pc_configurator.Entities.*;
 import org.modelmapper.PropertyMap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.modelmapper.ModelMapper;
-
-import java.time.LocalDate;
-import java.util.Map;
 
 @SpringBootApplication
 public class PcConfiguratorApplication {

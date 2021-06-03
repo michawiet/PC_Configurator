@@ -1,8 +1,8 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.CaseDTO;
-import com.pcc.pc_configurator.entities.Case_;
-import com.pcc.pc_configurator.repositories.CaseRepository;
+import com.pcc.pc_configurator.Entities.Case_;
+import com.pcc.pc_configurator.Repositories.CaseRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.ModelMapper;

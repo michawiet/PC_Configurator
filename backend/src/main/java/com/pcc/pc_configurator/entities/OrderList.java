@@ -1,7 +1,6 @@
-package com.pcc.pc_configurator.entities;
+package com.pcc.pc_configurator.Entities;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 public class OrderList {

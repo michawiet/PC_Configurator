@@ -1,8 +1,7 @@
-package com.pcc.pc_configurator.repositories;
+package com.pcc.pc_configurator.Repositories;
 
-import com.pcc.pc_configurator.entities.Psu;
+import com.pcc.pc_configurator.Entities.Psu;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 public interface PsuRepository extends JpaRepository<Psu,Long> {
 }

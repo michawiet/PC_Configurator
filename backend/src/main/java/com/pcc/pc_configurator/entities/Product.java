@@ -1,6 +1,5 @@
-package com.pcc.pc_configurator.entities;
+package com.pcc.pc_configurator.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Map;

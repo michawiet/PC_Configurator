@@ -1,10 +1,8 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.ProductsDTO;
-import com.pcc.pc_configurator.DTO.RamDTO;
-import com.pcc.pc_configurator.entities.Product;
-import com.pcc.pc_configurator.entities.Ram;
-import com.pcc.pc_configurator.repositories.*;
+import com.pcc.pc_configurator.Entities.Product;
+import com.pcc.pc_configurator.Repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

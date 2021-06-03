@@ -1,4 +1,4 @@
-package com.pcc.pc_configurator.entities;
+package com.pcc.pc_configurator.Entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

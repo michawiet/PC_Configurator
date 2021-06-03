@@ -1,9 +1,8 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.CoolerDTO;
-import com.pcc.pc_configurator.DTO.RamDTO;
-import com.pcc.pc_configurator.entities.Cooler;
-import com.pcc.pc_configurator.repositories.CoolerRepository;
+import com.pcc.pc_configurator.Entities.Cooler;
+import com.pcc.pc_configurator.Repositories.CoolerRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

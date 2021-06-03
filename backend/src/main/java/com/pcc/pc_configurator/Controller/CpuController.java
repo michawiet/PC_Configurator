@@ -1,8 +1,8 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.CpuDTO;
-import com.pcc.pc_configurator.entities.Cpu;
-import com.pcc.pc_configurator.repositories.CpuRepository;
+import com.pcc.pc_configurator.Entities.Cpu;
+import com.pcc.pc_configurator.Repositories.CpuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

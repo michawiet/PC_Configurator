@@ -1,8 +1,8 @@
 package com.pcc.pc_configurator.Controller;
 
 import com.pcc.pc_configurator.DTO.GpuDTO;
-import com.pcc.pc_configurator.entities.Gpu;
-import com.pcc.pc_configurator.repositories.GpuRepository;
+import com.pcc.pc_configurator.Entities.Gpu;
+import com.pcc.pc_configurator.Repositories.GpuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
