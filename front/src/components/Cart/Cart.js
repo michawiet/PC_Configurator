@@ -64,7 +64,6 @@ function Basket() {
     var totalPrice = 0;
     var count = 0;
     for(var p of products) {
-      console.log(p);
       count += p.quantity;
       totalPrice += p.quantity * p.product.price;
     }
@@ -81,8 +80,15 @@ function Basket() {
     localStorage.setItem("cart", []);
   };
 
-  const removeItemFromBasket = (props) =>{
-    {/* cut the product from the copy of the array and then set the copy as new array */}
+  const removeItemFromBasket = (productIdToDelete) =>{
+    {/* remove the product by filtering the product array */}
+    setProducts(products.filter(item => item.product.id !== productIdToDelete));
+    {/* remove the product from the localstorage */}
+    const productsLocalStorageString = localStorage.getItem("cart");
+    if(productsLocalStorageString) {
+      const parsedProducts = JSON.parse(productsLocalStorageString).filter(item => item.id !== productIdToDelete);
+      localStorage.setItem("cart", JSON.stringify(parsedProducts));
+    }
   };
 
   return (
