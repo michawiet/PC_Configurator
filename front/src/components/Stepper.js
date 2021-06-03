@@ -1,13 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles, Stepper, Step, StepLabel, Button, Typography, StepConnector } from '@material-ui/core';
 import clsx from 'clsx';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import StepConnector from '@material-ui/core/StepConnector';
 
 import WorkloadTypeQuestionPanel  from './Questions/WorkloadTypeQuestionsPanel';
 import ProcessorQuestionPanel  from './Questions/ProcessorQuestionPanel';
@@ -129,7 +123,7 @@ export default function CustomizedSteppers() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-  const [nextButtonDisabled, setNextButtonDisabled] = React.useState(false);
+  const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
   const steps = getSteps();
 
   const getStepContent = (step) => {
@@ -170,21 +164,6 @@ export default function CustomizedSteppers() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
   const handleReset = () => {
     setActiveStep(0);
   };
@@ -210,7 +189,13 @@ export default function CustomizedSteppers() {
         <Typography component={'span'} className={classes.instructions}>{getStepContent(activeStep)}</Typography>
         <div>
           <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>Wstecz</Button>
-          <Button variant="contained" color="primary" onClick={handleNext} className={classes.button}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleNext}
+            className={classes.button}
+            disabled={nextButtonDisabled}
+          >
             {activeStep === steps.length - 1 ? 'Zakończ' : 'Dalej'}
           </Button>
         </div>

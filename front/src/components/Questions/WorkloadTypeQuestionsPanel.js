@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
 import { ReactComponent as OfficeIcon } from '../../icons/statistics.svg';
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     maxWidth: 100,
     maxHeight: 100,
+    marginBottom: "15px",
   }
 }));
 
@@ -36,11 +37,15 @@ export default function SimpleCard({setNextButtonDisabled}) {
   const handleChange = (bvalue) => {
     setValue(bvalue);
   };
+
+  useEffect(() => {
+    value !== '' ? setNextButtonDisabled(false) : setNextButtonDisabled(true);
+  }, [value])
+
   return (
     <div className={classes.root}>
       <RadioGroup value={value}>
-      <Grid container spacing={5}>
-        <Grid item xs = {1} />
+      <Grid container direction="row" justify="space-between" alignItems="center">
         <Grid item xs = {2}>
           <Paper className={classes.paper} onClick={() =>{handleChange('office');}}>
             <OfficeIcon className={classes.icon}/>
@@ -71,7 +76,6 @@ export default function SimpleCard({setNextButtonDisabled}) {
             <FormControlLabel value="3d-rendering" control={<Radio />} labelPlacement="top" label="Modelowanie 3D"/>
           </Paper>
         </Grid>
-        <Grid item xs = {1} />
       </Grid>
         </RadioGroup>
     </div>

@@ -1,53 +1,79 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Slider from './Slider'
+import { makeStyles, Grid, Typography, Slider, Input } from '@material-ui/core';
+import { ReactComponent as ZlotyIcon } from '../../icons/poland-zloty-currency-symbol.svg';
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    width: 1000,
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+  input: {
+    width: 100,
+    fontSize: 20,
   },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  }, 
-  divs: {
-    height: 200,
-    width: 200,
-    margin: 50,
-  },
-  bigdiv: {
-    display: "flex",
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  header: {
-    textAlign: 'center',
-  } 
 });
+
+function valuetext(value) {
+    return `${value}`;
+}
 
 export default function SimpleCard() {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([]);
-  const handleChange = (e) => {
-    let data=checked;
-    data.push(e.target.value)
-    setChecked(data);
-    console.warn(checked)
+  const [value, setValue] = React.useState(3000);
+  const handleSliderChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const handleInputChange = (event) => {
+    setValue(event.target.value === '' ? '' : Number(event.target.value));
+  };
+
+  const handleBlur = () => {
+    if (value < 0) {
+      setValue(0);
+    } else if (value > 15000) {
+      setValue(15000);
+    }
   };
 
   return (
-    <>
-      <div className={classes.bigdiv}>
-        <Slider/>
-      </div>
-    </>
-    
+    <div className={classes.root}>
+      <Typography component={'span'} id="input-slider" variant="h5" gutterBottom>
+        Cena
+      </Typography>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item>
+        <ZlotyIcon height={20} width={20}/>
+        </Grid>
+        <Grid item xs>
+          <Slider
+            value={typeof value === 'number' ? value : 0}
+            onChange={handleSliderChange}
+            defaultValue={3000}
+            getAriaValueText={valuetext}
+            aria-labelledby="discrete-slider-small-steps"
+            step={500}
+            marks
+            min={1000}
+            max={9999}
+            valueLabelDisplay="auto"
+          />
+        </Grid>
+        <Grid item>
+          <Input
+            className={classes.input}
+            value={value}
+            margin="dense"
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            inputProps={{
+              step: 500,
+              min: 0,
+              max: 9999,
+              type: 'number',
+              'aria-labelledby': 'input-slider',
+            }}
+          />
+        </Grid>
+      </Grid>
+    </div>
   );
 }
