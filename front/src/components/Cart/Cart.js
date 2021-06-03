@@ -3,11 +3,10 @@ import { useHistory } from "react-router-dom";
 import { makeStyles, AppBar, Toolbar, IconButton, Typography, Table, TableBody, TableCell,
 TableContainer, TableHead, TableRow, Paper, Container, Grid, Button, OutlinedInput } from '@material-ui/core';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import DeleteIcon from '@material-ui/icons/Delete';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
-import BasketEmptyPlaceholder from './CartEmptyPlaceholder'
-import PayPalPayment from '../payment/PayPalPayment'
+import CartEmptyPlaceholder from './CartEmptyPlaceholder';
+import PayPalPayment from '../payment/PayPalPayment';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -33,13 +32,14 @@ function Basket() {
   const classes = useStyles();
   let history = useHistory();
   const [products, setProducts] = useState([]);
+  const [productCount, setProductCount] = useState(0);
   const [priceTotal, setPriceTotal]= useState(0);
   const [checkout, setCheckout] = useState(false);
 
   useEffect(() => {
     //get basket from local storage
-    const basketString = localStorage.getItem("basket");
-    var totalPrice = 0 ;
+    const basketString = localStorage.getItem("cart");
+    
     //if basketString is not null, then parse into {id: x, quantity: y}
     if(basketString) {
       var basketItems = JSON.parse(basketString);
@@ -51,28 +51,39 @@ function Basket() {
       axios.all(urls).then(axios.spread((...responses) => {
         var productsArr = [];
         for(var i = 0; i < responses.length; i++) {
-          totalPrice += responses[i].data.price * basketItems[i].quantity;
           productsArr.push({product: responses[i].data, quantity: basketItems[i].quantity});
         }
         setProducts(productsArr);
-        setPriceTotal(totalPrice);
       }));
     }
     //else return
   }, []);
+
+  useEffect(() => {
+    /* update localStorage, totalPrice, productCount on the product array change */
+    localStorage.setItem("cart", JSON.stringify(products));
+
+    var totalPrice = 0;
+    var count = 0;
+    for(var p of products) {
+      console.log(p);
+      count += p.quantity;
+      totalPrice += p.quantity * p.product.price;
+    }
+    setProductCount(count);
+    setPriceTotal(totalPrice);
+  }, [products])
   
   const handleClose = () => {
     history.push("/loged")
   };
 
   const deleteProducts = () => {
-    localStorage.setItem("basket", []);
     setProducts([]);
-    setPriceTotal(0);
   };
 
   const removeItemFromBasket = (props) =>{
-    console.log(props);
+    {/* cut the product from the copy of the array and then set the copy as new array */}
   };
 
   return (
@@ -85,12 +96,11 @@ function Basket() {
             <Typography variant="h6" className={classes.title}>
               Koszyk
             </Typography>
-            <Button variant='outlined' color="inherit" onClick={deleteProducts}>wyczyść koszyk</Button>
           </Toolbar>
         </AppBar>
         <Container fixed className={classes.container}>
-          <Grid container spacing={4} >
-            <Grid item xs={9}>
+          {productCount === 0 ? (<CartEmptyPlaceholder/>) : (<Grid container spacing={4} >
+            <Grid item xs={8}>
               <Grid container 
                 direction="row"
                 justify="space-between"
@@ -99,12 +109,15 @@ function Basket() {
                 spacing={3}
               >
                 <Grid item>
-                  <Typography variant={"h4"} component="h4" color="textSecondary" display="block" noWrap>
-                    Koszyk&nbsp;({products.length})
+                  <Typography variant={"h4"} component="h4" color="textPrimary" display="inline" noWrap>
+                    Koszyk&nbsp;
+                  </Typography>
+                  <Typography variant={"h4"} component="h4" color="textSecondary" display="inline" noWrap>
+                    ({productCount})
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <Button variant='outlined' color="inherit" onClick={deleteProducts} endIcon={<DeleteOutlinedIcon/>}>
+                  <Button variant='text' color="inherit" onClick={deleteProducts} endIcon={<DeleteOutlinedIcon/>}>
                     wyczyść koszyk
                   </Button>
                 </Grid>
@@ -113,7 +126,7 @@ function Basket() {
                 <Table>
                   <TableBody>
                   {products.map(({product, quantity}) => (
-                    <TableRow key={product.id} hover>
+                    <TableRow key={product.id} >
                       <TableCell>
                         <Grid container direction="row" justify="space-between" alignItems="center">
                           <Grid item>
@@ -134,15 +147,15 @@ function Basket() {
                             </Grid>
                           </Grid>
                           <Grid item>
-                            <Grid container alignItems="center" justify spacing={1}>
+                            <Grid container alignItems="center" spacing={1}>
                               <Grid item>
                                 {product.price.toFixed(2) + " zł"}
                               </Grid>
                               <Grid item>
-                                {"Ilość: " + quantity}
+                                Ilość:&nbsp;{quantity}
                               </Grid>
                               <Grid item>
-                                <IconButton onClick={() => removeItemFromBasket(product.id)}>
+                                <IconButton size="small" onClick={() => removeItemFromBasket(product.id)}>
                                   <DeleteOutlinedIcon/>
                                 </IconButton>
                               </Grid>
@@ -156,25 +169,23 @@ function Basket() {
                 </Table>
               </TableContainer>
             </Grid>
-            <Grid item xs={3}>
-              <Paper elevation={2} className={classes.checkoutPaper}>
-                <Grid container direction="row" justify="space-between" alignItems="center">
+            <Grid item xs={4}>
+              <Paper variant="outlined" className={classes.checkoutPaper}>
+                <Grid container direction="row" justify="space-between" alignItems="center" style={{paddingBottom:"10px"}}>
                   <Grid item>
                     <Typography>Cena całkowita</Typography>
                   </Grid>
                   <Grid item>
-                    <Typography>{priceTotal + " zł"}</Typography>
+                    <Typography><strong>{priceTotal.toFixed(2) + " zł"}</strong></Typography>
                   </Grid>
                 </Grid>             
                 { checkout ? (<PayPalPayment price={priceTotal} />) 
-                : (<Typography>
-                    <Button fullWidth variant="outlined" color="primary" onClick={() => {setCheckout(true);}}>
+                : (<Button fullWidth variant="contained" color="primary" onClick={() => {setCheckout(true);}}>
                       Kup
-                    </Button>
-                  </Typography>)}
-                    </Paper>
-                  </Grid>
-                </Grid>
+                    </Button>)}
+                </Paper>
+              </Grid>
+          </Grid>)}
         </Container>
     </div>
   )
