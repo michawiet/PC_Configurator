@@ -4,10 +4,18 @@ import Dialog from '@material-ui/core/Dialog';
 import { useHistory } from "react-router-dom";
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
-
+import  {makeStyles} from '@material-ui/core'
+import MuiDialogContent from '@material-ui/core/DialogContent';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+  dialog: {
+    textAlign: 'center',
+  },
+
+}));
 
 const styles = (theme) => ({
   root: {
@@ -35,8 +43,14 @@ const DialogTitle = withStyles(styles)((props) => {
     </MuiDialogTitle>
   );
 });
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
 
 function SuccessPayment() {
+  const classes = useStyles();
   let history = useHistory();
   const [open, setOpen] = React.useState(true);
   const handleClose = () => {
@@ -46,14 +60,16 @@ function SuccessPayment() {
 
   return (
     <div>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-            Potwierdzenie płatności
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
+        <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialog} >
+          Potwierdzenie płatności
         </DialogTitle>
+        <DialogContent dividers>
         <Alert severity="success">
-          <AlertTitle>Powodzenie</AlertTitle>
-          Płatność zakończona powodzeniem   
+        <AlertTitle><strong>Płatność zakończona powodzeniem</strong></AlertTitle>
+        Pomyślnie dokonano zapłaty za zamównienie <strong>{" numer zamówienia"}</strong>
         </Alert>
+        </DialogContent>
       </Dialog>
     </div>
   )

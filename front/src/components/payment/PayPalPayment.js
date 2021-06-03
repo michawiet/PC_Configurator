@@ -40,6 +40,7 @@ function PayPalPayment(props) {
     <div>
       <div ref={paypal}></div>
       {payd ? <SuccessPayment/> : ""}
+      
     </div>
   )
 }
