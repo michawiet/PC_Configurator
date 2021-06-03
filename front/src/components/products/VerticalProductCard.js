@@ -34,7 +34,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
   };
   
   const addToLocalStorage = () => {
-    var basketString = localStorage.getItem("basket");
+    var basketString = localStorage.getItem("cart");
     var basketItems = [];
     if(basketString) {
       basketItems = JSON.parse(basketString);
@@ -50,7 +50,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
       basketItems.push({id: productID, quantity: 1});
     }
     var string = JSON.stringify(basketItems);
-    localStorage.setItem("basket", string);
+    localStorage.setItem("cart", string);
     window.dispatchEvent(new Event("storage"));
     //console.log(localStorage.getItem("basket"));
   };

@@ -15,7 +15,7 @@ function BasketBadgedButton() {
 
   useEffect(() => {
     function updateItemBasketCount() {
-      const itemsString = localStorage.getItem("basket");
+      const itemsString = localStorage.getItem("cart");
       var count = 0;
       if(itemsString) {
         const items = JSON.parse(itemsString);
