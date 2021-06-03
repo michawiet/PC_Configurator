@@ -91,7 +91,18 @@ function Basket() {
         <Container fixed className={classes.container}>
           <Grid container spacing={4} >
             <Grid item xs={9}>
-              <Grid container style={{paddingBottom: 10}} spacing={3} direction="column" alignItems="flex-end">
+              <Grid container 
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+                style={{paddingBottom: 10}}
+                spacing={3}
+              >
+                <Grid item>
+                  <Typography variant={"h4"} component="h4" color="textSecondary" display="block" noWrap>
+                    Koszyk&nbsp;({products.length})
+                  </Typography>
+                </Grid>
                 <Grid item>
                   <Button variant='outlined' color="inherit" onClick={deleteProducts} endIcon={<DeleteOutlinedIcon/>}>
                     wyczyść koszyk
@@ -104,28 +115,40 @@ function Basket() {
                   {products.map(({product, quantity}) => (
                     <TableRow key={product.id} hover>
                       <TableCell>
-                      <img src={product.image} style={{
-                          height: 72,
-                          maxWidth: 72,
-                          width: '100%',
-                          objectFit: 'contain',
-                        }}
-                        loading="lazy"
-                        />
-                      </TableCell>
-                      <TableCell align="left">
-                        {product.brand + " " + product.name}
-                      </TableCell>
-                      <TableCell align="right" size="small">
-                        {product.price.toFixed(2) + " zł"}
-                      </TableCell>
-                      <TableCell align="right" size="small">
-                        {"Ilość: " + quantity}
-                      </TableCell>
-                      <TableCell align="right" padding="checkbox">
-                        <IconButton onClick={() => removeItemFromBasket(product.id)}>
-                          <DeleteOutlinedIcon/>
-                        </IconButton>
+                        <Grid container direction="row" justify="space-between" alignItems="center">
+                          <Grid item>
+                            <Grid container spacing={2} alignItems="center">
+                              <Grid item>
+                                <img src={product.image} style={{
+                                  height: 72,
+                                  maxWidth: 72,
+                                  width: '100%',
+                                  objectFit: 'contain',
+                                  }}
+                                  loading="lazy"
+                                />
+                              </Grid>
+                              <Grid item>
+                                {product.brand + " " + product.name}
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                          <Grid item>
+                            <Grid container alignItems="center" justify spacing={1}>
+                              <Grid item>
+                                {product.price.toFixed(2) + " zł"}
+                              </Grid>
+                              <Grid item>
+                                {"Ilość: " + quantity}
+                              </Grid>
+                              <Grid item>
+                                <IconButton onClick={() => removeItemFromBasket(product.id)}>
+                                  <DeleteOutlinedIcon/>
+                                </IconButton>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -135,7 +158,14 @@ function Basket() {
             </Grid>
             <Grid item xs={3}>
               <Paper elevation={2} className={classes.checkoutPaper}>
-                <Typography>{"Cena całkowita " + priceTotal + " zł"}</Typography>
+                <Grid container direction="row" justify="space-between" alignItems="center">
+                  <Grid item>
+                    <Typography>Cena całkowita</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography>{priceTotal + " zł"}</Typography>
+                  </Grid>
+                </Grid>             
                 { checkout ? (<PayPalPayment price={priceTotal} />) 
                 : (<Typography>
                     <Button fullWidth variant="outlined" color="primary" onClick={() => {setCheckout(true);}}>
