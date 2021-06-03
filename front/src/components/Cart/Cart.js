@@ -60,9 +60,7 @@ function Basket() {
   }, []);
 
   useEffect(() => {
-    /* update localStorage, totalPrice, productCount on the product array change */
-    localStorage.setItem("cart", JSON.stringify(products));
-
+    /* update totalPrice, productCount on the product array change */
     var totalPrice = 0;
     var count = 0;
     for(var p of products) {
@@ -80,6 +78,7 @@ function Basket() {
 
   const deleteProducts = () => {
     setProducts([]);
+    localStorage.setItem("cart", []);
   };
 
   const removeItemFromBasket = (props) =>{
@@ -155,7 +154,7 @@ function Basket() {
                                 Ilość:&nbsp;{quantity}
                               </Grid>
                               <Grid item>
-                                <IconButton size="small" onClick={() => removeItemFromBasket(product.id)}>
+                                <IconButton color="inherit" size="small" onClick={() => removeItemFromBasket(product.id)}>
                                   <DeleteOutlinedIcon/>
                                 </IconButton>
                               </Grid>
