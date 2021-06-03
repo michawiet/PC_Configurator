@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+import SuccessPayment from './SuccessPayment'
 
 function PayPalPayment(props) {
   const paypal = useRef()
   console.log(props.price);
+  const [payd, setPayd] = React.useState(false);
+  
   useEffect(() => {
       window.paypal
         .Buttons({
@@ -23,7 +26,8 @@ function PayPalPayment(props) {
           onApprove: async (data, actions) => {
             const order = await actions.order.capture();
             console.log(order);
-            localStorage.setItem("basket", []);
+            localStorage.setItem("cart", []);
+            setPayd(true);
           },
           onError: (err) => {
             console.log(err);
@@ -35,6 +39,7 @@ function PayPalPayment(props) {
   return (
     <div>
       <div ref={paypal}></div>
+      {payd ? <SuccessPayment/> : ""}
     </div>
   )
 }
