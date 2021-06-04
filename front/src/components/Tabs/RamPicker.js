@@ -110,8 +110,8 @@ function RamPicker() {
               onChange={handleSortChange}
               label="Sortuj po"
             >
-              <MenuItem value={'brand_desc'}>Marka malejąco</MenuItem>
-              <MenuItem value={'brand_asc'}>Marka rosnąco</MenuItem>
+              <MenuItem value={'brand_desc'}>Marka Z-A</MenuItem>
+              <MenuItem value={'brand_asc'}>Marka A-Z</MenuItem>
               <MenuItem value={'price_desc'}>Cena malejąco</MenuItem>
               <MenuItem value={'price_asc'}>Cena rosnąco</MenuItem>
             </Select> 
