@@ -1,60 +1,58 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import {  grey, blueGrey } from '@material-ui/core/colors';
-import Stepper from './Stepper'
+import React, { useState } from 'react';
+import { makeStyles, Button, Grid, Paper } from '@material-ui/core';
+import Stepper from './Stepper';
 
 const useStyles = makeStyles({
   root: {
     alignItems: 'center',
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  }, 
-  divs: {
-    height: 200,
-    width: 200,
-    margin: 50,
-  },
-  bigdiv: {
-    display: "flex",
-    margin: 20,
-  },
 });
-
-  const ColorButton = withStyles((theme) => ({
-    root: {
-      color: theme.palette.getContrastText(grey[900]),
-      backgroundColor: blueGrey[400],
-      '&:hover': {
-        backgroundColor: blueGrey[100],
-      },
-    },
-  }))(Button);
 
 export default function SimpleCard() {
   const classes = useStyles();
-  const [distable, setDistabl] = React.useState(false);
-  const [result, ddlvalue]=React.useState()
+  const [startButtonDisabled, setStartButtonDisabled] = useState(false);
+  const [result, ddlvalue] = useState();
   const handleClick = () => {
-    setDistabl(true)
+    setStartButtonDisabled(true)
     return  ddlvalue(<Stepper/>);
   };
 
   return (
     <>
-      <div className={classes.root}>{result}</div>   
-      { distable ? <></> : <ColorButton variant="outlined" disabled={distable}  onClick={(handleClick) } >Rozpocznij</ColorButton>}
+      {startButtonDisabled ? (<>{result}</>) : 
+      (
+      <>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={1}
+        >
+          <Grid item xs={6}>
+            <img src="https://images-ext-1.discordapp.net/external/cxTaGaew-BtvBjVUSBqWYbqqQDH8VpY4IGg0RykUeYM/%3Fresize%3D800%252C531%26ssl%3D1/https/i1.wp.com/itsfoss.com/wp-content/uploads/2020/10/pi-zero-cluster.png?width=720&height=478"
+            style={{
+              width: '100%',
+              objectFit: 'contain',
+              }}
+              loading="lazy"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Paper>
+              <Button
+                variant="contained"
+                color="secondary"
+                disabled={startButtonDisabled}
+                onClick={(handleClick)}
+              >
+                Rozpocznij
+              </Button>
+            </Paper>
+          </Grid>
+        </Grid>
+      </>
+      )}
     </>
-    
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
 import { ReactComponent as IntelLogo } from '../../icons/intel-3.svg';
@@ -6,11 +6,8 @@ import { ReactComponent as RyzenLogo } from '../../icons/amd-logo-1.svg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(6),
-    paddingLeft: theme.spacing(10),
-    paddingRight: theme.spacing(10),
   },
   paper: {
     padding: theme.spacing(3),
@@ -20,45 +17,44 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[2],
     '&:hover': {
       cursor: 'pointer',
-      boxShadow: theme.shadows[8],
+      boxShadow: theme.shadows[6],
     }
   },
   iconStyle: {
     maxHeight: 100,
-    maxWidth: 200,
+    maxWidth: "60%",
   },
 }));
 
-export default function ProcessorQuestionPanel() {
+export default function ProcessorQuestionPanel({cpuPreference, setCpuPreference}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState('');
 
   const handleChange = (bvalue) => {
-      setValue(bvalue);
+    setCpuPreference(bvalue);
   };
   return (
     <div className={classes.root}>
-      <RadioGroup value={value}>
-        <Grid container spacing={10}>
-        <Grid item xs = {6}>
+      <RadioGroup value={cpuPreference}>
+        <Grid container justify="space-evenly" alignItems="center">
+          <Grid item>
             <Paper className = {classes.paper} onClick={() =>{handleChange('amd');}}>
-              <Grid container spacing={1}>
-                <Grid item xs={12}>
+              <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
+                <Grid item>
                   <RyzenLogo className={classes.iconStyle}/>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item>
                   <FormControlLabel value="amd" control={<Radio />}/>
                 </Grid>
               </Grid>
             </Paper>
           </Grid>
-          <Grid item xs = {6}>
+          <Grid item>
             <Paper className = {classes.paper} onClick={() =>{handleChange('intel');}}>
-            <Grid container spacing={1}>
-                <Grid item xs={12}>
+            <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
+                <Grid item>
                   <IntelLogo className={classes.iconStyle}/>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item>
                   <FormControlLabel value="intel" control={<Radio />}/>
                 </Grid>
               </Grid>

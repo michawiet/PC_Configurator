@@ -83,7 +83,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
             endIcon={<AddShoppingCartIcon />}
             onClick={addToLocalStorage}
             color="primary">
-              {price} zł
+              { new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price) }
           </Button>
         </CardActions>
     </Card>

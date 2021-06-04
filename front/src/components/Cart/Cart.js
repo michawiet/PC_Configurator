@@ -154,7 +154,7 @@ function Basket() {
                           <Grid item>
                             <Grid container alignItems="center" spacing={1}>
                               <Grid item>
-                                {product.price.toFixed(2) + " zł"}
+                                {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(product.price)}
                               </Grid>
                               <Grid item>
                                 Ilość:&nbsp;{quantity}
@@ -181,7 +181,7 @@ function Basket() {
                     <Typography>Cena całkowita</Typography>
                   </Grid>
                   <Grid item>
-                    <Typography><strong>{priceTotal.toFixed(2) + " zł"}</strong></Typography>
+                    <Typography><strong>{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(priceTotal.toFixed(2))}</strong></Typography>
                   </Grid>
                 </Grid>             
                 { checkout ? (<PayPalPayment price={priceTotal} />) 
