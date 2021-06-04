@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import { makeStyles, AppBar, Toolbar, IconButton, Typography, Table, TableBody, TableCell,
-TableContainer, TableHead, TableRow, Paper, Container, Grid, Button, OutlinedInput } from '@material-ui/core';
+TableContainer, TableRow, Paper, Container, Grid, Button, OutlinedInput } from '@material-ui/core';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 import CartEmptyPlaceholder from './CartEmptyPlaceholder';
 import PayPalPayment from '../payment/PayPalPayment';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -25,8 +26,25 @@ const useStyles = makeStyles((theme) => ({
   },
   checkoutPaper: {
     padding: '15px',
+  },
+  titleTypography: {
+    fontSize: "26px",
   }
 }));
+
+function StyledPaper(props) {
+  const { children } = props;
+
+  return (
+    <Paper elevation={4}>
+      {children}
+    </Paper>
+  );
+}
+
+StyledPaper.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 function Basket() {
   const classes = useStyles();
@@ -114,10 +132,10 @@ function Basket() {
                 spacing={3}
               >
                 <Grid item>
-                  <Typography variant={"h4"} component="h4" color="textPrimary" display="inline" noWrap>
+                  <Typography className={classes.titleTypography} variant="subtitle2" component="h4" color="textPrimary" display="inline" noWrap>
                     Koszyk&nbsp;
                   </Typography>
-                  <Typography variant={"h4"} component="h4" color="textSecondary" display="inline" noWrap>
+                  <Typography className={classes.titleTypography} variant="subtitle2" component="h4" color="textSecondary" display="inline" noWrap>
                     ({productCount})
                   </Typography>
                 </Grid>
@@ -127,7 +145,7 @@ function Basket() {
                   </Button>
                 </Grid>
               </Grid>
-              <TableContainer component={Paper}>
+              <TableContainer component={StyledPaper}>
                 <Table>
                   <TableBody>
                   {products.map(({product, quantity}) => (
@@ -175,7 +193,7 @@ function Basket() {
               </TableContainer>
             </Grid>
             <Grid item xs={4}>
-              <Paper variant="outlined" className={classes.checkoutPaper}>
+              <Paper elevation={4} className={classes.checkoutPaper}>
                 <Grid container direction="row" justify="space-between" alignItems="center" style={{paddingBottom:"10px"}}>
                   <Grid item>
                     <Typography>Cena całkowita</Typography>
