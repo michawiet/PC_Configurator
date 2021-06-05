@@ -176,6 +176,7 @@ export default function CustomizedSteppers() {
         return <BudgetQuestionPanel
           budget={budget}
           setBudget={setBudget}
+          workload = {workload}
         />;
       default:
         return 'Unknown step';

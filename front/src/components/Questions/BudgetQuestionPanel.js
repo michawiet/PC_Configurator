@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Grid, Slider, OutlinedInput, Paper, withStyles, Typography, Tooltip } from '@material-ui/core';
 import { ReactComponent as ZlotyIcon } from '../../icons/poland-zloty-currency-symbol.svg';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(4),
+    paddingLeft: 50,
+    paddingRight: 50,
     color: theme.palette.text.primary,
     boxShadow: theme.shadows[2],
+    width: 900,
   },
   root: {
     paddingTop: theme.spacing(3),
+    display: "flex",
+    justifyContent: "center",
   },
+  title: {
+    paddingBottom: 25,
+    fontSize: 20,
+  }
 }));
 
 function ValueLabelComponent(props) {
@@ -34,86 +43,106 @@ function valuetext(value) {
     return `${value}`;
 }
 
-const marks = [
-  {
-    value: 1000,
-    label: '1000 zł',
-  },
-  {
-    value: 3000,
-    label: '3000 zł',
-  },
-  {
-    value: 5000,
-    label: '5000 zł',
-  },
-  {
-    value: 7000,
-    label: '7000 zł',
-  },
-  {
-    value: 12000,
-    label: '12 000 zł',
-  },
-  {
-    value: 20000,
-    label: '20 000 zł',
-  },
-];
+function marks(MIN_VAL, MAX_VAL) {
+  var arr = [ { value: 1000, label: '1000 zł' },
+    { value: 1500, label: '1500 zł' },
+    { value: 2000, label: '2000 zł' },
+    { value: 3000, label: '3000 zł' },
+    { value: 5000, label: '5000 zł' },
+    { value: 7000, label: '7000 zł' },
+    { value: 10000, label: '10 000 zł' },
+    { value: 15000, label: '15 000 zł' },
+    { value: 20000, label: '20 000 zł' },
+    { value: 25000, label: '25 000 zł' },
+    { value: 30000, label: '30 000 zł' },
+    { value: 35000, label: '35 000 zł' },
+    { value: 40000, label: '40 000 zł' },
+  ]
+  return arr.filter(x => x.value > MIN_VAL && x.value < MAX_VAL)
+};
 
-export default function SimpleCard({budget, setBudget}) {
-  const MIN_VAL = 1000;
-  const MAX_VAL = 20000;
-  const STEP_VAL = 1000;
+function getMinValue(workload) {
+  switch(workload) {
+    case "office":
+      return 1000;
+    case "gaming":
+      return 2000;
+    case "photo-editing":
+      return 2000;
+    case "video-editing":
+      return 4000;
+    case "3d-rendering":
+      return 6000;
+  }
+}
+
+function getMaxValue(workload) {
+  switch(workload) {
+    case "office":
+      return 4000;
+    case "gaming":
+      return 20000;
+    case "photo-editing":
+      return 10000;
+    case "video-editing":
+      return 30000;
+    case "3d-rendering":
+      return 40000;
+  }
+}
+
+function getStepValue(workload) {
+  switch(workload) {
+    case "office":
+      return 250;
+    case "gaming":
+      return 1000;
+    case "photo-editing":
+      return 500;
+    case "video-editing":
+      return 1000;
+    case "3d-rendering":
+      return 1000;
+  }
+}
+
+export default function SimpleCard({budget, setBudget, workload}) {
+  const MIN_VAL = getMinValue(workload);
+  const MAX_VAL = getMaxValue(workload);
+  const STEP_VAL = getStepValue(workload);
 
   const classes = useStyles();
   const handleSliderChange = (event, newValue) => {
     setBudget(newValue);
   };
-  const handleInputChange = (event) => {
-    setBudget(event.target.value === '' ? '' : Number(event.target.value));
-  };
 
-  const handleBlur = () => {
-    if (budget < MIN_VAL) {
-      setBudget(MIN_VAL);
-    } else if (budget > MAX_VAL) {
+  useEffect(() => {
+    if(budget > MAX_VAL)
       setBudget(MAX_VAL);
-    }
-  };
-
-  const customSlider = withStyles({
-    valueLabel: {
-      left: "calc(-50% + 12px)",
-      top: -22,
-      "& *": {
-        background: "transparent",
-        color: "#000"
-      }
-    },
-  })(Slider);
+    else if(budget < MIN_VAL)
+      setBudget(MIN_VAL);
+  }, [])
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
       <Grid container direction="row" justify="space-between" alignItems="center">
         <Grid item xs={12}>
-          <Typography align="center">
+          <Typography className={classes.title} align="center">
             {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(budget)}
           </Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <Slider
-            ValueLabelComponent={ValueLabelComponent}
             value={typeof budget === 'number' ? budget : 0}
             onChange={handleSliderChange}
             getAriaValueText={valuetext}
             aria-labelledby="discrete-slider-small-steps"
             step={STEP_VAL}
-            marks={marks}
+            marks={marks(MIN_VAL, MAX_VAL)}
             min={MIN_VAL}
             max={MAX_VAL}
-            valueLabelDisplay="on"
+            valueLabelDisplay="off"
           />
         </Grid>
       </Grid>
