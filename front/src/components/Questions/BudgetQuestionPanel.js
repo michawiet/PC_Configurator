@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 50,
     paddingRight: 50,
     color: theme.palette.text.primary,
-    boxShadow: theme.shadows[2],
+    boxShadow: theme.shadows[4],
     width: 900,
   },
   root: {

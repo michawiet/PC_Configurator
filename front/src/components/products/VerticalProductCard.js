@@ -52,7 +52,6 @@ export default function VerticalProductCard({image, productName, detail0, detail
     var string = JSON.stringify(basketItems);
     localStorage.setItem("cart", string);
     window.dispatchEvent(new Event("storage"));
-    //console.log(localStorage.getItem("basket"));
   };
 
   return (

@@ -6,7 +6,7 @@ function BasketEmptyPlaceholder() {
   let history = useHistory();
 
   return (
-    <div>
+    <div style={{marginTop: "50px"}}>
       <Typography variant="h4" align="center">Twój koszyk jest pusty</Typography>
       <Typography variant="h5" color="textSecondary" align="center">Szukasz inspiracji?</Typography>
       <Grid container justify="center" style={{paddingTop: "20px"}}>
@@ -14,7 +14,7 @@ function BasketEmptyPlaceholder() {
           <Button 
             variant="contained"
             color="primary"
-            onClick={()=>{history.push("/loged")}}
+            onClick={()=>{history.push("/konfigurator")}}
           >
             Przejdź do konfiguratora
           </Button>

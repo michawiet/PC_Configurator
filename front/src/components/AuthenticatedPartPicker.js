@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import { makeStyles, useTheme, AppBar, Toolbar, CssBaseline, Typography, IconButton, Grid, Button, Badge } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
-import MainTabsPanel from './MainTabsPanel';
+import MainTabsPanel from './Tabs/AppBarButtons';
 import PartPickerTabs from './Tabs/PartPickerTabs';
 import { useAuth } from "../AuthContext";
 import axios from 'axios';
@@ -86,7 +86,6 @@ const MiniDrawer = (props) => {
       </AppBar>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <PartPickerTabs selectedTabs={selectedTabs} />
       </main>
     </div>
   );

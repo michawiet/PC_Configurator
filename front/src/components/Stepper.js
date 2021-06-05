@@ -109,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
   },
   stepper: {
     backgroundColor: '#fff',
-    boxShadow: theme.shadows[2],
+    boxShadow: theme.shadows[1],
   }, 
   stepperButtons: {
     display: "flex", 
@@ -239,11 +239,9 @@ export default function CustomizedSteppers() {
               </Button>
             </Grid>
             <Grid item>
-              <Paper className={classes.paper} elevation={2}>
+              <Paper className={classes.paper} elevation={1} >
                 <Typography variant="overline" align="center" className={classes.titleTypography}>
-                  <strong>
-                  </strong>
-                    {getStepTitle(activeStep)}
+                  {getStepTitle(activeStep)}
                 </Typography>
               </Paper>
             </Grid>

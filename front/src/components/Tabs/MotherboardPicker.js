@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function CoolerPicker() {
+function MotherboardPicker() {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
 
@@ -160,4 +160,4 @@ function CoolerPicker() {
   )
 }
 
-export default CoolerPicker
+export default MotherboardPicker

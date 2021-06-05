@@ -46,7 +46,7 @@ StyledPaper.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-function Basket() {
+function Cart() {
   const classes = useStyles();
   let history = useHistory();
   const [products, setProducts] = useState([]);
@@ -89,13 +89,10 @@ function Basket() {
     setPriceTotal(totalPrice);
   }, [products])
   
-  const handleClose = () => {
-    history.push("/loged")
-  };
-
   const deleteProducts = () => {
     setProducts([]);
     localStorage.setItem("cart", []);
+    window.dispatchEvent(new Event("storage"));
   };
 
   const removeItemFromBasket = (productIdToDelete) =>{
@@ -107,111 +104,100 @@ function Basket() {
       const parsedProducts = JSON.parse(productsLocalStorageString).filter(item => item.id !== productIdToDelete);
       localStorage.setItem("cart", JSON.stringify(parsedProducts));
     }
+    window.dispatchEvent(new Event("storage"));
   };
 
   return (
     <div>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Koszyk
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Container fixed className={classes.container}>
-          {productCount === 0 ? (<CartEmptyPlaceholder/>) : (<Grid container spacing={4} >
-            <Grid item xs={8}>
-              <Grid container 
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-                style={{paddingBottom: 10}}
-                spacing={3}
-              >
-                <Grid item>
-                  <Typography className={classes.titleTypography} variant="subtitle2" component="h4" color="textPrimary" display="inline" noWrap>
-                    Koszyk&nbsp;
-                  </Typography>
-                  <Typography className={classes.titleTypography} variant="subtitle2" component="h4" color="textSecondary" display="inline" noWrap>
-                    ({productCount})
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Button variant='text' color="inherit" onClick={deleteProducts} endIcon={<DeleteOutlinedIcon/>}>
-                    wyczyść koszyk
-                  </Button>
-                </Grid>
-              </Grid>
-              <TableContainer component={StyledPaper}>
-                <Table>
-                  <TableBody>
-                  {products.map(({product, quantity}) => (
-                    <TableRow key={product.id} >
-                      <TableCell>
-                        <Grid container direction="row" justify="space-between" alignItems="center">
+      {productCount === 0 ? (<CartEmptyPlaceholder/>) : (<Grid container spacing={4} >
+        <Grid item xs={8}>
+          <Grid container 
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+            style={{paddingBottom: 10}}
+            spacing={3}
+          >
+            <Grid item>
+              <Typography className={classes.titleTypography} variant="subtitle2" component="h4" color="textPrimary" display="inline" noWrap>
+                Koszyk&nbsp;
+              </Typography>
+              <Typography className={classes.titleTypography} variant="subtitle2" component="h4" color="textSecondary" display="inline" noWrap>
+                ({productCount})
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button variant='text' color="inherit" onClick={deleteProducts} endIcon={<DeleteOutlinedIcon/>}>
+                wyczyść koszyk
+              </Button>
+            </Grid>
+          </Grid>
+          <TableContainer component={StyledPaper}>
+            <Table>
+              <TableBody>
+              {products.map(({product, quantity}) => (
+                <TableRow key={product.id} >
+                  <TableCell>
+                    <Grid container direction="row" justify="space-between" alignItems="center">
+                      <Grid item>
+                        <Grid container spacing={2} alignItems="center">
                           <Grid item>
-                            <Grid container spacing={2} alignItems="center">
-                              <Grid item>
-                                <img src={product.image} style={{
-                                  height: 72,
-                                  maxWidth: 72,
-                                  width: '100%',
-                                  objectFit: 'contain',
-                                  }}
-                                  loading="lazy"
-                                />
-                              </Grid>
-                              <Grid item>
-                                {product.brand + " " + product.name}
-                              </Grid>
-                            </Grid>
+                            <img src={product.image} style={{
+                              height: 72,
+                              maxWidth: 72,
+                              width: '100%',
+                              objectFit: 'contain',
+                              }}
+                              loading="lazy"
+                            />
                           </Grid>
                           <Grid item>
-                            <Grid container alignItems="center" spacing={1}>
-                              <Grid item>
-                                {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(product.price)}
-                              </Grid>
-                              <Grid item>
-                                Ilość:&nbsp;{quantity}
-                              </Grid>
-                              <Grid item>
-                                <IconButton color="inherit" size="small" onClick={() => removeItemFromBasket(product.id)}>
-                                  <DeleteOutlinedIcon/>
-                                </IconButton>
-                              </Grid>
-                            </Grid>
+                            {product.brand + " " + product.name}
                           </Grid>
                         </Grid>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
-            <Grid item xs={4}>
-              <Paper elevation={4} className={classes.checkoutPaper}>
-                <Grid container direction="row" justify="space-between" alignItems="center" style={{paddingBottom:"10px"}}>
-                  <Grid item>
-                    <Typography>Cena całkowita</Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography><strong>{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(priceTotal.toFixed(2))}</strong></Typography>
-                  </Grid>
-                </Grid>             
-                { checkout ? (<PayPalPayment price={priceTotal} />) 
-                : (<Button fullWidth variant="contained" color="primary" onClick={() => {setCheckout(true);}}>
-                      Kup
-                    </Button>)}
-                </Paper>
+                      </Grid>
+                      <Grid item>
+                        <Grid container alignItems="center" spacing={1}>
+                          <Grid item>
+                            {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(product.price)}
+                          </Grid>
+                          <Grid item>
+                            Ilość:&nbsp;{quantity}
+                          </Grid>
+                          <Grid item>
+                            <IconButton color="inherit" size="small" onClick={() => removeItemFromBasket(product.id)}>
+                              <DeleteOutlinedIcon/>
+                            </IconButton>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </TableCell>
+                </TableRow>
+              ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper elevation={4} className={classes.checkoutPaper}>
+            <Grid container direction="row" justify="space-between" alignItems="center" style={{paddingBottom:"10px"}}>
+              <Grid item>
+                <Typography>Cena całkowita</Typography>
               </Grid>
-          </Grid>)}
-        </Container>
+              <Grid item>
+                <Typography><strong>{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(priceTotal.toFixed(2))}</strong></Typography>
+              </Grid>
+            </Grid>             
+            { checkout ? (<PayPalPayment price={priceTotal} />) 
+            : (<Button fullWidth variant="contained" color="primary" onClick={() => {setCheckout(true);}}>
+                  Kup
+                </Button>)}
+            </Paper>
+          </Grid>
+      </Grid>)}
     </div>
   )
 }
 
-export default Basket
+export default Cart

@@ -41,7 +41,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if(loginSuccess) {
-      history.push("/loged");
+      history.push("/konfigurator");
     }
   }, [loginSuccess]);
 
