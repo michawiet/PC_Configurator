@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from 'react';
-import { IconButton, Badge } from '@material-ui/core';
+import { Button, Badge } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
@@ -10,7 +10,7 @@ function BasketBadgedButton() {
   let history = useHistory();
 
   const handleClickOpenDialog = () => {
-    history.push("/basket")
+    history.push("/koszyk")
   };
 
   useEffect(() => {
@@ -34,11 +34,18 @@ function BasketBadgedButton() {
 
   return (
     <div>
-      <IconButton color="inherit" onClick={handleClickOpenDialog}>  
-        <Badge badgeContent={itemCount} color="secondary">
-          <ShoppingCartOutlinedIcon/>
-        </Badge>
-      </IconButton>
+      <Button
+        color="inherit"
+        variant="outlined"
+        disableElevation
+        onClick={handleClickOpenDialog}
+        startIcon={<Badge anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }} badgeContent={itemCount} color="secondary" ><ShoppingCartOutlinedIcon/></Badge>}
+      >
+        Koszyk
+      </Button>
     </div>
   )
 }

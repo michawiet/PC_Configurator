@@ -6,18 +6,19 @@ import AuthenticatedPartPicker from './components/AuthenticatedPartPicker';
 import { AuthProvider } from "./AuthContext"
 import PrivateRoute from "./PrivateRoute"
 import Basket from './components/Cart/Cart'
+import routes from './components/Routes';
+import RouteWithSubRoutes from './components/RouteWithSubRoutes';
 
 function App() {
   return (
     <div>
+
       <Router>
         <AuthProvider>
         <Switch>
-          <Route exact path="/" component={UnauthenticatedPartPicker} />
-          <Route exact path="/login" component={SignIn} />
-          <Route exact path="/signup" component={SingUp} />
-          <PrivateRoute exact path="/basket" component={Basket} />
-          <PrivateRoute exact path="/loged" component={AuthenticatedPartPicker} />
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
         </Switch>
         </AuthProvider>
       </Router>

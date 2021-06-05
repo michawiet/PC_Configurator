@@ -3,8 +3,7 @@ import clsx from 'clsx';
 import { makeStyles, AppBar, Toolbar, CssBaseline, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
-import MainTabsPanel from './MainTabsPanel';
-import PartPickerTabs from './Tabs/PartPickerTabs';
+import MainTabsPanel from './Tabs/AppBarButtons';
 
 const drawerWidth = 240;
 
@@ -74,7 +73,6 @@ const MiniDrawer = (props) => {
       </AppBar>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <PartPickerTabs selectedTabs={selectedTabs} />
       </main>
     </div>
   );

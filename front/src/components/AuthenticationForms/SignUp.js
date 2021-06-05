@@ -60,7 +60,7 @@ export default function SignUp() {
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
       console.log("konto")
-      history.push("/loged")
+      history.push("/konfigurator")
     } catch {
       setError("Nie udało się stworzyć konta")
     }
@@ -147,7 +147,7 @@ export default function SignUp() {
           {error && <Alert severity="error">{error}</Alert>}
           <Grid container justify="flex-end">
             <Grid item>
-              <Button disabled={loading} color="primary" onClick={()=>{history.push("/login")}}>Posiasz już konto? Zaloguj się</Button>
+              <Button disabled={loading} color="primary" onClick={()=>{history.push("/logowanie")}}>Posiasz już konto? Zaloguj się</Button>
             </Grid>
           </Grid>
         </form>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Button, Grid, Paper } from '@material-ui/core';
-import Stepper from './Stepper';
+import Stepper from '../Stepper';
 
 const useStyles = makeStyles({
   root: {
@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard() {
+export default function ConfigurationStartPanel() {
   const classes = useStyles();
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);
   const [result, ddlvalue] = useState();
