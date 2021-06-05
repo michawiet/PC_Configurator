@@ -10,7 +10,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
+import java.text.Collator;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comp")
@@ -146,17 +148,71 @@ public class ComputerController {
                     subCoolerList.add(coolerDtoList.get(i));
                 }
             }
-            products.putIfAbsent("cpu",subCpuList.get(random.nextInt(subCpuList.size()-1)));
+            if(type.equals("office")) {
+                subCpuList.stream()
+                        .sorted(Comparator.comparing(CpuDTO::getMtPref))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
+            } else if(type.equals("games")) {
+                subCpuList.stream()
+                        .sorted(Comparator.comparing(CpuDTO::getStPref))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
+            } else if(type.equals("photoEditing")) {
+                subCpuList.stream()
+                        .sorted(Comparator.comparing(CpuDTO::getMtPref))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
+            } else if(type.equals("videoEditing")) {
+                subCpuList.stream()
+                        .sorted(Comparator.comparing(CpuDTO::getMtPref))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
+            } else if(type.equals("3DRendering")) {
+                subCpuList.stream()
+                        .sorted(Comparator.comparing(CpuDTO::getMtPref))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
+            }
             for (int i = 0; i < motherboardDtoList.size(); ++i) {
                 if (motherboardDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[2][0] && motherboardDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[2][1]&& motherboardDtoList.get(i).getSocket().equals(((CpuDTO) products.get("cpu")).getSocket())) {
                     subMotherboardList.add(motherboardDtoList.get(i));
                 }
             }
+
             for (int i = 0; i < ramDtoList.size(); ++i) {
                 if (ramDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[3][0] && ramDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[3][1] ) {
                     subRamList.add(ramDtoList.get(i));
                 }
             }
+
+            if(type.equals("office")) {
+                subRamList.stream()
+                        .sorted(Comparator.comparing(RamDTO::getSpeed))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("ram",subRamList.get(subRamList.size()-1));
+            } else if(type.equals("games")) {
+                subRamList.stream()
+                        .sorted(Comparator.comparing(RamDTO::getSpeed))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("ram",subRamList.get(subRamList.size()-1));
+            } else if(type.equals("photoEditing")) {
+                subRamList.stream()
+                        .sorted(Comparator.comparing(RamDTO::getCl))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("ram",subRamList.get(0));
+            } else if(type.equals("videoEditing")) {
+                subRamList.stream()
+                        .sorted(Comparator.comparing(RamDTO::getCl))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("ram",subRamList.get(0));
+            } else if(type.equals("3DRendering")) {
+                subRamList.stream()
+                        .sorted(Comparator.comparing(RamDTO::getCl))
+                        .collect(Collectors.toList());
+                products.putIfAbsent("ram",subRamList.get(0));
+            }
+
             for (int i = 0; i < storageDtoList.size(); ++i) {
                 if (storageDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[4][0] && storageDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[4][1] ) {
                     subStorageList.add(storageDtoList.get(i));
@@ -179,11 +235,31 @@ public class ComputerController {
                     subCaseList.add(caseDtoList.get(i));
                 }
             }
-            products.putIfAbsent("cooler", subCoolerList.get(random.nextInt(subCoolerList.size()-1)));
-            products.putIfAbsent("motherboard",subMotherboardList.get(random.nextInt(subMotherboardList.size()-1)));
-            products.putIfAbsent("ram",subRamList.get(random.nextInt(subRamList.size()-1)));
+            //products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
+
+            subCoolerList.stream()
+                    .sorted(Comparator.comparing(CoolerDTO::getTier))
+                    .collect(Collectors.toList());
+            products.putIfAbsent("cooler", subCoolerList.get(0));
+
+            subMotherboardList.stream()
+                    .sorted(Comparator.comparing(MotherboardDTO::getTier))
+                    .collect(Collectors.toList());
+            products.putIfAbsent("motherboard",subMotherboardList.get(0));
+
+            subStorageList.stream()
+                    .sorted(Comparator.comparing(StorageDTO::getTier))
+                    .collect(Collectors.toList());
             products.putIfAbsent("storage",subStorageList.get(random.nextInt(subStorageList.size()-1)));
+
+            subGpuList.stream()
+                    .sorted(Comparator.comparing(GpuDTO::getPerformance))
+                    .collect(Collectors.toList());
             products.putIfAbsent("gpu", subGpuList.get(random.nextInt(subGpuList.size()-1)));
+
+            subPsuList.stream()
+                    .sorted(Comparator.comparing(PsuDTO::getTier))
+                    .collect(Collectors.toList());
             products.putIfAbsent("psu",subPsuList.get(random.nextInt(subPsuList.size()-1)));
             products.putIfAbsent("case",subCaseList.get(random.nextInt(subCaseList.size()-1)));
         }
