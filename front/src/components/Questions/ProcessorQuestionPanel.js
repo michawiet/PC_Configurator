@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
+import { FormControlLabel, RadioGroup, Radio, Grid, Paper, Typography } from '@material-ui/core';
 import { ReactComponent as IntelLogo } from '../../icons/intel-3.svg';
 import { ReactComponent as RyzenLogo } from '../../icons/amd-logo-1.svg';
+import { ReactComponent as AnyCpuLogo } from '../../icons/any_cpu.svg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.primary,
-    maxWidth: 460,
+    width: 350,
+    height: 250,
     boxShadow: theme.shadows[4],
     '&:hover': {
       cursor: 'pointer',
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   iconStyle: {
-    maxHeight: 100,
+    maxHeight: 150,
     maxWidth: "60%",
   },
 }));
@@ -43,7 +45,19 @@ export default function ProcessorQuestionPanel({cpuPreference, setCpuPreference}
                   <RyzenLogo className={classes.iconStyle}/>
                 </Grid>
                 <Grid item>
-                  <FormControlLabel value="amd" control={<Radio />}/>
+                  <FormControlLabel labelPlacement="top" value="amd" control={<Radio />}/>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Grid>
+          <Grid item>
+            <Paper className = {classes.paper} onClick={() =>{handleChange('any');}}>
+              <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
+                <Grid item>
+                  <AnyCpuLogo className={classes.iconStyle}/>
+                </Grid>
+                <Grid item>
+                  <FormControlLabel labelPlacement="top" value="any" control={<Radio />}/>
                 </Grid>
               </Grid>
             </Paper>
@@ -55,7 +69,7 @@ export default function ProcessorQuestionPanel({cpuPreference, setCpuPreference}
                   <IntelLogo className={classes.iconStyle}/>
                 </Grid>
                 <Grid item>
-                  <FormControlLabel value="intel" control={<Radio />}/>
+                  <FormControlLabel labelPlacement="top" value="intel" control={<Radio />}/>
                 </Grid>
               </Grid>
             </Paper>
