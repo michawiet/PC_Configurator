@@ -9,13 +9,18 @@ public class OrderList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long product_Id;
-    private long order_Id;
+    @OneToOne
+    @JoinColumn(name = "product_Id", referencedColumnName = "id")
+    private Product product;
+
+    @OneToOne
+    @JoinColumn(name = "order_Id", referencedColumnName = "id")
+    private Order_ order_;
     private int quantity;
 
-    public OrderList(long productId, long orderId, int quantity) {
-        this.product_Id = productId;
-        this.order_Id = orderId;
+    public OrderList(Product product, Order_ order_, int quantity) {
+        this.product = product;
+        this.order_ = order_;
         this.quantity = quantity;
     }
 
@@ -30,20 +35,20 @@ public class OrderList {
         this.id = id;
     }
 
-    public long getProduct_Id() {
-        return product_Id;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_Id(long productId) {
-        this.product_Id = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public long getOrder_Id() {
-        return order_Id;
+    public Order_ getOrder_() {
+        return order_;
     }
 
-    public void setOrder_Id(long orderId) {
-        this.order_Id = orderId;
+    public void setOrder_(Order_ order_) {
+        this.order_ = order_;
     }
 
     public int getQuantity() {
@@ -58,8 +63,8 @@ public class OrderList {
     public String toString() {
         return "OrderList{" +
                 "id=" + id +
-                ", productId=" + product_Id +
-                ", orderId=" + order_Id +
+                ", product=" + product +
+                ", order_=" + order_ +
                 ", quantity=" + quantity +
                 '}';
     }

@@ -1,5 +1,7 @@
 package com.pcc.pc_configurator.DTO;
 
+import com.pcc.pc_configurator.Entities.Order_;
+import com.pcc.pc_configurator.Entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderListDTO {
     private long id;
-    private long productId;
-    private long orderId;
+    private Product product;
+    private Order_ order_;
     private int quantity;
 }

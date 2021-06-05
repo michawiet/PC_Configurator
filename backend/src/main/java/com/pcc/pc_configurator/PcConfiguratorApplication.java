@@ -140,6 +140,23 @@ public class PcConfiguratorApplication {
                 map().setPassword(source.getPassword());
             }
         });
+        modelMapper.addMappings(new PropertyMap<Order_, OrderDTO>() {
+            @Override
+            protected void configure() {
+                map().setId(source.getId());
+                map().setDate(source.getDate());
+                map().setUser(source.getUser());
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<OrderList, OrderListDTO>() {
+            @Override
+            protected void configure() {
+                map().setId(source.getId());
+                map().setProduct(source.getProduct());
+                map().setOrder_(source.getOrder_());
+                map().setQuantity(source.getQuantity());
+            }
+        });
         return modelMapper;
     }
 }

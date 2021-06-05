@@ -1,9 +1,6 @@
 package com.pcc.pc_configurator.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -14,11 +11,14 @@ public class Order_ {
     private long id;
 
     private LocalDate date;
-    private long user_Id;
 
-    public Order_(LocalDate date, long userId) {
+    @OneToOne
+    @JoinColumn(name = "user_Id", referencedColumnName = "id")
+    private User user;
+
+    public Order_(LocalDate date, User user) {
         this.date = date;
-        this.user_Id = userId;
+        this.user = user;
     }
 
     public Order_() {
@@ -40,20 +40,20 @@ public class Order_ {
         this.date = date;
     }
 
-    public long getUser_Id() {
-        return user_Id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_Id(long userId) {
-        this.user_Id = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Order_{" +
                 "id=" + id +
                 ", date=" + date +
-                ", userId=" + user_Id +
+                ", user=" + user +
                 '}';
     }
 }

@@ -23,7 +23,6 @@ import java.util.Map;
 @CrossOrigin("*")
 public class GpuController {
     private final GpuRepository gpuRepository;
-    private List<GpuDTO> gpuDtoList = new ArrayList<>();
     @Autowired
     ModelMapper modelMapper;
 

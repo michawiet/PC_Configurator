@@ -1,7 +1,6 @@
 package com.pcc.pc_configurator.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.pcc.pc_configurator.Entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
