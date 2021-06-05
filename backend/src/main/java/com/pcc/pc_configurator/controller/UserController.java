@@ -1,6 +1,7 @@
 package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.UserDTO;
+import com.pcc.pc_configurator.Entities.User;
 import com.pcc.pc_configurator.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -31,6 +32,18 @@ public class UserController {
     public String testPost(@RequestParam String email) {
         var userRepo = userRepository.findByEmail(email).getEmail();
         if(email.equals(userRepo)) {
+            return "To działa";
+        } else {
+            return "nie działa";
+        }
+    }
+
+    @RequestMapping(value = "/testPost1",consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    public String testPost1(@RequestBody User email) {
+        System.out.println(email);
+        var userRepo = userRepository.findByEmail(email.getEmail());
+        System.out.println(userRepo);
+        if(email.getEmail().equals(userRepo.getEmail())) {
             return "To działa";
         } else {
             return "nie działa";
