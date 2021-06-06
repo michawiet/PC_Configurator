@@ -5,8 +5,6 @@ import ProdukcsConfigurated from '../products/ProductsConfigurated'
 
 function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
   const [configurations, setConfigurations] = useState([]);
-  console.log(cpuPref);
-  console.log(gpuPref);  
   useEffect(() => {
     axios.get("http://localhost:8080/comp/form?"
       + "type="
@@ -21,7 +19,6 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
       console.log(res.data);
       setConfigurations(res.data);
     });
-    console.log("dodać efekt")
   }, [])
   var totalPrice = 0;
 

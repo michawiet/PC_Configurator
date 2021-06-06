@@ -96,6 +96,15 @@ public class ComputerController {
                 .get();
     }
 
+    private RamDTO getRam(float minPrice, float maxPrice) {
+        return ramDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= minPrice)//price MIN
+                        && (p.getProduct().getPrice() <= maxPrice))
+                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
+                .findFirst()
+                .get();
+    }
+
     private StorageDTO getStorage(float minPrice, float maxPrice) throws NoSuchElementException {
         return storageDtoList.stream()
                 .filter(p -> (p.getProduct().getPrice() >= minPrice)//price MIN
@@ -111,6 +120,15 @@ public class ComputerController {
                         && (p.getProduct().getPrice() >= minPrice)//price MIN
                         && (p.getProduct().getPrice() <= maxPrice))
                 .sorted(Comparator.comparingInt(GpuDTO::getPerformance).reversed())
+                .findFirst()
+                .get();
+    }
+
+    private CoolerDTO getCooler(float minPrice, float maxPrice) throws NoSuchElementException {
+        return coolerDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= minPrice)//price MIN
+                        && (p.getProduct().getPrice() <= maxPrice))
+                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
                 .findFirst()
                 .get();
     }
@@ -139,12 +157,7 @@ public class ComputerController {
         //find a motherboard that matches the socket
         var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
         //find a ram
-        var ram = ramDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
-                        && (p.getProduct().getPrice() <= MAX * ramFactor))
-                .sorted(Comparator.comparingInt(RamDTO::getSpeed).reversed())
-                .findFirst()
-                .get();
+        var ram = getRam(MIN * ramFactor, MAX * ramFactor);
         //find a storage
         var storage = getStorage(MIN * storageFactor, MAX * storageFactor);
         //find a psu
@@ -174,7 +187,6 @@ public class ComputerController {
         final float gpuFactor = 0.33f;
         final float psuFactor = 0.06f;
         final float caseFactor = 0.07f;
-        //TODO: wypisać je tutaj jako zmienne final
 
         //find a cpu of preferred brand
         var cpu = cpuDtoList.stream()
@@ -185,22 +197,12 @@ public class ComputerController {
                 .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
                 .findFirst().get();
         //find a cooler
-        var cooler = coolerDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= (MIN * coolerFactor))//price MIN
-                        && (p.getProduct().getPrice() <= (MAX * coolerFactor)))
-                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
-                .findFirst()
-                .get();
+        var cooler = getCooler(MIN * coolerFactor, MAX * coolerFactor);
 
         //find a motherboard that matches the socket
         var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
         //find a ram
-        var ram = ramDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
-                        && (p.getProduct().getPrice() <= MAX * ramFactor))
-                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
-                .findFirst()
-                .get();
+        var ram = getRam(MIN * ramFactor, MAX * ramFactor);
         //find a gpu
         var gpu = getGpu(MIN * gpuFactor, MAX * gpuFactor, preferredGpuBrand);
         //find a storage
@@ -234,7 +236,6 @@ public class ComputerController {
         final float gpuFactor = 0.17f;
         final float psuFactor = 0.08f;
         final float caseFactor = 0.07f;
-        //TODO: wypisać je tutaj jako zmienne final
 
         //find a cpu of preferred brand
         var cpu = cpuDtoList.stream()
@@ -245,21 +246,11 @@ public class ComputerController {
                 .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
                 .findFirst().get();
         //find a cooler of preferred brand
-        var cooler = coolerDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= (MIN * coolerFactor))//price MIN
-                        && (p.getProduct().getPrice() <= (MAX * coolerFactor)))
-                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
-                .findFirst()
-                .get();
+        var cooler = getCooler(MIN * coolerFactor, MAX * coolerFactor);
         //find a motherboard that matches the socket
         var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
         //find a ram
-        var ram = ramDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
-                        && (p.getProduct().getPrice() <= MAX * ramFactor))
-                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
-                .findFirst()
-                .get();
+        var ram = getRam(MIN * ramFactor, MAX * ramFactor);
         //find a gpu
         var gpu = getGpu(MIN * gpuFactor, MAX * gpuFactor, preferredGpuBrand);
         //find a storage
@@ -293,7 +284,6 @@ public class ComputerController {
         final float gpuFactor = 0.19f;
         final float psuFactor = 0.08f;
         final float caseFactor = 0.08f;
-        //TODO: wypisać je tutaj jako zmienne final
 
         //find a cpu of preferred brand
         var cpu = cpuDtoList.stream()
@@ -301,24 +291,14 @@ public class ComputerController {
                         && (p.getProduct().getPrice() >= (MIN * cpuFactor))//price MIN
                         && (p.getProduct().getPrice() <= (MAX * cpuFactor)) //brand
                 )
-                .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
+                .sorted(Comparator.comparingInt(CpuDTO::getMtPref).reversed())
                 .findFirst().get();
         //find a cooler of preferred brand
-        var cooler = coolerDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= (MIN * coolerFactor))//price MIN
-                        && (p.getProduct().getPrice() <= (MAX * coolerFactor)))
-                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
-                .findFirst()
-                .get();
+        var cooler = getCooler(MIN * coolerFactor, MAX * coolerFactor);
         //find a motherboard that matches the socket
         var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
         //find a ram
-        var ram = ramDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
-                        && (p.getProduct().getPrice() <= MAX * ramFactor))
-                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
-                .findFirst()
-                .get();
+        var ram = getRam(MIN * ramFactor, MAX * ramFactor);
         //find a gpu
         var gpu = getGpu(MIN * gpuFactor, MAX * gpuFactor, preferredGpuBrand);
         //find a storage
@@ -344,15 +324,14 @@ public class ComputerController {
         //factors
         final float MIN = budget - (budget * VARIATION);
         final float MAX = budget + (budget * VARIATION);
-        final float cpuFactor = 0.21f;
-        final float coolerFactor = 0.04f;
-        final float motherboardFactor = 0.1f;
+        final float cpuFactor = 0.27f;
+        final float coolerFactor = 0.039f;
+        final float motherboardFactor = 0.067f;
         final float ramFactor = 0.14f;
-        final float storageFactor = 0.12f;
-        final float gpuFactor = 0.25f;
-        final float psuFactor = 0.07f;
-        final float caseFactor = 0.07f;
-        //TODO: wypisać je tutaj jako zmienne final
+        final float storageFactor = 0.17f;
+        final float gpuFactor = 0.235f;
+        final float psuFactor = 0.059f;
+        final float caseFactor = 0.04f;
 
         //find a cpu of preferred brand
         var cpu = cpuDtoList.stream()
@@ -360,24 +339,14 @@ public class ComputerController {
                         && (p.getProduct().getPrice() >= (MIN * cpuFactor))//price MIN
                         && (p.getProduct().getPrice() <= (MAX * cpuFactor)) //brand
                 )
-                .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
+                .sorted(Comparator.comparingInt(CpuDTO::getMtPref).reversed())
                 .findFirst().get();
         //find a cooler of preferred brand
-        var cooler = coolerDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= (MIN * coolerFactor))//price MIN
-                        && (p.getProduct().getPrice() <= (MAX * coolerFactor)))
-                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
-                .findFirst()
-                .get();
+        var cooler = getCooler(MIN * coolerFactor, MAX * coolerFactor);
         //find a motherboard that matches the socket
         var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
         //find a ram
-        var ram = ramDtoList.stream()
-                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
-                        && (p.getProduct().getPrice() <= MAX * ramFactor))
-                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
-                .findFirst()
-                .get();
+        var ram = getRam(MIN * ramFactor, MAX * ramFactor);
         //find a gpu
         var gpu = getGpu(MIN * gpuFactor, MAX * gpuFactor, preferredGpuBrand);
         //find a storage
@@ -404,10 +373,31 @@ public class ComputerController {
                                                   @RequestParam("gpu") String gpu,
                                                   @RequestParam("price") Float price) {
         List<Map<String, Object>> lists = new ArrayList<>();
-        try {
-            lists.add(getGamingComputer(price,cpu, gpu));
-        } catch (NoSuchElementException e) {
-            System.out.println(e);
+        final float priceVariation = price * VARIATION;
+        float currentPrice = price - priceVariation;
+        for(int i = 0 ; i < 3; ++i, currentPrice += priceVariation) {
+            try {
+                switch (type) {
+                    case OFFICE_WORKLOAD:
+                        getOfficeComputer(currentPrice, cpu);
+                        break;
+                    case GAMING_WORKLOAD:
+                        getGamingComputer(currentPrice, cpu, gpu);
+                        break;
+                    case PHOTO_WORKLOAD:
+                        getPhotoComputer(currentPrice, cpu, gpu);
+                        break;
+                    case VIDEO_WORKLOAD:
+                        getVideoComputer(currentPrice, cpu, gpu);
+                        break;
+                    case RENDERING_WORKLOAD:
+                        getRenderingComputer(currentPrice, cpu, gpu);
+                        break;
+                }
+                lists.add(getGamingComputer(currentPrice, cpu, gpu));
+            } catch (NoSuchElementException e) {
+                System.out.println(e);
+            }
         }
         //TODO: add total price
 
