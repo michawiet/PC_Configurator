@@ -1,7 +1,7 @@
 package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.RamDTO;
-import com.pcc.pc_configurator.Entities.Ram;
+import com.pcc.pc_configurator.entities.Ram;
 import com.pcc.pc_configurator.repositories.RamRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

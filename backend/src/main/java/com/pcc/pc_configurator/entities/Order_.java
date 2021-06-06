@@ -1,4 +1,4 @@
-package com.pcc.pc_configurator.Entities;
+package com.pcc.pc_configurator.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;

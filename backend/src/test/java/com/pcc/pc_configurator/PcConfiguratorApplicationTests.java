@@ -1,6 +1,6 @@
 package com.pcc.pc_configurator;
 
-import com.pcc.pc_configurator.Entities.OrderList;
+import com.pcc.pc_configurator.entities.OrderList;
 import com.pcc.pc_configurator.repositories.OrderListRepository;
 import com.pcc.pc_configurator.repositories.OrderRepository;
 import org.junit.jupiter.api.Test;

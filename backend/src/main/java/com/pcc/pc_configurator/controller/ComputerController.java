@@ -9,8 +9,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
-import java.text.Collator;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,7 +39,15 @@ public class ComputerController {
 
     @Autowired
     ModelMapper modelMapper;
-    List<ProductsDTO> productsDtoList = new ArrayList<>();
+
+    final String OFFICE_WORKLOAD = "office";
+    final String PHOTO_WORKLOAD = "photo-editing";
+    final String VIDEO_WORKLOAD = "video-editing";
+    final String GAMING_WORKLOAD = "gaming";
+    final String RENDERING_WORKLOAD = "3d-rendering";
+
+    final float VARIATION = 0.2f;
+
     List<CaseDTO> caseDtoList = new ArrayList<>();
     List<CoolerDTO> coolerDtoList = new ArrayList<>();
     List<CpuDTO> cpuDtoList = new ArrayList<>();
@@ -50,61 +56,9 @@ public class ComputerController {
     List<PsuDTO> psuDtoList = new ArrayList<>();
     List<RamDTO> ramDtoList = new ArrayList<>();
     List<StorageDTO> storageDtoList = new ArrayList<>();
-    Float[][] wspOffice = {
-            {0.0f, 0.5f},   //cpu
-            {0.0f, 0.5f},   //cooler
-            {0.0f, 0.5f},   //motherboard
-            {0.0f, 0.5f},   //ram
-            {0.0f, 0.5f},   //storage
-            {0.0f, 0.5f},   //gpu
-            {0.0f, 0.5f},   //psu
-            {0.0f, 0.5f}    //case
-    };
-    Float[][] wspGames = {
-            {0.0f, 0.5f},   //cpu
-            {0.0f, 0.5f},   //cooler
-            {0.0f, 0.5f},   //motherboard
-            {0.0f, 0.5f},   //ram
-            {0.0f, 0.5f},   //storage
-            {0.0f, 0.5f},   //gpu
-            {0.0f, 0.5f},   //psu
-            {0.0f, 0.5f}    //case
-    };
-    Float[][] wspPhotoEditing = {
-            {0.0f, 0.5f},   //cpu
-            {0.0f, 0.5f},   //cooler
-            {0.0f, 0.5f},   //motherboard
-            {0.0f, 0.5f},   //ram
-            {0.0f, 0.5f},   //storage
-            {0.0f, 0.5f},   //gpu
-            {0.0f, 0.5f},   //psu
-            {0.0f, 0.5f}    //case
-    };
-    Float[][] wspVideoEditing = {
-            {0.0f, 0.5f},   //cpu
-            {0.0f, 0.5f},   //cooler
-            {0.0f, 0.5f},   //motherboard
-            {0.0f, 0.5f},   //ram
-            {0.0f, 0.5f},   //storage
-            {0.0f, 0.5f},   //gpu
-            {0.0f, 0.5f},   //psu
-            {0.0f, 0.5f}    //case
-    };
-    Float[][] wsp3DRendering = {
-            {0.0f, 0.5f},   //cpu
-            {0.0f, 0.5f},   //cooler
-            {0.0f, 0.5f},   //motherboard
-            {0.0f, 0.5f},   //ram
-            {0.0f, 0.5f},   //storage
-            {0.0f, 0.5f},   //gpu
-            {0.0f, 0.5f},   //psu
-            {0.0f, 0.5f}    //case
-    };
 
     @EventListener(ApplicationReadyEvent.class)
-    //@RequestMapping
     public void fillLists() {
-        for (var product : productRepository.findAll()) { productsDtoList.add(modelMapper.map(product, ProductsDTO.class)); }
         for (var case_ : caseRepository.findAll()) { caseDtoList.add(modelMapper.map(case_, CaseDTO.class)); }
         for (var cooler : coolerRepository.findAll()) { coolerDtoList.add(modelMapper.map(cooler, CoolerDTO.class)); }
         for (var cpu : cpuRepository.findAll()) { cpuDtoList.add(modelMapper.map(cpu, CpuDTO.class)); }
@@ -113,163 +67,335 @@ public class ComputerController {
         for (var psu : psuRepository.findAll()) { psuDtoList.add(modelMapper.map(psu, PsuDTO.class)); }
         for (var ram : ramRepository.findAll()) { ramDtoList.add(modelMapper.map(ram, RamDTO.class)); }
         for (var storage : storageRepository.findAll()) { storageDtoList.add(modelMapper.map(storage, StorageDTO.class)); }
-
     }
 
-    public Map<String, Object> temp(String type, String cpu, String gpu, Float price) {
-        Map<String, Object> products = new HashMap<>();
-        List<CpuDTO> subCpuList = new ArrayList<>();
-        List<CoolerDTO> subCoolerList = new ArrayList<>();
-        List<MotherboardDTO> subMotherboardList = new ArrayList<>();
-        List<RamDTO> subRamList = new ArrayList<>();
-        List<StorageDTO> subStorageList = new ArrayList<>();
-        List<GpuDTO> subGpuList = new ArrayList<>();
-        List<PsuDTO> subPsuList = new ArrayList<>();
-        List<CaseDTO> subCaseList = new ArrayList<>();
+    private CaseDTO getCase(float minPrice, float maxPrice) throws NoSuchElementException {
+        return caseDtoList.stream().filter(p -> (p.getProduct().getPrice() >= minPrice)//price MIN
+                && (p.getProduct().getPrice() <= maxPrice)
+                && (p.getMax_Motherboard_Size().equals("ATX")))
+                .sorted(((o1, o2) -> Float.compare(o1.getProduct().getPrice(), o2.getProduct().getPrice())))
+                .findFirst().get();
+    }
 
-        Map<String, Float[][]> map = new HashMap<>() {{
-            put("office", wspOffice);
-            put("games", wspGames);
-            put("photoEditing", wspPhotoEditing);
-            put("videoEditing", wspVideoEditing);
-            put("3DRendering", wsp3DRendering);
-        }};
-        Random random = new Random();
-        if (map.containsKey(type)) {
-            Float[][] temporaryWsp = map.get(type);
+    private PsuDTO getPsu(float minPrice, float maxPrice) throws NoSuchElementException {
+        return psuDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= minPrice)//price MIN
+                        && (p.getProduct().getPrice() <= maxPrice))
+                .sorted(Comparator.comparingDouble(PsuDTO::getTier))
+                .findFirst()
+                .get();
+    }
 
-            for (int i = 0; i < cpuDtoList.size(); ++i) {
-                if (cpuDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[0][0] && cpuDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[0][1] && cpuDtoList.get(i).getProduct().getBrand().equals(cpu)) {
-                    subCpuList.add(cpuDtoList.get(i));
-                }
-            }
-            for (int i = 0; i < coolerDtoList.size(); ++i) {
-                if (coolerDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[1][0] && coolerDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[1][1]) {
-                    subCoolerList.add(coolerDtoList.get(i));
-                }
-            }
-            if(type.equals("office")) {
-                subCpuList.stream()
-                        .sorted(Comparator.comparing(CpuDTO::getMtPref))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
-            } else if(type.equals("games")) {
-                subCpuList.stream()
-                        .sorted(Comparator.comparing(CpuDTO::getStPref))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
-            } else if(type.equals("photoEditing")) {
-                subCpuList.stream()
-                        .sorted(Comparator.comparing(CpuDTO::getMtPref))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
-            } else if(type.equals("videoEditing")) {
-                subCpuList.stream()
-                        .sorted(Comparator.comparing(CpuDTO::getMtPref))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
-            } else if(type.equals("3DRendering")) {
-                subCpuList.stream()
-                        .sorted(Comparator.comparing(CpuDTO::getMtPref))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
-            }
-            for (int i = 0; i < motherboardDtoList.size(); ++i) {
-                if (motherboardDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[2][0] && motherboardDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[2][1]&& motherboardDtoList.get(i).getSocket().equals(((CpuDTO) products.get("cpu")).getSocket())) {
-                    subMotherboardList.add(motherboardDtoList.get(i));
-                }
-            }
+    private MotherboardDTO getMotherboard(float minPrice, float maxPrice, String cpuSocket) throws NoSuchElementException {
+        return motherboardDtoList.stream()
+                .filter(p -> p.getSocket().equals(cpuSocket)
+                        && (p.getProduct().getPrice() >= minPrice)//price MIN
+                        && (p.getProduct().getPrice() <= maxPrice))
+                .sorted(Comparator.comparingDouble(MotherboardDTO::getTier))
+                .findFirst()
+                .get();
+    }
 
-            for (int i = 0; i < ramDtoList.size(); ++i) {
-                if (ramDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[3][0] && ramDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[3][1] ) {
-                    subRamList.add(ramDtoList.get(i));
-                }
-            }
+    private StorageDTO getStorage(float minPrice, float maxPrice) throws NoSuchElementException {
+        return storageDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= minPrice)//price MIN
+                        && (p.getProduct().getPrice() <= maxPrice))
+                .sorted(Comparator.comparingInt(StorageDTO::getTier))
+                .findFirst()
+                .get();
+    }
 
-            if(type.equals("office")) {
-                subRamList.stream()
-                        .sorted(Comparator.comparing(RamDTO::getSpeed))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("ram",subRamList.get(subRamList.size()-1));
-            } else if(type.equals("games")) {
-                subRamList.stream()
-                        .sorted(Comparator.comparing(RamDTO::getSpeed))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("ram",subRamList.get(subRamList.size()-1));
-            } else if(type.equals("photoEditing")) {
-                subRamList.stream()
-                        .sorted(Comparator.comparing(RamDTO::getCl))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("ram",subRamList.get(0));
-            } else if(type.equals("videoEditing")) {
-                subRamList.stream()
-                        .sorted(Comparator.comparing(RamDTO::getCl))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("ram",subRamList.get(0));
-            } else if(type.equals("3DRendering")) {
-                subRamList.stream()
-                        .sorted(Comparator.comparing(RamDTO::getCl))
-                        .collect(Collectors.toList());
-                products.putIfAbsent("ram",subRamList.get(0));
-            }
+    private GpuDTO getGpu(float minPrice, float maxPrice, String preferredGpuBrand) throws NoSuchElementException {
+        return gpuDtoList.stream()
+                .filter(p -> (preferredGpuBrand.equals("any") ? true : p.getChipset().substring(0, p.getChipset().indexOf(' ')).equals(preferredGpuBrand))
+                        && (p.getProduct().getPrice() >= minPrice)//price MIN
+                        && (p.getProduct().getPrice() <= maxPrice))
+                .sorted(Comparator.comparingInt(GpuDTO::getPerformance).reversed())
+                .findFirst()
+                .get();
+    }
 
-            for (int i = 0; i < storageDtoList.size(); ++i) {
-                if (storageDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[4][0] && storageDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[4][1] ) {
-                    subStorageList.add(storageDtoList.get(i));
-                }
-            }
-            for (int i = 0; i < gpuDtoList.size(); ++i) {
-                if (gpuDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[5][0] && gpuDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[5][1] && gpuDtoList.get(i).getChipset().substring(0,gpuDtoList.get(i).getChipset().indexOf(' ')).equals(gpu)// &&
-                    /*!((CpuDTO) products.get("cpu")).isIntegratedGPU()*/) {
-                    subGpuList.add(gpuDtoList.get(i));
-                }
-            }
-            for (int i = 0; i < psuDtoList.size(); ++i) {
-                if (psuDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[6][0] && psuDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[6][1] &&
-                        (((CpuDTO) products.get("cpu")).getTdpW()) + 100 <= psuDtoList.get(i).getWattage()) {
-                    subPsuList.add(psuDtoList.get(i));
-                }
-            }
-            for (int i = 0; i < caseDtoList.size(); ++i) {
-                if (caseDtoList.get(i).getProduct().getPrice() >= price * temporaryWsp[7][0] && caseDtoList.get(i).getProduct().getPrice() <= price * temporaryWsp[7][1] ) {
-                    subCaseList.add(caseDtoList.get(i));
-                }
-            }
-            //products.putIfAbsent("cpu",subCpuList.get(subCpuList.size()-1));
+    private Map<String, Object> getOfficeComputer(Float budget, String preferredCpuBrand) throws NoSuchElementException {
+        Map<String, Object> map = new HashMap<>();
+        //factors
+        final float MIN = budget - (budget * VARIATION);
+        final float MAX = budget + (budget * VARIATION);
+        final float cpuFactor = 0.3f;
+        final float motherboardFactor = 0.167f;
+        final float ramFactor = 0.16f;
+        final float storageFactor = 0.13f;
+        final float psuFactor = 0.113f;
+        final float caseFactor = 0.13f;
+        //TODO: wypisać je tutaj jako zmienne final
+        //find a cpu with integrated graphics of preferred brand
+        var cpu = cpuDtoList.stream()
+                .filter(p -> p.isIntegratedGPU()
+                        && (preferredCpuBrand.equals("any") ? true : p.getProduct().getBrand().equals(preferredCpuBrand))
+                        && (p.getProduct().getPrice() >= (MIN * cpuFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * cpuFactor))//brand
+                )
+                .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
+                .findFirst().get();
+        //find a motherboard that matches the socket
+        var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
+        //find a ram
+        var ram = ramDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
+                        && (p.getProduct().getPrice() <= MAX * ramFactor))
+                .sorted(Comparator.comparingInt(RamDTO::getSpeed).reversed())
+                .findFirst()
+                .get();
+        //find a storage
+        var storage = getStorage(MIN * storageFactor, MAX * storageFactor);
+        //find a psu
+        var psu = getPsu(MIN * psuFactor, MAX * psuFactor);
+        //find a case, match form factor of motherboard
+        var case_ = getCase(MIN * caseFactor, MAX * caseFactor);
 
-            subCoolerList.stream()
-                    .sorted(Comparator.comparing(CoolerDTO::getTier))
-                    .collect(Collectors.toList());
-            products.putIfAbsent("cooler", subCoolerList.get(0));
+        map.put("cpu", cpu);
+        map.put("motherboard", motherboard);
+        map.put("ram", ram);
+        map.put("storage", storage);
+        map.put("psu", psu);
+        map.put("computerCase", case_);
+        return map;
+    }
 
-            subMotherboardList.stream()
-                    .sorted(Comparator.comparing(MotherboardDTO::getTier))
-                    .collect(Collectors.toList());
-            products.putIfAbsent("motherboard",subMotherboardList.get(0));
+    private Map<String, Object> getGamingComputer(Float budget, String preferredCpuBrand, String preferredGpuBrand) {
+        Map<String, Object> map = new HashMap<>();
+        //factors
+        final float MIN = budget - (budget * VARIATION);
+        final float MAX = budget + (budget * VARIATION);
+        final float cpuFactor = 0.21f;
+        final float coolerFactor = 0.04f;
+        final float motherboardFactor = 0.11f;
+        final float ramFactor = 0.08f;
+        final float storageFactor = 0.1f;
+        final float gpuFactor = 0.33f;
+        final float psuFactor = 0.06f;
+        final float caseFactor = 0.07f;
+        //TODO: wypisać je tutaj jako zmienne final
 
-            subStorageList.stream()
-                    .sorted(Comparator.comparing(StorageDTO::getTier))
-                    .collect(Collectors.toList());
-            products.putIfAbsent("storage",subStorageList.get(random.nextInt(subStorageList.size()-1)));
+        //find a cpu of preferred brand
+        var cpu = cpuDtoList.stream()
+                .filter(p -> (preferredCpuBrand.equals("any") ? true : p.getProduct().getBrand().equals(preferredCpuBrand))
+                        && (p.getProduct().getPrice() >= (MIN * cpuFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * cpuFactor)) //brand
+                )
+                .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
+                .findFirst().get();
+        //find a cooler
+        var cooler = coolerDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= (MIN * coolerFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * coolerFactor)))
+                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
+                .findFirst()
+                .get();
 
-            subGpuList.stream()
-                    .sorted(Comparator.comparing(GpuDTO::getPerformance))
-                    .collect(Collectors.toList());
-            products.putIfAbsent("gpu", subGpuList.get(random.nextInt(subGpuList.size()-1)));
+        //find a motherboard that matches the socket
+        var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
+        //find a ram
+        var ram = ramDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
+                        && (p.getProduct().getPrice() <= MAX * ramFactor))
+                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
+                .findFirst()
+                .get();
+        //find a gpu
+        var gpu = getGpu(MIN * gpuFactor, MAX * gpuFactor, preferredGpuBrand);
+        //find a storage
+        var storage = getStorage(MIN * storageFactor, MAX * storageFactor);
+        //find a psu
+        var psu= getPsu(MIN * psuFactor, MAX * psuFactor);
+        //find a case, match form factor of motherboard
+        var case_ = getCase(MIN * caseFactor, MAX * caseFactor);
 
-            subPsuList.stream()
-                    .sorted(Comparator.comparing(PsuDTO::getTier))
-                    .collect(Collectors.toList());
-            products.putIfAbsent("psu",subPsuList.get(random.nextInt(subPsuList.size()-1)));
-            products.putIfAbsent("case",subCaseList.get(random.nextInt(subCaseList.size()-1)));
-        }
-        var temp1 = ((CpuDTO) products.get("cpu")).getProduct().getPrice() +((CoolerDTO) products.get("cooler")).getProduct().getPrice() +
-                ((MotherboardDTO) products.get("motherboard")).getProduct().getPrice() +((RamDTO) products.get("ram")).getProduct().getPrice() +
-                ((StorageDTO) products.get("storage")).getProduct().getPrice() +((GpuDTO) products.get("gpu")).getProduct().getPrice() +
-                ((PsuDTO) products.get("psu")).getProduct().getPrice() +((CaseDTO) products.get("case")).getProduct().getPrice();
-        System.out.println(Math.round((temp1)*100.f)/100.f);
+        map.put("cpu", cpu);
+        map.put("cooler", cooler);
+        map.put("motherboard", motherboard);
+        map.put("ram", ram);
+        map.put("storage", storage);
+        map.put("gpu",gpu);
+        map.put("psu", psu);
+        map.put("computerCase", case_);
+        return map;
+    }
 
-        return products;
+    private Map<String, Object> getPhotoComputer(Float budget, String preferredCpuBrand, String preferredGpuBrand) {
+        Map<String, Object> map = new HashMap<>();
+        //factors
+        final float MIN = budget - (budget * VARIATION);
+        final float MAX = budget + (budget * VARIATION);
+        final float cpuFactor = 0.24f;
+        final float coolerFactor = 0.06f;
+        final float motherboardFactor = 0.13f;
+        final float ramFactor = 0.13f;
+        final float storageFactor = 0.12f;
+        final float gpuFactor = 0.17f;
+        final float psuFactor = 0.08f;
+        final float caseFactor = 0.07f;
+        //TODO: wypisać je tutaj jako zmienne final
+
+        //find a cpu of preferred brand
+        var cpu = cpuDtoList.stream()
+                .filter(p -> (preferredCpuBrand.equals("any") ? true : p.getProduct().getBrand().equals(preferredCpuBrand))
+                        && (p.getProduct().getPrice() >= (MIN * cpuFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * cpuFactor)) //brand
+                )
+                .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
+                .findFirst().get();
+        //find a cooler of preferred brand
+        var cooler = coolerDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= (MIN * coolerFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * coolerFactor)))
+                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
+                .findFirst()
+                .get();
+        //find a motherboard that matches the socket
+        var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
+        //find a ram
+        var ram = ramDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
+                        && (p.getProduct().getPrice() <= MAX * ramFactor))
+                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
+                .findFirst()
+                .get();
+        //find a gpu
+        var gpu = getGpu(MIN * gpuFactor, MAX * gpuFactor, preferredGpuBrand);
+        //find a storage
+        var storage = getStorage(MIN * storageFactor, MAX * storageFactor);
+        //find a psu
+        var psu= getPsu(MIN * psuFactor, MAX * psuFactor);
+        //find a case, match form factor of motherboard
+        var case_ = getCase(MIN * caseFactor, MAX * caseFactor);
+
+        map.put("cpu", cpu);
+        map.put("cooler", cooler);
+        map.put("motherboard", motherboard);
+        map.put("ram", ram);
+        map.put("storage", storage);
+        map.put("gpu",gpu);
+        map.put("psu", psu);
+        map.put("computerCase", case_);
+        return map;
+    }
+
+    private Map<String, Object> getVideoComputer(Float budget, String preferredCpuBrand, String preferredGpuBrand) {
+        Map<String, Object> map = new HashMap<>();
+        //factors
+        final float MIN = budget - (budget * VARIATION);
+        final float MAX = budget + (budget * VARIATION);
+        final float cpuFactor = 0.27f;
+        final float coolerFactor = 0.04f;
+        final float motherboardFactor = 0.1f;
+        final float ramFactor = 0.1f;
+        final float storageFactor = 0.14f;
+        final float gpuFactor = 0.19f;
+        final float psuFactor = 0.08f;
+        final float caseFactor = 0.08f;
+        //TODO: wypisać je tutaj jako zmienne final
+
+        //find a cpu of preferred brand
+        var cpu = cpuDtoList.stream()
+                .filter(p -> (preferredCpuBrand.equals("any") ? true : p.getProduct().getBrand().equals(preferredCpuBrand))
+                        && (p.getProduct().getPrice() >= (MIN * cpuFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * cpuFactor)) //brand
+                )
+                .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
+                .findFirst().get();
+        //find a cooler of preferred brand
+        var cooler = coolerDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= (MIN * coolerFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * coolerFactor)))
+                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
+                .findFirst()
+                .get();
+        //find a motherboard that matches the socket
+        var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
+        //find a ram
+        var ram = ramDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
+                        && (p.getProduct().getPrice() <= MAX * ramFactor))
+                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
+                .findFirst()
+                .get();
+        //find a gpu
+        var gpu = getGpu(MIN * gpuFactor, MAX * gpuFactor, preferredGpuBrand);
+        //find a storage
+        var storage = getStorage(MIN * storageFactor, MAX * storageFactor);
+        //find a psu
+        var psu= getPsu(MIN * psuFactor, MAX * psuFactor);
+        //find a case, match form factor of motherboard
+        var case_ = getCase(MIN * caseFactor, MAX * caseFactor);
+
+        map.put("cpu", cpu);
+        map.put("cooler", cooler);
+        map.put("motherboard", motherboard);
+        map.put("ram", ram);
+        map.put("storage", storage);
+        map.put("gpu",gpu);
+        map.put("psu", psu);
+        map.put("computerCase", case_);
+        return map;
+    }
+
+    private Map<String, Object> getRenderingComputer(Float budget, String preferredCpuBrand, String preferredGpuBrand) {
+        Map<String, Object> map = new HashMap<>();
+        //factors
+        final float MIN = budget - (budget * VARIATION);
+        final float MAX = budget + (budget * VARIATION);
+        final float cpuFactor = 0.21f;
+        final float coolerFactor = 0.04f;
+        final float motherboardFactor = 0.1f;
+        final float ramFactor = 0.14f;
+        final float storageFactor = 0.12f;
+        final float gpuFactor = 0.25f;
+        final float psuFactor = 0.07f;
+        final float caseFactor = 0.07f;
+        //TODO: wypisać je tutaj jako zmienne final
+
+        //find a cpu of preferred brand
+        var cpu = cpuDtoList.stream()
+                .filter(p -> (preferredCpuBrand.equals("any") ? true : p.getProduct().getBrand().equals(preferredCpuBrand))
+                        && (p.getProduct().getPrice() >= (MIN * cpuFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * cpuFactor)) //brand
+                )
+                .sorted(Comparator.comparingInt(CpuDTO::getStPref).reversed())
+                .findFirst().get();
+        //find a cooler of preferred brand
+        var cooler = coolerDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= (MIN * coolerFactor))//price MIN
+                        && (p.getProduct().getPrice() <= (MAX * coolerFactor)))
+                .sorted(Comparator.comparingInt(CoolerDTO::getTier))
+                .findFirst()
+                .get();
+        //find a motherboard that matches the socket
+        var motherboard = getMotherboard(MIN * motherboardFactor, MAX * motherboardFactor, cpu.getSocket());
+        //find a ram
+        var ram = ramDtoList.stream()
+                .filter(p -> (p.getProduct().getPrice() >= MIN * ramFactor)//price MIN
+                        && (p.getProduct().getPrice() <= MAX * ramFactor))
+                .sorted(Comparator.comparingInt(RamDTO::getSpeed))
+                .findFirst()
+                .get();
+        //find a gpu
+        var gpu = getGpu(MIN * gpuFactor, MAX * gpuFactor, preferredGpuBrand);
+        //find a storage
+        var storage = getStorage(MIN * storageFactor, MAX * storageFactor);
+        //find a psu
+        var psu= getPsu(MIN * psuFactor, MAX * psuFactor);
+        //find a case, match form factor of motherboard
+        var case_ = getCase(MIN * caseFactor, MAX * caseFactor);
+
+        map.put("cpu", cpu);
+        map.put("cooler", cooler);
+        map.put("motherboard", motherboard);
+        map.put("ram", ram);
+        map.put("storage", storage);
+        map.put("gpu",gpu);
+        map.put("psu", psu);
+        map.put("computerCase", case_);
+        return map;
     }
 
     @GetMapping("/form")
@@ -278,10 +404,16 @@ public class ComputerController {
                                                   @RequestParam("gpu") String gpu,
                                                   @RequestParam("price") Float price) {
         List<Map<String, Object>> lists = new ArrayList<>();
+        try {
+            lists.add(getGamingComputer(price,cpu, gpu));
+        } catch (NoSuchElementException e) {
+            System.out.println(e);
+        }
+        //TODO: add total price
 
-        lists.add(temp(type, cpu, gpu, price + price*0.6f));
-        lists.add(temp(type, cpu, gpu, price));
-        lists.add(temp(type, cpu, gpu, price - price*0.6f));
+        //lists.add(temp(type, cpu, gpu, price + price*0.6f));
+        //lists.add(temp(type, cpu, gpu, price));
+        //lists.add(temp(type, cpu, gpu, price - price*0.6f));
         return lists;
     }
 }

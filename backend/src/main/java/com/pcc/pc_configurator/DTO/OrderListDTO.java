@@ -1,7 +1,7 @@
 package com.pcc.pc_configurator.DTO;
 
-import com.pcc.pc_configurator.Entities.Order_;
-import com.pcc.pc_configurator.Entities.Product;
+import com.pcc.pc_configurator.entities.Order_;
+import com.pcc.pc_configurator.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

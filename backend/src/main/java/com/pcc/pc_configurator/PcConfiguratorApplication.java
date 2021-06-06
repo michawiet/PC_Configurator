@@ -1,7 +1,7 @@
 package com.pcc.pc_configurator;
 
 import com.pcc.pc_configurator.DTO.*;
-import com.pcc.pc_configurator.Entities.*;
+import com.pcc.pc_configurator.entities.*;
 import org.modelmapper.PropertyMap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

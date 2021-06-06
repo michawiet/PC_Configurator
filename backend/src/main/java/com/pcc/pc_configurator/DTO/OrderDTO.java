@@ -1,6 +1,6 @@
 package com.pcc.pc_configurator.DTO;
 
-import com.pcc.pc_configurator.Entities.User;
+import com.pcc.pc_configurator.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
 package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.PsuDTO;
-import com.pcc.pc_configurator.Entities.Psu;
+import com.pcc.pc_configurator.entities.Psu;
 import com.pcc.pc_configurator.repositories.PsuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

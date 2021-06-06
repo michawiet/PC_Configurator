@@ -1,7 +1,7 @@
 package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.UserDTO;
-import com.pcc.pc_configurator.Entities.User;
+import com.pcc.pc_configurator.entities.User;
 import com.pcc.pc_configurator.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

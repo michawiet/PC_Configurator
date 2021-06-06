@@ -1,7 +1,7 @@
 package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.MotherboardDTO;
-import com.pcc.pc_configurator.Entities.Motherboard;
+import com.pcc.pc_configurator.entities.Motherboard;
 import com.pcc.pc_configurator.repositories.MotherboardRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
