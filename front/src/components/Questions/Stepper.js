@@ -5,15 +5,15 @@ import NavigateNextOutlinedIcon from '@material-ui/icons/NavigateNextOutlined';
 import NavigateBeforeOutlinedIcon from '@material-ui/icons/NavigateBeforeOutlined';
 import clsx from 'clsx';
 
-import WorkloadTypeQuestionPanel  from './Questions/WorkloadTypeQuestionsPanel';
-import ProcessorQuestionPanel  from './Questions/ProcessorQuestionPanel';
-import GpuQuestionPanel  from './Questions/GpuQuestionPanel';
-import BudgetQuestionPanel  from './Questions/BudgetQuestionPanel';
+import WorkloadTypeQuestionPanel  from './WorkloadTypeQuestionsPanel';
+import ProcessorQuestionPanel  from './ProcessorQuestionPanel';
+import GpuQuestionPanel  from './GpuQuestionPanel';
+import BudgetQuestionPanel  from './BudgetQuestionPanel';
 
-import { ReactComponent as TargetIcon } from '../icons/stepper/target_white.svg';
-import { ReactComponent as GpuIcon } from '../icons/stepper/gpu_white.svg';
-import { ReactComponent as CpuIcon } from '../icons/stepper/cpu_white.svg';
-import { ReactComponent as BudgetIcon } from '../icons/stepper/money-bag_white.svg';
+import { ReactComponent as TargetIcon } from '../../icons/stepper/target_white.svg';
+import { ReactComponent as GpuIcon } from '../../icons/stepper/gpu_white.svg';
+import { ReactComponent as CpuIcon } from '../../icons/stepper/cpu_white.svg';
+import { ReactComponent as BudgetIcon } from '../../icons/stepper/money-bag_white.svg';
 
 const ColorlibConnector = withStyles({
   alternativeLabel: {
@@ -100,7 +100,6 @@ ColorlibStepIcon.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
     alignItems: 'center',
   },
   instructions: {

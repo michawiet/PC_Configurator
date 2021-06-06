@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles, useTheme, AppBar, Menu, MenuItem, Toolbar, CssBaseline, Typography, IconButton, Grid, Button, Badge, Container, Icon } from '@material-ui/core';
+import React, { useState } from 'react'
+import { makeStyles, AppBar, Menu, MenuItem, Toolbar, CssBaseline, Typography, Grid, Button, Container } from '@material-ui/core';
 import BasketBadgedButton from './Cart/CartBadgedButton';
-import { Switch, Link, useHistory } from 'react-router-dom';
+import { Switch, useHistory } from 'react-router-dom';
 import RouteWithSubRoutes from './RouteWithSubRoutes';
 import { useAuth } from "../AuthContext";
-import MainTabsPanel from './Tabs/AppBarButtons';
+import MainTabsPanel from './HomePageElements/AppBarButtons';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 
 const useStyles = makeStyles((theme) => ({

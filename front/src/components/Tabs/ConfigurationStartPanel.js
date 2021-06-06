@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Button, Grid, Paper } from '@material-ui/core';
-import Stepper from '../Stepper';
+import Stepper from '../Questions/Stepper';
 
 const useStyles = makeStyles({
   root: {
