@@ -288,6 +288,7 @@ public class ComputerController {
                 System.out.println(e);
             }
         }
+        //TODO: add total price
 
         return lists;
     }

@@ -152,8 +152,14 @@ public class PcConfiguratorApplication {
             @Override
             protected void configure() {
                 map().setId(source.getId());
-                map().setProduct(source.getProduct());
-                map().setOrder_(source.getOrder_());
+                map().setProductId(source.getProduct().getId());
+                map().setBrand(source.getProduct().getBrand());
+                map().setName(source.getProduct().getName());
+                map().setPrice(source.getProduct().getPrice());
+                map().setOrderId(source.getOrder_().getId());
+                map().setDate(source.getOrder_().getDate());
+                //map().setProduct(source.getProduct());
+                //map().setOrder_(source.getOrder_());
                 map().setQuantity(source.getQuantity());
             }
         });

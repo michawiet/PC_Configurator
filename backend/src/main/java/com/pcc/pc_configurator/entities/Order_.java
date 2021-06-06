@@ -1,5 +1,7 @@
 package com.pcc.pc_configurator.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -14,6 +16,7 @@ public class Order_ {
 
     @OneToOne
     @JoinColumn(name = "user_Id", referencedColumnName = "id")
+    @JsonIgnore
     private User user;
 
     public Order_(LocalDate date, User user) {
