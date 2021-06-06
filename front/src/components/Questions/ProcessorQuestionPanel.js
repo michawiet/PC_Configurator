@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControlLabel, RadioGroup, Radio, Grid, Paper, Typography } from '@material-ui/core';
+import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
 import { ReactComponent as IntelLogo } from '../../icons/intel-3.svg';
 import { ReactComponent as RyzenLogo } from '../../icons/amd-logo-1.svg';
 import { ReactComponent as AnyCpuLogo } from '../../icons/any_cpu.svg';

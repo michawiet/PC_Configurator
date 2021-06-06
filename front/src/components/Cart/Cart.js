@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
-import { makeStyles, AppBar, Toolbar, IconButton, Typography, Table, TableBody, TableCell,
-TableContainer, TableRow, Paper, Container, Grid, Button, OutlinedInput } from '@material-ui/core';
+import { makeStyles, IconButton, Typography, Table, TableBody, TableCell,
+TableContainer, TableRow, Paper, Grid, Button } from '@material-ui/core';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 import CartEmptyPlaceholder from './CartEmptyPlaceholder';
 import PayPalPayment from '../payment/PayPalPayment';
@@ -69,6 +68,7 @@ function Cart() {
       axios.all(urls).then(axios.spread((...responses) => {
         var productsArr = [];
         for(var i = 0; i < responses.length; i++) {
+          
           productsArr.push({product: responses[i].data, quantity: basketItems[i].quantity});
         }
         setProducts(productsArr);

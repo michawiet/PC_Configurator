@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Button, withStyles  } from '@material-ui/core';
+import { makeStyles, Button  } from '@material-ui/core';
 import { ReactComponent as CpuIcon } from '../../icons/cpu.svg';
 import { ReactComponent as CoolerIcon } from '../../icons/fan.svg';
 import { ReactComponent as MotherboardIcon } from '../../icons/motherboard.svg';

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Grid, Slider, OutlinedInput, Paper, withStyles, Typography, Tooltip } from '@material-ui/core';
-import PropTypes from 'prop-types';
+import { makeStyles, Grid, Slider, Paper, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,22 +20,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 40,
   }
 }));
-
-function ValueLabelComponent(props) {
-  const { children, open, value } = props;
-
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-      {children}
-    </Tooltip>
-  );
-}
-
-ValueLabelComponent.propTypes = {
-  children: PropTypes.element.isRequired,
-  open: PropTypes.bool.isRequired,
-  value: PropTypes.number.isRequired,
-};
 
 function valuetext(value) {
     return `${value}`;
