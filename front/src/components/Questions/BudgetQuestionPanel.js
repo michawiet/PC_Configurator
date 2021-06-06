@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Grid, Slider, OutlinedInput, Paper, withStyles, Typography, Tooltip } from '@material-ui/core';
-import { ReactComponent as ZlotyIcon } from '../../icons/poland-zloty-currency-symbol.svg';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     paddingBottom: 25,
-    fontSize: 20,
+    fontSize: 40,
   }
 }));
 
@@ -128,8 +127,8 @@ export default function SimpleCard({budget, setBudget, workload}) {
       <Paper className={classes.paper}>
       <Grid container direction="row" justify="space-between" alignItems="center">
         <Grid item xs={12}>
-          <Typography className={classes.title} align="center">
-            {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(budget)}
+          <Typography className={classes.title} variant="h1" align="center">
+            <strong>{budget + " zł"}</strong>
           </Typography>
         </Grid>
         <Grid item xs={12}>
