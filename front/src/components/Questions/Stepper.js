@@ -14,6 +14,7 @@ import { ReactComponent as TargetIcon } from '../../icons/stepper/target_white.s
 import { ReactComponent as GpuIcon } from '../../icons/stepper/gpu_white.svg';
 import { ReactComponent as CpuIcon } from '../../icons/stepper/cpu_white.svg';
 import { ReactComponent as BudgetIcon } from '../../icons/stepper/money-bag_white.svg';
+import ConfigurationResult from './ConfigurationResult';
 
 const ColorlibConnector = withStyles({
   alternativeLabel: {
@@ -221,10 +222,11 @@ export default function CustomizedSteppers() {
     <div>
     {activeStep === steps.length ? (
       <div>
-        <Typography component={'span'} className={classes.instructions}>
-          All steps completed - you&apos;re finished
-        </Typography>
-        <Button onClick={handleReset} className={classes.button}>Reset</Button>
+        <ConfigurationResult
+        workloadType={workload}
+        cpuPref={cpuPreference}
+        gpuPref={gpuPreference}
+        budget={budget} />
       </div>
       ) : (
       <div>

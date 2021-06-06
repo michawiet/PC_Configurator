@@ -41,7 +41,6 @@ function CpuPicker() {
     ).then(res => {
       setProducts(res.data.products);
       setTotalPages(res.data.totalPages);
-      console.log(res.data.products);
     });
   }, [sortBy, sortSelect, sortOrder, totalItems, currentPage]);
 

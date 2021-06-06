@@ -3,9 +3,12 @@ import { Button, Badge } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
+function checkIfCartObjectIsValid(cartObject) {
+
+}
+
 function BasketBadgedButton() {
   const [itemCount, setItemCount] = useState(0);
-
   
   let history = useHistory();
 

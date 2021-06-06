@@ -60,6 +60,14 @@ function Cart() {
     //if basketString is not null, then parse into {id: x, quantity: y}
     if(basketString) {
       var basketItems = JSON.parse(basketString);
+      for(const it of basketItems) {
+        if(it.quantity <= 0) {
+          setProducts([]);
+          localStorage.setItem("cart", []);
+          window.dispatchEvent(new Event("storage"));
+          return;
+        }
+      }
       const baseUrl = "http://localhost:8080/products?id=";
       var urls = [];
       //create promises
@@ -68,11 +76,14 @@ function Cart() {
       axios.all(urls).then(axios.spread((...responses) => {
         var productsArr = [];
         for(var i = 0; i < responses.length; i++) {
-          
           productsArr.push({product: responses[i].data, quantity: basketItems[i].quantity});
         }
         setProducts(productsArr);
-      }));
+      })).catch((error) => {
+        setProducts([]);
+        localStorage.setItem("cart", []);
+        window.dispatchEvent(new Event("storage"));
+      });
     }
     //else return
   }, []);

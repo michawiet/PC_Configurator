@@ -38,10 +38,10 @@ function MainTabsPanel({setselectedTabs, selectedTabs}) {
     { path: '/cooler', startIcon: <CoolerIcon className={classes.icon}/>, title: 'Chłodzenie'},
     { path: '/motherboard', startIcon: <MotherboardIcon className={classes.icon}/>, title: 'Płyta główna'},
     { path: '/ram', startIcon: <RamIcon className={classes.icon}/>, title: 'Pamięć RAM'},
-    { path: '/psu', startIcon: <StorageIcon className={classes.icon}/>, title: 'Dysk'},
-    { path: '/case', startIcon: <GpuIcon className={classes.icon}/>, title: 'Karta graficzna'},
-    { path: '/storage', startIcon: <CaseIcon className={classes.icon}/>, title: 'Obudowa'},
-    { path: '/cooler', startIcon: <PsuIcon className={classes.icon}/>, title: 'Zasilacz'},
+    { path: '/storage', startIcon: <StorageIcon className={classes.icon}/>, title: 'Dysk'},
+    { path: '/gpu', startIcon: <GpuIcon className={classes.icon}/>, title: 'Karta graficzna'},
+    { path: '/case', startIcon: <CaseIcon className={classes.icon}/>, title: 'Obudowa'},
+    { path: '/psu', startIcon: <PsuIcon className={classes.icon}/>, title: 'Zasilacz'},
   ];
   
   return (

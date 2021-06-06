@@ -38,13 +38,13 @@ export default function GpuQuestionPanel({gpuPreference, setGpuPreference}) {
       <RadioGroup  value={gpuPreference}>
         <Grid container justify="space-evenly" alignItems="center">
           <Grid item>
-            <Paper className = {classes.paper} onClick={() =>{handleChange('amd');}}  >
+            <Paper className = {classes.paper} onClick={() =>{handleChange('AMD');}}  >
               <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
                 <Grid item xs={12}>
                   <RadeonLogo className={classes.iconStyle}/>
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControlLabel value="amd" labelPlacement="top" control={<Radio />}/>
+                  <FormControlLabel value="AMD" labelPlacement="top" control={<Radio />}/>
                 </Grid>
               </Grid>
             </Paper>
@@ -62,13 +62,13 @@ export default function GpuQuestionPanel({gpuPreference, setGpuPreference}) {
             </Paper>
           </Grid>
           <Grid item>
-            <Paper className = {classes.paper} onClick={() =>{handleChange('nvidia');}}>
+            <Paper className = {classes.paper} onClick={() =>{handleChange('NVIDIA');}}>
               <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
                 <Grid item xs={12}>
                   <NvidiaLogo className={classes.iconStyle}/>
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControlLabel value="nvidia" labelPlacement="top" control={<Radio />}/>
+                  <FormControlLabel value="NVIDIA" labelPlacement="top" control={<Radio />}/>
                 </Grid>
               </Grid>
             </Paper>

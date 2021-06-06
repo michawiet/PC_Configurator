@@ -39,13 +39,13 @@ export default function ProcessorQuestionPanel({cpuPreference, setCpuPreference}
       <RadioGroup value={cpuPreference}>
         <Grid container justify="space-evenly" alignItems="center">
           <Grid item>
-            <Paper className = {classes.paper} onClick={() =>{handleChange('amd');}}>
+            <Paper className = {classes.paper} onClick={() =>{handleChange('AMD');}}>
               <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
                 <Grid item>
                   <RyzenLogo className={classes.iconStyle}/>
                 </Grid>
                 <Grid item>
-                  <FormControlLabel labelPlacement="top" value="amd" control={<Radio />}/>
+                  <FormControlLabel labelPlacement="top" value="AMD" control={<Radio />}/>
                 </Grid>
               </Grid>
             </Paper>
@@ -63,13 +63,13 @@ export default function ProcessorQuestionPanel({cpuPreference, setCpuPreference}
             </Paper>
           </Grid>
           <Grid item>
-            <Paper className = {classes.paper} onClick={() =>{handleChange('intel');}}>
+            <Paper className = {classes.paper} onClick={() =>{handleChange('Intel');}}>
             <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
                 <Grid item>
                   <IntelLogo className={classes.iconStyle}/>
                 </Grid>
                 <Grid item>
-                  <FormControlLabel labelPlacement="top" value="intel" control={<Radio />}/>
+                  <FormControlLabel labelPlacement="top" value="Intel" control={<Radio />}/>
                 </Grid>
               </Grid>
             </Paper>
