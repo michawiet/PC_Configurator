@@ -1,4 +1,4 @@
-package com.pcc.pc_configurator.Repositories;
+package com.pcc.pc_configurator.repositories;
 
 import com.pcc.pc_configurator.Entities.Psu;
 import org.springframework.data.jpa.repository.JpaRepository;
