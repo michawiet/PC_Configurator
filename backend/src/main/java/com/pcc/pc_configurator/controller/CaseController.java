@@ -2,7 +2,7 @@ package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.CaseDTO;
 import com.pcc.pc_configurator.Entities.Case_;
-import com.pcc.pc_configurator.Repositories.CaseRepository;
+import com.pcc.pc_configurator.repositories.CaseRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.ModelMapper;

@@ -2,7 +2,7 @@ package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.RamDTO;
 import com.pcc.pc_configurator.Entities.Ram;
-import com.pcc.pc_configurator.Repositories.RamRepository;
+import com.pcc.pc_configurator.repositories.RamRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.OrderDTO;
-import com.pcc.pc_configurator.Repositories.OrderRepository;
+import com.pcc.pc_configurator.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
