@@ -2,7 +2,7 @@ package com.pcc.pc_configurator.controller;
 
 import com.pcc.pc_configurator.DTO.PsuDTO;
 import com.pcc.pc_configurator.Entities.Psu;
-import com.pcc.pc_configurator.Repositories.PsuRepository;
+import com.pcc.pc_configurator.repositories.PsuRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

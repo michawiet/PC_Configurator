@@ -1,8 +1,8 @@
 package com.pcc.pc_configurator;
 
 import com.pcc.pc_configurator.Entities.OrderList;
-import com.pcc.pc_configurator.Repositories.OrderListRepository;
-import com.pcc.pc_configurator.Repositories.OrderRepository;
+import com.pcc.pc_configurator.repositories.OrderListRepository;
+import com.pcc.pc_configurator.repositories.OrderRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
