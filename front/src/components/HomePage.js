@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { makeStyles, AppBar, Menu, MenuItem, Toolbar, CssBaseline, Typography, Grid, Button, Container } from '@material-ui/core';
+import { makeStyles, AppBar, Menu, MenuItem, Toolbar, CssBaseline, Typography, Grid, Button, Container, Divider } from '@material-ui/core';
 import BasketBadgedButton from './Cart/CartBadgedButton';
 import { Switch, useHistory } from 'react-router-dom';
 import RouteWithSubRoutes from './RouteWithSubRoutes';
@@ -88,6 +88,7 @@ function HomePage({ routes }) {
                     MenuListProps={{ onMouseLeave: handleClose }}
                   >
                     <MenuItem onClick={handleClose}>Twoje zamówienia</MenuItem>
+                    <Divider />
                     {currentUser ? <MenuItem onClick={handleClose, handleLogout}>Wyloguj się</MenuItem> :
                     (<><MenuItem onClick={handleClose, () => history.push('/logowanie') }>Zaloguj się</MenuItem>
                     <MenuItem onClick={handleClose, () => history.push('/rejestracja')}>Rejestracja</MenuItem></>) 

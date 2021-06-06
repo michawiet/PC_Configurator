@@ -1,7 +1,24 @@
-import { Paper, Grid,Typography } from '@material-ui/core';
 import React, {useState, useEffect} from 'react'
+import { Paper, Grid, Typography  } from '@material-ui/core';
 import axios from 'axios';
 import ProdukcsConfigurated from '../products/ProductsConfigurated'
+
+function getPriceOptionText(priceOption) {
+  var text = "Rozwiązanie";
+
+  switch(priceOption) {
+    case 0:
+      text = "Tańsze rozwiązanie";
+      break;
+    case 1:
+      text = "Dopasowane rozwiązanie";
+      break;
+    case 2:
+      text = "Droższe rozwiązanie";
+      break;
+  }
+  return text;
+}
 
 function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
   const [configurations, setConfigurations] = useState([]);
@@ -24,12 +41,9 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
   return (
     <div>
       <Grid container alignItems="center" spacing={3}>
-      <Grid item  xs={4}><Typography   align="center">Konfiguracja tańsza </Typography></Grid>
-      <Grid item  xs={4}>konfiguracja 2</Grid>
-      <Grid item  xs={4}>konfiguracja 3</Grid>
-      {configurations.map(({ cpu, gpu, cooler , motherboard, psu, ram, storage,computerCase,totalPrice}, index) => (      
-            
+      {configurations.map(({ cpu, gpu, cooler , motherboard, psu, ram, storage,computerCase,totalPrice,priceOption}, index) => (      
           <Grid item key={index} xs={4}>
+            <Typography align="center">{getPriceOptionText(priceOption)}</Typography> 
             {totalPrice}
             <ProdukcsConfigurated
               productName={ cpu.product.brand + " " + cpu.product.name + " " }
@@ -41,7 +55,7 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
               detail3={"TDP: " + cpu.tdpW + " W"}
               productID={cpu.product.id}
             />
-            {workloadType==='office'? " ": (<> <ProdukcsConfigurated
+            {workloadType==='office' ? " ": (<> <ProdukcsConfigurated
                 productName={ cooler.product.brand + " " + cooler.product.name + " " }
                 image={cooler.product.image}
                 price={Number(cooler.product.price).toFixed(2)}
