@@ -76,7 +76,7 @@ function getMaxValue(workload) {
 function getStepValue(workload) {
   switch(workload) {
     case "office":
-      return 1000;
+      return 250;
     case "gaming":
       return 1000;
     case "photo-editing":

@@ -1,4 +1,4 @@
-import { Paper, Grid } from '@material-ui/core';
+import { Paper, Grid,Typography } from '@material-ui/core';
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import ProdukcsConfigurated from '../products/ProductsConfigurated'
@@ -20,18 +20,17 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
       setConfigurations(res.data);
     });
   }, [])
-  var totalPrice = 0;
 
   return (
     <div>
       <Grid container alignItems="center" spacing={3}>
-      <Grid item  xs={4}>konfiguracja 1</Grid>
+      <Grid item  xs={4}><Typography   align="center">Konfiguracja tańsza </Typography></Grid>
       <Grid item  xs={4}>konfiguracja 2</Grid>
       <Grid item  xs={4}>konfiguracja 3</Grid>
-      {configurations.map(({ cpu, gpu, cooler , motherboard, psu, ram, storage,computerCase}, index) => (      
+      {configurations.map(({ cpu, gpu, cooler , motherboard, psu, ram, storage,computerCase,totalPrice}, index) => (      
+            
           <Grid item key={index} xs={4}>
-              {workloadType==='office'? (<>cena za komplet {totalPrice=cpu.product.price+motherboard.product.price+psu.product.price+ram.product.price+storage.product.price+computerCase.product.price}</>):
-              (<>cena za komplet {totalPrice=cpu.product.price+motherboard.product.price+psu.product.price+ram.product.price+storage.product.price+computerCase.product.price+gpu.product.price+cooler.product.price}</>)}
+            {totalPrice}
             <ProdukcsConfigurated
               productName={ cpu.product.brand + " " + cpu.product.name + " " }
               image={cpu.product.image}
