@@ -55,7 +55,7 @@ function SuccessPayment() {
   const [open, setOpen] = React.useState(true);
   const handleClose = () => {
     setOpen(false);
-    history.push("/loged")
+    history.push("/")
   };
 
   return (

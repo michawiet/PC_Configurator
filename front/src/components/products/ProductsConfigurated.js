@@ -77,10 +77,10 @@ export default function ProductsConfigurated({image, productName, detail0, detai
         </CardActionArea>
         <CardActions>
           <Button
+            disableFocusRipple
+            disableRipple
             variant="contained"
             className={classes.button}
-            endIcon={<AddShoppingCartIcon />}
-            //onClick={addToLocalStorage}
             color="primary">
               { new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price) }
           </Button>
