@@ -36,11 +36,13 @@ export default function VerticalProductCard({image, productName, detail0, detail
   const addToLocalStorage = () => {
     var basketString = localStorage.getItem("cart");
     var basketItems = [];
+    
     if(basketString) {
       basketItems = JSON.parse(basketString);
     }
+    
     var exists = false;
-    for(var product of basketItems){ //check if item exists
+    for(var product of basketItems) { //check if item exists
       if(product.id === productID) {
         product.quantity++;
         exists = true;

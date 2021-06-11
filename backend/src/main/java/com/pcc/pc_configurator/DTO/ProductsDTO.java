@@ -14,6 +14,7 @@ public class ProductsDTO {
     private String brand;
     private String name;
     private float price;
+    @JsonIgnore
     private int quantity;
     private String image;
 }

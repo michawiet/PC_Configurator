@@ -81,8 +81,10 @@ function Cart() {
         for(var i = 0; i < responses.length; i++) {
           productsArr.push({product: responses[i].data, quantity: basketItems[i].quantity});
         }
+        //DEBUG DELETE BELOW
+        //console.log(productsArr);
         setProducts(productsArr);
-      })).catch((error) => {
+      })).catch(() => {
         setProducts([]);
         localStorage.setItem("cart", []);
         window.dispatchEvent(new Event("storage"));

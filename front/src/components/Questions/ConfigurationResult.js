@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import ProductsConfigurated from '../products/ProductsConfigurated';
 import ConfigurationPlaceholder from './ConfigurationPlaceholder';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { ConfirmationNumberOutlined } from '@material-ui/icons';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,6 +77,7 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   useEffect(() => {
     axios.get("http://localhost:8080/comp/form?"
       + "type="
@@ -87,14 +89,34 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
       + "&price=" 
       + budget
     ).then(res => {
-      
       setConfigurations(res.data);
       if(res.data.length > 0) {
-        console.log(res.data[0].priceOption);
         setValue(res.data.length === 3 ? 1 : 0)
       }
     });
   }, [])
+
+  const addConfigurationToCart = () => {
+    const cartString = localStorage.getItem("cart");
+    var cartArray = [];
+    if(cartString) {
+      cartArray = JSON.parse(cartString);
+    }
+    var selectedConfiguration = configurations[value];
+    //iterate over cartArray and add the current configuration products
+    for(var it in selectedConfiguration) {
+      if(it !== "priceOption" && it !== "totalPrice") {
+        var i = cartArray.findIndex((el) => (el.id === selectedConfiguration[it].product.id));
+        if(i > -1) {
+          cartArray[i].quantity++;
+        } else {
+          cartArray.push({id: selectedConfiguration[it].product.id, quantity: 1});
+        }
+      }
+    }
+    localStorage.setItem("cart", JSON.stringify(cartArray));
+    window.dispatchEvent(new Event("storage"));
+  };
 
   return (
     <div>
@@ -110,6 +132,7 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
               <Button
                 variant="contained" size="large" color="primary" style={{display: 'flex', margin: "auto", textTransform: 'none'}}
                 endIcon={<AddShoppingCartIcon />} fullWidth
+                onClick={()=>addConfigurationToCart()}
               >
                 Dodaj cały zestaw do koszyka { new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(totalPrice) }
               </Button>

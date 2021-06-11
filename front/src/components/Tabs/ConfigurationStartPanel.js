@@ -1,25 +1,41 @@
 import React, { useState } from 'react';
-import { makeStyles, Button, Grid, Paper } from '@material-ui/core';
+import { makeStyles, Button, Grid, Paper, Typography } from '@material-ui/core';
 import Stepper from '../Questions/Stepper';
+import StepperImage from '../../icons/stepper_image.jpg';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     alignItems: 'center',
   },
-});
+  paper: {
+    padding: theme.spacing(2),
+  },
+  bodyText: {
+    maringBottom: theme.spacing(2),
+  },
+  image: {
+    width: '100%',
+    height: "750px",
+    objectFit: 'cover',
+    boxShadow: theme.shadows[5],
+  },
+}));
+
+function getContent() {
+  return [
+    {question: "Czym jest konfigurator?", answer: "Konfigurator to ................"},
+    {question: "Drugie pytanie?", answer: "no i taki sobie tutaj tekścik"},
+    {question: "Trzecie pytanie?", answer: "no i taki sobie tutaj tekścik"},
+  ];
+}
 
 export default function ConfigurationStartPanel() {
   const classes = useStyles();
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);
-  const [result, ddlvalue] = useState();
-  const handleClick = () => {
-    setStartButtonDisabled(true)
-    return  ddlvalue(<Stepper/>);
-  };
 
   return (
     <>
-      {startButtonDisabled ? (<>{result}</>) : 
+      {startButtonDisabled ? (<><Stepper/></>) : 
       (
       <>
         <Grid
@@ -27,27 +43,32 @@ export default function ConfigurationStartPanel() {
           direction="row"
           justify="center"
           alignItems="center"
-          spacing={1}
+          spacing={4}
         >
           <Grid item xs={6}>
-            <img src="https://images-ext-1.discordapp.net/external/cxTaGaew-BtvBjVUSBqWYbqqQDH8VpY4IGg0RykUeYM/%3Fresize%3D800%252C531%26ssl%3D1/https/i1.wp.com/itsfoss.com/wp-content/uploads/2020/10/pi-zero-cluster.png?width=720&height=478"
-            style={{
-              width: '100%',
-              objectFit: 'contain',
-              }}
-              loading="lazy"
+            <img src={StepperImage}
+              className={classes.image}
             />
           </Grid>
           <Grid item xs={6}>
-            <Paper>
-              <Button
-                variant="contained"
-                color="secondary"
-                disabled={startButtonDisabled}
-                onClick={(handleClick)}
-              >
-                Rozpocznij
-              </Button>
+            <Paper className={classes.paper} elevation={3}>
+              <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
+                {getContent().map(({question, answer}, index) => (
+                <Grid key={index} item>
+                  <Typography variant="h6">{question}</Typography>
+                  <Typography variant="body1">{answer}</Typography>
+                </Grid>
+                ))}
+                <Grid item>
+                  <Button
+                  variant="contained"
+                  color="secondary"
+                  disabled={startButtonDisabled}
+                  >
+                    Rozpocznij konfigurację
+                  </Button>
+                </Grid>
+              </Grid>
             </Paper>
           </Grid>
         </Grid>
