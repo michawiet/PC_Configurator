@@ -1,5 +1,7 @@
 package com.pcc.pc_configurator.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ public class Product {
     private String brand;
     private String name;
     private float price;
+    @JsonIgnore
     private int quantity;
     private String image;
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Paper, Grid, Typography, Tabs } from '@material-ui/core';
+import { Paper, Grid, Typography, Tabs, Button } from '@material-ui/core';
 import axios from 'axios';
 
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import ProductsConfigurated from '../products/ProductsConfigurated';
 import ConfigurationPlaceholder from './ConfigurationPlaceholder';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -23,7 +24,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component="span">{children}</Typography>
         </Box>
       )}
     </div>
@@ -66,11 +67,11 @@ function getPriceOptionText(priceOption) {
   return text;
 }
 
-function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
+function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveStep}) {
   const [configurations, setConfigurations] = useState([]);
   const [numberOfGrids, setNumberOfGrids] = useState(workloadType === "office" ? 4 : 3 );
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -86,26 +87,38 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
       + "&price=" 
       + budget
     ).then(res => {
-      console.log(res.data);
+      
       setConfigurations(res.data);
+      if(res.data.length > 0) {
+        console.log(res.data[0].priceOption);
+        setValue(res.data.length === 3 ? 1 : 0)
+      }
     });
   }, [])
 
   return (
     <div>
-      {configurations.length === 0 ? <ConfigurationPlaceholder/> : (<><AppBar position="static">
+      {configurations.length === 0 ? <ConfigurationPlaceholder setActiveStep={setActiveStep}/> : (<><AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="simple tabs example">
-        {configurations.map(({priceOption}) => ( <Tab label={getPriceOptionText(priceOption)} {...a11yProps(priceOption)} /> ))}
+        {configurations.map(({priceOption}, index) => ( <Tab key={index} label={getPriceOptionText(priceOption)} {...a11yProps(priceOption)} /> ))}
         </Tabs>
       </AppBar>
-        {configurations.map(({ cpu, gpu, cooler, motherboard, psu, ram, storage, computerCase, totalPrice, priceOption}, index) => (
-        <TabPanel value={value} index={index}>
-          <Grid container>
-          <Grid item key={index} xs={numberOfGrids}>
+        {configurations.map(({ cpu, gpu, cooler, motherboard, psu, ram, storage, computerCase, totalPrice }, index) => (
+        <TabPanel key={index} value={value} index={index}>
+          <Grid container spacing={3} direction="row" justify="space-between" alignItems="center">
+          <Grid item xs={12}>
+              <Button
+                variant="contained" size="large" color="primary" style={{display: 'flex', margin: "auto", textTransform: 'none'}}
+                endIcon={<AddShoppingCartIcon />} fullWidth
+              >
+                Dodaj cały zestaw do koszyka { new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(totalPrice) }
+              </Button>
+          </Grid> 
+          <Grid item xs={numberOfGrids}>
             <ProductsConfigurated
               productName={ cpu.product.brand + " " + cpu.product.name + " " }
               image={cpu.product.image}
-              price={Number(cpu.product.price).toFixed(2)}
+              price={cpu.product.price}
               detail0={"Socket: " + cpu.socket}
               detail1={"Taktowanie: " + cpu.coreClock + " GHz"}
               detail2={"Liczba rdzeni (wątków): " + cpu.cores + " (" + (cpu.smt ? cpu.cores * 2 : cpu.cores) + ")" }
@@ -115,44 +128,44 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
           </Grid>
             {workloadType==='office' ? (<></>) : 
             (<>
-            <Grid item key={index} xs={numberOfGrids}>
+            <Grid item xs={numberOfGrids}>
               <ProductsConfigurated
                 productName={ cooler.product.brand + " " + cooler.product.name + " " }
                 image={cooler.product.image}
-                price={Number(cooler.product.price).toFixed(2)}
+                price={cooler.product.price}
                 detail0={"Maksymalny poziom hałasu: " + cooler.noiseLevelDB + " dB"}
                 detail1={"Kompatybilność z gniazdem: " + (cooler.workstation ? "sTRX4" : "2066, 1151, 1200, AM4")}
                 detail2={"Typ chłodzenia: " + (cooler.air ? "Powietrzne" : "AIO")}
                 productID={cooler.product.id}/>
               </Grid>
-              <Grid item key={index} xs={numberOfGrids}>
+              <Grid item xs={numberOfGrids}>
             <ProductsConfigurated
                 productName={ gpu.product.brand + " " + gpu.product.name + " " }
                 image={gpu.product.image}
-                price={Number(gpu.product.price).toFixed(2)}
+                price={gpu.product.price}
                 detail0={ "Układ graficzny: " + gpu.chipset }
-                detail1={ "Taktowanie rdzenia: " + gpu.coreClockMHZ + " MHz (" + gpu.boostClockMHZ + " MHz w trybie Boost)" }
+                detail1={ "Taktowanie rdzenia: " + gpu.coreClockMHZ + " MHz" }
                 detail2={ "Pamięć: " + gpu.memoryGB + " GB" }
                 detail3={ "Długość: " + gpu.lengthMM + " mm" }
                 productID={gpu.product.id}
               /> </Grid>
               </>)}
-              <Grid item key={index} xs={numberOfGrids}>
+              <Grid item xs={numberOfGrids}>
             <ProductsConfigurated
               productName={ motherboard.product.brand + " " + motherboard.product.name + " " }
               image={motherboard.product.image}
-              price={Number(motherboard.product.price).toFixed(2)}
+              price={motherboard.product.price}
               detail0={ "Socket: " + motherboard.socket }
               detail1={ "Chipset: " + motherboard.chipset }
               detail2={ "Format: " + motherboard.formFactor }
               productID={motherboard.product.id}
             />
             </Grid>
-            <Grid item key={index} xs={numberOfGrids}>
+            <Grid item xs={numberOfGrids}>
             <ProductsConfigurated
               productName={ ram.product.brand + " " + ram.product.name + " " }
               image={ram.product.image}
-              price={Number(ram.product.price).toFixed(2)}
+              price={ram.product.price}
               detail0={ "Taktowanie: " + ram.speed + " MHz" }
               detail1={ "Opóżnienie: CL" + ram.cl }
               detail2={ "Pojemność całkowita: " + (ram.moduleCapacity * ram.modulesCount) + " GB" }
@@ -160,11 +173,11 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
               productID={ram.product.id}
             />
             </Grid>
-            <Grid item key={index} xs={numberOfGrids}>
+            <Grid item xs={numberOfGrids}>
             <ProductsConfigurated
               productName={ storage.product.brand + " " + storage.product.name + " " }
               image={storage.product.image}
-              price={Number(storage.product.price).toFixed(2)}
+              price={storage.product.price}
               detail0={"Pojemność: " + storage.capacityGB + " GB" }
               detail1={"Typ: " + storage.type }
               detail2={"Interfejs: " + storage.interface_ }
@@ -172,22 +185,22 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
               productID={storage.product.id}
             />
             </Grid>
-            <Grid item key={index} xs={numberOfGrids}>
+            <Grid item xs={numberOfGrids}>
             <ProductsConfigurated
               productName={ psu.product.brand + " " + psu.product.name + " " }
               image={psu.product.image}
-              price={Number(psu.product.price).toFixed(2)}
+              price={psu.product.price}
               detail0={"Moc: " + psu.wattage + " W"}
               detail1={"Format: " + psu.formFactor }
               detail2={"Sprawność: " + psu.efficiencyRating }
               detail3={"Typ okablowania: " + psu.modular }
               productID={psu.product.id}
             /></Grid>
-            <Grid item key={index} xs={numberOfGrids}>
+            <Grid item xs={numberOfGrids}>
             <ProductsConfigurated
               productName={ computerCase.product.brand + " " + computerCase.product.name + " " }
               image={computerCase.product.image}
-              price={Number(computerCase.product.price).toFixed(2)}
+              price={computerCase.product.price}
               detail0={"Typ: " + computerCase.type }
               detail1={"Panel boczny: " +  computerCase.side_Panel_Window }
               detail2={"Standard zasilacza: " + computerCase.power_Supply_Standard }
@@ -196,7 +209,8 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget}) {
             />
             </Grid>
             </Grid>
-      </TabPanel>))}
+      </TabPanel>
+      ))}
       </>)}
     </div>
   );

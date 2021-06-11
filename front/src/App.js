@@ -6,7 +6,6 @@ import RouteWithSubRoutes from './components/RouteWithSubRoutes';
 function App() {
   return (
     <div>
-
       <Router>
         <AuthProvider>
         <Switch>

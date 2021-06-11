@@ -11,59 +11,92 @@ import CoolerPicker from "./Tabs/CoolerPicker";
 import GpuPicker from "./Tabs/GpuPicker";
 import Cart from "./Cart/Cart";
 import ConfigurationStartPanel from "./Tabs/ConfigurationStartPanel";
+import OrdersHistory from "./user/OrdersHistory";
 
 const routes = [
 	{
 		path: '/logowanie',
 		component: SignIn,
+		private: false,
+		accessIfAuth: false,
 	},
 	{
 		path: '/rejestracja',
 		component: SignUp,
+		private: false,
+		accessIfAuth: false,
 	},
 	{
 		path: '/',
 		component: HomePage,
+		private: false,
+		accessIfAuth: true,
 		routes: [
-      {
+			{
+				path: '/zamowienia',
+				component: OrdersHistory,
+				private: true,
+				accessIfAuth: true,
+			},
+			{
         path: '/koszyk',
         component: Cart,
+				private: false,
+				accessIfAuth: true,
       },
       {
 				path: '/cpu',
 				component: CpuPicker,
+				private: false,
+				accessIfAuth: true,
       },
 			{
 				path: '/gpu',
 				component: GpuPicker,
+				private: false,
+				accessIfAuth: true,
 			},
       {
 				path: '/motherboard',
 				component: MotherboardPicker,
+				private: false,
+				accessIfAuth: true,
 			},
       {
 				path: '/ram',
 				component: RamPicker,
+				private: false,
+				accessIfAuth: true,
 			},
       {
 				path: '/psu',
 				component: PsuPicker,
+				private: false,
+				accessIfAuth: true,
 			},
       {
 				path: '/case',
 				component: CasePicker,
+				private: false,
+				accessIfAuth: true,
 			},
       {
 				path: '/storage',
 				component: StoragePicker,
+				private: false,
+				accessIfAuth: true,
 			},
       {
 				path: '/cooler',
 				component: CoolerPicker,
+				private: false,
+				accessIfAuth: true,
 			},
       {
         path: '/konfigurator',
         component: ConfigurationStartPanel,
+				private: false,
+				accessIfAuth: true,
       }
 		],
 	},

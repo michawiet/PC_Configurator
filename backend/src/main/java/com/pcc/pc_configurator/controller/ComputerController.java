@@ -285,7 +285,14 @@ public class ComputerController {
                 }
                 lists.get(lists.size() - 1).put("priceOption", i);
             } catch (NoSuchElementException e) {
-                System.out.println(e);
+                System.out.println("No configuration returned for price: "
+                        + currentPrice
+                        + " type: "
+                        + type
+                        + " cpu: "
+                        + cpu
+                        + " gpu: "
+                        + gpu);
             }
         }
         //TODO: add total price

@@ -20,9 +20,21 @@ public class OrderListDTO {
     private String name;
     private Float price;
     @JsonIgnore
+    private int productQuantity;
+    private String image;
+    @JsonIgnore
     private long orderId;
     @JsonIgnore
     private LocalDate date;
+    //user
+    @JsonIgnore
+    private long userId;
+    @JsonIgnore
+    private String email;
+    @JsonIgnore
+    private String username;
+    @JsonIgnore
+    private String password;
     //private Product product;
     //private Order_ order_;
     private int quantity;

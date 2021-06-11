@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orderlist")
@@ -23,22 +24,32 @@ public class OrderListController {
     ModelMapper modelMapper;
 
     @GetMapping
-    public Map<String, Object> allOrderLists(@RequestParam("email") String email) {
+    public List< Map<String, Object> > allOrderLists(@RequestParam("email") String email) {
 
         List<OrderListDTO> orderDtoList = new ArrayList<>();
-        Map<String, Object> map = new HashMap<>();
 
         for (var orderList : orderListRepository.findAll()) {
             if (orderList.getOrder_().getUser().getEmail().equals(email)) {
                 orderDtoList.add(modelMapper.map(orderList, OrderListDTO.class));
             }
         }
+
+        List< Map<String, Object> > response = new ArrayList<>();
+
         if (!orderDtoList.isEmpty()) {
-            map.put("orderId", orderDtoList.get(0).getOrderId());
-            map.put("date", orderDtoList.get(0).getDate());
-            map.put("products", orderDtoList);
-            return map;
+            for (int i = 0; i < orderDtoList.size(); ++i) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("orderId", orderDtoList.get(i).getOrderId());
+                map.put("date", orderDtoList.get(i).getDate());
+                int finalI = i;
+                map.put("products", orderDtoList.stream()
+                        .filter(p -> (p.getOrderId() == orderDtoList.get(finalI).getOrderId()))
+                        .collect(Collectors.toList()));
+                response.add(map);
+            }
+            return response;
         }
-        return map;
+
+        return response;
     }
 }

@@ -87,7 +87,7 @@ function HomePage({ routes }) {
                     onClose={handleClose}
                     MenuListProps={{ onMouseLeave: handleClose }}
                   >
-                    <MenuItem onClick={handleClose}>Twoje zamówienia</MenuItem>
+                    <MenuItem onClick={handleClose, () => history.push('/zamowienia')}>Twoje zamówienia</MenuItem>
                     <Divider />
                     {currentUser ? <MenuItem onClick={handleClose, handleLogout}>Wyloguj się</MenuItem> :
                     (<><MenuItem onClick={handleClose, () => history.push('/logowanie') }>Zaloguj się</MenuItem>
@@ -110,7 +110,7 @@ function HomePage({ routes }) {
       <Container fixed className={classes.content}>
         <Switch>
           {routes.map((route, i) => (
-			  		<RouteWithSubRoutes key={i} {...route} />
+            <RouteWithSubRoutes key={i} {...route} />
 			  	))}
         </Switch>
       </Container>

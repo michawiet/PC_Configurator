@@ -7,6 +7,8 @@ import axios from 'axios';
 import CartEmptyPlaceholder from './CartEmptyPlaceholder';
 import PayPalPayment from '../payment/PayPalPayment';
 import PropTypes from 'prop-types';
+import { useAuth } from "../../AuthContext"
+
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -52,6 +54,7 @@ function Cart() {
   const [productCount, setProductCount] = useState(0);
   const [priceTotal, setPriceTotal]= useState(0);
   const [checkout, setCheckout] = useState(false);
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     //get basket from local storage
@@ -117,7 +120,10 @@ function Cart() {
     }
     window.dispatchEvent(new Event("storage"));
   };
-
+  const handelCheckout = () => {
+    {currentUser ? (setCheckout(true)) : history.push("/logowanie");
+    }
+  };
   return (
     <div>
       {productCount === 0 ? (<CartEmptyPlaceholder/>) : (<Grid container spacing={4} >
@@ -201,7 +207,7 @@ function Cart() {
               </Grid>
             </Grid>             
             { checkout ? (<PayPalPayment price={priceTotal} />) 
-            : (<Button fullWidth variant="contained" color="primary" onClick={() => {setCheckout(true);}}>
+            : (<Button fullWidth variant="contained" color="primary" onClick={handelCheckout}>
                   Kup
                 </Button>)}
             </Paper>

@@ -8,6 +8,9 @@ import { useAuth } from "../../AuthContext"
 import Alert from '@material-ui/lab/Alert';
 import firebase from "firebase/app";
 import "firebase/auth";
+import axios from 'axios';
+import { resolvePlugin } from '@babel/core';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
@@ -51,6 +54,7 @@ export default function SignIn() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      axios.get('http://localhost:8080/users/register?email=' + emailRef.current.value )
       setLoginSuccess(true);
     } catch {
       setError("Niepoprawne hasło lub e-mail");
@@ -76,10 +80,11 @@ export default function SignIn() {
             Zaloguj
           </Button>
           {error && <Alert severity="error">{error}</Alert>}
-          <GoogleButton variant="contained" color="primary"className={classes.submit}    
+          <GoogleButton variant="contained" color="primary" className={classes.submit}    
           onClick={() => {
               var googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-              firebase.auth().signInWithPopup(googleAuthProvider).then(function() {
+              firebase.auth().signInWithPopup(googleAuthProvider).then((res) => {
+                axios.get('http://localhost:8080/users/register?email=' + res.user.email)
                 setLoginSuccess(true);
               }).catch(function(error) {
                 console.log(error);

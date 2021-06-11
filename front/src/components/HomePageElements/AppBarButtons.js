@@ -46,8 +46,9 @@ function MainTabsPanel({setselectedTabs, selectedTabs}) {
   
   return (
   <div className={classes.root}>
-    {buttons_props.map((prop) => (
+    {buttons_props.map((prop, index) => (
       <Button
+      key={index}
       variant="contained"
       disableElevation
       disableRipple

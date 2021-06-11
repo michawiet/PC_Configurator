@@ -226,7 +226,11 @@ export default function CustomizedSteppers() {
         workloadType={workload}
         cpuPref={cpuPreference}
         gpuPref={gpuPreference}
-        budget={budget} />
+        budget={budget}
+        setActiveStep={setActiveStep} />
+        <Button variant='outlined' onClick={handleReset} className={classes.button}>
+          Reset
+        </Button>
       </div>
       ) : (
       <div>

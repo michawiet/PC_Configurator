@@ -6,7 +6,6 @@ import com.pcc.pc_configurator.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,25 +27,20 @@ public class UserController {
             userDtoList.add(modelMapper.map(user,UserDTO.class));
     }
 
-    @RequestMapping(value = "/testPost",consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public String testPost(@RequestParam String email) {
-        var userRepo = userRepository.findByEmail(email).getEmail();
-        if(email.equals(userRepo)) {
-            return "To działa";
-        } else {
-            return "nie działa";
-        }
+    public User dtoToUser(UserDTO userDTO) {
+        return new User(userDTO.getEmail(), userDTO.getUsername(), userDTO.getPassword());
     }
 
-    @RequestMapping(value = "/testPost1",consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public String testPost1(@RequestBody User email) {
-        System.out.println(email);
-        var userRepo = userRepository.findByEmail(email.getEmail());
-        System.out.println(userRepo);
-        if(email.getEmail().equals(userRepo.getEmail())) {
-            return "To działa";
-        } else {
-            return "nie działa";
+    @GetMapping("/register")
+    public void updateDB(@RequestParam String email) {
+        if(userDtoList
+                .stream()
+                .filter(p -> (p.getEmail().equals(email)))
+                .findFirst()
+                .orElse(null) == null) {
+            var user = new UserDTO(email);
+            System.out.println("email " + user);
+            userRepository.save(dtoToUser(user));
         }
     }
 

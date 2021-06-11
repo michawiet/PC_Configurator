@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect} from 'react';
 import {Avatar, Button, CssBaseline, TextField, Grid, Box, Typography, makeStyles, Container} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../AuthContext"
 import Alert from '@material-ui/lab/Alert';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +38,8 @@ export default function SignUp() {
   const classes = useStyles();
   let history = useHistory();
 
+
+
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -48,6 +51,7 @@ export default function SignUp() {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
+      axios.get('http://localhost:8080/users/register?email=' + emailRef.current.value )
       console.log("konto")
       history.push("/konfigurator")
     } catch {

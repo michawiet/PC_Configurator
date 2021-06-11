@@ -14,15 +14,21 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 'auto !important',
     },
     cardMedia: {
-      paddingTop: 20,
+      paddingTop: 15,
       margin: 'auto',
-      height: 220,
+      height: 150,
       width: '80%',
       objectFit: 'contain',
     },
     cardContent: {
-      minHeight: 165,
-    }
+      minHeight: 180,
+    },
+    textSecondary: {
+      fontSize: "0.7rem",
+    },
+    textPrimary: {
+      fontSize: "1rem",
+    },
 }));
 
 //productDetails as a array, that gets converted here to a list or something
@@ -31,27 +37,6 @@ export default function ProductsConfigurated({image, productName, detail0, detai
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
-  };
-  
-  const addToLocalStorage = () => {
-    var basketString = localStorage.getItem("cart");
-    var basketItems = [];
-    if(basketString) {
-      basketItems = JSON.parse(basketString);
-    }
-    var exists = false;
-    for(var product of basketItems){ //check if item exists
-      if(product.id === productID) {
-        product.quantity++;
-        exists = true;
-      }
-    }
-    if(!exists) {
-      basketItems.push({id: productID, quantity: 1});
-    }
-    var string = JSON.stringify(basketItems);
-    localStorage.setItem("cart", string);
-    window.dispatchEvent(new Event("storage"));
   };
 
   return (
@@ -64,10 +49,10 @@ export default function ProductsConfigurated({image, productName, detail0, detai
         >
         </CardMedia>
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom component="h5" variant="body1">
+          <Typography className={classes.textPrimary} gutterBottom component="h5" variant="body1">
             {productName}
           </Typography>
-          <Typography variant="caption" color="textSecondary" component="h2">
+          <Typography className={classes.textSecondary} variant="caption" color="textSecondary" component="h2">
             {detail0}<br/>
             {detail1}<br/>
             {detail2}<br/>
@@ -79,7 +64,7 @@ export default function ProductsConfigurated({image, productName, detail0, detai
           <Button
             disableFocusRipple
             disableRipple
-            variant="contained"
+            variant="outlined"
             className={classes.button}
             color="primary">
               { new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price) }
