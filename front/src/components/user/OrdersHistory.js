@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useAuth } from "../../AuthContext"
 import axios from 'axios';
-import { makeStyles, IconButton, Typography, Table, TableBody, TableCell,TableContainer, TableRow, Paper, Grid, Button } from '@material-ui/core';
+import { makeStyles, IconButton, Typography, Table, TableBody, TableCell,TableContainer, TableRow, Paper, Grid, Button, Container } from '@material-ui/core';
 import OrderEmptyPlaceholder from './OrderEmptyPlaceholder'
 
 function StyledPaper(props) {
@@ -32,14 +32,17 @@ function OrdersHistory() {
 
   return (
     <div>
-      {orders.length === 0 ? (<OrderEmptyPlaceholder/>) :(<>
+      <Container maxWidth="md">
+      {orders.length === 0 ? (<OrderEmptyPlaceholder/>) :
+        (<>
         <Typography gutterBottom component="h2" variant="h4" align="center">
           Twoje zamówienia 
         </Typography>
-      {orders.map(({date, orderId,products}, index) => (
+        <Grid container spacing={2}>
+        {orders.map(({date, orderId,products}, index) => (
           <Grid item key={index} xs={12}>
-            <Typography gutterBottom component="h5" variant="h6" align="center">
-              Numer zamówienia {orderId}
+            <Typography gutterBottom component="h5" variant="h6" align="left">
+              Zamówienie #{orderId}
             </Typography>
             <TableContainer component={StyledPaper}>
             <Table>
@@ -84,8 +87,9 @@ function OrdersHistory() {
           </TableContainer>
           </Grid>
         ))}
+        </Grid>
         </>)}
-
+      </Container>
     </div>
   )
 }
