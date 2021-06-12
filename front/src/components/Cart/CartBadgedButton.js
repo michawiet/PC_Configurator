@@ -3,10 +3,11 @@ import { Button, Badge } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import axios from "axios";
+import { useAuth } from "../../AuthContext";
 
 function BasketBadgedButton() {
   const [itemCount, setItemCount] = useState(0);
-  
+  const { currentUser } = useAuth();
   let history = useHistory();
 
   const handleClickOpenDialog = () => {
@@ -14,19 +15,14 @@ function BasketBadgedButton() {
   };
 
   //effect for updating badge
-  
 
   useEffect(() => {
     function updateItemBasketCount() {
-      const itemsString = localStorage.getItem("cart");
-      var count = 0;
-      if(itemsString) {
-        const items = JSON.parse(itemsString);
-        for(const item of items) {
-          count += item.quantity;
-        }
+      if(currentUser) {
+        axios.post("http://localhost:8080/cart/getItemCount?email=" + currentUser.email)
+        .then(res => setItemCount(res.data))
+        .catch(() => console.log("item count post failed"));
       }
-      setItemCount(count);
     }
     updateItemBasketCount();
     window.addEventListener('storage', updateItemBasketCount);

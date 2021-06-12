@@ -58,15 +58,17 @@ function Cart() {
 
   useEffect(() => {
     //get items from server
-    axios.post(baseUrl + "getItemList?email=" + currentUser.email)
-      .then(res => {
-        console.log(res.data);
-        setProducts(res.data.products);
-        setTotalPrice(res.data.totalPrice);
-        setProductCount(res.data.productCount);
-      }).catch(() => {
-        console.log("exception in post method");
-      });
+    if(currentUser) {
+      axios.post(baseUrl + "getItemList?email=" + currentUser.email)
+        .then(res => {
+          console.log(res.data);
+          setProducts(res.data.products);
+          setTotalPrice(res.data.totalPrice);
+          setProductCount(res.data.productCount);
+        }).catch(() => {
+          console.log("exception in post method");
+        });
+    }
   }, [])
   
   const deleteProducts = () => {
