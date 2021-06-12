@@ -39,7 +39,7 @@ function OrdersHistory() {
           Twoje zamówienia 
         </Typography>
         <Grid container spacing={4}>
-          {orders.map(({date, orderId,products}, index) => (
+          {orders.map(({date, orderId, products, totalPrice}, index) => (
           <Grid item key={index} xs={12}>
             <Grid container 
               direction="row"
@@ -83,12 +83,12 @@ function OrdersHistory() {
                         </Grid>
                       </Grid>
                       <Grid item>
-                        <Grid container alignItems="center" spacing={1}>
+                        <Grid container alignItems="center" spacing={2}>
                           <Grid item>
-                            {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price)}
+                            {quantity} szt.
                           </Grid>
                           <Grid item>
-                            Ilość:&nbsp;{quantity}
+                            {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price)}
                           </Grid>
                         </Grid>
                       </Grid>
@@ -96,6 +96,16 @@ function OrdersHistory() {
                   </TableCell>
                 </TableRow>
                 ))}
+                <TableCell>
+                    <Grid container direction="row" justify="flex-end" alignItems="center" spacing={1}>
+                      <Grid item>
+                        <strong>Razem:</strong>
+                      </Grid>
+                      <Grid item>
+                        {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(totalPrice)}
+                      </Grid>
+                    </Grid>
+                  </TableCell>
                 </TableBody>
               </Table>
             </TableContainer>

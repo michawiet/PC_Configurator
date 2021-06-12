@@ -27,7 +27,6 @@ public class CaseController {
     @Autowired
     ModelMapper modelMapper;
 
-
     @GetMapping(params = {"id"})
     public CaseDTO getOneCase(@RequestParam("id") int id) {
         return modelMapper.map(caseRepository.findById(Long.valueOf(id)).get(),CaseDTO.class);

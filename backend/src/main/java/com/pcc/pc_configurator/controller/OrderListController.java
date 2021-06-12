@@ -42,9 +42,10 @@ public class OrderListController {
                 map.put("orderId", orderDtoList.get(i).getOrderId());
                 map.put("date", orderDtoList.get(i).getDate());
                 int finalI = i;
-                map.put("products", orderDtoList.stream()
-                        .filter(p -> (p.getOrderId() == orderDtoList.get(finalI).getOrderId()))
-                        .collect(Collectors.toList()));
+                var list = orderDtoList.stream()
+                        .filter(p -> (p.getOrderId() == orderDtoList.get(finalI).getOrderId())).collect(Collectors.toList());
+                map.put("products", list);
+                map.put("totalPrice", list.stream().map(o -> o.getPrice() * o.getQuantity()).mapToDouble(Float::doubleValue).sum());
                 response.add(map);
             }
             return response;
