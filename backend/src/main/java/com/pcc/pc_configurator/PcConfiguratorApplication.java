@@ -166,6 +166,15 @@ public class PcConfiguratorApplication {
                 map().setQuantity(source.getQuantity());
             }
         });
+        modelMapper.addMappings(new PropertyMap<Cart, CartDTO>() {
+            @Override
+            protected void configure() {
+                map().setId(source.getId());
+                map().setUser(source.getUser());
+                map().setProduct(source.getProduct());
+                map().setQuantity(source.getQuantity());
+            }
+        });
         return modelMapper;
     }
 }
