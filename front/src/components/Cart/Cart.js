@@ -127,7 +127,8 @@ function Cart() {
   };
   return (
     <div>
-      {productCount === 0 ? (<CartEmptyPlaceholder/>) : (<Grid container spacing={4} >
+      {productCount === 0 ? (<CartEmptyPlaceholder/>)
+      : (<Grid container spacing={4} >
         <Grid item xs={8}>
           <Grid container 
             direction="row"

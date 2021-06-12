@@ -38,55 +38,69 @@ function OrdersHistory() {
         <Typography gutterBottom component="h2" variant="h4" align="center">
           Twoje zamówienia 
         </Typography>
-        <Grid container spacing={2}>
-        {orders.map(({date, orderId,products}, index) => (
+        <Grid container spacing={4}>
+          {orders.map(({date, orderId,products}, index) => (
           <Grid item key={index} xs={12}>
-            <Typography gutterBottom component="h5" variant="h6" align="left">
-              Zamówienie #{orderId}
-            </Typography>
+            <Grid container 
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+              spacing={3}
+            >
+              <Grid item>
+                <Typography color="textSecondary" component="h5" variant="subtitle1" align="left">
+                  Zamówienie #{orderId}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography color="textSecondary" component="h5" variant="subtitle1" align="left">
+                {new Intl.DateTimeFormat('pl-PL', { dateStyle: 'full' }).format(Date.parse(date))}
+                </Typography>
+              </Grid>
+            </Grid>
             <TableContainer component={StyledPaper}>
-            <Table>
-              <TableBody>
-            {products.map(({id, productId, image, brand, name, quantity, price}, indexx)=>(
-              <TableRow key={id} >
-              <TableCell>
-                <Grid container direction="row" justify="space-between" alignItems="center">
-                  <Grid item>
-                    <Grid container spacing={2} alignItems="center">
+              <Table>
+                <TableBody>
+                {products.map(({id, image, brand, name, quantity, price}, index)=>(
+                <TableRow key={id}>
+                  <TableCell>
+                    <Grid container direction="row" justify="space-between" alignItems="center">
                       <Grid item>
-                        <img src={image} alt={brand + " " + name} style={{
-                          height: 72,
-                          maxWidth: 72,
-                          width: '100%',
-                          objectFit: 'contain',
-                          }}
-                          loading="lazy"
-                        />
+                        <Grid container spacing={2} alignItems="center">
+                          <Grid item>
+                            <img src={image} alt={brand + " " + name} style={{
+                              height: 72,
+                              maxWidth: 72,
+                              width: '100%',
+                              objectFit: 'contain',
+                              }}
+                              loading="lazy"
+                            />
+                          </Grid>
+                          <Grid item>
+                            {brand + " " + name}
+                          </Grid>
+                        </Grid>
                       </Grid>
                       <Grid item>
-                        {brand + " " + name}
+                        <Grid container alignItems="center" spacing={1}>
+                          <Grid item>
+                            {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price)}
+                          </Grid>
+                          <Grid item>
+                            Ilość:&nbsp;{quantity}
+                          </Grid>
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid item>
-                    <Grid container alignItems="center" spacing={1}>
-                      <Grid item>
-                        {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price)}
-                      </Grid>
-                      <Grid item>
-                        Ilość:&nbsp;{quantity}
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </TableCell>
-            </TableRow>
-            ))}
-            </TableBody>
-            </Table>
-          </TableContainer>
+                  </TableCell>
+                </TableRow>
+                ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Grid>
-        ))}
+          ))}
         </Grid>
         </>)}
       </Container>
