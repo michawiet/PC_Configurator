@@ -9,7 +9,6 @@ import Alert from '@material-ui/lab/Alert';
 import firebase from "firebase/app";
 import "firebase/auth";
 import axios from 'axios';
-import { resolvePlugin } from '@babel/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, currentUser } = useAuth();
+  const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const classes = useStyles();

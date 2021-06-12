@@ -144,7 +144,7 @@ export default function CustomizedSteppers() {
   const [cpuPreference, setCpuPreference] = useState("any");
   const [gpuPreference, setGpuPreference] = useState("any");
   const [budget, setBudget] = useState("-");
-  const [displayValues, setDisplayValues] = useState([
+  const [displayedValues, setDisplayedValues] = useState([
     {stepTitle: "Zastosowanie", selectedValue: "-"},
     {stepTitle: "Procesor", selectedValue: "-"},
     {stepTitle: "Karta graficzna", selectedValue: "-"},
@@ -152,7 +152,7 @@ export default function CustomizedSteppers() {
   ]);
 
   useEffect(() => {
-    let tmp = [...displayValues];
+    let tmp = displayedValues;
     switch(workload) {
       case "office":
         tmp[0].selectedValue = "Praca biurowa";
@@ -173,11 +173,11 @@ export default function CustomizedSteppers() {
         tmp[0].selectedValue = "-";
         break;
     }
-    setDisplayValues(tmp);
+    setDisplayedValues(tmp);
   }, [workload])
 
   useEffect(() => {
-    let tmp = [...displayValues];
+    let tmp = [...displayedValues];
     switch(cpuPreference) {
       case "any":
         tmp[1].selectedValue = "Brak preferencji";
@@ -192,11 +192,11 @@ export default function CustomizedSteppers() {
         tmp[1].selectedValue = "-";
         break;
     }
-    setDisplayValues(tmp);
+    setDisplayedValues(tmp);
   }, [cpuPreference])
 
   useEffect(() => {
-    let tmp = [...displayValues];
+    let tmp = [...displayedValues];
     switch(gpuPreference) {
       case "any":
         tmp[2].selectedValue = "Brak preferencji";
@@ -211,14 +211,14 @@ export default function CustomizedSteppers() {
         tmp[2].selectedValue = "-";
         break;
     }
-    setDisplayValues(tmp);
+    setDisplayedValues(tmp);
   }, [gpuPreference])
 
   useEffect(() => {
-    let tmp = [...displayValues];
+    let tmp = [...displayedValues];
     if(budget !== "-") {
       tmp[3].selectedValue = new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(budget);
-      setDisplayValues(tmp);
+      setDisplayedValues(tmp);
     }
   }, [budget])
 
@@ -266,7 +266,7 @@ export default function CustomizedSteppers() {
   return (
     <div className={classes.root}>
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector/>} className={classes.stepper}>
-        {displayValues.map(({stepTitle, selectedValue}) => (
+        {displayedValues.map(({stepTitle, selectedValue}) => (
           <Step key={stepTitle}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>
               <Typography variant="overline">
@@ -280,7 +280,7 @@ export default function CustomizedSteppers() {
         ))}
       </Stepper>
     <div>
-    {activeStep === displayValues.length ? (
+    {activeStep === displayedValues.length ? (
       <div>
         <ConfigurationResult
         workloadType={workload}

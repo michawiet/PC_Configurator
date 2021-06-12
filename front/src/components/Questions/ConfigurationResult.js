@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Paper, Grid, Typography, Tabs, Button } from '@material-ui/core';
+import { Grid, Typography, Tabs, Button } from '@material-ui/core';
 import axios from 'axios';
 
 import PropTypes from 'prop-types';
@@ -10,7 +10,6 @@ import Box from '@material-ui/core/Box';
 import ProductsConfigurated from '../products/ProductsConfigurated';
 import ConfigurationPlaceholder from './ConfigurationPlaceholder';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { ConfirmationNumberOutlined } from '@material-ui/icons';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -109,12 +108,13 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
     var selectedConfiguration = configurations[value];
     //iterate over cartArray and add the current configuration products
     for(var it in selectedConfiguration) {
-      if(it !== "priceOption" && it !== "totalPrice") {
-        var i = cartArray.findIndex((el) => (el.id === selectedConfiguration[it].product.id));
+      const itCopy = it;
+      if(itCopy !== "priceOption" && itCopy !== "totalPrice") {
+        var i = cartArray.findIndex((el) => (el.id === selectedConfiguration[itCopy].product.id));
         if(i > -1) {
           cartArray[i].quantity++;
         } else {
-          cartArray.push({id: selectedConfiguration[it].product.id, quantity: 1});
+          cartArray.push({id: selectedConfiguration[itCopy].product.id, quantity: 1});
         }
       }
     }

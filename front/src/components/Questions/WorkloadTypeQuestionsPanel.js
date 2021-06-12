@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControlLabel, RadioGroup, Radio, Grid, Paper } from '@material-ui/core';
 import { ReactComponent as OfficeIcon } from '../../icons/statistics.svg';

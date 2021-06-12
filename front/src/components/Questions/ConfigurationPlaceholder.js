@@ -1,9 +1,7 @@
 import { Typography, Button, Grid } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from "react-router-dom";
 
 function ConfigurationPlaceholder({setActiveStep}) {
-  let history = useHistory();
 
   return (
     <div style={{marginTop: "50px"}}>

@@ -3,7 +3,6 @@ import SuccessPayment from './SuccessPayment'
 
 function PayPalPayment(props) {
   const paypal = useRef()
-  console.log(props.price);
   const [payd, setPayd] = React.useState(false);
   
   useEffect(() => {

@@ -3,7 +3,7 @@ import { Route, useHistory } from 'react-router-dom';
 import { useAuth } from "../AuthContext";
 
 const RouteWithSubRoutes = (route) => {
-	const { currentUser, logout } = useAuth();
+	const { currentUser } = useAuth();
 	let history = useHistory();
 
 	useEffect(() => {

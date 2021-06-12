@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuth } from "../../AuthContext"
 import axios from 'axios';
-import { makeStyles, IconButton, Typography, Table, TableBody, TableCell,TableContainer, TableRow, Paper, Grid, Button, Container } from '@material-ui/core';
+import { Typography, Table, TableBody, TableCell,TableContainer, TableRow, Paper, Grid, Container } from '@material-ui/core';
 import OrderEmptyPlaceholder from './OrderEmptyPlaceholder'
 
 function StyledPaper(props) {
@@ -19,16 +19,16 @@ function OrdersHistory() {
 
   useEffect(() => {
     //prevent from reading null from user if he is not authenticated
-    console.log("test1");
     if(currentUser) {
       axios.get('http://localhost:8080/orderlist?email=' + currentUser.email )
-    .then(res => {
-      console.log("test2");
-      console.log(res.data);
-      setOrders(res.data);
-    });
-  }
-    },[]);
+      .then(res => {
+        setOrders(res.data);
+      });
+    }
+    else {
+      setOrders([]);
+    }
+    },[currentUser]);
 
   return (
     <div>
@@ -54,7 +54,7 @@ function OrdersHistory() {
                   <Grid item>
                     <Grid container spacing={2} alignItems="center">
                       <Grid item>
-                        <img src={image} style={{
+                        <img src={image} alt={brand + " " + name} style={{
                           height: 72,
                           maxWidth: 72,
                           width: '100%',

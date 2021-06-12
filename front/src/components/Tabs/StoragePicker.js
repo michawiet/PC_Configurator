@@ -75,6 +75,8 @@ function StoragePicker() {
         setSortBy('product.price');
         setSortOrder('desc');
         break;
+      default:
+        break;
     }
     setCurrentPage(1);
   };

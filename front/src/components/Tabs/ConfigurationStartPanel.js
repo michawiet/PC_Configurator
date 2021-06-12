@@ -36,23 +36,14 @@ export default function ConfigurationStartPanel() {
   return (
     <>
       {startButtonDisabled ? (<><Stepper/></>) : 
-      (
-      <>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          spacing={4}
-        >
+      (<>
+        <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
           <Grid item xs={6}>
-            <img src={StepperImage}
-              className={classes.image}
-            />
+            <img src={StepperImage} alt="Konfigurator komputera" className={classes.image}/>
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper} elevation={3}>
-              <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
+              <Grid container direction="column" justify="center" alignItems="flex-start" spacing={1}>
                 {getContent().map(({question, answer}, index) => (
                 <Grid key={index} item>
                   <Typography variant="h6">{question}</Typography>
@@ -61,10 +52,11 @@ export default function ConfigurationStartPanel() {
                 ))}
                 <Grid item>
                   <Button
-                  variant="contained"
-                  color="secondary"
-                  disabled={startButtonDisabled}
-                  onClick={() => setStartButtonDisabled(true)}
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    disabled={startButtonDisabled}
+                    onClick={() => setStartButtonDisabled(true)}
                   >
                     Rozpocznij konfigurację
                   </Button>

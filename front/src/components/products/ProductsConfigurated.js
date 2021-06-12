@@ -1,6 +1,5 @@
-import React, {useState}  from 'react';
+import React from 'react';
 import { makeStyles, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,16 +31,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //productDetails as a array, that gets converted here to a list or something
-export default function ProductsConfigurated({image, productName, detail0, detail1, detail2, detail3, price, productID}) {
+export default function ProductsConfigurated({image, productName, detail0, detail1, detail2, detail3, price}) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   return (
     <Card className={classes.root}>
-      <CardActionArea  onClick={handleClickOpen}>
+      <CardActionArea>
         <CardMedia 
           className={classes.cardMedia}
           component="img"

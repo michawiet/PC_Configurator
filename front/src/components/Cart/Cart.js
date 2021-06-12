@@ -112,9 +112,9 @@ function Cart() {
   };
 
   const removeItemFromBasket = (productIdToDelete) =>{
-    {/* remove the product by filtering the product array */}
+    /* remove the product by filtering the product array */
     setProducts(products.filter(item => item.product.id !== productIdToDelete));
-    {/* remove the product from the localstorage */}
+    /* remove the product from the localstorage */
     const productsLocalStorageString = localStorage.getItem("cart");
     if(productsLocalStorageString) {
       const parsedProducts = JSON.parse(productsLocalStorageString).filter(item => item.id !== productIdToDelete);
@@ -123,8 +123,7 @@ function Cart() {
     window.dispatchEvent(new Event("storage"));
   };
   const handelCheckout = () => {
-    {currentUser ? (setCheckout(true)) : history.push("/logowanie");
-    }
+    currentUser ? (setCheckout(true)) : history.push("/logowanie");
   };
   return (
     <div>
@@ -161,11 +160,13 @@ function Cart() {
                       <Grid item>
                         <Grid container spacing={2} alignItems="center">
                           <Grid item>
-                            <img src={product.image} style={{
-                              height: 72,
-                              maxWidth: 72,
-                              width: '100%',
-                              objectFit: 'contain',
+                            <img src={product.image}
+                              alt={product.brand + " " + product.name}
+                              style={{
+                                height: 72,
+                                maxWidth: 72,
+                                width: '100%',
+                                objectFit: 'contain',
                               }}
                               loading="lazy"
                             />

@@ -47,6 +47,8 @@ function getMinValue(workload) {
       return 4000;
     case "3d-rendering":
       return 6000;
+    default:
+      return 0;
   }
 }
 
@@ -62,6 +64,8 @@ function getMaxValue(workload) {
       return 30000;
     case "3d-rendering":
       return 40000;
+    default:
+        return 100000;
   }
 }
 
@@ -76,6 +80,8 @@ function getStepValue(workload) {
     case "video-editing":
       return 1000;
     case "3d-rendering":
+      return 1000;
+    default:
       return 1000;
   }
 }
