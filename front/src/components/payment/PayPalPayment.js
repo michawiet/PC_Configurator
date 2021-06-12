@@ -1,14 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import SuccessPayment from './SuccessPayment'
+import { useAuth } from "../../AuthContext"
+
 
 function PayPalPayment(props) {
   const paypal = useRef()
   const [payd, setPayd] = React.useState(false);
-  
+  const { currentUser } = useAuth();
+
+
+
   useEffect(() => {
       window.paypal
         .Buttons({
           createOrder: (data, actions, err) => {
+            //tu order z cartu
             return actions.order.create({
               intent: "CAPTURE",
               purchase_units: [
@@ -24,8 +30,7 @@ function PayPalPayment(props) {
           },
           onApprove: async (data, actions) => {
             const order = await actions.order.capture();
-            console.log(order);
-            localStorage.setItem("cart", []);
+            // a tu potwierdzenie zapłaty
             setPayd(true);
           },
           onError: (err) => {

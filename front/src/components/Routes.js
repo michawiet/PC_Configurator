@@ -41,7 +41,7 @@ const routes = [
 			{
         path: '/koszyk',
         component: Cart,
-				private: false,
+				private: true,
 				accessIfAuth: true,
       },
       {

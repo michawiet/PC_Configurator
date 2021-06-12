@@ -14,5 +14,6 @@ public class OrderDTO {
     private long id;
     private LocalDate date;
     private User user;
+    private String status;
 
 }

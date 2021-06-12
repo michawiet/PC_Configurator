@@ -9,7 +9,6 @@ import PayPalPayment from '../payment/PayPalPayment';
 import PropTypes from 'prop-types';
 import { useAuth } from "../../AuthContext"
 
-
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -48,86 +47,77 @@ StyledPaper.propTypes = {
 };
 
 function Cart() {
+  const baseUrl = "http://localhost:8080/cart/";
   const classes = useStyles();
   let history = useHistory();
   const [products, setProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [productCount, setProductCount] = useState(0);
-  const [priceTotal, setPriceTotal]= useState(0);
   const [checkout, setCheckout] = useState(false);
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    //get basket from local storage
-    const basketString = localStorage.getItem("cart");
-    
-    //if basketString is not null, then parse into {id: x, quantity: y}
-    if(basketString) {
-      var basketItems = JSON.parse(basketString);
-      for(const it of basketItems) {
-        if(it.quantity <= 0) {
-          setProducts([]);
-          localStorage.setItem("cart", []);
-          window.dispatchEvent(new Event("storage"));
-          return;
-        }
-      }
-      const baseUrl = "http://localhost:8080/products?id=";
-      var urls = [];
-      //create promises
-      basketItems.map(x => urls.push(axios.get(baseUrl + x.id)));
-      //axios getAll items
-      axios.all(urls).then(axios.spread((...responses) => {
-        var productsArr = [];
-        for(var i = 0; i < responses.length; i++) {
-          productsArr.push({product: responses[i].data, quantity: basketItems[i].quantity});
-        }
-        //DEBUG DELETE BELOW
-        //console.log(productsArr);
-        setProducts(productsArr);
-      })).catch(() => {
-        setProducts([]);
-        localStorage.setItem("cart", []);
-        window.dispatchEvent(new Event("storage"));
+    //get items from server
+    axios.post(baseUrl + "getItemList?email=" + currentUser.email)
+      .then(res => {
+        console.log(res.data);
+        setProducts(res.data.products);
+        setTotalPrice(res.data.totalPrice);
+        setProductCount(res.data.productCount);
+      }).catch(() => {
+        console.log("exception in post method");
       });
-    }
-    //else return
-  }, []);
-
-  useEffect(() => {
-    /* update totalPrice, productCount on the product array change */
-    var totalPrice = 0;
-    var count = 0;
-    for(var p of products) {
-      count += p.quantity;
-      totalPrice += p.quantity * p.product.price;
-    }
-    setProductCount(count);
-    setPriceTotal(totalPrice);
-  }, [products])
+  }, [])
   
   const deleteProducts = () => {
-    setProducts([]);
-    localStorage.setItem("cart", []);
-    window.dispatchEvent(new Event("storage"));
+    axios.post(baseUrl + "clear?email=" + currentUser.email)
+    .then(res => {
+      if(res.data === true) {
+        setProducts([]);
+        setTotalPrice(0);
+        setProductCount(0);
+      }
+    }).catch(() => {
+      console.log("exception in post method");
+    });
   };
 
   const removeItemFromBasket = (productIdToDelete) =>{
-    /* remove the product by filtering the product array */
-    setProducts(products.filter(item => item.product.id !== productIdToDelete));
-    /* remove the product from the localstorage */
-    const productsLocalStorageString = localStorage.getItem("cart");
-    if(productsLocalStorageString) {
-      const parsedProducts = JSON.parse(productsLocalStorageString).filter(item => item.id !== productIdToDelete);
-      localStorage.setItem("cart", JSON.stringify(parsedProducts));
-    }
-    window.dispatchEvent(new Event("storage"));
+    axios.post(baseUrl + "deleteItem?email="
+    + currentUser.email
+    + "&productId="
+    + productIdToDelete
+    ).then(res => {
+      if(res.data) {
+        setProducts(res.data.products);
+        setProductCount(res.data.productCount);
+        setTotalPrice(res.data.totalPrice);
+      }
+    }).catch(() => {
+      console.log("exception in post method");
+    });
   };
+
   const handelCheckout = () => {
-    currentUser ? (setCheckout(true)) : history.push("/logowanie");
+    if(currentUser) {
+      setCheckout(true);
+      var arr = [];
+      //add user email
+      for(var p of products) {
+        arr.push({id: p.product.id, quantity: p.quantity})
+      }
+      //create object to send to backend;
+      console.log(arr);
+      arr = {list: arr, user_email: currentUser.email};
+      console.log(arr);
+    } else {
+      history.push("/logowanie");
+    }
   };
+
   return (
     <div>
-      {productCount === 0 ? (<CartEmptyPlaceholder/>)
+      {(productCount === 0) ? (<CartEmptyPlaceholder/>)
       : (<Grid container spacing={4} >
         <Grid item xs={8}>
           <Grid container 
@@ -204,13 +194,20 @@ function Cart() {
           <Paper elevation={4} className={classes.checkoutPaper}>
             <Grid container direction="row" justify="space-between" alignItems="center" style={{paddingBottom:"10px"}}>
               <Grid item>
-                <Typography>Cena całkowita</Typography>
+                <Typography>Łączna kwota</Typography>
               </Grid>
               <Grid item>
-                <Typography><strong>{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(priceTotal.toFixed(2))}</strong></Typography>
+                <Typography><strong>{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(totalPrice)}</strong></Typography>
               </Grid>
             </Grid>             
-            { checkout ? (<PayPalPayment price={priceTotal} />) 
+            { checkout ? (<PayPalPayment
+                            price={totalPrice}
+                            setTotalPrice={setTotalPrice}
+                            products={products}
+                            setProducts={setProducts}
+                            productCount={productCount}
+                            productCount={setProductCount}
+                          />) 
             : (<Button fullWidth variant="contained" color="primary" onClick={handelCheckout}>
                   Kup
                 </Button>)}

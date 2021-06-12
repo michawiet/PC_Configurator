@@ -2,10 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import { Button, Badge } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-
-function checkIfCartObjectIsValid(cartObject) {
-
-}
+import axios from "axios";
 
 function BasketBadgedButton() {
   const [itemCount, setItemCount] = useState(0);
@@ -15,6 +12,9 @@ function BasketBadgedButton() {
   const handleClickOpenDialog = () => {
     history.push("/koszyk")
   };
+
+  //effect for updating badge
+  
 
   useEffect(() => {
     function updateItemBasketCount() {

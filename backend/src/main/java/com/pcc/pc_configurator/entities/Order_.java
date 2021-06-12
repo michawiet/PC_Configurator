@@ -18,6 +18,7 @@ public class Order_ {
     @JoinColumn(name = "user_Id", referencedColumnName = "id")
     @JsonIgnore
     private User user;
+    private String status;
 
     public Order_(LocalDate date, User user) {
         this.date = date;
@@ -49,6 +50,14 @@ public class Order_ {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

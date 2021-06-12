@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import ProductsConfigurated from '../products/ProductsConfigurated';
 import ConfigurationPlaceholder from './ConfigurationPlaceholder';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { useAuth } from "../../AuthContext";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,6 +77,7 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
   const numberOfGrids = workloadType === "office" ? 4 : 3;
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const { currentUser } = useAuth();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -98,6 +100,26 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
       }
     });
   }, [])
+
+  const addConfigurationToCart_ = () => {
+    const config = configurations[value];
+    for(var key in config) {
+      var keyCopy = key;
+      if(keyCopy !== "priceOption" && keyCopy !== "totalPrice") {
+        axios.post("http://localhost:8080/cart/addItem?"
+          + "email="
+          + currentUser.email
+          + "&productId="
+          + config[key].product.id
+          ).then(res => {
+            console.log("Dodano pomyślnie do koszyka")
+          }).catch(() => {
+            console.log("exception in post method");
+          });
+        console.log({id: config[key].product.id, email: currentUser.email});
+      }
+    }
+  }
 
   const addConfigurationToCart = () => {
     const cartString = localStorage.getItem("cart");
@@ -136,7 +158,7 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
               <Button
                 variant="contained" size="large" color="primary" style={{display: 'flex', margin: "auto", textTransform: 'none'}}
                 endIcon={<AddShoppingCartIcon />} fullWidth
-                onClick={()=>addConfigurationToCart()}
+                onClick={()=>addConfigurationToCart_()}
               >
                 Dodaj cały zestaw do koszyka { new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(totalPrice) }
               </Button>

@@ -146,6 +146,7 @@ public class PcConfiguratorApplication {
                 map().setId(source.getId());
                 map().setDate(source.getDate());
                 map().setUser(source.getUser());
+                map().setStatus(source.getStatus());
             }
         });
         modelMapper.addMappings(new PropertyMap<OrderList, OrderListDTO>() {

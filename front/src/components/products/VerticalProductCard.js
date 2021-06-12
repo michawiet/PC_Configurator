@@ -1,6 +1,9 @@
 import React, {useState}  from 'react';
 import { makeStyles, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import axios from 'axios';
+import { useAuth } from "../../AuthContext";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,10 +32,29 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalProductCard({image, productName, detail0, detail1, detail2, detail3, price, productID}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const { currentUser } = useAuth();
+  let history = useHistory();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
   
+  const addProductToCart = () => {
+    if(currentUser) {
+      //axios post
+      axios.post("http://localhost:8080/cart/addItem?" 
+        + "email="
+        + currentUser.email
+        + "&productId=" 
+        + productID
+      ).then(res => {
+      console.log(res);
+      })
+    } else {
+      history.push("/logowanie");
+    }
+  }
+
   const addToLocalStorage = () => {
     var basketString = localStorage.getItem("cart");
     var basketItems = [];
@@ -82,7 +104,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
             variant="contained"
             className={classes.button}
             endIcon={<AddShoppingCartIcon />}
-            onClick={addToLocalStorage}
+            onClick={addToLocalStorage, addProductToCart}
             color="primary">
               { new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price) }
           </Button>
