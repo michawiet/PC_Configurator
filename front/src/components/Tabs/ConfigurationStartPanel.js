@@ -64,6 +64,7 @@ export default function ConfigurationStartPanel() {
                   variant="contained"
                   color="secondary"
                   disabled={startButtonDisabled}
+                  onClick={() => setStartButtonDisabled(true)}
                   >
                     Rozpocznij konfigurację
                   </Button>

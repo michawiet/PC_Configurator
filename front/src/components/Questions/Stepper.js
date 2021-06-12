@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles, Stepper, Step, StepLabel, Button, Typography, StepConnector, Grid, Paper } from '@material-ui/core';
 import NavigateNextOutlinedIcon from '@material-ui/icons/NavigateNextOutlined';
@@ -127,13 +127,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function getSteps() {
-  return ['Zastosowanie',
-  'Procesor',
-  'Karta graficzna',
-  'Budżet'];
-}
-
 function getStepTitle(index) {
   const title = ["Wybierz główne przeznaczenie komputera",
     "Wybierz preferowanego producenta procesora",
@@ -146,13 +139,88 @@ function getStepTitle(index) {
 export default function CustomizedSteppers() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set());
   const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
   const [workload, setWorkload] = useState("");
   const [cpuPreference, setCpuPreference] = useState("any");
   const [gpuPreference, setGpuPreference] = useState("any");
-  const [budget, setBudget] = useState(3000);
-  const steps = getSteps();
+  const [budget, setBudget] = useState("-");
+  const [displayValues, setDisplayValues] = useState([
+    {stepTitle: "Zastosowanie", selectedValue: "-"},
+    {stepTitle: "Procesor", selectedValue: "-"},
+    {stepTitle: "Karta graficzna", selectedValue: "-"},
+    {stepTitle: "Budżet", selectedValue: "-"},
+  ]);
+
+  useEffect(() => {
+    let tmp = [...displayValues];
+    switch(workload) {
+      case "office":
+        tmp[0].selectedValue = "Praca biurowa";
+        break;
+      case "gaming":
+        tmp[0].selectedValue = "Gry";
+        break;
+      case "photo-editing":
+        tmp[0].selectedValue = "Obróbka zdjęć";
+        break;
+      case "video-editing":
+        tmp[0].selectedValue = "Edycja filmów";
+        break;
+      case "3d-rendering":
+        tmp[0].selectedValue = "Modelowanie 3D";
+        break;
+      default:
+        tmp[0].selectedValue = "-";
+        break;
+    }
+    setDisplayValues(tmp);
+  }, [workload])
+
+  useEffect(() => {
+    let tmp = [...displayValues];
+    switch(cpuPreference) {
+      case "any":
+        tmp[1].selectedValue = "Brak preferencji";
+        break;
+      case "Intel":
+        tmp[1].selectedValue = "Intel";
+        break;
+      case "AMD":
+        tmp[1].selectedValue = "AMD";
+        break;
+      default:
+        tmp[1].selectedValue = "-";
+        break;
+    }
+    setDisplayValues(tmp);
+  }, [cpuPreference])
+
+  useEffect(() => {
+    let tmp = [...displayValues];
+    switch(gpuPreference) {
+      case "any":
+        tmp[2].selectedValue = "Brak preferencji";
+        break;
+      case "NVIDIA":
+        tmp[2].selectedValue = "NVIDIA";
+        break;
+      case "AMD":
+        tmp[2].selectedValue = "AMD";
+        break;
+      default:
+        tmp[2].selectedValue = "-";
+        break;
+    }
+    setDisplayValues(tmp);
+  }, [gpuPreference])
+
+  useEffect(() => {
+    let tmp = [...displayValues];
+    if(budget !== "-") {
+      tmp[3].selectedValue = new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(budget);
+      setDisplayValues(tmp);
+    }
+  }, [budget])
 
   const getStepContent = (step) => {
     switch (step) {
@@ -181,21 +249,10 @@ export default function CustomizedSteppers() {
       default:
         return 'Unknown step';
     }
-  } 
-
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
+  }
 
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
@@ -209,18 +266,21 @@ export default function CustomizedSteppers() {
   return (
     <div className={classes.root}>
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector/>} className={classes.stepper}>
-        {steps.map((label) => (
-          <Step key={label}>
+        {displayValues.map(({stepTitle, selectedValue}) => (
+          <Step key={stepTitle}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>
               <Typography variant="overline">
-              {label}
+                {stepTitle}
+              </Typography>
+              <Typography color="textSecondary" variant="subtitle2">
+                {selectedValue}
               </Typography>
             </StepLabel>
           </Step>
         ))}
       </Stepper>
     <div>
-    {activeStep === steps.length ? (
+    {activeStep === displayValues.length ? (
       <div>
         <ConfigurationResult
         workloadType={workload}

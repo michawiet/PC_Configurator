@@ -51,8 +51,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
+
 function getPriceOptionText(priceOption) {
-  var text = "Rozwiązanie";
+  var text = "";
 
   switch(priceOption) {
     case 0:
@@ -64,13 +65,16 @@ function getPriceOptionText(priceOption) {
     case 2:
       text = "Droższe rozwiązanie";
       break;
+    default:
+      text = "Wygenerowane rozwiązanie";
+      break;
   }
   return text;
 }
 
 function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveStep}) {
   const [configurations, setConfigurations] = useState([]);
-  const [numberOfGrids, setNumberOfGrids] = useState(workloadType === "office" ? 4 : 3 );
+  const numberOfGrids = workloadType === "office" ? 4 : 3;
   const classes = useStyles();
   const [value, setValue] = useState(0);
 

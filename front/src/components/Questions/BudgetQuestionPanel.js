@@ -25,22 +25,14 @@ function valuetext(value) {
     return `${value}`;
 }
 
-function marks(MIN_VAL, MAX_VAL) {
-  var arr = [ { value: 1000, label: '1000 zł' },
-    { value: 1500, label: '1500 zł' },
-    { value: 2000, label: '2000 zł' },
-    { value: 3000, label: '3000 zł' },
-    { value: 5000, label: '5000 zł' },
-    { value: 7000, label: '7000 zł' },
-    { value: 10000, label: '10 000 zł' },
-    { value: 15000, label: '15 000 zł' },
-    { value: 20000, label: '20 000 zł' },
-    { value: 25000, label: '25 000 zł' },
-    { value: 30000, label: '30 000 zł' },
-    { value: 35000, label: '35 000 zł' },
-    { value: 40000, label: '40 000 zł' },
-  ]
-  return arr.filter(x => x.value > MIN_VAL && x.value < MAX_VAL)
+function marks(MIN_VAL, MAX_VAL, STEP_VAL) {
+  const val = (MAX_VAL - MIN_VAL) / STEP_VAL;
+  STEP_VAL *= val > 18 ? 4 : (val > 12 ? 3 : 2);
+  var arr = [];
+  for(var i = MIN_VAL; i <= MAX_VAL; i += STEP_VAL) {
+    arr.push({value: i, label: new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(i)})
+  }
+  return arr;
 };
 
 function getMinValue(workload) {
@@ -99,7 +91,9 @@ export default function SimpleCard({budget, setBudget, workload}) {
   };
 
   useEffect(() => {
-    if(budget > MAX_VAL)
+    if(budget === "-") {
+      setBudget((MAX_VAL - MIN_VAL) / 2)
+    } else if(budget > MAX_VAL)
       setBudget(MAX_VAL);
     else if(budget < MIN_VAL)
       setBudget(MIN_VAL);
@@ -111,7 +105,7 @@ export default function SimpleCard({budget, setBudget, workload}) {
       <Grid container direction="row" justify="space-between" alignItems="center">
         <Grid item xs={12}>
           <Typography className={classes.title} variant="h1" align="center">
-            <strong>{budget + " zł"}</strong>
+            <strong>{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(budget)}</strong>
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -121,7 +115,7 @@ export default function SimpleCard({budget, setBudget, workload}) {
             getAriaValueText={valuetext}
             aria-labelledby="discrete-slider-small-steps"
             step={STEP_VAL}
-            marks={marks(MIN_VAL, MAX_VAL)}
+            marks={marks(MIN_VAL, MAX_VAL, STEP_VAL)}
             min={MIN_VAL}
             max={MAX_VAL}
             valueLabelDisplay="off"

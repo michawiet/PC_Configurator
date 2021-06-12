@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useAuth } from "../../AuthContext"
 import axios from 'axios';
 import { makeStyles, IconButton, Typography, Table, TableBody, TableCell,TableContainer, TableRow, Paper, Grid, Button } from '@material-ui/core';
+import OrderEmptyPlaceholder from './OrderEmptyPlaceholder'
 
 function StyledPaper(props) {
   const { children } = props;
@@ -31,10 +32,13 @@ function OrdersHistory() {
 
   return (
     <div>
-      Twoje zamówienia XD
+      {orders.length === 0 ? (<OrderEmptyPlaceholder/>) :(<>
+        <Typography gutterBottom component="h2" variant="h4" align="center">
+          Twoje zamówienia 
+        </Typography>
       {orders.map(({date, orderId,products}, index) => (
           <Grid item key={index} xs={12}>
-            <Typography gutterBottom component="h5" variant="body1">
+            <Typography gutterBottom component="h5" variant="h6" align="center">
               Numer zamówienia {orderId}
             </Typography>
             <TableContainer component={StyledPaper}>
@@ -80,6 +84,8 @@ function OrdersHistory() {
           </TableContainer>
           </Grid>
         ))}
+        </>)}
+
     </div>
   )
 }
