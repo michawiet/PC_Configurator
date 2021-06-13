@@ -20,6 +20,4 @@ public class OrderListDTO {
     //private Product product;
     //private Order_ order_;
     private int quantity;
-
-
 }
