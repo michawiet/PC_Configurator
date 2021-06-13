@@ -16,4 +16,9 @@ public class OrderDTO {
     private User user;
     private String status;
 
+    public OrderDTO(LocalDate date, User user, String status) {
+        this.date = date;
+        this.user = user;
+        this.status = status;
+    }
 }

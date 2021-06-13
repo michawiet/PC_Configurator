@@ -1,6 +1,7 @@
 package com.pcc.pc_configurator.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class OrderList {
@@ -13,15 +14,13 @@ public class OrderList {
     @JoinColumn(name = "product_Id", referencedColumnName = "id")
     private Product product;
 
-    @OneToOne
-    @JoinColumn(name = "order_Id", referencedColumnName = "id")
-    private Order_ order_;
     private int quantity;
+    private long orderId;
 
-    public OrderList(Product product, Order_ order_, int quantity) {
+    public OrderList(Product product, int quantity, long orderId) {
         this.product = product;
-        this.order_ = order_;
         this.quantity = quantity;
+        this.orderId = orderId;
     }
 
     public OrderList() {
@@ -43,12 +42,12 @@ public class OrderList {
         this.product = product;
     }
 
-    public Order_ getOrder_() {
-        return order_;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_(Order_ order_) {
-        this.order_ = order_;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public int getQuantity() {
@@ -64,7 +63,6 @@ public class OrderList {
         return "OrderList{" +
                 "id=" + id +
                 ", product=" + product +
-                ", order_=" + order_ +
                 ", quantity=" + quantity +
                 '}';
     }

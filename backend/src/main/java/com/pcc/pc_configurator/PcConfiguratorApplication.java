@@ -153,17 +153,19 @@ public class PcConfiguratorApplication {
             @Override
             protected void configure() {
                 map().setId(source.getId());
-                map().setProductId(source.getProduct().getId());
-                map().setBrand(source.getProduct().getBrand());
-                map().setName(source.getProduct().getName());
-                map().setPrice(source.getProduct().getPrice());
-                map().setProductQuantity(source.getProduct().getQuantity());
-                map().setImage(source.getProduct().getImage());
-                map().setOrderId(source.getOrder_().getId());
-                map().setDate(source.getOrder_().getDate());
-                map().setEmail(source.getOrder_().getUser().getEmail());
-                map().setUsername(source.getOrder_().getUser().getUsername());
-                map().setPassword(source.getOrder_().getUser().getPassword());
+                map().setProduct(source.getProduct());
+                //map().setOrder_set(source.getOrder_());
+                //map().setProductId(source.getProduct().getId());
+                //map().setBrand(source.getProduct().getBrand());
+                //map().setName(source.getProduct().getName());
+                //map().setPrice(source.getProduct().getPrice());
+                //map().setProductQuantity(source.getProduct().getQuantity());
+                //map().setImage(source.getProduct().getImage());
+                //map().setOrderId(source.getOrder_().getId());
+                //map().setDate(source.getOrder_().getDate());
+                //map().setEmail(source.getOrder_().getUser().getEmail());
+                //map().setUsername(source.getOrder_().getUser().getUsername());
+                //map().setPassword(source.getOrder_().getUser().getPassword());
                 map().setQuantity(source.getQuantity());
             }
         });

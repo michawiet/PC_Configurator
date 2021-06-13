@@ -20,9 +20,10 @@ public class Order_ {
     private User user;
     private String status;
 
-    public Order_(LocalDate date, User user) {
+    public Order_(LocalDate date, User user, String status) {
         this.date = date;
         this.user = user;
+        this.status = status;
     }
 
     public Order_() {
@@ -66,6 +67,7 @@ public class Order_ {
                 "id=" + id +
                 ", date=" + date +
                 ", user=" + user +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
