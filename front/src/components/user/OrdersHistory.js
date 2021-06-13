@@ -66,7 +66,7 @@ function OrdersHistory() {
         </Typography>
         <Grid container spacing={4}>
           {orders.map(({date, orderId, products, totalPrice, paymentStatus}, index) => (
-            <>
+          <>
           <Grid item key={index} xs={12}>
             <Grid container 
               direction="row"
@@ -89,34 +89,28 @@ function OrdersHistory() {
               <Table>
                 <TableBody>
                 {products.map(({product,quantity}, index)=>(
-                <TableRow key={product.id}>
+                <TableRow key={index}>
                   <TableCell>
                     <Grid container direction="row" justify="space-between" alignItems="center">
                       <Grid item>
                         <Grid container spacing={2} alignItems="center">
                           <Grid item>
-                            <img src={product.image} alt={product.brand + " " + product.name} style={{
-                              height: 72,
-                              maxWidth: 72,
-                              width: '100%',
-                              objectFit: 'contain',
+                            <img src={product.image} alt={product.brand + " " + product.name} loading="lazy"
+                              style={{
+                                height: 72,
+                                maxWidth: 72,
+                                width: '100%',
+                                objectFit: 'contain',
                               }}
-                              loading="lazy"
                             />
                           </Grid>
-                          <Grid item>
-                            {product.brand + " " + product.name}
-                          </Grid>
+                          <Grid item>{product.brand + " " + product.name}</Grid>
                         </Grid>
                       </Grid>
                       <Grid item>
                         <Grid container alignItems="center" spacing={2}>
-                          <Grid item>
-                            {quantity} szt.
-                          </Grid>
-                          <Grid item>
-                            {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(product.price)}
-                          </Grid>
+                          <Grid item>{quantity} szt.</Grid>
+                          <Grid item>{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(product.price)}</Grid>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -147,7 +141,7 @@ function OrdersHistory() {
                       </Grid>
                     </Grid>
                   </TableCell>
-                </TableRow>) : ("") }
+                </TableRow>) : <></> }
                 </TableBody>
               </Table>
             </TableContainer>

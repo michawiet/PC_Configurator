@@ -48,15 +48,15 @@ function MainTabsPanel({setselectedTabs, selectedTabs}) {
   <div className={classes.root}>
     {buttons_props.map((prop, index) => (
       <Button
-      key={index}
-      variant="contained"
-      disableElevation
-      disableRipple
-      color="primary"
-      className={classes.button}
-      startIcon={prop.startIcon}
-      onClick={()=> history.push(prop.path)}
-    >
+        key={index}
+        variant="contained"
+        disableElevation
+        disableRipple
+        color="primary"
+        className={classes.button}
+        startIcon={prop.startIcon}
+        onClick={()=> history.push(prop.path)}
+      >
       {prop.title}
     </Button>
     ))}
