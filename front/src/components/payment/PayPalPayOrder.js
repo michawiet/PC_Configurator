@@ -16,12 +16,8 @@ function PayPalPayment(props) {
         .Buttons({
           createOrder: async (data, actions, err) => {
             var totalPrice = 0;
-            const res = await axios.post("http://localhost:8080/cart/createOrder?"
-              + "email="
-              + currentUser.email
-            );
-            totalPrice = res.data.totalPrice.toFixed(2);
-            orderId = res.data.orderId;
+            totalPrice = props.totalPrice ;
+            orderId = props.orderId ;
             return actions.order.create({
               intent: "CAPTURE",
               purchase_units: [
@@ -37,9 +33,6 @@ function PayPalPayment(props) {
           },
           onApprove: async (data, actions) => {
             const order = await actions.order.capture();
-            props.setProducts([]);
-            props.setProductCount(0);
-            props.setTotalPrice(0);
             await axios.post("http://localhost:8080/orders/confirmOrder?" 
             + "email="
             + currentUser.email
@@ -51,16 +44,7 @@ function PayPalPayment(props) {
             console.log(err);
           },
           onCancel: () => {
-            axios.post("http://localhost:8080/orders/cancelOrder?" 
-            + "email="
-            + currentUser.email
-            + "&orderId=" 
-            + orderId
-            ).then(res => {
-                console.log(res);
-              }).catch(() => {
-                console.log("exception in post method");
-            });
+            
             console.log("zamkniete");
           },
         })

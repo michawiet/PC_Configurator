@@ -103,7 +103,7 @@ public class CartController {
         map.put("products", cartDTOList);
         map.put("totalPrice", getTotalPrice(cartDTOList));
         map.put("productCount", getProductCount(cartDTOList));
-        
+
         return map;
     }
 
@@ -144,8 +144,13 @@ public class CartController {
             if(cart.getUser().getEmail().equals(email))
                 cartDTOList.add(modelMapper.map(cart,CartDTO.class));
         }
+
+        if(cartDTOList.size() == 0) {
+            return null;
+        }
+
         map.put("products", cartDTOList);
-        map.put("totalPrice", cartDTOList.stream().map(o -> o.getProduct().getPrice()* o.getQuantity()).mapToDouble(Float::doubleValue).sum());
+        map.put("totalPrice", getTotalPrice(cartDTOList));
 
         var newOrder = new Order_(LocalDate.now(), userRepository.findByEmail(email),  "nieopłacone");
         orderRepository.save(newOrder);

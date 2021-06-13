@@ -9,10 +9,12 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import PayPalPayOrder from '../payment/PayPalPayOrder';
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
     textAlign: 'center',
+    width: 350,
   },
 
 }));
@@ -49,30 +51,32 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-function SuccessPayment() {
+function PaymentDialog(props) {
   const classes = useStyles();
   let history = useHistory();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(props.opend);
   const handleClose = () => {
     setOpen(false);
-    history.push("/")
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
   return (
     <div>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialog} >
-          Potwierdzenie płatności
-        </DialogTitle>
-        <DialogContent dividers>
-        <Alert severity="success">
-        <AlertTitle><strong>Płatność zakończona powodzeniem</strong></AlertTitle>
-        Pomyślnie dokonano zapłaty za zamównienie <strong>{" numer zamówienia"}</strong>
-        </Alert>
-        </DialogContent>
-      </Dialog>
+            <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialog} >
+              Zapłać {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(props.totalPrice)}
+            </DialogTitle>
+            <DialogContent dividers>
+            <PayPalPayOrder
+                totalPrice={props.totalPrice}
+                orderId={props.orderId}
+              />
+            </DialogContent>
+          </Dialog>
     </div>
   )
 }
 
-export default SuccessPayment
+export default PaymentDialog

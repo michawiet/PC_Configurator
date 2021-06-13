@@ -65,7 +65,6 @@ function Cart() {
             setProducts(res.data.products);
             setTotalPrice(res.data.totalPrice);
             setProductCount(res.data.productCount);
-            console.log(res);
           }).catch(() => {
             console.log("exception in post method");
           });
