@@ -58,16 +58,25 @@ function Cart() {
 
   useEffect(() => {
     //get items from server
-    if(currentUser) {
-      axios.post(baseUrl + "getItemList?email=" + currentUser.email)
-        .then(res => {
-          console.log(res.data);
-          setProducts(res.data.products);
-          setTotalPrice(res.data.totalPrice);
-          setProductCount(res.data.productCount);
-        }).catch(() => {
-          console.log("exception in post method");
-        });
+    function fetchProducts() {
+      if(currentUser) {
+        axios.post(baseUrl + "getItemList?email=" + currentUser.email)
+          .then(res => {
+            setProducts(res.data.products);
+            setTotalPrice(res.data.totalPrice);
+            setProductCount(res.data.productCount);
+            console.log(res);
+          }).catch(() => {
+            console.log("exception in post method");
+          });
+      }
+    }
+    fetchProducts();
+    window.addEventListener('focus', fetchProducts);
+    window.addEventListener('cartUpdate', fetchProducts);
+    return () => {
+      window.removeEventListener('focus', fetchProducts);
+      window.removeEventListener('cartUpdate', fetchProducts);
     }
   }, [])
   
@@ -78,6 +87,7 @@ function Cart() {
         setProducts([]);
         setTotalPrice(0);
         setProductCount(0);
+        dispatchEvent(new Event('cartUpdate'));
       }
     }).catch(() => {
       console.log("exception in post method");
@@ -94,6 +104,7 @@ function Cart() {
         setProducts(res.data.products);
         setProductCount(res.data.productCount);
         setTotalPrice(res.data.totalPrice);
+        dispatchEvent(new Event('cartUpdate'));
       }
     }).catch(() => {
       console.log("exception in post method");
@@ -103,15 +114,6 @@ function Cart() {
   const handelCheckout = () => {
     if(currentUser) {
       setCheckout(true);
-      var arr = [];
-      //add user email
-      for(var p of products) {
-        arr.push({id: p.product.id, quantity: p.quantity})
-      }
-      //create object to send to backend;
-      console.log(arr);
-      arr = {list: arr, user_email: currentUser.email};
-      console.log(arr);
     } else {
       history.push("/logowanie");
     }
@@ -203,12 +205,9 @@ function Cart() {
               </Grid>
             </Grid>             
             { checkout ? (<PayPalPayment
-                            price={totalPrice}
                             setTotalPrice={setTotalPrice}
-                            products={products}
                             setProducts={setProducts}
-                            productCount={productCount}
-                            productCount={setProductCount}
+                            setProductCount={setProductCount}
                           />) 
             : (<Button fullWidth variant="contained" color="primary" onClick={handelCheckout}>
                   Kup

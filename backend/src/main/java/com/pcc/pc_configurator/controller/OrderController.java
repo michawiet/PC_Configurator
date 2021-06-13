@@ -52,11 +52,6 @@ public class OrderController {
             objectList.add(objectMap);
         }
 
-        //orderId
-        //orderList
-        //totalPrice
-        //map.put()
-        //map.put("order", orderListDtoList);
         return objectList;
     }
 

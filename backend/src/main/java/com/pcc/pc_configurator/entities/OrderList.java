@@ -1,5 +1,7 @@
 package com.pcc.pc_configurator.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ public class OrderList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private long id;
 
     @OneToOne

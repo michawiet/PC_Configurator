@@ -25,6 +25,14 @@ public class CartController {
     @Autowired
     ModelMapper modelMapper;
 
+    private int getProductCount(List<CartDTO> cartDTOList) {
+        return cartDTOList.stream().map(o -> o.getQuantity()).mapToInt(Integer::intValue).sum();
+    }
+
+    private double getTotalPrice(List<CartDTO> cartDTOList) {
+        return cartDTOList.stream().map(o -> o.getProduct().getPrice() * o.getQuantity()).mapToDouble(Float::doubleValue).sum();
+    }
+
     @PostMapping("/getItemList")
     public Map<String, Object> getItemList(@RequestParam String email) {
         Map<String, Object> map = new HashMap<>();
@@ -36,7 +44,8 @@ public class CartController {
         }
 
         map.put("products", cartDTOList);
-        map.put("totalPrice", cartDTOList.stream().map(o -> o.getProduct().getPrice()* o.getQuantity()).mapToDouble(Float::doubleValue).sum());
+        map.put("productCount", getProductCount(cartDTOList));
+        map.put("totalPrice", getTotalPrice(cartDTOList));
 
         return map;
     }
@@ -50,7 +59,7 @@ public class CartController {
                 cartDTOList.add(modelMapper.map(cart,CartDTO.class));
         }
 
-        return cartDTOList.stream().map(o -> o.getQuantity()).mapToInt(Integer::intValue).sum();
+        return getProductCount(cartDTOList);
     }
 
     @PostMapping("/clear")
@@ -61,32 +70,41 @@ public class CartController {
             if(cart.getUser().getEmail().equals(email))
                 cartDTOList.add(modelMapper.map(cart,CartDTO.class));
         }
+
         for(int i=0; i<cartDTOList.size(); ++i) {
             cartRepository.deleteById(cartDTOList.get(i).getId());
         }
-//jeżeli się uda true jeżeli nie false
+        //jeżeli się uda true jeżeli nie false
         return true;
     }
 
     @PostMapping("/deleteItem")
-    public boolean deleteItem(@RequestParam String email, @RequestParam long productId) {
+    public Map<String, Object> deleteItem(@RequestParam String email,@RequestParam long productId) {
         List<CartDTO> cartDTOList = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
 
         for(var cart : cartRepository.findAll()) {
             if(cart.getUser().getEmail().equals(email))
                 cartDTOList.add(modelMapper.map(cart,CartDTO.class));
         }
         try {
-            var tempCartItem = cartDTOList.stream()
+            var tempCartItem = cartDTOList
+                    .stream()
                     .filter(p -> (p.getProduct().getId() == productId))
                     .findFirst()
                     .get();
             cartRepository.deleteById(tempCartItem.getId());
+            cartDTOList.remove(tempCartItem);
 
         } catch (NoSuchElementException e) {
             e.getCause();
         }
-        return true;
+
+        map.put("products", cartDTOList);
+        map.put("totalPrice", getTotalPrice(cartDTOList));
+        map.put("productCount", getProductCount(cartDTOList));
+        
+        return map;
     }
 
     public Cart dtoToCart(CartDTO cartDTO) {
@@ -117,7 +135,6 @@ public class CartController {
         }
     }
 
-
     @PostMapping("/createOrder")
     public Map<String , Object> createOrder(@RequestParam String email) {
         Map<String, Object> map = new HashMap<>();
@@ -138,11 +155,6 @@ public class CartController {
             orderListRepository.save(new OrderList(o.getProduct(), o.getQuantity(), newOrder.getId()));
         }
 
-
-
-        //for(int i = 0; i<cartDTOList.size(); ++i) {
-        //    orderListRepository.save(new OrderList(cartDTOList.get(i).getProduct(), cartDTOList.get(i).getQuantity()));
-        //}
         clear(email);
 
         return map;

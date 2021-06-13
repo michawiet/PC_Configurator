@@ -22,12 +22,16 @@ function BasketBadgedButton() {
         axios.post("http://localhost:8080/cart/getItemCount?email=" + currentUser.email)
         .then(res => setItemCount(res.data))
         .catch(() => console.log("item count post failed"));
+      } else {
+        console.log("no nie jestem niby zalogowany");
       }
     }
     updateItemBasketCount();
-    window.addEventListener('storage', updateItemBasketCount);
+    window.addEventListener('focus', updateItemBasketCount);
+    window.addEventListener('cartUpdate', updateItemBasketCount);
     return () => {
-      window.removeEventListener("storage", updateItemBasketCount);
+      window.removeEventListener('cartUpdate', updateItemBasketCount);
+      window.removeEventListener('focus', updateItemBasketCount);
     }
   }, [])
 

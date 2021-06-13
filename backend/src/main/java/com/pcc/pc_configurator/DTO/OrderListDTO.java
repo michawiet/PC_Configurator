@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderListDTO {
+    @JsonIgnore
     private long id;
     private Product product;
     //private Product product;

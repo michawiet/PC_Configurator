@@ -6,13 +6,13 @@ import OrderEmptyPlaceholder from './OrderEmptyPlaceholder'
 
 function StyledPaper(props) {
   const { children } = props;
-
   return (
     <Paper elevation={4}>
       {children}
     </Paper>
   );
-  }
+}
+
 function OrdersHistory() {
   const { currentUser } = useAuth();
   const [orders, setOrders] = useState([]);
@@ -20,9 +20,10 @@ function OrdersHistory() {
   useEffect(() => {
     //prevent from reading null from user if he is not authenticated
     if(currentUser) {
-      axios.get('http://localhost:8080/orderlist?email=' + currentUser.email )
+      axios.post('http://localhost:8080/orders/userOrders?email=' + currentUser.email )
       .then(res => {
         setOrders(res.data);
+        console.log(res);
       });
     }
     else {
@@ -61,14 +62,14 @@ function OrdersHistory() {
             <TableContainer component={StyledPaper}>
               <Table>
                 <TableBody>
-                {products.map(({id, image, brand, name, quantity, price}, index)=>(
-                <TableRow key={id}>
+                {products.map(({product,quantity}, index)=>(
+                <TableRow key={product.id}>
                   <TableCell>
                     <Grid container direction="row" justify="space-between" alignItems="center">
                       <Grid item>
                         <Grid container spacing={2} alignItems="center">
                           <Grid item>
-                            <img src={image} alt={brand + " " + name} style={{
+                            <img src={product.image} alt={product.brand + " " + product.name} style={{
                               height: 72,
                               maxWidth: 72,
                               width: '100%',
@@ -78,7 +79,7 @@ function OrdersHistory() {
                             />
                           </Grid>
                           <Grid item>
-                            {brand + " " + name}
+                            {product.brand + " " + product.name}
                           </Grid>
                         </Grid>
                       </Grid>
@@ -88,7 +89,7 @@ function OrdersHistory() {
                             {quantity} szt.
                           </Grid>
                           <Grid item>
-                            {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(price)}
+                            {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(product.price)}
                           </Grid>
                         </Grid>
                       </Grid>

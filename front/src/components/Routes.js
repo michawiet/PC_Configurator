@@ -12,6 +12,7 @@ import GpuPicker from "./Tabs/GpuPicker";
 import Cart from "./Cart/Cart";
 import ConfigurationStartPanel from "./Tabs/ConfigurationStartPanel";
 import OrdersHistory from "./user/OrdersHistory";
+import OrderConfirmation from "./user/OrderConfirmation";
 
 const routes = [
 	{
@@ -32,6 +33,12 @@ const routes = [
 		private: false,
 		accessIfAuth: true,
 		routes: [
+			{
+				path: '/zamówienie',
+				component: OrderConfirmation,
+				private: true,
+				accessIfAuth: true,
+			},
 			{
 				path: '/zamowienia',
 				component: OrdersHistory,

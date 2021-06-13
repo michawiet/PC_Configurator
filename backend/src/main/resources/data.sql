@@ -160,7 +160,6 @@ create table ORDER_
 create table ORDER_LIST
 (
     ID         INT auto_increment,
-    DATE       DATE,
     PRODUCT_ID INT,
     ORDER_ID   INT,
     QUANTITY   INT,

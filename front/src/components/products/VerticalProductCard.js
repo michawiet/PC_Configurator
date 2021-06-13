@@ -48,7 +48,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
         + "&productId=" 
         + productID
       ).then(res => {
-      console.log(res);
+        dispatchEvent(new Event('cartUpdate'));
       })
     } else {
       history.push("/logowanie");
