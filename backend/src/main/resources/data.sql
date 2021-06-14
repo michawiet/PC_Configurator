@@ -140,8 +140,6 @@ create table USER
 (
     ID       INT auto_increment,
     EMAIL    VARCHAR(100),
-    USERNAME VARCHAR(50),
-    PASSWORD VARCHAR(250),
     constraint USER_PK
         primary key (ID)
 );
@@ -169,4 +167,17 @@ create table ORDER_LIST
         foreign key (ORDER_ID) references ORDER_ (ID),
     constraint ORDERLIST_PRODUCT_ID_FK
         foreign key (PRODUCT_ID) references PRODUCT (ID)
+);
+
+create table cart
+(
+    id         int auto_increment
+        primary key,
+    user_id    int null,
+    product_id int null,
+    quantity   int null,
+    constraint cart_product_ID_fk
+        foreign key (product_id) references product (ID),
+    constraint cart_user_ID_fk
+        foreign key (user_id) references user (ID)
 );
