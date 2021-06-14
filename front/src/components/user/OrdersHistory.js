@@ -3,7 +3,7 @@ import { useAuth } from "../../AuthContext"
 import axios from 'axios';
 import { Typography, Table, TableBody, TableCell,TableContainer, TableRow, Paper, Grid, Container, Button } from '@material-ui/core';
 import OrderEmptyPlaceholder from './OrderEmptyPlaceholder'
-import PaymentDialog from '../payment/PaymentDialog';
+import { useHistory } from "react-router-dom";
 
 function StyledPaper(props) {
   const { children } = props;
@@ -17,16 +17,7 @@ function StyledPaper(props) {
 function OrdersHistory() {
   const { currentUser } = useAuth();
   const [orders, setOrders] = useState([]);
-  const [open, setOpen] = useState(true);
-  const [dialog, setDialog]=useState();
-  const handleClickOpen = (totalPrice, orderId) => {
-    setOpen(true);
-    setDialog(<PaymentDialog
-      opend={open}
-      totalPrice={totalPrice}
-      orderId={orderId}
-    />)
-  };
+  let history = useHistory();
 
   const handleCancel = (orderId) => {
     if(currentUser) {
@@ -38,7 +29,6 @@ function OrdersHistory() {
         ).catch(() => console.log("cancel order failed"));
         await axios.post('http://localhost:8080/orders/userOrders?token=' + idToken)
           .then(res => {
-            console.log(res.data);
             setOrders(res.data);
         });
       }).catch(function(error) {
@@ -76,7 +66,6 @@ function OrdersHistory() {
         </Typography>
         <Grid container spacing={4}>
           {orders.map(({date, orderId, products, totalPrice, paymentStatus}, index) => (
-          <>
           <Grid item key={index} xs={12}>
             <Grid container 
               direction="row"
@@ -98,8 +87,8 @@ function OrdersHistory() {
             <TableContainer component={StyledPaper}>
               <Table>
                 <TableBody>
-                {products.map(({product,quantity}, index)=>(
-                <TableRow key={index}>
+                {products.map(({product,quantity}, index2)=>(
+                <TableRow key={index2 * (index + 1)}>
                   <TableCell>
                     <Grid container direction="row" justify="space-between" alignItems="center">
                       <Grid item>
@@ -147,7 +136,7 @@ function OrdersHistory() {
                         <Button variant="contained" color="primary" onClick={() => handleCancel(orderId)}>Anuluj</Button>
                       </Grid>
                       <Grid item>
-                        <Button variant="contained" color="primary" onClick={() => handleClickOpen(totalPrice,orderId)}>Zapłać</Button>
+                        <Button variant="contained" color="primary" onClick={() => history.push({ pathname: "/opłacanie-zamówienia", orderId: orderId, totalPrice: totalPrice })}>Zapłać</Button>
                       </Grid>
                     </Grid>
                   </TableCell>
@@ -156,12 +145,10 @@ function OrdersHistory() {
               </Table>
             </TableContainer>
           </Grid>
-          </>
           ))}
         </Grid>
         </>)}
       </Container>
-      {dialog}
     </div>
   )
 }

@@ -163,7 +163,7 @@ public class CartController {
         map.put("products", cartDTOList);
         map.put("totalPrice", getTotalPrice(cartDTOList));
 
-        var newOrder = new Order_(LocalDate.now(), userRepository.findByEmail(email),  "nieopłacone");
+        var newOrder = new Order_(LocalDate.now(), userRepository.findByEmail(email), "nieopłacone");
         orderRepository.save(newOrder);
         map.put("orderId", newOrder.getId());
 

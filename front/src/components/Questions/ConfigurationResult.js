@@ -116,7 +116,6 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
               + "&productId="
               + config[key].product.id
               ).then(res => {
-                console.log("Dodano pomyślnie do koszyka");
                 dispatchEvent(new Event('cartUpdate'));
               }).catch(() => {
                 console.log("exception in post method");

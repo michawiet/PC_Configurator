@@ -53,7 +53,6 @@ function OrderConfirmation(props) {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    console.log(props);
     if(props.location.orderId === undefined) {
       //check if order id is not passed
       history.replace("/");
@@ -67,7 +66,6 @@ function OrderConfirmation(props) {
             + "&orderId=" 
             + props.location.orderId
           ).then(res => {
-            console.log(res);
             setProducts(res.data.products);
             setTotalPrice(res.data.totalPrice);
             setProductCount(res.data.productCount);

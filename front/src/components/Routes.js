@@ -13,6 +13,7 @@ import Cart from "./Cart/Cart";
 import ConfigurationStartPanel from "./Tabs/ConfigurationStartPanel";
 import OrdersHistory from "./user/OrdersHistory";
 import OrderConfirmation from "./user/OrderConfirmation";
+import OrderPay from "./user/OrderPay";
 
 const routes = [
 	{
@@ -33,6 +34,12 @@ const routes = [
 		private: false,
 		accessIfAuth: true,
 		routes: [
+			{
+				path: '/opłacanie-zamówienia',
+				component: OrderPay,
+				private: true,
+				accessIfAuth: true,
+			},
 			{
 				path: '/zamówienie',
 				component: OrderConfirmation,

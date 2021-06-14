@@ -46,7 +46,6 @@ function PayPalPayment(props) {
             console.log(err);
           },
           onCancel: () => {
-            console.log("zamkniete");
           },
         })
         .render(paypal.current);

@@ -1,5 +1,5 @@
-import React, {useState}  from 'react';
-import { makeStyles, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
+import React, { useState }  from 'react';
+import { makeStyles, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import axios from 'axios';
 import { useAuth } from "../../AuthContext";
@@ -31,13 +31,8 @@ const useStyles = makeStyles((theme) => ({
 //productDetails as a array, that gets converted here to a list or something
 export default function VerticalProductCard({image, productName, detail0, detail1, detail2, detail3, price, productID}) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const { currentUser } = useAuth();
   let history = useHistory();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   
   const addProductToCart = () => {
     if(currentUser) {
@@ -85,7 +80,7 @@ export default function VerticalProductCard({image, productName, detail0, detail
 
   return (
     <Card className={classes.root}>
-      <CardActionArea  onClick={handleClickOpen}>
+      <CardActionArea>
         <CardMedia 
           className={classes.cardMedia}
           component="img"
