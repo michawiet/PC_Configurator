@@ -144,15 +144,15 @@ create table USER
         primary key (ID)
 );
 
-create table ORDER_
+create table order_
 (
-    ID      INT auto_increment,
-    DATE    DATE,
-    USER_ID INT,
-    constraint ORDER_PK
-        primary key (ID),
+    ID      int auto_increment
+        primary key,
+    DATE    date        null,
+    USER_ID int         null,
+    status  varchar(20) null,
     constraint ORDER_USER_ID_FK
-        foreign key (USER_ID) references USER (ID)
+        foreign key (USER_ID) references user (ID)
 );
 
 create table ORDER_LIST
