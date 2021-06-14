@@ -136,8 +136,6 @@ public class PcConfiguratorApplication {
             protected void configure() {
                 map().setId(source.getId());
                 map().setEmail(source.getEmail());
-                map().setUsername(source.getUsername());
-                map().setPassword(source.getPassword());
             }
         });
         modelMapper.addMappings(new PropertyMap<Order_, OrderDTO>() {

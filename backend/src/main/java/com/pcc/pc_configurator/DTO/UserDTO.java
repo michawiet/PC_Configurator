@@ -12,8 +12,6 @@ public class UserDTO {
     @JsonIgnore
     private long id;
     private String email;
-    private String username;
-    private String password;
 
     public UserDTO(String email) {
         this.email = email;

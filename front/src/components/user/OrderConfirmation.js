@@ -59,20 +59,25 @@ function OrderConfirmation(props) {
       history.replace("/");
     }
     else {
-      axios.post( "http://localhost:8080/orders/userOrder?" 
-      + "email="
-      + currentUser.email
-      + "&orderId=" 
-      + props.location.orderId
-      )
-        .then(res => {
-          console.log(res);
-          setProducts(res.data.products);
-          setTotalPrice(res.data.totalPrice);
-          setProductCount(res.data.productCount);
-        }).catch(() => {
-          console.log("exception in post method");
-      });
+      if(currentUser) {
+        currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+          axios.post("http://localhost:8080/orders/userOrder?" 
+            + "token="
+            + idToken
+            + "&orderId=" 
+            + props.location.orderId
+          ).then(res => {
+            console.log(res);
+            setProducts(res.data.products);
+            setTotalPrice(res.data.totalPrice);
+            setProductCount(res.data.productCount);
+          }).catch(() => {
+            console.log("exception in post method");
+          });
+        }).catch(function(error) {
+          // Handle error
+        });
+      }
     }
   }, [])
 

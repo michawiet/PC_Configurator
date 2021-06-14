@@ -94,7 +94,7 @@ export default function SignIn() {
             <Grid item xs>
             </Grid>
             <Grid item>
-            <Button color="primary" onClick={()=>{history.push("/signup")}}>Nie masz konta? Zarejestruj się</Button>
+            <Button color="primary" onClick={()=>{history.push("/rejestracja")}}>Nie masz konta? Zarejestruj się</Button>
             </Grid>
           </Grid>
         </form>

@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  //const usernameRef = useRef()
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
   const [error, setError] = useState("")
@@ -38,15 +37,12 @@ export default function SignUp() {
   const classes = useStyles();
   let history = useHistory();
 
-
-
   async function handleSubmit(e) {
     e.preventDefault()
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Hasła nie są takie same!")
     }
-
     try {
       setError("")
       setLoading(true)
@@ -68,8 +64,6 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        
-
         <Typography component="h1" variant="h5">
           Rejestracja
         </Typography>

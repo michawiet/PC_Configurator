@@ -1,6 +1,8 @@
 package com.pcc.pc_configurator.controller;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import com.pcc.pc_configurator.DTO.CartDTO;
+import com.pcc.pc_configurator.FirebaseInitializer;
 import com.pcc.pc_configurator.entities.*;
 import com.pcc.pc_configurator.repositories.*;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ public class CartController {
 
     @Autowired
     ModelMapper modelMapper;
+    @Autowired
+    FirebaseInitializer firebase;
 
     private int getProductCount(List<CartDTO> cartDTOList) {
         return cartDTOList.stream().map(o -> o.getQuantity()).mapToInt(Integer::intValue).sum();
@@ -34,7 +38,8 @@ public class CartController {
     }
 
     @PostMapping("/getItemList")
-    public Map<String, Object> getItemList(@RequestParam String email) {
+    public Map<String, Object> getItemList(@RequestParam String token) throws FirebaseAuthException {
+        var email = firebase.verifyTokenAndGetEmail(token);
         Map<String, Object> map = new HashMap<>();
         List<CartDTO> cartDTOList = new ArrayList<>();
 
@@ -51,7 +56,8 @@ public class CartController {
     }
 
     @PostMapping("/getItemCount")
-    public int getItemCount(@RequestParam String email) {
+    public int getItemCount(@RequestParam String token) throws FirebaseAuthException {
+        var email = firebase.verifyTokenAndGetEmail(token);
         List<CartDTO> cartDTOList = new ArrayList<>();
 
         for(var cart : cartRepository.findAll()) {
@@ -63,7 +69,8 @@ public class CartController {
     }
 
     @PostMapping("/clear")
-    public boolean clear(@RequestParam String email) {
+    public boolean clear(@RequestParam String email) throws FirebaseAuthException {
+        //var email = firebase.verifyTokenAndGetEmail(token);
         List<CartDTO> cartDTOList = new ArrayList<>();
 
         for(var cart : cartRepository.findAll()) {
@@ -79,7 +86,8 @@ public class CartController {
     }
 
     @PostMapping("/deleteItem")
-    public Map<String, Object> deleteItem(@RequestParam String email,@RequestParam long productId) {
+    public Map<String, Object> deleteItem(@RequestParam String token, @RequestParam long productId) throws FirebaseAuthException {
+        var email = firebase.verifyTokenAndGetEmail(token);
         List<CartDTO> cartDTOList = new ArrayList<>();
         Map<String, Object> map = new HashMap<>();
 
@@ -112,10 +120,14 @@ public class CartController {
     }
 
     @PostMapping("/addItem")
-    public void addItem(@RequestParam String email, @RequestParam long productId) throws NoSuchElementException{
+    public void addItem(@RequestParam String token, @RequestParam long productId) throws FirebaseAuthException {
+        var email = firebase.verifyTokenAndGetEmail(token);
+        System.out.println("firebase email: " + email);
         try {
             var user = userRepository.findByEmail(email);
+            System.out.println("user: " + user.getEmail() + " id: " + user.getId());
             var product = productRepository.findById(productId).get();
+            System.out.println("product: " + product.getId() + " name: " + product.getName());
             List<CartDTO> cartDTOList = new ArrayList<>();
 
             for(var cart : cartRepository.findAll()) {
@@ -124,19 +136,23 @@ public class CartController {
             }
             try {
                 var tempCartDTO = cartDTOList.stream().filter(p -> (p.getProduct().equals(product))).findFirst().get();
+                System.out.println("tutaj nas nie powinno być");
                 var temp = cartRepository.getOne(tempCartDTO.getId());
                 temp.setQuantity(tempCartDTO.getQuantity() + 1);
                 cartRepository.save(temp);
+
             } catch (NoSuchElementException e) {
-                cartRepository.save(dtoToCart(new CartDTO(user,product,1)));
+                cartRepository.save(new Cart(user,product,1));
             }
         } catch (NoSuchElementException e) {
-            e.getCause();
+            //e.getCause();
         }
     }
 
     @PostMapping("/createOrder")
-    public Map<String , Object> createOrder(@RequestParam String email) {
+    public Map<String , Object> createOrder(@RequestParam String email) throws FirebaseAuthException {
+        //var email = firebase.verifyTokenAndGetEmail(token);
+        System.out.println(email);
         Map<String, Object> map = new HashMap<>();
         List<CartDTO> cartDTOList = new ArrayList<>();
 
@@ -163,15 +179,5 @@ public class CartController {
         clear(email);
 
         return map;
-    }
-
-    @GetMapping
-    public List<CartDTO> all() {
-        List<CartDTO> cartDTOList = new ArrayList<>();
-
-        for(var cart : cartRepository.findAll()) {
-            cartDTOList.add(modelMapper.map(cart,CartDTO.class));
-        }
-        return cartDTOList;
     }
 }

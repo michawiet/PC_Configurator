@@ -42,14 +42,19 @@ export default function VerticalProductCard({image, productName, detail0, detail
   const addProductToCart = () => {
     if(currentUser) {
       //axios post
-      axios.post("http://localhost:8080/cart/addItem?" 
-        + "email="
-        + currentUser.email
-        + "&productId=" 
-        + productID
-      ).then(res => {
-        dispatchEvent(new Event('cartUpdate'));
-      })
+      currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+        axios.post("http://localhost:8080/cart/addItem?" 
+          + "token="
+          + idToken
+          + "&productId=" 
+          + productID
+        ).then(res => {
+          dispatchEvent(new Event('cartUpdate'));
+        })
+      }).catch(function(error) {
+        // Handle error
+      });
+      
     } else {
       history.push("/logowanie");
     }

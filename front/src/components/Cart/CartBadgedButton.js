@@ -19,9 +19,14 @@ function BasketBadgedButton() {
   useEffect(() => {
     function updateItemBasketCount() {
       if(currentUser) {
-        axios.post("http://localhost:8080/cart/getItemCount?email=" + currentUser.email)
-        .then(res => setItemCount(res.data))
-        .catch(() => console.log("item count post failed"));
+        currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+          axios.post("http://localhost:8080/cart/getItemCount?token=" + idToken)
+          .then(res => setItemCount(res.data))
+          .catch(() => console.log("item count post failed"));
+        }).catch(function(error) {
+          // Handle error
+        });
+        
       } else {
         console.log("no nie jestem niby zalogowany");
       }

@@ -28,7 +28,7 @@ public class UserController {
     }
 
     public User dtoToUser(UserDTO userDTO) {
-        return new User(userDTO.getEmail(), userDTO.getUsername(), userDTO.getPassword());
+        return new User(userDTO.getEmail());
     }
 
     @GetMapping("/register")

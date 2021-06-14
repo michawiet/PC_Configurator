@@ -15,7 +15,6 @@ function StyledPaper(props) {
 }
 
 function OrdersHistory() {
-  //const classes = useStyles();
   const { currentUser } = useAuth();
   const [orders, setOrders] = useState([]);
   const [open, setOpen] = useState(true);
@@ -30,25 +29,37 @@ function OrdersHistory() {
     
   };
 
-  const handleCancel = async (orderId) => {
-    await axios.post('http://localhost:8080/orders/cancelOrder?email='
-      + currentUser.email
-      + "&orderId="
-      + orderId
-    ).catch(() => console.log("cancel order failed"));
-    await axios.post('http://localhost:8080/orders/userOrders?email=' + currentUser.email)
-      .then(res => {
-        setOrders(res.data);
-    });
+  const handleCancel = (orderId) => {
+    if(currentUser) {
+      currentUser.getIdToken(/* forceRefresh */ true).then(async function(idToken) {
+        await axios.post('http://localhost:8080/orders/cancelOrder?token='
+          + idToken
+          + "&orderId="
+          + orderId
+        ).catch(() => console.log("cancel order failed"));
+        await axios.post('http://localhost:8080/orders/userOrders?token=' + idToken)
+          .then(res => {
+            console.log(res.data);
+            setOrders(res.data);
+        });
+      }).catch(function(error) {
+        // Handle error
+      });
+    }
   }
 
   useEffect(() => {
     //prevent from reading null from user if he is not authenticated
     if(currentUser) {
-      axios.post('http://localhost:8080/orders/userOrders?email=' + currentUser.email)
-      .then(res => {
-        setOrders(res.data);
-        console.log(res);
+      currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+        axios.post('http://localhost:8080/orders/userOrders?'
+        + "&token="
+        + idToken
+        ).then(res => {
+            setOrders(res.data);
+        });
+      }).catch(function(error) {
+        // Handle error
       });
     }
     else {

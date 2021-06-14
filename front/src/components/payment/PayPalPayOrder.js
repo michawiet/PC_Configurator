@@ -5,9 +5,7 @@ import { useHistory } from "react-router-dom";
 
 function PayPalPayment(props) {
   const paypal = useRef()
-  const [payd, setPayd] = useState(false);
   const { currentUser } = useAuth();
-  //const [orderId, setOrderId] = useState(0);
   let history = useHistory();
   var orderId = -1;
 
@@ -33,18 +31,21 @@ function PayPalPayment(props) {
           },
           onApprove: async (data, actions) => {
             const order = await actions.order.capture();
-            await axios.post("http://localhost:8080/orders/confirmOrder?" 
-            + "email="
-            + currentUser.email
-            + "&orderId=" 
-            + orderId);
-            history.push({ pathname: "/zamówienie", orderId: orderId});
+            currentUser.getIdToken(/* forceRefresh */ true).then(async function(idToken) {
+              await axios.post("http://localhost:8080/orders/confirmOrder?" 
+                  + "token="
+                  + idToken
+                  + "&orderId=" 
+                  + orderId);
+                history.push({ pathname: "/zamówienie", orderId: orderId});
+            }).catch(function(error) {
+              // Handle error
+            });
           },
           onError: (err) => {
             console.log(err);
           },
           onCancel: () => {
-            
             console.log("zamkniete");
           },
         })

@@ -1,7 +1,9 @@
 package com.pcc.pc_configurator.controller;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import com.pcc.pc_configurator.DTO.OrderDTO;
 import com.pcc.pc_configurator.DTO.OrderListDTO;
+import com.pcc.pc_configurator.FirebaseInitializer;
 import com.pcc.pc_configurator.repositories.OrderListRepository;
 import com.pcc.pc_configurator.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,9 +24,12 @@ public class OrderController {
 
     @Autowired
     ModelMapper modelMapper;
+    @Autowired
+    FirebaseInitializer firebase;
 
     @PostMapping("/userOrders")
-    public List<Map<String, Object>> getUserOrders(@RequestParam String email) {
+    public List<Map<String, Object>> getUserOrders(@RequestParam String token) throws FirebaseAuthException {
+        var email = firebase.verifyTokenAndGetEmail(token);
         List<Map<String, Object>> objectList = new ArrayList<>();
         List<OrderDTO> orderDtoList = new ArrayList<>();
         Map<Long, List<OrderListDTO>> tempMap = new HashMap<>();
@@ -63,7 +67,8 @@ public class OrderController {
     }
 
     @PostMapping("/userOrder")
-    public Map<String, Object> getOrder(@RequestParam String email, @RequestParam int orderId) {
+    public Map<String, Object> getOrder(@RequestParam String token, @RequestParam int orderId) throws FirebaseAuthException {
+        var email = firebase.verifyTokenAndGetEmail(token);
         Map<String, Object> map = new HashMap<>();
         List<OrderListDTO> orderListDTOList = new ArrayList<>();
         OrderDTO orderDTO;
@@ -104,7 +109,8 @@ public class OrderController {
     }
 
     @PostMapping("/confirmOrder")
-    public void confirmOrder(@RequestParam String email, @RequestParam int orderId) {
+    public void confirmOrder(@RequestParam String token, @RequestParam int orderId) throws FirebaseAuthException {
+        var email = firebase.verifyTokenAndGetEmail(token);
         try {
             var order = orderRepository.findAll()
                     .stream()
@@ -119,7 +125,8 @@ public class OrderController {
     }
 
     @PostMapping("/cancelOrder")
-    private void cancelOrder(@RequestParam String email, @RequestParam int orderId) {
+    private void cancelOrder(@RequestParam String token, @RequestParam int orderId) throws FirebaseAuthException {
+        var email = firebase.verifyTokenAndGetEmail(token);
         try {
             var order = orderRepository.findAll()
                     .stream()

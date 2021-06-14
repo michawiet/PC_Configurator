@@ -105,50 +105,31 @@ function ConfigurationResult({workloadType, cpuPref, gpuPref, budget, setActiveS
 
   const addConfigurationToCart_ = () => {
     if(currentUser) {
-      const config = configurations[value];
-      for(var key in config) {
-        var keyCopy = key;
-        if(keyCopy !== "priceOption" && keyCopy !== "totalPrice") {
-          axios.post("http://localhost:8080/cart/addItem?"
-            + "email="
-            + currentUser.email
-            + "&productId="
-            + config[key].product.id
-            ).then(res => {
-              console.log("Dodano pomyślnie do koszyka");
-              dispatchEvent(new Event('cartUpdate'));
-            }).catch(() => {
-              console.log("exception in post method");
-            });
+      currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+        const config = configurations[value];
+        for(var key in config) {
+          var keyCopy = key;
+          if(keyCopy !== "priceOption" && keyCopy !== "totalPrice") {
+            axios.post("http://localhost:8080/cart/addItem?"
+              + "token="
+              + idToken
+              + "&productId="
+              + config[key].product.id
+              ).then(res => {
+                console.log("Dodano pomyślnie do koszyka");
+                dispatchEvent(new Event('cartUpdate'));
+              }).catch(() => {
+                console.log("exception in post method");
+              });
+          }
         }
-      }
+      }).catch(function(error) {
+        // Handle error
+      });
     } else {
       history.push("/logowanie");
     }
   }
-
-  const addConfigurationToCart = () => {
-    const cartString = localStorage.getItem("cart");
-    var cartArray = [];
-    if(cartString) {
-      cartArray = JSON.parse(cartString);
-    }
-    var selectedConfiguration = configurations[value];
-    //iterate over cartArray and add the current configuration products
-    for(var it in selectedConfiguration) {
-      const itCopy = it;
-      if(itCopy !== "priceOption" && itCopy !== "totalPrice") {
-        var i = cartArray.findIndex((el) => (el.id === selectedConfiguration[itCopy].product.id));
-        if(i > -1) {
-          cartArray[i].quantity++;
-        } else {
-          cartArray.push({id: selectedConfiguration[itCopy].product.id, quantity: 1});
-        }
-      }
-    }
-    localStorage.setItem("cart", JSON.stringify(cartArray));
-    window.dispatchEvent(new Event("storage"));
-  };
 
   return (
     <div>

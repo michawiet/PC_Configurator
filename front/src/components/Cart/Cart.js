@@ -60,7 +60,8 @@ function Cart() {
     //get items from server
     function fetchProducts() {
       if(currentUser) {
-        axios.post(baseUrl + "getItemList?email=" + currentUser.email)
+        currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+          axios.post(baseUrl + "getItemList?token=" + idToken)
           .then(res => {
             setProducts(res.data.products);
             setTotalPrice(res.data.totalPrice);
@@ -68,8 +69,13 @@ function Cart() {
           }).catch(() => {
             console.log("exception in post method");
           });
+        }).catch(function(error) {
+          // Handle error
+        });
+        
       }
     }
+    
     fetchProducts();
     window.addEventListener('focus', fetchProducts);
     window.addEventListener('cartUpdate', fetchProducts);
@@ -80,33 +86,41 @@ function Cart() {
   }, [])
   
   const deleteProducts = () => {
-    axios.post(baseUrl + "clear?email=" + currentUser.email)
-    .then(res => {
-      if(res.data === true) {
-        setProducts([]);
-        setTotalPrice(0);
-        setProductCount(0);
-        dispatchEvent(new Event('cartUpdate'));
-      }
-    }).catch(() => {
-      console.log("exception in post method");
+    currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      axios.post(baseUrl + "clear?token=" + idToken)
+        .then(res => {
+          if(res.data === true) {
+            setProducts([]);
+            setTotalPrice(0);
+            setProductCount(0);
+            dispatchEvent(new Event('cartUpdate'));
+          }
+        }).catch(() => {
+          console.log("exception in post method");
+        });
+    }).catch(function(error) {
+      // Handle error
     });
   };
 
   const removeItemFromBasket = (productIdToDelete) =>{
-    axios.post(baseUrl + "deleteItem?email="
-    + currentUser.email
-    + "&productId="
-    + productIdToDelete
-    ).then(res => {
-      if(res.data) {
-        setProducts(res.data.products);
-        setProductCount(res.data.productCount);
-        setTotalPrice(res.data.totalPrice);
-        dispatchEvent(new Event('cartUpdate'));
-      }
-    }).catch(() => {
-      console.log("exception in post method");
+    currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      axios.post(baseUrl + "deleteItem?token="
+        + idToken
+        + "&productId="
+        + productIdToDelete
+      ).then(res => {
+        if(res.data) {
+          setProducts(res.data.products);
+          setProductCount(res.data.productCount);
+          setTotalPrice(res.data.totalPrice);
+          dispatchEvent(new Event('cartUpdate'));
+        }
+      }).catch(() => {
+        console.log("exception in post method");
+      });
+    }).catch(function(error) {
+      // Handle error
     });
   };
 
@@ -203,12 +217,13 @@ function Cart() {
                 <Typography><strong>{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(totalPrice)}</strong></Typography>
               </Grid>
             </Grid>             
-            { checkout ? (<PayPalPayment
-                            setTotalPrice={setTotalPrice}
-                            setProducts={setProducts}
-                            setProductCount={setProductCount}
-                          />) 
-            : (<Button fullWidth variant="contained" color="primary" onClick={handelCheckout}>
+            { checkout ? 
+              (<PayPalPayment
+                setTotalPrice={setTotalPrice}
+                setProducts={setProducts}
+                setProductCount={setProductCount}
+              />) 
+              : (<Button fullWidth variant="contained" color="primary" onClick={handelCheckout}>
                   Kup
                 </Button>)}
             </Paper>
