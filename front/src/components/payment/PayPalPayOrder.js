@@ -12,7 +12,7 @@ function PayPalPayment(props) {
   useEffect(() => {
       window.paypal
         .Buttons({
-          createOrder: async (data, actions, err) => {
+          createOrder: (data, actions, err) => {
             var totalPrice = 0;
             totalPrice = props.totalPrice ;
             orderId = props.orderId ;

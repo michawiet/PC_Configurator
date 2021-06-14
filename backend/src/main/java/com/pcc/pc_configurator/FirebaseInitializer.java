@@ -24,7 +24,7 @@ public class FirebaseInitializer {
     @PostConstruct
     private void initDB() throws IOException {
         InputStream serviceAccount = this.getClass().getClassLoader()
-                .getResourceAsStream("./pc-conf-login-firebase-adminsdk-aa0io-7bcf50dc04.json");
+                .getResourceAsStream("./pc-conf-login-firebase-adminsdk-us3la-d8a72f7ece.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))

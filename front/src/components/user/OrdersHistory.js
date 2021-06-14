@@ -26,7 +26,6 @@ function OrdersHistory() {
       totalPrice={totalPrice}
       orderId={orderId}
     />)
-    
   };
 
   const handleCancel = (orderId) => {

@@ -100,7 +100,6 @@ public class OrderController {
                     .sum());
 
         } catch (NoSuchElementException e) {
-            System.out.println("kurwa jebane");
         }
         //znaleźć order usera
         //automagiczny kod
