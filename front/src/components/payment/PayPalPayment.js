@@ -49,15 +49,15 @@ function PayPalPayment(props) {
             console.log(err);
           },
           onCancel: async () => {
-            const token = await currentUser.getIdToken(/* forceRefresh */ true);
-            axios.post("http://localhost:8080/orders/cancelOrder?" 
-              + "token="
-              + token
-              + "&orderId=" 
-              + orderId
-            ).catch(() => {
-                console.log("exception in post method");
-            });
+            //const token = await currentUser.getIdToken(/* forceRefresh */ true);
+            //axios.post("http://localhost:8080/orders/cancelOrder?" 
+            //  + "token="
+            //  + token
+            //  + "&orderId=" 
+            //  + orderId
+            //).catch(() => {
+            //    console.log("exception in post method");
+            //});
             history.push("/");
           },
         })
