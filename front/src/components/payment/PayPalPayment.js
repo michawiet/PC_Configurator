@@ -47,6 +47,10 @@ function PayPalPayment(props) {
           },
           onError: (err) => {
             console.log(err);
+            props.setProducts([]);
+            props.setProductCount(0);
+            props.setTotalPrice(0);
+            //history.push("/zamowienia");
           },
           onCancel: async () => {
             //const token = await currentUser.getIdToken(/* forceRefresh */ true);
