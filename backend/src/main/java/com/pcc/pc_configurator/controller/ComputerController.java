@@ -272,30 +272,34 @@ public class ComputerController {
                                                   @RequestParam("gpu") String gpu,
                                                   @RequestParam("price") Float price) {
         List<Map<String, Object>> lists = new ArrayList<>();
-        final float priceVariation = price * VARIATION;
-        float currentPrice = price - priceVariation;
-        final boolean isOffice = type.equals(OFFICE_WORKLOAD);
+        try {
+            if(price < 0.0f) throw new Exception();
+            final float priceVariation = price * VARIATION;
+            float currentPrice = price - priceVariation;
+            final boolean isOffice = type.equals(OFFICE_WORKLOAD);
 
-        for(int i = 0 ; i < 3; ++i, currentPrice += priceVariation) {
-            try {
-                if (isOffice) {
-                    lists.add(getOfficeComputer(currentPrice, cpu));
-                } else {
-                    lists.add(getComputer(currentPrice, cpu, gpu, type));
+            for (int i = 0; i < 3; ++i, currentPrice += priceVariation) {
+                try {
+                    if (isOffice) {
+                        lists.add(getOfficeComputer(currentPrice, cpu));
+                    } else {
+                        lists.add(getComputer(currentPrice, cpu, gpu, type));
+                    }
+                    lists.get(lists.size() - 1).put("priceOption", i);
+                } catch (NoSuchElementException e) {
+                    System.out.println("No configuration returned for price: "
+                            + currentPrice
+                            + " type: "
+                            + type
+                            + " cpu: "
+                            + cpu
+                            + " gpu: "
+                            + gpu);
                 }
-                lists.get(lists.size() - 1).put("priceOption", i);
-            } catch (NoSuchElementException e) {
-                System.out.println("No configuration returned for price: "
-                        + currentPrice
-                        + " type: "
-                        + type
-                        + " cpu: "
-                        + cpu
-                        + " gpu: "
-                        + gpu);
             }
+        } catch (Exception e) {
+
         }
-        //TODO: add total price
 
         return lists;
     }

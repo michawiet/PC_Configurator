@@ -20,7 +20,6 @@ public class UserController {
 
     List<UserDTO> userDtoList = new ArrayList<>();
 
-
     @Autowired
     public void userToDto(ModelMapper modelMapper) {
         for(var user : userRepository.findAll())

@@ -138,7 +138,7 @@ public class CartController {
     }
 
     @PostMapping("/addItem")
-    public void addItem(@RequestParam String token, @RequestParam long productId) throws FirebaseAuthException {
+    public boolean addItem(@RequestParam String token, @RequestParam long productId) throws FirebaseAuthException {
         try {
             if(productId < 1) throw new NoSuchElementException();
             var email = firebase.verifyTokenAndGetEmail(token);
@@ -150,6 +150,7 @@ public class CartController {
                 if(cart.getUser().getEmail().equals(email))
                     cartDTOList.add(modelMapper.map(cart,CartDTO.class));
             }
+
             try {
                 var tempCartDTO = cartDTOList.stream().filter(p -> (p.getProduct().equals(product))).findFirst().get();
                 var temp = cartRepository.getOne(tempCartDTO.getId());
@@ -160,10 +161,11 @@ public class CartController {
                 cartRepository.save(new Cart(user,product,1));
             }
         } catch (NoSuchElementException e) {
-            //e.getCause();
+            return false;
         } catch (FirebaseAuthException e) {
-
+            return false;
         }
+        return true;
     }
 
     @PostMapping("/createOrder")

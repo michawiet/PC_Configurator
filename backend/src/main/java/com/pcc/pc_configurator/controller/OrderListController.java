@@ -22,36 +22,4 @@ public class OrderListController {
 
     @Autowired
     ModelMapper modelMapper;
-
-    //@GetMapping
-    //public List< Map<String, Object> > allOrderLists(@RequestParam("email") String email) {
-//
-    //    List<OrderListDTO> orderDtoList = new ArrayList<>();
-//
-    //    for (var orderList : orderListRepository.findAll()) {
-    //        if (orderList.getOrder_().getUser().getEmail().equals(email)) {
-    //            orderDtoList.add(modelMapper.map(orderList, OrderListDTO.class));
-    //        }
-    //    }
-//
-    //    List< Map<String, Object> > response = new ArrayList<>();
-//
-    //    if (!orderDtoList.isEmpty()) {
-    //        for (int i = 0; i < orderDtoList.size(); ++i) {
-    //            Map<String, Object> map = new HashMap<>();
-    //            map.put("orderId", orderDtoList.get(i).getOrderId());
-    //            map.put("date", orderDtoList.get(i).getDate());
-    //            int finalI = i;
-    //            var list = orderDtoList.stream()
-    //                    .filter(p -> (p.getOrderId() == orderDtoList.get(finalI).getOrderId())).collect(Collectors.toList());
-    //            map.put("products", list);
-    //            map.put("totalPrice", list.stream().map(o -> o.getPrice() * o.getQuantity()).mapToDouble(Float::doubleValue).sum());
-    //            response.add(map);
-    //        }
-    //        return response;
-    //    }
-//
-    //    return response;
-    //}
-
 }
