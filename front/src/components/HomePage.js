@@ -76,7 +76,7 @@ function HomePage({ routes }) {
                   disableElevation variant="outlined" startIcon={<AccountCircleOutlinedIcon/>}>
                     Twoje konto
                   </Button>
-                  <Menu
+                  {currentUser ? <><Menu
                     id="fade-menu"
                     anchorEl={anchorEl}
                     getContentAnchorEl={null}
@@ -88,12 +88,21 @@ function HomePage({ routes }) {
                     MenuListProps={{ onMouseLeave: handleClose }}
                   >
                     <MenuItem onClick={handleClose, () => history.push('/zamowienia')}>Twoje zamówienia</MenuItem>
-                    <Divider />
-                    {currentUser ? <MenuItem onClick={handleClose, handleLogout}>Wyloguj się</MenuItem> :
-                    (<><MenuItem onClick={handleClose, () => history.push('/logowanie') }>Zaloguj się</MenuItem>
-                    <MenuItem onClick={handleClose, () => history.push('/rejestracja')}>Rejestracja</MenuItem></>) 
-                    }
-                  </Menu>
+                    <Divider /><MenuItem onClick={handleClose, handleLogout}>Wyloguj się</MenuItem></Menu></> :
+                    <><Menu
+                    id="fade-menu"
+                    anchorEl={anchorEl}
+                    getContentAnchorEl={null}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                    transformOrigin={{ vertical: "top", horizontal: "center" }}
+                    keepMounted
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{ onMouseLeave: handleClose }}
+                  >
+                    <MenuItem onClick={handleClose, () => history.push('/zamowienia')}>Twoje zamówienia</MenuItem>
+                    <Divider /><MenuItem onClick={handleClose, () => history.push('/logowanie') }>Zaloguj się</MenuItem>
+                    <MenuItem onClick={handleClose, () => history.push('/rejestracja')}>Rejestracja</MenuItem></Menu></>}
                 </Grid>
                 <Grid item>
                   <BasketBadgedButton/>

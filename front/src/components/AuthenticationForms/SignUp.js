@@ -1,11 +1,12 @@
-import React, { useRef, useState} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {Avatar, Button, CssBaseline, TextField, Grid, Box, Typography, makeStyles, Container} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../AuthContext"
+import firebase from "firebase/app";
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
-
+import {ReactComponent as GoogleIcon} from "../../icons/btn_google_light_normal_ios.svg";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,11 +36,26 @@ export default function SignUp() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const classes = useStyles();
+  const [loginSuccess, setLoginSuccess] = useState(false);
   let history = useHistory();
+
+  useEffect(() => {
+    if(loginSuccess) {
+      history.push("/konfigurator");
+    }
+  }, [loginSuccess]);
 
   async function handleSubmit(e) {
     e.preventDefault()
-
+    if(emailRef.current.value === "") {
+      return setError("Podaj adres email!");
+    }
+    if(passwordRef.current.value === "") {
+      return setError("Wprowadź hasło!");
+    }
+    if(passwordConfirmRef.current.value === "") {
+      return setError("Wprowadź hasło!");
+    }
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Hasła nie są takie same!")
     }
@@ -48,7 +64,6 @@ export default function SignUp() {
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
       axios.get('http://localhost:8080/users/register?email=' + emailRef.current.value )
-      console.log("konto")
       history.push("/konfigurator")
     } catch {
       setError("Nie udało się stworzyć konta")
@@ -69,19 +84,6 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            {/*<Grid item xs={12} >
-              <TextField
-                autoComplete="Name"
-                name="Name"
-                variant="outlined"
-                required
-                fullWidth
-                id="Name"
-                label=" Name"
-                autoFocus
-                inputRef={usernameRef}
-              />
-  </Grid>*/}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -130,6 +132,19 @@ export default function SignUp() {
             onClick={handleSubmit}
           >
             Zarejestruj
+          </Button>
+          <Button variant="contained" color="primary" fullWidth startIcon={<GoogleIcon/>}
+            onClick={() => {
+              var googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+              firebase.auth().signInWithPopup(googleAuthProvider).then((res) => {
+                axios.get('http://localhost:8080/users/register?email=' + res.user.email)
+                setLoginSuccess(true);
+              }).catch(function(error) {
+                console.log(error);
+              });
+            }}
+          >
+            Zarejestruj przez Google
           </Button>
           {error && <Alert severity="error">{error}</Alert>}
           <Grid container justify="flex-end">

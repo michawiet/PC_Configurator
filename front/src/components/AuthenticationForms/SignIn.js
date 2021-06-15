@@ -3,13 +3,12 @@ import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Gri
   Typography, makeStyles, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useHistory } from "react-router-dom";
-import GoogleButton from 'react-google-button'
 import { useAuth } from "../../AuthContext"
 import Alert from '@material-ui/lab/Alert';
 import firebase from "firebase/app";
 import "firebase/auth";
 import axios from 'axios';
-
+import {ReactComponent as GoogleIcon} from "../../icons/btn_google_light_normal_ios.svg";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,6 +49,12 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
+      if(emailRef.current.value === "") {
+        return setError("Podaj poprawny adres email!");
+      }
+      if(passwordRef.current.value === "") {
+        return setError("Wprowadź hasło!");
+      }
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
@@ -74,13 +79,11 @@ export default function SignIn() {
         <form className={classes.form} noValidate>
           <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Adres Email" name="email" autoComplete="email" autoFocus inputRef={emailRef}/>
           <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Hasło" type="password" id="password" autoComplete="current-password" inputRef={passwordRef}/>
-          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Zapamiętaj mnie"/>
           <Button disabled={loading}  fullWidth variant="contained" color="primary"className={classes.submit} onClick={handleSubmit}>
             Zaloguj
           </Button>
-          {error && <Alert severity="error">{error}</Alert>}
-          <GoogleButton variant="contained" color="primary" className={classes.submit}    
-          onClick={() => {
+          <Button variant="contained" color="primary" fullWidth startIcon={<GoogleIcon/>}
+            onClick={() => {
               var googleAuthProvider = new firebase.auth.GoogleAuthProvider();
               firebase.auth().signInWithPopup(googleAuthProvider).then((res) => {
                 axios.get('http://localhost:8080/users/register?email=' + res.user.email)
@@ -89,7 +92,11 @@ export default function SignIn() {
                 console.log(error);
               });
             }}
-          />
+          >
+            Zaloguj przez Google
+          </Button>
+          {error && <Alert severity="error">{error}</Alert>}
+          
           <Grid container>
             <Grid item xs>
             </Grid>

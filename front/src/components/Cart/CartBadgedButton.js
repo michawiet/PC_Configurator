@@ -26,9 +26,6 @@ function BasketBadgedButton() {
         }).catch(function(error) {
           // Handle error
         });
-        
-      } else {
-        console.log("no nie jestem niby zalogowany");
       }
     }
     updateItemBasketCount();

@@ -39,47 +39,62 @@ public class CartController {
 
     @PostMapping("/getItemList")
     public Map<String, Object> getItemList(@RequestParam String token) throws FirebaseAuthException {
-        var email = firebase.verifyTokenAndGetEmail(token);
         Map<String, Object> map = new HashMap<>();
-        List<CartDTO> cartDTOList = new ArrayList<>();
+        try {
+            var email = firebase.verifyTokenAndGetEmail(token);
+            map.put("authFailed", false);
+            List<CartDTO> cartDTOList = new ArrayList<>();
 
-        for(var cart : cartRepository.findAll()) {
-            if(cart.getUser().getEmail().equals(email))
-                cartDTOList.add(modelMapper.map(cart,CartDTO.class));
+            for (var cart : cartRepository.findAll()) {
+                if (cart.getUser().getEmail().equals(email))
+                    cartDTOList.add(modelMapper.map(cart, CartDTO.class));
+            }
+
+            map.put("products", cartDTOList);
+            map.put("productCount", getProductCount(cartDTOList));
+            map.put("totalPrice", getTotalPrice(cartDTOList));
+        } catch (FirebaseAuthException e) {
+            map.put("authFailed", true);
         }
-
-        map.put("products", cartDTOList);
-        map.put("productCount", getProductCount(cartDTOList));
-        map.put("totalPrice", getTotalPrice(cartDTOList));
 
         return map;
     }
 
     @PostMapping("/getItemCount")
-    public int getItemCount(@RequestParam String token) throws FirebaseAuthException {
-        var email = firebase.verifyTokenAndGetEmail(token);
-        List<CartDTO> cartDTOList = new ArrayList<>();
+    public int getItemCount(@RequestParam String token) {
+        int productCount = -1;
+        try {
+            var email = firebase.verifyTokenAndGetEmail(token);
+            List<CartDTO> cartDTOList = new ArrayList<>();
 
-        for(var cart : cartRepository.findAll()) {
-            if(cart.getUser().getEmail().equals(email))
-                cartDTOList.add(modelMapper.map(cart,CartDTO.class));
+            for (var cart : cartRepository.findAll()) {
+                if (cart.getUser().getEmail().equals(email))
+                    cartDTOList.add(modelMapper.map(cart, CartDTO.class));
+            }
+            productCount = getProductCount(cartDTOList);
+        } catch (FirebaseAuthException e) {
+
         }
 
-        return getProductCount(cartDTOList);
+        return productCount;
     }
 
     @PostMapping("/clear")
     public boolean clear(@RequestParam String token) throws FirebaseAuthException {
-        var email = firebase.verifyTokenAndGetEmail(token);
-        List<CartDTO> cartDTOList = new ArrayList<>();
+        try {
+            var email = firebase.verifyTokenAndGetEmail(token);
+            List<CartDTO> cartDTOList = new ArrayList<>();
 
-        for(var cart : cartRepository.findAll()) {
-            if(cart.getUser().getEmail().equals(email))
-                cartDTOList.add(modelMapper.map(cart,CartDTO.class));
-        }
+            for (var cart : cartRepository.findAll()) {
+                if (cart.getUser().getEmail().equals(email))
+                    cartDTOList.add(modelMapper.map(cart, CartDTO.class));
+            }
 
-        for(int i=0; i<cartDTOList.size(); ++i) {
-            cartRepository.deleteById(cartDTOList.get(i).getId());
+            for (int i = 0; i < cartDTOList.size(); ++i) {
+                cartRepository.deleteById(cartDTOList.get(i).getId());
+            }
+        } catch (FirebaseAuthException e) {
+            return false;
         }
         //jeżeli się uda true jeżeli nie false
         return true;
@@ -87,15 +102,17 @@ public class CartController {
 
     @PostMapping("/deleteItem")
     public Map<String, Object> deleteItem(@RequestParam String token, @RequestParam long productId) throws FirebaseAuthException {
-        var email = firebase.verifyTokenAndGetEmail(token);
-        List<CartDTO> cartDTOList = new ArrayList<>();
         Map<String, Object> map = new HashMap<>();
-
-        for(var cart : cartRepository.findAll()) {
-            if(cart.getUser().getEmail().equals(email))
-                cartDTOList.add(modelMapper.map(cart,CartDTO.class));
-        }
         try {
+            var email = firebase.verifyTokenAndGetEmail(token);
+            map.put("authFailed", false);
+            List<CartDTO> cartDTOList = new ArrayList<>();
+
+            for(var cart : cartRepository.findAll()) {
+                if(cart.getUser().getEmail().equals(email))
+                    cartDTOList.add(modelMapper.map(cart,CartDTO.class));
+            }
+
             var tempCartItem = cartDTOList
                     .stream()
                     .filter(p -> (p.getProduct().getId() == productId))
@@ -104,13 +121,14 @@ public class CartController {
             cartRepository.deleteById(tempCartItem.getId());
             cartDTOList.remove(tempCartItem);
 
+            map.put("products", cartDTOList);
+            map.put("totalPrice", getTotalPrice(cartDTOList));
+            map.put("productCount", getProductCount(cartDTOList));
         } catch (NoSuchElementException e) {
             e.getCause();
+        } catch (FirebaseAuthException e) {
+            map.put("authFailed", true);
         }
-
-        map.put("products", cartDTOList);
-        map.put("totalPrice", getTotalPrice(cartDTOList));
-        map.put("productCount", getProductCount(cartDTOList));
 
         return map;
     }
@@ -121,8 +139,9 @@ public class CartController {
 
     @PostMapping("/addItem")
     public void addItem(@RequestParam String token, @RequestParam long productId) throws FirebaseAuthException {
-        var email = firebase.verifyTokenAndGetEmail(token);
         try {
+            if(productId < 1) throw new NoSuchElementException();
+            var email = firebase.verifyTokenAndGetEmail(token);
             var user = userRepository.findByEmail(email);
             var product = productRepository.findById(productId).get();
             List<CartDTO> cartDTOList = new ArrayList<>();
@@ -142,36 +161,42 @@ public class CartController {
             }
         } catch (NoSuchElementException e) {
             //e.getCause();
+        } catch (FirebaseAuthException e) {
+
         }
     }
 
     @PostMapping("/createOrder")
-    public Map<String , Object> createOrder(@RequestParam String token) throws FirebaseAuthException {
-        var email = firebase.verifyTokenAndGetEmail(token);
+    public Map<String , Object> createOrder(@RequestParam String token) {
         Map<String, Object> map = new HashMap<>();
-        List<CartDTO> cartDTOList = new ArrayList<>();
+        try {
+            var email = firebase.verifyTokenAndGetEmail(token);
+            map.put("authFailed", false);
+            List<CartDTO> cartDTOList = new ArrayList<>();
 
-        for(var cart : cartRepository.findAll()) {
-            if(cart.getUser().getEmail().equals(email))
-                cartDTOList.add(modelMapper.map(cart,CartDTO.class));
+            for (var cart : cartRepository.findAll()) {
+                if (cart.getUser().getEmail().equals(email))
+                    cartDTOList.add(modelMapper.map(cart, CartDTO.class));
+            }
+
+            if (cartDTOList.size() == 0) {
+                return null;
+            }
+
+            map.put("products", cartDTOList);
+            map.put("totalPrice", getTotalPrice(cartDTOList));
+
+            var newOrder = new Order_(LocalDate.now(), userRepository.findByEmail(email), "nieopłacone");
+            orderRepository.save(newOrder);
+            map.put("orderId", newOrder.getId());
+
+            for (var o : cartDTOList) {
+                orderListRepository.save(new OrderList(o.getProduct(), o.getQuantity(), newOrder.getId()));
+            }
+            clear(token);
+        } catch (FirebaseAuthException e) {
+            map.put("authFailed", true);
         }
-
-        if(cartDTOList.size() == 0) {
-            return null;
-        }
-
-        map.put("products", cartDTOList);
-        map.put("totalPrice", getTotalPrice(cartDTOList));
-
-        var newOrder = new Order_(LocalDate.now(), userRepository.findByEmail(email), "nieopłacone");
-        orderRepository.save(newOrder);
-        map.put("orderId", newOrder.getId());
-
-        for(var o :cartDTOList) {
-            orderListRepository.save(new OrderList(o.getProduct(), o.getQuantity(), newOrder.getId()));
-        }
-
-        clear(token);
 
         return map;
     }
